@@ -18,7 +18,16 @@ import org.projecthusky.xua.hl7v3.Role;
 import org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.projecthusky.xua.hl7v3.impl.InstanceIdentifierImpl;
+
+import jakarta.xml.bind.JAXBElement;
+
+import java.util.List;
+
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeValue;
+
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.core.xml.schema.impl.XSStringImpl;
 import org.opensaml.saml.saml2.core.impl.AttributeBuilder;
@@ -32,8 +41,8 @@ import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AttributeImpl
-		extends AttributeType implements SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
+public class AttributeImpl extends AttributeType
+		implements SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
 
 	private org.opensaml.saml.saml2.core.Attribute attribute;
 
@@ -41,7 +50,8 @@ public class AttributeImpl
 	 *
 	 * Default constructor to instanciate the object
 	 *
-	 * @param aAttribute the opensaml instance
+	 * @param aAttribute
+	 *            the opensaml instance
 	 */
 	protected AttributeImpl(org.opensaml.saml.saml2.core.Attribute aAttribute) {
 		attribute = aAttribute;
@@ -51,7 +61,8 @@ public class AttributeImpl
 	 *
 	 * Default constructor to instanciate the object
 	 *
-	 * @param aAttribute the attributetype
+	 * @param aAttribute
+	 *            the attributetype
 	 */
 	protected AttributeImpl(AttributeType aAttribute) {
 		attribute = new AttributeBuilder().buildObject();
@@ -61,8 +72,9 @@ public class AttributeImpl
 
 		for (Object obj : aAttribute.getAttributeValue()) {
 			if (obj instanceof org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl purposeOfUse) {
-				var retVal = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
-						PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
+				var retVal = new CodedWithEquivalentsBuilder().buildObject(
+						PurposeOfUse.DEFAULT_NS_URI, PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+						PurposeOfUse.DEFAULT_PREFIX);
 				retVal.setCode(purposeOfUse.getCode());
 				retVal.setCodeSystemName(purposeOfUse.getCodeSystemName());
 				retVal.setDisplayName(purposeOfUse.getDisplayName());
@@ -106,13 +118,23 @@ public class AttributeImpl
 
 	/**
 	 * Method to get value as InstanceIdentifier
+	 * 
 	 * @return the InstanceIdentifier value
 	 */
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (isValueAInstanceIdentifier()) {
-			var instanceIdentifier = (InstanceIdentifierImpl) ((AttributeValueImpl) attribute.getAttributeValues()
-					.get(0)).getUnknownXMLObjects().get(0);
-			getAttributeValue().add(instanceIdentifier);
+			var instanceIdentifier = (InstanceIdentifierImpl) ((AttributeValueImpl) attribute
+					.getAttributeValues().get(0)).getUnknownXMLObjects().get(0);
+
+			II ii = new II();
+			ii.setExtension(instanceIdentifier.getExtension());
+			ii.setRoot(instanceIdentifier.getRoot());
+			JAXBElement<II> instIdentifier = new org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.ObjectFactory()
+					.createInstanceIdentifier(ii);
+
+			AttributeValue attValue = new org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeValue();
+			attValue.setInstanceIdentifier(instIdentifier);
+			getAttributeValue().add(attValue);
 			return instanceIdentifier;
 		}
 		return null;
@@ -120,13 +142,24 @@ public class AttributeImpl
 
 	/**
 	 * Method to get value as PurposeOfUse
+	 * 
 	 * @return teh PurposeOfUse value
 	 */
 	public CE getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
-			var purposeOfUse = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
-					.getUnknownXMLObjects().get(0);
-			getAttributeValue().add(purposeOfUse);
+			var purposeOfUse = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute
+					.getAttributeValues().get(0)).getUnknownXMLObjects().get(0);
+
+			org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE ce = new org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE();
+			ce.setCode(purposeOfUse.getCode());
+			ce.setCodeSystemName(purposeOfUse.getCodeSystemName());
+			ce.setDisplayName(purposeOfUse.getDisplayName());
+
+			AttributeValue attValue = new org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeValue();
+			JAXBElement<org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE> porposeOfUse = new org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.ObjectFactory()
+					.createPurposeOfUse(ce);
+			attValue.setPurposeOfUse(porposeOfUse);
+			getAttributeValue().add(attValue);
 			return purposeOfUse;
 		}
 		return null;
@@ -134,14 +167,24 @@ public class AttributeImpl
 
 	/**
 	 * Method to get value as Role
+	 * 
 	 * @return the Role value
 	 */
 	public CE getValueAsRole() {
 		if (isValueARole()) {
-			var role = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
-					.getUnknownXMLObjects()
-					.get(0);
-			getAttributeValue().add(role);
+			var role = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute
+					.getAttributeValues().get(0)).getUnknownXMLObjects().get(0);
+
+			org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE ce = new org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE();
+			ce.setCode(role.getCode());
+			ce.setCodeSystemName(role.getCodeSystemName());
+			ce.setDisplayName(role.getDisplayName());
+
+			AttributeValue attValue = new org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeValue();
+			JAXBElement<org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CE> roleCe = new org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.ObjectFactory()
+					.createRole(ce);
+			attValue.setRole(roleCe);
+			getAttributeValue().add(attValue);
 			return role;
 		}
 		return null;
@@ -149,12 +192,18 @@ public class AttributeImpl
 
 	/**
 	 * Method to get value as String
+	 * 
 	 * @return the value as String
 	 */
 	public String getValueAsString() {
 		if (isValueAString()) {
 			final XSString attributeValue = (XSStringImpl) attribute.getAttributeValues().get(0);
-			getAttributeValue().add(attributeValue);
+
+			List<String> stringValues = new java.util.ArrayList<>();
+			stringValues.add(attributeValue.getValue());
+			AttributeValue attValue = new org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeValue();
+			attValue.setStringValues(stringValues);
+			getAttributeValue().add(attValue);
 			return attributeValue.getValue();
 		}
 		return "";
@@ -173,59 +222,64 @@ public class AttributeImpl
 
 	/**
 	 * Method to check if value is of type InstanceIdentifier
+	 * 
 	 * @return true if InstanceIdentifier
 	 */
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attribute.getAttributeValues()
+						.get(0) instanceof AttributeValueImpl attributevalueimpl
 				&& attributevalueimpl.getUnknownXMLObjects() != null
-				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
-				&& attributevalueimpl.getUnknownXMLObjects()
-						.get(0) instanceof InstanceIdentifierImpl;
+				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty() && attributevalueimpl
+						.getUnknownXMLObjects().get(0) instanceof InstanceIdentifierImpl;
 	}
 
 	/**
 	 * Method to check if value is of type PurposeOfUse
+	 * 
 	 * @return true if PurposeOfUse
 	 */
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attribute.getAttributeValues()
+						.get(0) instanceof AttributeValueImpl attributevalueimpl
 				&& attributevalueimpl.getUnknownXMLObjects() != null
 				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
 				&& attributevalueimpl.getUnknownXMLObjects()
-						.get(0)instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
-				&& codedWithEquivalentImpl.getElementQName() != null
-				&& PurposeOfUse.TYPE_LOCAL_NAME
+						.get(0) instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
+				&& codedWithEquivalentImpl.getElementQName() != null && PurposeOfUse.TYPE_LOCAL_NAME
 						.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
 	/**
 	 * Method to check if value is of type Role
+	 * 
 	 * @return true if Role
 	 */
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attribute.getAttributeValues()
+						.get(0) instanceof AttributeValueImpl attributevalueimpl
 				&& attributevalueimpl.getUnknownXMLObjects() != null
 				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
 				&& attributevalueimpl.getUnknownXMLObjects()
-						.get(0)instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
-				&& codedWithEquivalentImpl.getElementQName() != null
-				&& Role.TYPE_LOCAL_NAME.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
+						.get(0) instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
+				&& codedWithEquivalentImpl.getElementQName() != null && Role.TYPE_LOCAL_NAME
+						.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
 	/**
 	 * Method to check if value is of type String
+	 * 
 	 * @return true if String
 	 */
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0)instanceof XSStringImpl xsstringimpl
+				&& attribute.getAttributeValues().get(0) instanceof XSStringImpl xsstringimpl
 				&& xsstringimpl.getValue() != null;
 	}
 
