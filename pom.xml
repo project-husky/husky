@@ -27,7 +27,6 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<slf4j.version>2.0.16</slf4j.version>
 		<jaxws-version>2.3.4</jaxws-version>
-		<!--<opensaml.version>4.3.0</opensaml.version>-->
 		<opensaml.version>5.1.3</opensaml.version>
 		<ph-schematron.version>6.3.4</ph-schematron.version>
 		<org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
@@ -35,17 +34,17 @@
 		<apache-httpcore5>5.3.4</apache-httpcore5>
 		<junit.version>5.10.0</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>5.1-20250424</ipf.version>
+		<ipf.version>5.1.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.5</jaxb.version>
-		<spring.version>6.2.5</spring.version>
-		<spring.boot.version>3.4.5</spring.boot.version>
+		<spring.version>6.2.10</spring.version>
+		<spring.boot.version>3.5.5</spring.boot.version>
 		<hapi.fhir.version>8.0.0</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel.version>4.10.2</camel.version>
+		<camel.version>4.10.6</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
 		<org.hl7.fhir.version>6.5.20</org.hl7.fhir.version>
@@ -70,6 +69,21 @@
 		<module>husky-common</module>
 		<module>husky-cda</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>mvnrepository.com</id>
+			<name>MVN Repository</name>
+			<url>https://mvnrepository.com/artifact/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>Shibboleth repo</id>
+			<url>
+				https://build.shibboleth.net/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>husky-snapshots</id>
@@ -858,21 +872,7 @@
 -->
 
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>mvnrepository.com</id>
-			<name>MVN Repository</name>
-			<url>https://mvnrepository.com/artifact/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>Shibboleth repo</id>
-			<url>
-				https://build.shibboleth.net/nexus/content/repositories/releases</url>
-		</repository>
-	</repositories>
+	
 	<build>
 		<pluginManagement>
 			<plugins>
