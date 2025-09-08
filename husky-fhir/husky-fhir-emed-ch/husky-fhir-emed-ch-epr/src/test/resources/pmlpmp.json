@@ -1,0 +1,5648 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist"
+    ]
+  },
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:855bc83b-ab84-4883-9e41-6b8f7c987287"
+  },
+  "type": "document",
+  "timestamp": "2025-09-05T16:31:51.774+02:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:855bc83b-ab84-4883-9e41-6b8f7c987287",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-composition-medicationlist"
+          ]
+        },
+        "language": "fr-CH",
+        "identifier": {
+          "system": "urn:ietf:rfc:3986",
+          "value": "urn:uuid:855bc83b-ab84-4883-9e41-6b8f7c987287"
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "721912009",
+              "display": "Medication summary document (record artifact)"
+            },
+            {
+              "system": "http://loinc.org",
+              "code": "56445-0",
+              "display": "Medication summary Document"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "date": "2025-09-05T16:31:51+02:00",
+        "author": [
+          {
+            "reference": "urn:uuid:899ffd68-86f1-477b-b915-e7da1b3b49ce"
+          }
+        ],
+        "title": "Liste de médication",
+        "confidentiality": "N",
+        "_confidentiality": {
+          "extension": [
+            {
+              "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "17621005",
+                    "display": "Normal (qualifier value)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "custodian": {
+          "reference": "urn:uuid:15672b1f-0066-44dd-9a24-1c43975d2958"
+        },
+        "section": [
+          {
+            "title": "Medication List",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "10160-0",
+                  "display": "History of medication use Narrative"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Cette liste de médication a été générée automatiquement par le service eMedication CARA le 5 septembre 2025, 16:31:51 CEST. Les paramètres utilisés pour la génération du document sont : les éléments de type Medication Treatment Plan Item, Prescription Item, Dispense Item et PADV sont inclus ; tous les traitements sont considérés.</div>"
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+              },
+              {
+                "reference": "urn:uuid:a13bffd7-aac3-43ad-96ba-fcf05fe2eb4d"
+              },
+              {
+                "reference": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+              },
+              {
+                "reference": "urn:uuid:2da72f04-ab95-459b-b18a-60a0dc20990f"
+              },
+              {
+                "reference": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+              },
+              {
+                "reference": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+              },
+              {
+                "reference": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a"
+              },
+              {
+                "reference": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7"
+              },
+              {
+                "reference": "urn:uuid:97452870-9741-4def-8d0b-775e659431e0"
+              },
+              {
+                "reference": "urn:uuid:d930c0d8-7c9b-4942-ade2-44ccf484f38c"
+              },
+              {
+                "reference": "urn:uuid:0bfe9248-2a88-4d54-9753-ebeb27611cf2"
+              },
+              {
+                "reference": "urn:uuid:667818af-f2f6-48a6-9bc3-15d0a74575d0"
+              },
+              {
+                "reference": "urn:uuid:19bfd3c8-175c-4aad-b599-6a94b95ee27f"
+              },
+              {
+                "reference": "urn:uuid:d77dee82-77b4-45fa-8d21-634e7b8ff32e"
+              },
+              {
+                "reference": "urn:uuid:e1b4f45f-b56b-4d40-abe0-0b0c7973aedd"
+              },
+              {
+                "reference": "urn:uuid:86a9e3a6-be61-4ad6-b995-a85a5008353a"
+              },
+              {
+                "reference": "urn:uuid:df7ac1d9-0a6c-42f9-829d-f656823f86d9"
+              },
+              {
+                "reference": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf"
+              },
+              {
+                "reference": "urn:uuid:d20b8125-06db-41b7-ace8-0a7a980b2742"
+              },
+              {
+                "reference": "urn:uuid:f26e7dc8-7cfb-4c33-809d-3444a647779a"
+              },
+              {
+                "reference": "urn:uuid:6b72041b-8d14-4f7c-9f51-4113e52b0ebc"
+              },
+              {
+                "reference": "urn:uuid:a822834f-17b8-4afe-8841-c15054dff7eb"
+              },
+              {
+                "reference": "urn:uuid:dfdf3bde-54bf-450f-bd96-a03c25d57346"
+              },
+              {
+                "reference": "urn:uuid:9dd335f2-2c90-4d65-9111-cd67b0ca9082"
+              },
+              {
+                "reference": "urn:uuid:4b612501-4ad8-4644-b1b6-e9e0a67b7e8a"
+              },
+              {
+                "reference": "urn:uuid:1ca0706a-7179-42bf-bdbe-5f01bced322c"
+              },
+              {
+                "reference": "urn:uuid:18cd9773-3539-4969-9782-7339bd649b9c"
+              },
+              {
+                "reference": "urn:uuid:713cc628-3cd7-4600-a175-f517108a0eae"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81",
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+          ]
+        },
+        "identifier": [
+          {
+            "use": "official",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+            "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+          },
+          {
+            "use": "secondary",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "urn:oid:2.16.756.5.30.1.191.1.0.2.1",
+            "value": "0ab31e0c-1699-4699-a7e7-d36c8c08d0c3"
+          },
+          {
+            "use": "secondary",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+            "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+          },
+          {
+            "use": "secondary",
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "urn:oid:2.16.756.5.30.1.191.1.0.12.3.101",
+            "value": "186258ee-4fae-4d04-ad5a-c622784dba95"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "family": "GOTTSPONER",
+            "given": [
+              "MARIJE"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "2006-05-30"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:899ffd68-86f1-477b-b915-e7da1b3b49ce",
+      "resource": {
+        "resourceType": "Device",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-device"
+          ]
+        },
+        "deviceName": [
+          {
+            "name": "PMP CARA",
+            "type": "model-name"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "701612004",
+              "display": "Pharmaceutical information system application software (physical object)"
+            }
+          ]
+        },
+        "version": [
+          {
+            "value": "97b5a46"
+          }
+        ],
+        "owner": {
+          "reference": "urn:uuid:15672b1f-0066-44dd-9a24-1c43975d2958"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:15672b1f-0066-44dd-9a24-1c43975d2958",
+      "resource": {
+        "resourceType": "Organization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:2.51.1.3",
+            "value": "7601001407428"
+          }
+        ],
+        "name": "Association CARA",
+        "address": [
+          {
+            "line": [
+              "Route de la Corniche 3a"
+            ],
+            "city": "Épalinges",
+            "state": "Vaud",
+            "postalCode": "1066",
+            "country": "CH"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-1",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-1",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-1"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-06-12T09:10:42+02:00",
+        "informationSource": {
+          "reference": "#patient-1"
+        },
+        "reasonCode": [
+          {
+            "text": "Raison Dalacin C caps"
+          }
+        ],
+        "dosage": [
+          {
+            "id": "#dosage-1",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-09T00:00:00+02:00",
+                  "end": "2025-06-30T00:00:00+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a13bffd7-aac3-43ad-96ba-fcf05fe2eb4d",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-2",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-1",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-1"
+            },
+            "organization": {
+              "reference": "#organization-1"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-1",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-1",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentreason",
+            "valueString": "</dd><i>test</i><dd>"
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:21608715-ebe7-4fa1-82cb-16d570bd01af"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:a13bffd7-aac3-43ad-96ba-fcf05fe2eb4d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:24ab8a98-3cba-4d15-93a9-1761c5c71cf2"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:a13bffd7-aac3-43ad-96ba-fcf05fe2eb4d"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-2"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-1"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-07-29T11:42:09+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-2",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationrequest-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-3",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-2",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-2"
+            },
+            "organization": {
+              "reference": "#organization-2"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-2",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001553620"
+              }
+            ],
+            "name": [
+              {
+                "family": "Loureiro Pinto",
+                "given": [
+                  "Ronaldo"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-2",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.128.1.1.1.2"
+              }
+            ],
+            "name": "HUG - Accueil et urgences pédiatriques",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=PRIMARY $ addr=Rue Gabrielle-Perret-Gentil 4 1205 Genève  CH $ city=Genève $ country=CH $ postalCode=1205 $ streetName=Rue Gabrielle-Perret-Gentil $ streetNumber=4 $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1e6ca9d9-6766-4bf3-8515-e2d10acc83cb"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+          }
+        ],
+        "status": "active",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#medication-3"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "authoredOn": "2025-06-27T09:03:33+02:00",
+        "requester": {
+          "reference": "#practitioner-role-2"
+        },
+        "reasonCode": [
+          {
+            "text": "Raison Dalacin C caps"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "id": "#dosage-3",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2da72f04-ab95-459b-b18a-60a0dc20990f",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-4",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-3",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-3"
+            },
+            "organization": {
+              "reference": "#organization-3"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-3",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001553620"
+              }
+            ],
+            "name": [
+              {
+                "family": "Loureiro Pinto",
+                "given": [
+                  "Ronaldo"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-3",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.128.1.1.1.2"
+              }
+            ],
+            "name": "HUG - Accueil et urgences pédiatriques",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=PRIMARY $ addr=Rue Gabrielle-Perret-Gentil 4 1205 Genève  CH $ city=Genève $ country=CH $ postalCode=1205 $ streetName=Rue Gabrielle-Perret-Gentil $ streetNumber=4 $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentreason",
+            "valueString": "dsdsds"
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1e6ca9d9-6766-4bf3-8515-e2d10acc83cb"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:2da72f04-ab95-459b-b18a-60a0dc20990f"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:f8c51c16-c52a-4d0c-b790-4b1adbf97657"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:2da72f04-ab95-459b-b18a-60a0dc20990f"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-4"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-3"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-06-27T09:08:27+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-4",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-5",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680475040157",
+                  "display": "DAFALGAN cpr 500 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "N02BE01",
+                  "display": "paracetamol"
+                }
+              ],
+              "text": "DAFALGAN cpr 500 mg 16 pce"
+            },
+            "form": {
+              "coding": [
+                {
+                  "system": "urn:oid:0.4.0.127.0.16.1.1.2.1",
+                  "code": "10219000",
+                  "display": "Tablet"
+                }
+              ],
+              "text": "Tablet"
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-4",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-4"
+            },
+            "organization": {
+              "reference": "#organization-4"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-4",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001553620"
+              }
+            ],
+            "name": [
+              {
+                "family": "Loureiro Pinto",
+                "given": [
+                  "Ronaldo"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-4",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.128.1.1.1.2"
+              }
+            ],
+            "name": "HUG - Accueil et urgences pédiatriques",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=PRIMARY $ addr=Rue Gabrielle-Perret-Gentil 4 1205 Genève  CH $ city=Genève $ country=CH $ postalCode=1205 $ streetName=Rue Gabrielle-Perret-Gentil $ streetNumber=4 $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:e18090ce-9c97-457c-91c9-103788f32c4e"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-5"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-06-27T10:14:12+02:00",
+        "informationSource": {
+          "reference": "#practitioner-role-4"
+        },
+        "reasonCode": [
+          {
+            "text": "dfafda"
+          }
+        ],
+        "dosage": [
+          {
+            "id": "#dosage-5",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-27T10:13:31+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE",
+                  "NIGHT"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-6",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680475030271",
+                  "display": "DAFALGAN cpr eff 500 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "N02BE01",
+                  "display": "paracetamol"
+                }
+              ],
+              "text": "DAFALGAN cpr eff 500 mg 16 pce"
+            },
+            "form": {
+              "coding": [
+                {
+                  "system": "urn:oid:0.4.0.127.0.16.1.1.2.1",
+                  "code": "10222000",
+                  "display": "Effervescent tablet"
+                }
+              ],
+              "text": "Effervescent tablet"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-2",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3f9bf9e6-75dc-40b8-a41e-ee728a5d3c9d"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-6"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-06-30T13:21:44+02:00",
+        "informationSource": {
+          "reference": "#patient-2"
+        },
+        "dosage": [
+          {
+            "id": "#dosage-6",
+            "patientInstruction": "De préférence avant les repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-30T13:20:30+02:00",
+                  "end": "2025-07-10T13:20:30+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationrequest-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-7",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-5",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-5"
+            },
+            "organization": {
+              "reference": "#organization-5"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-5",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002830843"
+              }
+            ],
+            "name": [
+              {
+                "family": "Jimenez Villalba",
+                "given": [
+                  "Rafael"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-5",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.128"
+              }
+            ],
+            "name": " HUG - Hôpitaux Universitaires de Genève",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Rue Gabrielle-Perret-Gentil 4 1205 Genève $ city=Genève $ postalCode=1205 $ streetName=Rue Gabrielle-Perret-Gentil $ streetNumber=4 $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:21608715-ebe7-4fa1-82cb-16d570bd01af"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a"
+          }
+        ],
+        "status": "active",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#medication-7"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "authoredOn": "2025-06-30T13:25:15+02:00",
+        "requester": {
+          "reference": "#practitioner-role-5"
+        },
+        "reasonCode": [
+          {
+            "text": "Raison Dalacin C caps"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "id": "#dosage-7",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-8",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680268210293",
+                  "display": "AGIOLAX avec séné gran bte 1000 g"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "A06AC51",
+                  "display": "ispaghula, combinations"
+                }
+              ],
+              "text": "AGIOLAX avec séné gran bte 1000 g"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-3",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:7312b906-1fce-46de-860e-333d2eb7a54a"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-8"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-06-30T13:46:19+02:00",
+        "informationSource": {
+          "reference": "#patient-3"
+        },
+        "dosage": [
+          {
+            "id": "#dosage-8",
+            "patientInstruction": "Prendre 1 sachet toutes les 2 semaines",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-30T13:45:40+02:00"
+                }
+              }
+            },
+            "asNeededBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:97452870-9741-4def-8d0b-775e659431e0",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-9",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-6",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-6"
+            },
+            "organization": {
+              "reference": "#organization-6"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-6",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-6",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1e6ca9d9-6766-4bf3-8515-e2d10acc83cb"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:97452870-9741-4def-8d0b-775e659431e0"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:69161f1f-fff6-452a-9c64-65af8f3c0e82"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:97452870-9741-4def-8d0b-775e659431e0"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-9"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-6"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-07-29T15:56:38+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-9",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d930c0d8-7c9b-4942-ade2-44ccf484f38c",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-a",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-7",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-7"
+            },
+            "organization": {
+              "reference": "#organization-7"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-7",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-7",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1e6ca9d9-6766-4bf3-8515-e2d10acc83cb"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:d930c0d8-7c9b-4942-ade2-44ccf484f38c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6721bddd-d302-4396-80c7-268819f69383"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:d930c0d8-7c9b-4942-ade2-44ccf484f38c"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-a"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-7"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-07-29T11:25:48+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-a",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0bfe9248-2a88-4d54-9753-ebeb27611cf2",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationrequest-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-b",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680268210293",
+                  "display": "AGIOLAX avec séné gran bte 1000 g"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "A06AC51",
+                  "display": "ispaghula, combinations"
+                }
+              ],
+              "text": "AGIOLAX avec séné gran bte 1000 g"
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-8",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-8"
+            },
+            "organization": {
+              "reference": "#organization-8"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-8",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-8",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:7312b906-1fce-46de-860e-333d2eb7a54a"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:0bfe9248-2a88-4d54-9753-ebeb27611cf2"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:cab398ad-6cac-4030-8dd9-8dfe1e1bbdb2"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:0bfe9248-2a88-4d54-9753-ebeb27611cf2"
+          }
+        ],
+        "status": "active",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#medication-b"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "authoredOn": "2025-07-29T11:27:26+02:00",
+        "requester": {
+          "reference": "#practitioner-role-8"
+        },
+        "dosageInstruction": [
+          {
+            "id": "#dosage-b",
+            "patientInstruction": "Prendre 1 sachet toutes les 2 semaines",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-30T13:45:40+02:00"
+                }
+              }
+            },
+            "asNeededBoolean": false
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:667818af-f2f6-48a6-9bc3-15d0a74575d0",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationrequest-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-c",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680475030271",
+                  "display": "DAFALGAN cpr eff 500 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "N02BE01",
+                  "display": "paracetamol"
+                }
+              ],
+              "text": "DAFALGAN cpr eff 500 mg 16 pce"
+            },
+            "form": {
+              "coding": [
+                {
+                  "system": "urn:oid:0.4.0.127.0.16.1.1.2.1",
+                  "code": "10222000",
+                  "display": "Effervescent tablet"
+                }
+              ],
+              "text": "Effervescent tablet"
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-9",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-9"
+            },
+            "organization": {
+              "reference": "#organization-9"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-9",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-9",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3f9bf9e6-75dc-40b8-a41e-ee728a5d3c9d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:667818af-f2f6-48a6-9bc3-15d0a74575d0"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b352f2e8-46bf-4874-8a1f-6dd93df3d3f3"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:667818af-f2f6-48a6-9bc3-15d0a74575d0"
+          }
+        ],
+        "status": "active",
+        "intent": "order",
+        "medicationReference": {
+          "reference": "#medication-c"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "authoredOn": "2025-07-29T11:38:03+02:00",
+        "requester": {
+          "reference": "#practitioner-role-9"
+        },
+        "dosageInstruction": [
+          {
+            "id": "#dosage-c",
+            "patientInstruction": "De préférence avant les repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-30T13:20:30+02:00",
+                  "end": "2025-07-10T13:20:30+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:19bfd3c8-175c-4aad-b599-6a94b95ee27f",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-d",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-a",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-a"
+            },
+            "organization": {
+              "reference": "#organization-a"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-a",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-a",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentreason",
+            "valueString": "<i>test</test>"
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6d06bed8-7e3c-4c6e-884a-b15f4b6d806d"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1e6ca9d9-6766-4bf3-8515-e2d10acc83cb"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:19bfd3c8-175c-4aad-b599-6a94b95ee27f"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:c483dd3e-fe1f-4850-9ecd-db277f30f0bd"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:19bfd3c8-175c-4aad-b599-6a94b95ee27f"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-d"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-a"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-07-29T11:41:03+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-d",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d77dee82-77b4-45fa-8d21-634e7b8ff32e",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-e",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7611883006374",
+                  "display": "BIOLIGO POE 1 Endoligo 20 amp 2 ml"
+                }
+              ],
+              "text": "BIOLIGO POE 1 Endoligo 20 amp 2 ml"
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-b",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-b"
+            },
+            "organization": {
+              "reference": "#organization-b"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-b",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-b",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:d77dee82-77b4-45fa-8d21-634e7b8ff32e"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:121768af-4ab4-4acb-aec6-1f0ab545be38"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:d77dee82-77b4-45fa-8d21-634e7b8ff32e"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-e"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-07-30T14:22:46+02:00",
+        "informationSource": {
+          "reference": "#practitioner-role-b"
+        },
+        "dosage": [
+          {
+            "id": "#dosage-e",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-07-30T14:21:02+02:00"
+                },
+                "when": [
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "milliliter",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mL"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e1b4f45f-b56b-4d40-abe0-0b0c7973aedd",
+      "resource": {
+        "resourceType": "MedicationDispense",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-f",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            },
+            "amount": {
+              "numerator": {
+                "value": 16,
+                "unit": "Quantity",
+                "system": "http://snomed.info/sct",
+                "code": "246205007"
+              },
+              "denominator": {
+                "value": 1,
+                "unit": "Package",
+                "system": "http://snomed.info/sct",
+                "code": "1681000175101"
+              }
+            }
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-c",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-c"
+            },
+            "organization": {
+              "reference": "#organization-c"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-c",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-c",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentreason",
+            "valueString": "<i>foobar</i>"
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:ebd9f067-96e6-4cd8-805a-2a167b7d353a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:21608715-ebe7-4fa1-82cb-16d570bd01af"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:e1b4f45f-b56b-4d40-abe0-0b0c7973aedd"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:fb42ac2a-b580-4a2b-9660-28856f64fc3d"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:e1b4f45f-b56b-4d40-abe0-0b0c7973aedd"
+          }
+        ],
+        "status": "completed",
+        "medicationReference": {
+          "reference": "#medication-f"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "performer": [
+          {
+            "actor": {
+              "reference": "#practitioner-role-c"
+            }
+          }
+        ],
+        "quantity": {
+          "value": 1,
+          "unit": "Package",
+          "system": "http://snomed.info/sct",
+          "code": "1681000175101"
+        },
+        "whenHandedOver": "2025-07-30T14:26:07+02:00",
+        "dosageInstruction": [
+          {
+            "id": "#dosage-f",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:86a9e3a6-be61-4ad6-b995-a85a5008353a",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-10",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680421240365",
+                  "display": "IBUFEN-L supp 500 mg 10 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "M01AE01",
+                  "display": "ibuprofen"
+                }
+              ],
+              "text": "IBUFEN-L supp 500 mg 10 pce"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-4",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:86a9e3a6-be61-4ad6-b995-a85a5008353a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:24d1a4d7-66fb-47b0-9425-0e9efffbb587"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:86a9e3a6-be61-4ad6-b995-a85a5008353a"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-10"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-08-26T15:55:21+02:00",
+        "informationSource": {
+          "reference": "#patient-4"
+        },
+        "reasonCode": [
+          {
+            "text": "raison..."
+          }
+        ],
+        "note": [
+          {
+            "text": "comm"
+          }
+        ],
+        "dosage": [
+          {
+            "id": "#dosage-10",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-08-26T15:54:42+02:00"
+                },
+                "when": [
+                  "MORN"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 2,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:df7ac1d9-0a6c-42f9-829d-f656823f86d9",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-11",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680622990038",
+                  "display": "IBUPROFENE Sandoz cpr pell ret 800 mg 100 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "M01AE01",
+                  "display": "ibuprofen"
+                }
+              ],
+              "text": "IBUPROFENE Sandoz cpr pell ret 800 mg 100 pce"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-5",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:df7ac1d9-0a6c-42f9-829d-f656823f86d9"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:cac029c6-8711-4b50-8aeb-4d7562f3c13f"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:df7ac1d9-0a6c-42f9-829d-f656823f86d9"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-11"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-08-26T16:51:36+02:00",
+        "informationSource": {
+          "reference": "#patient-5"
+        },
+        "reasonCode": [
+          {
+            "text": "ras..."
+          }
+        ],
+        "note": [
+          {
+            "text": "commm"
+          }
+        ],
+        "dosage": [
+          {
+            "id": "#dosage-11",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-08-26T16:50:56+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NIGHT"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-7",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-8",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-medicationstatement-changed",
+            "valueReference": {
+              "reference": "urn:uuid:42efddaf-1d2f-4b08-b55f-3744517232e3"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-06-12T09:11:48+02:00"
+                }
+              ],
+              "reference": "#patient-7"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:cb66a219-b222-4365-80cd-db88a445a208"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "CHANGE",
+              "display": "CHANGE"
+            }
+          ],
+          "text": "CHANGE"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-06-12T09:11:48+02:00",
+        "issued": "2025-06-12T09:11:48.292+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-06-12T09:11:48+02:00"
+              }
+            ],
+            "reference": "#patient-8"
+          }
+        ],
+        "note": [
+          {
+            "text": "test"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:42efddaf-1d2f-4b08-b55f-3744517232e3",
+      "resource": {
+        "resourceType": "MedicationStatement",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-changed-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Medication",
+            "id": "medication-12",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"
+              ]
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:oid:2.51.1.1",
+                  "code": "7680354380688",
+                  "display": "DALACIN C caps 150 mg 16 pce"
+                },
+                {
+                  "system": "http://www.whocc.no/atc",
+                  "code": "J01FF01",
+                  "display": "clindamycin"
+                }
+              ],
+              "text": "DALACIN C caps 150 mg 16 pce"
+            }
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-6",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:cb66a219-b222-4365-80cd-db88a445a208"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+          }
+        ],
+        "partOf": [
+          {
+            "reference": "urn:uuid:a1479ac4-c9dd-4ae4-87d6-d7ebe871cdbf"
+          }
+        ],
+        "status": "active",
+        "medicationReference": {
+          "reference": "#medication-12"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "dateAsserted": "2025-06-12T09:11:48+02:00",
+        "informationSource": {
+          "reference": "#patient-6"
+        },
+        "reasonCode": [
+          {
+            "text": "Raison Dalacin C caps"
+          }
+        ],
+        "dosage": [
+          {
+            "id": "#dosage-12",
+            "patientInstruction": "De préférences avant le repas",
+            "timing": {
+              "repeat": {
+                "boundsPeriod": {
+                  "start": "2025-06-12T09:11:27+02:00"
+                },
+                "when": [
+                  "MORN",
+                  "NOON",
+                  "EVE"
+                ]
+              }
+            },
+            "asNeededBoolean": false,
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1,
+                  "unit": "Quantity",
+                  "system": "http://snomed.info/sct",
+                  "code": "246205007"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d20b8125-06db-41b7-ace8-0a7a980b2742",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-9",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-a",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3f9bf9e6-75dc-40b8-a41e-ee728a5d3c9d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-06-30T13:22:28+02:00"
+                }
+              ],
+              "reference": "#patient-9"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:d20b8125-06db-41b7-ace8-0a7a980b2742"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:27a5e662-e128-4101-bb1c-59ca32dea9e6"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:d20b8125-06db-41b7-ace8-0a7a980b2742"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "COMMENT",
+              "display": "COMMENT"
+            }
+          ],
+          "text": "COMMENT"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-06-30T13:22:28+02:00",
+        "issued": "2025-06-30T13:22:28.755+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-06-30T13:22:28+02:00"
+              }
+            ],
+            "reference": "#patient-a"
+          }
+        ],
+        "note": [
+          {
+            "text": "J'ajoute un commentaire"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f26e7dc8-7cfb-4c33-809d-3444a647779a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-d",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-d"
+            },
+            "organization": {
+              "reference": "#organization-d"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-d",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-d",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-e",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-e"
+            },
+            "organization": {
+              "reference": "#organization-e"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-e",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601002952026"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro1",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "female"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-e",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:0bfe9248-2a88-4d54-9753-ebeb27611cf2"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:cab398ad-6cac-4030-8dd9-8dfe1e1bbdb2"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-07-29T11:28:50+02:00"
+                }
+              ],
+              "reference": "#practitioner-role-d"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:f26e7dc8-7cfb-4c33-809d-3444a647779a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:37028351-f28f-4380-9003-4bb47d8cb12b"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:f26e7dc8-7cfb-4c33-809d-3444a647779a"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "COMMENT",
+              "display": "COMMENT"
+            }
+          ],
+          "text": "COMMENT"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-07-29T11:28:50+02:00",
+        "issued": "2025-07-29T11:28:50.834+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-07-29T11:28:50+02:00"
+              }
+            ],
+            "reference": "#practitioner-role-e"
+          }
+        ],
+        "note": [
+          {
+            "text": "<i>test</i>"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6b72041b-8d14-4f7c-9f51-4113e52b0ebc",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-f",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-f"
+            },
+            "organization": {
+              "reference": "#organization-f"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-f",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-f",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-10",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-10"
+            },
+            "organization": {
+              "reference": "#organization-10"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-10",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-10",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-07-29T15:56:54+02:00"
+                }
+              ],
+              "reference": "#practitioner-role-f"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:6b72041b-8d14-4f7c-9f51-4113e52b0ebc"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:822de5ec-6144-4c1c-bc45-0aa8de27c75d"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:6b72041b-8d14-4f7c-9f51-4113e52b0ebc"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "SUSPEND",
+              "display": "SUSPEND"
+            }
+          ],
+          "text": "SUSPEND"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-07-29T15:56:54+02:00",
+        "issued": "2025-07-29T15:56:54.390+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-07-29T15:56:54+02:00"
+              }
+            ],
+            "reference": "#practitioner-role-10"
+          }
+        ],
+        "note": [
+          {
+            "text": "dfds"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a822834f-17b8-4afe-8841-c15054dff7eb",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-11",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-11"
+            },
+            "organization": {
+              "reference": "#organization-11"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-11",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-11",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          },
+          {
+            "resourceType": "PractitionerRole",
+            "id": "practitioner-role-12",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"
+              ]
+            },
+            "practitioner": {
+              "reference": "#practitioner-12"
+            },
+            "organization": {
+              "reference": "#organization-12"
+            }
+          },
+          {
+            "resourceType": "Practitioner",
+            "id": "practitioner-12",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.51.1.3",
+                "value": "7601001475830"
+              }
+            ],
+            "name": [
+              {
+                "family": "Pro2",
+                "given": [
+                  "Gigowa"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          },
+          {
+            "resourceType": "Organization",
+            "id": "organization-12",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:oid:2.16.756.5.30.1.191.10.1"
+              }
+            ],
+            "name": "CARA-CabinetTest",
+            "address": [
+              {
+                "use": "work",
+                "type": "physical",
+                "text": "status=SECONDARY $ addr=Ch. de la Corniche 3A 1066 Epalinges Vaud CH $ city=Epalinges $ country=CH $ postalCode=1066 $ state=Vaud $ streetName=Ch. de la Corniche $ streetNumber=3A $ boundInstitution=None"
+              }
+            ]
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-07-29T15:57:01+02:00"
+                }
+              ],
+              "reference": "#practitioner-role-11"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:a822834f-17b8-4afe-8841-c15054dff7eb"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:95a28b32-ffd6-4bf7-b587-774d1366c7ec"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:a822834f-17b8-4afe-8841-c15054dff7eb"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "OK",
+              "display": "OK"
+            }
+          ],
+          "text": "OK"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-07-29T15:57:01+02:00",
+        "issued": "2025-07-29T15:57:01.586+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-07-29T15:57:01+02:00"
+              }
+            ],
+            "reference": "#practitioner-role-12"
+          }
+        ],
+        "note": [
+          {
+            "text": "fdgvds"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dfdf3bde-54bf-450f-bd96-a03c25d57346",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-b",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-c",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3ade4a5e-4a1d-4149-94ab-d68513d3a0c7"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:7312b906-1fce-46de-860e-333d2eb7a54a"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T11:04:41+02:00"
+                }
+              ],
+              "reference": "#patient-b"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:dfdf3bde-54bf-450f-bd96-a03c25d57346"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8b79a975-15c2-44f0-9bc5-f444d91f750c"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:dfdf3bde-54bf-450f-bd96-a03c25d57346"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "CANCEL",
+              "display": "CANCEL"
+            }
+          ],
+          "text": "CANCEL"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T11:04:41+02:00",
+        "issued": "2025-08-26T11:04:41.823+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T11:04:41+02:00"
+              }
+            ],
+            "reference": "#patient-c"
+          }
+        ],
+        "note": [
+          {
+            "text": "ggfdhgfhgf"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9dd335f2-2c90-4d65-9111-cd67b0ca9082",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-d",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-e",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:160e0f61-9c7a-49e2-95e2-78dda12d65c3"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3f9bf9e6-75dc-40b8-a41e-ee728a5d3c9d"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T11:04:49+02:00"
+                }
+              ],
+              "reference": "#patient-d"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:9dd335f2-2c90-4d65-9111-cd67b0ca9082"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8cde3ade-9c5d-4106-8e84-f361f36e25ac"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:9dd335f2-2c90-4d65-9111-cd67b0ca9082"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "CANCEL",
+              "display": "CANCEL"
+            }
+          ],
+          "text": "CANCEL"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T11:04:49+02:00",
+        "issued": "2025-08-26T11:04:49.097+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T11:04:49+02:00"
+              }
+            ],
+            "reference": "#patient-e"
+          }
+        ],
+        "note": [
+          {
+            "text": "ghfdgfhfg"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b612501-4ad8-4644-b1b6-e9e0a67b7e8a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-f",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-10",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:b6dccea4-c110-46a4-9f0e-56631819a62c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:8e2ae260-2d9e-45d0-955a-9eb35c74ffba"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T11:23:29+02:00"
+                }
+              ],
+              "reference": "#patient-f"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:4b612501-4ad8-4644-b1b6-e9e0a67b7e8a"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:bab6169a-8c2c-48e2-946f-4ed621105938"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:4b612501-4ad8-4644-b1b6-e9e0a67b7e8a"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "CANCEL",
+              "display": "CANCEL"
+            }
+          ],
+          "text": "CANCEL"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T11:23:29+02:00",
+        "issued": "2025-08-26T11:23:29.197+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T11:23:29+02:00"
+              }
+            ],
+            "reference": "#patient-10"
+          }
+        ],
+        "note": [
+          {
+            "text": "test"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1ca0706a-7179-42bf-bdbe-5f01bced322c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-11",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-12",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:e18090ce-9c97-457c-91c9-103788f32c4e"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T15:54:38+02:00"
+                }
+              ],
+              "reference": "#patient-11"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:1ca0706a-7179-42bf-bdbe-5f01bced322c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:01980e1f-9f13-4f19-8d86-0636ff2b8dfc"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:1ca0706a-7179-42bf-bdbe-5f01bced322c"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "COMMENT",
+              "display": "COMMENT"
+            }
+          ],
+          "text": "COMMENT"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T15:54:38+02:00",
+        "issued": "2025-08-26T15:54:38.280+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T15:54:38+02:00"
+              }
+            ],
+            "reference": "#patient-12"
+          }
+        ],
+        "note": [
+          {
+            "text": "comm"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:18cd9773-3539-4969-9782-7339bd649b9c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-13",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-14",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:e18090ce-9c97-457c-91c9-103788f32c4e"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T16:02:34+02:00"
+                }
+              ],
+              "reference": "#patient-13"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:18cd9773-3539-4969-9782-7339bd649b9c"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:9618f8ca-74f3-4025-a177-66b0cca12ba6"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:18cd9773-3539-4969-9782-7339bd649b9c"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "COMMENT",
+              "display": "COMMENT"
+            }
+          ],
+          "text": "COMMENT"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T16:02:34+02:00",
+        "issued": "2025-08-26T16:02:34.171+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T16:02:34+02:00"
+              }
+            ],
+            "reference": "#patient-14"
+          }
+        ],
+        "note": [
+          {
+            "text": "comm"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:713cc628-3cd7-4600-a175-f517108a0eae",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list"
+          ]
+        },
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "patient-15",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          },
+          {
+            "resourceType": "Patient",
+            "id": "patient-16",
+            "meta": {
+              "profile": [
+                "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"
+              ]
+            },
+            "identifier": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.3",
+                "value": "761337618116306629"
+              },
+              {
+                "system": "urn:oid:2.16.756.5.30.1.1625.3.1.2.1",
+                "value": "c34f413f-a0c5-438e-8caf-145eaec28509"
+              }
+            ],
+            "name": [
+              {
+                "family": "GOTTSPONER",
+                "given": [
+                  "MARIJE"
+                ]
+              }
+            ],
+            "gender": "female",
+            "birthDate": "2006-05-30"
+          }
+        ],
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:3889863a-c9ad-44b7-becc-a81786cb0652"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:e18090ce-9c97-457c-91c9-103788f32c4e"
+                }
+              }
+            ]
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author",
+            "valueReference": {
+              "extension": [
+                {
+                  "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                  "valueDateTime": "2025-08-26T16:50:52+02:00"
+                }
+              ],
+              "reference": "#patient-15"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice",
+            "extension": [
+              {
+                "url": "id",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:713cc628-3cd7-4600-a175-f517108a0eae"
+                }
+              },
+              {
+                "url": "externalDocumentId",
+                "valueIdentifier": {
+                  "system": "urn:ietf:rfc:3986",
+                  "value": "urn:uuid:9755d4cc-9605-4f50-84ae-0c32d9d53c35"
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:713cc628-3cd7-4600-a175-f517108a0eae"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "urn:oid:1.3.6.1.4.1.19376.1.9.2.1",
+              "code": "COMMENT",
+              "display": "COMMENT"
+            }
+          ],
+          "text": "COMMENT"
+        },
+        "subject": {
+          "reference": "urn:uuid:ff6d20ca-bd36-4fc7-a919-dde2c456fe81"
+        },
+        "effectiveDateTime": "2025-08-26T16:50:52+02:00",
+        "issued": "2025-08-26T16:50:52.890+02:00",
+        "performer": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2025-08-26T16:50:52+02:00"
+              }
+            ],
+            "reference": "#patient-16"
+          }
+        ],
+        "note": [
+          {
+            "text": "comm"
+          }
+        ]
+      }
+    }
+  ]
+}

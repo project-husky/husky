@@ -322,4 +322,18 @@ class ChEmedEprParserTest {
         assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
         assertNotNull(pml.findMtpEntryForObservation((ChEmedEprObservationPml) pml.getEntryByResourceType(ChEmedEprObservationPml.class).getResource()));
     }
+
+    @Test
+    void testParseChEmedEprPmlWithObservationCommentOnPre() throws IOException {
+        final var json = new String(getClass().getResourceAsStream("/pmlpmp.json").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(json, EmedDocumentType.PML);
+        assertInstanceOf(ChEmedEprDocumentPml.class, document);
+        final var pml = (ChEmedEprDocumentPml) document;
+        assertNotNull(pml.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
+        final var observationEntry = ((ChEmedEprCompositionPml)document.resolveComposition()).resolveEntries().get(19);
+        final var observation = (ChEmedEprObservationPml) observationEntry;
+        assertNotNull(pml.findMtpEntryForObservation(observation));
+    }
 }
