@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>husky-fhir-vacd-ch-common</artifactId>
+	<name>Husky FHIR eVaccination Switzerland Common</name>
+
+	<parent>
+		<groupId>org.projecthusky.fhir.vacd.ch</groupId>
+		<artifactId>husky-fhir-vacd-ch</artifactId>
+		<version>3.2.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projecthusky.fhir.core.ch</groupId>
+			<artifactId>husky-fhir-core-ch</artifactId>
+			<version>3.2.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Tests (EPL 2.0) -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.12</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

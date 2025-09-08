@@ -5,21 +5,22 @@
   <parent>
     <groupId>org.projecthusky.communication</groupId>
     <artifactId>husky-communication</artifactId>
-    <version>3.1.1-SNAPSHOT</version>
+    <version>3.2.0-SNAPSHOT</version>
   </parent>
   
   <dependencies>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-    			<version>3.1.1-SNAPSHOT</version>
+    			<version>3.2.0-SNAPSHOT</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-at</artifactId>
-    			<version>3.1.1-SNAPSHOT</version>
+    			<version>3.2.0-SNAPSHOT</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-saml-impl</artifactId>
@@ -28,7 +29,7 @@
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-impl</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-saml-impl</artifactId>
@@ -47,17 +48,17 @@
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.2.0-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-gen</artifactId>
-			<version>3.1.1-SNAPSHOT</version>
+			<version>3.2.0-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 </project>

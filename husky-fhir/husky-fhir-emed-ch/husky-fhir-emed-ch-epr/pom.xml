@@ -2,7 +2,7 @@
     <parent>
         <groupId>org.projecthusky.fhir.emed.ch</groupId>
         <artifactId>husky-fhir-emed-ch</artifactId>
-        <version>3.1.1-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>husky-fhir-emed-ch-epr</artifactId>
@@ -12,7 +12,7 @@
         <dependency>
             <groupId>org.projecthusky.fhir.emed.ch</groupId>
 	    	    <artifactId>husky-fhir-emed-ch-common</artifactId>
-	   		    <version>3.1.1-SNAPSHOT</version>
+	   		    <version>3.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- Used for FHIR resource validation -->
@@ -27,22 +27,23 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
-            <groupId>org.checkerframework</groupId>
-            <artifactId>checker-qual</artifactId> <!-- MIT -->
-        </dependency>
+		<dependency>
+			<!-- The Checker Framework enhances Java's type system to make it
+			more powerful and useful. -->
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId> <!-- MIT -->
+		</dependency>
 
-        <!-- Tests (EPL 2.0) -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- Tests (EPL 2.0) -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

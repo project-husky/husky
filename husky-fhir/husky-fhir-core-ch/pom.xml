@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.projecthusky.fhir.core.ch</groupId>
+	<artifactId>husky-fhir-core-ch</artifactId>
+	<name>Husky FHIR Core Switzerland</name>
+
+	<parent>
+		<groupId>org.projecthusky.fhir</groupId>
+		<artifactId>husky-fhir</artifactId>
+		<version>3.2.0-SNAPSHOT</version>
+	</parent>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projecthusky.fhir.structures</groupId>
+			<artifactId>husky-fhir-structures-gen</artifactId>
+			<version>3.2.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openehealth.ipf.platform-camel</groupId>
+					<artifactId>ipf-platform-camel-ihe-xds</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId> <!-- MIT -->
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.3</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Tests (EPL 2.0) -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+</project>

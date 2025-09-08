@@ -16,11 +16,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
@@ -146,7 +146,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      */
     @ExpectsValidResource
     public ChEmedEprDosage resolveBaseDosage() throws InvalidEmedContentException {
-        if (!this.getDosage().isEmpty() && this.getDosage().get(0) instanceof final ChEmedEprDosage dosage) {
+        if (!this.getDosage().isEmpty() && this.getDosage().getFirst() instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
         throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
@@ -343,7 +343,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
         if (getDosage().isEmpty()) {
             addDosage();
         }
-        return (ChEmedEprDosage) getDosage().get(0);
+        return (ChEmedEprDosage) getDosage().getFirst();
     }
 
     /**

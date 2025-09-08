@@ -17,18 +17,22 @@ import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContextComponent;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
+import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.common.utils.time.Hl7Dtm;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.openehealth.ipf.commons.ihe.xds.core.metadata.Vocabulary.SLOT_NAME_REPOSITORY_UNIQUE_ID;
 
 /**
  * A converter between XDS' DocumentEntry and MHD's DocumentReference.
@@ -65,7 +69,8 @@ public class DocumentEntryConverter {
 
         // masterIdentifier | DocumentEntry.uniqueId
         if (documentEntry.getUniqueId() != null) {
-            final var masterId = new Identifier().setValue(documentEntry.getUniqueId());
+            final var masterId =
+                    new Identifier().setValue(Uuids.match(documentEntry.getUniqueId())? Uuids.URN_PREFIX + Uuids.normalize(documentEntry.getUniqueId()) : documentEntry.getUniqueId());
             masterId.setSystem("urn:ietf:rfc:3986");
             documentReference.setMasterIdentifier(masterId);
         }
@@ -149,12 +154,16 @@ public class DocumentEntryConverter {
             try {
                 attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
                 if (documentEntry.getRepositoryUniqueId() != null) {
-                    final var url = String.format("%s&repositoryUniqueId=%s", attachment.getUrl(), documentEntry.getRepositoryUniqueId());
+                    final var url = String.format(
+                            "%s&repositoryUniqueId=%s",
+                            attachment.getUrl(),
+                            Oids.match(documentEntry.getRepositoryUniqueId())? Oids.PREFIX_OID + Oids.normalize(documentEntry.getRepositoryUniqueId()) : documentEntry.getRepositoryUniqueId()
+                    );
                     attachment.setUrl(url);
                 }
             } catch (URISyntaxException | MalformedURLException ignored) {}
         } else if (documentEntry.getRepositoryUniqueId() != null)
-            attachment.setUrl(documentEntry.getRepositoryUniqueId());
+            attachment.setUrl(Oids.match(documentEntry.getRepositoryUniqueId())? Oids.PREFIX_OID + Oids.normalize(documentEntry.getRepositoryUniqueId()) : documentEntry.getRepositoryUniqueId());
 
         //// size | DocumentEntry.size
         if (documentEntry.getSize() != null) {
@@ -351,14 +360,16 @@ public class DocumentEntryConverter {
 
                 //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
                 if (attachment.hasUrl()) {
-                    if (ConverterUtils.isOid(attachment.getUrl())) {
-                        documentEntry.setRepositoryUniqueId(attachment.getUrl());
+                    if (Oids.match(attachment.getUrl())) {
+                        documentEntry.setRepositoryUniqueId(Oids.normalize(attachment.getUrl()));
                     } else {
-                        try {
-                            final var url = new URL(attachment.getUrl()).toURI();
-                            documentEntry.setUri(url.toString());
-                        } catch (MalformedURLException | URISyntaxException ignored) {
+                        final var uriComponents = UriComponentsBuilder.fromUriString(attachment.getUrl()).build();
+                        //uriComponentsBuilder.
+                        final var params = uriComponents.getQueryParams();
+                        if (params.containsKey(SLOT_NAME_REPOSITORY_UNIQUE_ID)) {
+                            documentEntry.setRepositoryUniqueId(Oids.normalize(params.getFirst(SLOT_NAME_REPOSITORY_UNIQUE_ID)));
                         }
+                        documentEntry.setUri(uriComponents.toUriString());
                     }
                 }
 
