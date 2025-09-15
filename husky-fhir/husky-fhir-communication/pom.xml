@@ -1,18 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-fhir-communication</artifactId>
 	<name>Husky FHIR Communication</name>
 	<parent>
 		<groupId>org.projecthusky.fhir</groupId>
 		<artifactId>husky-fhir</artifactId>
-		<version>3.2.1-SNAPSHOT</version>
+		<version>3.2.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.2.1-SNAPSHOT</version>
+			<version>3.2.0-SNAPSHOT</version>
 		</dependency>
 
 		<!-- test stuff -->
