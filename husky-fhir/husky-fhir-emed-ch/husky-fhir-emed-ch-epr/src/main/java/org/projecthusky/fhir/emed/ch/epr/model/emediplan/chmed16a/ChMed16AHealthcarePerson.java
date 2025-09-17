@@ -53,8 +53,7 @@ public class ChMed16AHealthcarePerson extends EMediplanHealthcarePerson {
         return LAST_NAME_FIELD_NAME;
     }
 
-    @Override
-    public @Nullable String getZsr() {
+    public @Nullable String getZsrFieldName() {
         return ZSR_FIELD_NAME;
     }
 

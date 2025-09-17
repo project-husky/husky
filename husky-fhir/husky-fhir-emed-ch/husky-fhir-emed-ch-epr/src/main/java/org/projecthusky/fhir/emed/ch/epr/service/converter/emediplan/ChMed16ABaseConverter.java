@@ -30,7 +30,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequest
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu.PACKAGE;
@@ -118,15 +117,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         final var lastRequest = pre.resolveLastRequest();
         if (lastRequest != null) {
             final var lastMedicalAuthor = lastRequest.resolveMedicalAuthor();
-            if (lastMedicalAuthor.getPractitionerRole() != null) {
-                final var practitioner = lastMedicalAuthor.getPractitionerRole().resolvePractitioner();
-                emediplan.setAuthor(practitioner.resolveGln());
-                final var zsr = practitioner.resolveZsr();
-                if (zsr !=  null && !zsr.isEmpty()) {
-                    // the professional has one OR MORE ZSR codes, CHMED16A supports only 0 or 1, so the first will be used and the rest ignored.
-                    emediplan.setZsr(zsr.getFirst());
-                }
-            } else throw new InvalidEmedContentException("The last medical author of a prescription must be a professional.");
+            setPrescriptionAuthor(emediplan, lastMedicalAuthor);
         } else  throw new InvalidEmedContentException("The prescription authorship could not be determined: no medication requests found in the prescription document.");
 
         emediplan.setTimestamp(pre.resolveTimestamp());
@@ -136,6 +127,20 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
             if (annotation.hasText()) emediplan.setRemark(annotation.getText().getDivAsString());
         }
 
+        return emediplan;
+    }
+
+    @ExpectsValidResource
+    protected E setPrescriptionAuthor(final E emediplan, final Author lastMedicalAuthor) {
+        if (lastMedicalAuthor.getPractitionerRole() != null) {
+            final var practitioner = lastMedicalAuthor.getPractitionerRole().resolvePractitioner();
+            emediplan.setAuthor(practitioner.resolveGln());
+            final var zsr = practitioner.resolveZsr();
+            if (zsr !=  null && !zsr.isEmpty()) {
+                // the professional has one OR MORE ZSR codes, CHMED16A supports only 0 or 1, so the first will be used and the rest ignored.
+                emediplan.setZsr(zsr.getFirst());
+            }
+        } else throw new InvalidEmedContentException("The last medical author of a prescription must be a professional.");
         return emediplan;
     }
 
