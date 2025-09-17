@@ -53,7 +53,7 @@
 </th:block>
 
 <th:block th:fragment="max-doses(effectiveDosageInstructions, lang)">
-    <th:block th:if="effectiveDosageInstructions.maxDosePerPeriod()"
+    <th:block th:if="${effectiveDosageInstructions.maxDosePerPeriod() != null}"
               th:with="maxDosePerPeriod = ${effectiveDosageInstructions.maxDosePerPeriod()}">
         Dose maximale :
         <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.amount()}, ${lang})}"/>
@@ -61,7 +61,7 @@
         <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.duration()}, ${lang})}"/>
         .
     </th:block>
-    <th:block th:if="effectiveDosageInstructions.maxDosePerAdministration()"
+    <th:block th:if="${effectiveDosageInstructions.maxDosePerAdministration() != null}"
               th:with="maxDosePerAdministration = ${effectiveDosageInstructions.maxDosePerAdministration()}">
         Dose maximale par administration :
         <th:block th:insert="~{::amount-quantity(${maxDosePerAdministration}, ${lang})}"/>
