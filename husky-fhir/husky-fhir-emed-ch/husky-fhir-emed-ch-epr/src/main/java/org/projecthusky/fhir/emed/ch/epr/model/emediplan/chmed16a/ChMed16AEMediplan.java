@@ -23,10 +23,12 @@ import java.util.List;
  * Based on the CHMED16A specs doc as published on its
  * <a href="https://github.com/ig-emediplan/specification/tree/main/chmed16a">GitHub site</a> as of 2025-06-25.
  * </p>
+ * @param <M> The type of ChMed16AMedicament. This is needed since revision 3 has added a new version of the medicament
+ *            object for the ePrescription.
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ChMed16AEMediplan extends EMediplan<ChMed16AExtension, ChMed16AMedicament> implements ChMed16AExtendable {
+public class ChMed16AEMediplan<M extends ChMed16AMedicament> extends EMediplan<ChMed16AExtension, M> implements ChMed16AExtendable {
     public static final String EMEDIPLAN_VERSION = "CHMED16A";
 
     protected static final String PATIENT_FIELD_NAME = "Patient";
@@ -51,7 +53,7 @@ public class ChMed16AEMediplan extends EMediplan<ChMed16AExtension, ChMed16AMedi
      * The list of medicaments.
      */
     @JsonProperty(MEDICAMENTS_FIELD_NAME)
-    protected List<@NonNull ChMed16AMedicament> medicaments;
+    protected List<@NonNull M> medicaments;
     /**
      * The list of recommendations.
      */
@@ -127,7 +129,7 @@ public class ChMed16AEMediplan extends EMediplan<ChMed16AExtension, ChMed16AMedi
     }
 
     @Override
-    public List<@NonNull ChMed16AMedicament> getMedicaments() {
+    public List<@NonNull M> getMedicaments() {
         if (medicaments == null) medicaments = new ArrayList<>();
         return medicaments;
     }

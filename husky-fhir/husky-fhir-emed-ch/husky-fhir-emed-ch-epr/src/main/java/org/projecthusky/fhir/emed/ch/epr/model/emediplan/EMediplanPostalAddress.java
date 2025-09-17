@@ -9,6 +9,7 @@ import org.hl7.fhir.r4.model.PrimitiveType;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,13 @@ public abstract class EMediplanPostalAddress implements EMediplanObject {
     public abstract void setCountry(final @Nullable String country);
 
     @JsonIgnore
-    protected abstract String getCountryFieldName();
+    public abstract String getStreetFieldName();
+    @JsonIgnore
+    public abstract String getPostalCodeFieldName();
+    @JsonIgnore
+    public abstract String getCityFieldName();
+    @JsonIgnore
+    public abstract String getCountryFieldName();
 
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = new ValidationResult();
@@ -42,14 +49,16 @@ public abstract class EMediplanPostalAddress implements EMediplanObject {
 
     /**
      * Fills the received (normally, new) eMediplan postal address object with the content of the received FHIR address.
-     * @param address     The eMediplan address to be filled.
+     * @param addressSupplier     A supplier for the eMediplan address to be filled.
      * @param fhirAddress The FHIR address with the postal address data.
      * @return            The mutated eMediplan address object.
      * @param <T>         The type of eMediplanPostalAddress object.
      */
-    public static <T extends EMediplanPostalAddress> T fromFhirAddress(final T address, final Address fhirAddress) {
-        Objects.requireNonNull(address, "address must not be null");
+    public static <T extends EMediplanPostalAddress> T fromFhirAddress(final Supplier<T> addressSupplier, final Address fhirAddress) {
+        Objects.requireNonNull(addressSupplier, "address must not be null");
         Objects.requireNonNull(fhirAddress, "fhirAddress must not be null");
+
+        final var address = addressSupplier.get();
 
         String street = null, postalCode = null, city = null, country = null;
         if (fhirAddress.hasLine())
@@ -63,6 +72,7 @@ public abstract class EMediplanPostalAddress implements EMediplanObject {
                 country = countryCoding.getCode();
             }
         }
+
         address.setStreet( street );
         address.setPostalCode( postalCode );
         address.setCity( city );

@@ -11,6 +11,7 @@ import org.projecthusky.common.utils.datatypes.Gln;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareProCarrier;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.EMediplanAuthor;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
@@ -28,8 +29,12 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedicament> implements ChMed23AExtendable {
+public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedicament>
+        implements ChMed23AExtendable, EMediplanHealthcareProCarrier<ChMed23AHealthcarePerson, ChMed23AHealthcareOrganization> {
     public static final String EMEDIPLAN_VERSION = "CHMED23A";
+
+    protected static final String HEALTHCARE_PERSON_FIELD_NAME = "hcPerson";
+    protected static final String HEALTHCARE_ORGANIZATION_FIELD_NAME = "hcOrg";
 
     /**
      * The patient.
@@ -38,11 +43,13 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
     /**
      * The healthcare person author of the document, required if the document author type is an HCP.
      */
-    protected @Nullable EMediplanHealthcarePerson hcPerson;
+    @JsonProperty(HEALTHCARE_PERSON_FIELD_NAME)
+    protected @Nullable ChMed23AHealthcarePerson healthcarePerson;
     /**
      * The healthcare organization in which the HealthcarePerson works. Required if the document author type is an HCP.
      */
-    protected @Nullable EMediplanHealthcareOrganization hcOrg;
+    @JsonProperty(HEALTHCARE_ORGANIZATION_FIELD_NAME)
+    protected @Nullable ChMed23AHealthcareOrganization healthcareOrganization;
     /**
      * List of medications.
      */
@@ -87,6 +94,17 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
     @JsonProperty("mk")
     protected @Nullable String remark;
 
+    @Override
+    public String getHealthcarePersonFieldName() {
+        return HEALTHCARE_PERSON_FIELD_NAME;
+    }
+
+    @Override
+    public String getHealthcareOrganizationFieldName() {
+        return HEALTHCARE_ORGANIZATION_FIELD_NAME;
+    }
+
+    @Override
     public List<@NonNull ChMed23AMedicament> getMedicaments() {
         if (medicaments == null) medicaments = new ArrayList<>();
         return medicaments;
@@ -110,6 +128,11 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
     }
 
     @Override
+    public boolean isAuthorProfessional() {
+        return author == EMediplanAuthor.HEALTHCARE_PERSON;
+    }
+
+    @Override
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = super.validate(basePath);
 
@@ -121,40 +144,9 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
         else {
             final var resolvedType = resolveType();
 
-            // Certain checks need the author to be present to determine the validation result
-            if (hcPerson == null) {
-                if (author == EMediplanAuthor.HEALTHCARE_PERSON)
-                    result.add(getRequiredFieldValidationIssue(
-                            getFieldValidationPath(basePath, "hcPerson"),
-                            "The hcPerson object is missing, but it is required when the author is a healthcare person."
-                    ));
-            } else {
-                result.add(hcPerson.validate(getFieldValidationPath(basePath, "hcPerson"), resolvedType));
-                if (author == EMediplanAuthor.PATIENT) {
-                    result.add(getIgnoredFieldValidationIssue(
-                            getFieldValidationPath(basePath,"hcPerson"),
-                            "The healthcare person object is present, but the author type is a patient."
-                    ));
-                }
-            }
+            result.add(validateHealtcareProInfo(basePath));
 
-            if (hcOrg == null) {
-                if (author == EMediplanAuthor.HEALTHCARE_PERSON)
-                    result.add(getRequiredFieldValidationIssue(
-                            getFieldValidationPath(basePath, "hcOrg"),
-                            "The hcOrg object is missing, but it is required when the author is a healthcare person."
-                    ));
-            } else hcOrg.validate(getFieldValidationPath(basePath, "hcOrg"), resolvedType);
-
-            if (hcPerson != null && hcOrg != null && hcPerson.getZsr() != null && !hcPerson.getZsr().isBlank() && hcOrg.getZsr() != null && !hcOrg.getZsr().isBlank())
-                result.add(getValidationIssue(
-                        OperationOutcome.IssueSeverity.ERROR,
-                        OperationOutcome.IssueType.BUSINESSRULE,
-                        basePath,
-                        "The ZSR number may be present either in the healthcare person object or the healthcare organization object but not both."
-                ));
-
-            if (resolvedType == EMediplanType.MEDICATION_PLAN && author == EMediplanAuthor.HEALTHCARE_PERSON && (hcPerson == null || hcPerson.getGln() == null || hcPerson.getGln().isBlank()) && (hcOrg == null || hcOrg.getGln() == null || hcOrg.getGln().isBlank()))
+            if (resolvedType == EMediplanType.MEDICATION_PLAN && author == EMediplanAuthor.HEALTHCARE_PERSON && (healthcarePerson == null || healthcarePerson.getGln() == null || healthcarePerson.getGln().isBlank()) && (healthcareOrganization == null || healthcareOrganization.getGln() == null || healthcareOrganization.getGln().isBlank()))
                 result.add(getRequiredFieldValidationIssue(
                         basePath,
                         "The GLN of either the healthcare professional or the healthcare organization is mandatory for eMediplan treatment plan documents done by a healthcare professional."
@@ -225,8 +217,8 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
     public boolean hasExtensions(boolean inDepth) {
         return (extensions != null && !extensions.isEmpty()) || (inDepth && (
                 (patient != null && patient.hasExtensions(true)) ||
-                (hcPerson != null && hcPerson.hasExtensions(true)) ||
-                (hcOrg != null && hcOrg.hasExtensions(true)) ||
+                (healthcarePerson != null && healthcarePerson.hasExtensions(true)) ||
+                (healthcareOrganization != null && healthcareOrganization.hasExtensions(true)) ||
                 (medicaments != null && medicaments.stream().anyMatch(med -> med.hasExtensions(true)))
                 ));
     }
@@ -235,8 +227,8 @@ public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedi
     public void trim() {
         super.trim();
 
-        if (hcPerson != null) hcPerson.trim();
-        if (hcOrg != null) hcOrg.trim();
+        if (healthcarePerson != null) healthcarePerson.trim();
+        if (healthcareOrganization != null) healthcareOrganization.trim();
 
         if (type != null && type == EMediplanType.MEDICATION_PLAN && author != null && author == EMediplanAuthor.PATIENT)
             type = null;

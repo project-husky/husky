@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import org.projecthusky.fhir.emed.ch.epr.enums.ChEmedEprTimeUnit;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanEnum;
 
 @Getter
@@ -19,5 +20,16 @@ public enum TimeUnit implements EMediplanEnum<Integer> {
 
     TimeUnit(int code) {
         this.code = code;
+    }
+
+    public static TimeUnit fromChEmedEprTimeUnit(final ChEmedEprTimeUnit chEmedEprTimeUnit) {
+        return switch(chEmedEprTimeUnit) {
+            case A -> YEAR;
+            case SEC -> SECOND;
+            case MIN -> MINUTE;
+            case H -> HOUR;
+            case D -> DAY;
+            case MO -> MONTH;
+        };
     }
 }

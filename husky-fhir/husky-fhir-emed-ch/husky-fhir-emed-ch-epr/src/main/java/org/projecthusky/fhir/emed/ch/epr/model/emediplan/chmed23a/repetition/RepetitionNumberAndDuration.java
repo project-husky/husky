@@ -1,8 +1,10 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.TimeUnit;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
@@ -12,6 +14,8 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RepetitionNumberAndDuration extends Repetition implements NumberBoundRepeatable, DurationBoundRepeatable{
     protected static final String DURATION_FIELD_NAME = "d";
     protected static final String VALUE_FIELD_NAME = "v";

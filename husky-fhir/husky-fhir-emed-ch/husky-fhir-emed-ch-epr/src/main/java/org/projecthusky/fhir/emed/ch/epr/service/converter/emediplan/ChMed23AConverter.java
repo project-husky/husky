@@ -3,6 +3,8 @@ package org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan;
 import com.google.common.collect.Streams;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.MedicationRequest;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
@@ -23,11 +25,16 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detai
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.dose.SimpleDose;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.timed.DaySegmentsDosage;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.timed.DoseOnlyDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.Repetition;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.RepetitionDuration;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.RepetitionNumber;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.RepetitionNumberAndDuration;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -65,8 +72,8 @@ public non-sealed class ChMed23AConverter implements EMediplanConverter {
         if (lastStatement != null) {
             final var lastMedicalAuthor = lastStatement.resolveMedicalAuthor();
             if (lastMedicalAuthor.getPractitionerRole() != null) {
-                emediplan.setHcPerson(EMediplanHealthcarePerson.fromChEmedEprPractitioner(lastMedicalAuthor.getPractitionerRole().resolvePractitioner()));
-                emediplan.setHcOrg(EMediplanHealthcareOrganization.fromChEmedEprOrganization(lastMedicalAuthor.getPractitionerRole().resolveOrganization()));
+                emediplan.setHealthcarePerson(ChMed23AHealthcarePerson.fromChEmedEprPractitioner(lastMedicalAuthor.getPractitionerRole().resolvePractitioner()));
+                emediplan.setHealthcareOrganization(ChMed23AHealthcareOrganization.fromChEmedEprOrganization(lastMedicalAuthor.getPractitionerRole().resolveOrganization()));
                 emediplan.setAuthor(EMediplanAuthor.HEALTHCARE_PERSON);
             } else emediplan.setAuthor(EMediplanAuthor.PATIENT);
         } else emediplan.setAuthor(EMediplanAuthor.PATIENT);
@@ -267,5 +274,31 @@ public non-sealed class ChMed23AConverter implements EMediplanConverter {
                 Double.parseDouble(chEmedEprDose.low().value()),
                 Double.parseDouble(chEmedEprDose.high().value())
                 );
+    }
+
+    /**
+     * Gets a repetition object from a FHIR dispense request, if possible.
+     * @param dispenseRequest The dispense request form which to create a repetition object.
+     * @return The resulting repetition object, if it would make sense, {@code null} otherwise.
+     */
+    protected static @Nullable Repetition toRepetition(final MedicationRequest.MedicationRequestDispenseRequestComponent dispenseRequest) {
+        Objects.requireNonNull(dispenseRequest);
+
+        if (dispenseRequest.hasValidityPeriod() || dispenseRequest.hasNumberOfRepeatsAllowed()) {
+            if (dispenseRequest.hasValidityPeriod()) {
+                final var repetitionDuration = RepetitionDuration.fromFhirPeriod(dispenseRequest.getValidityPeriod());
+                if (repetitionDuration != null) {
+                    if (dispenseRequest.hasNumberOfRepeatsAllowed()) {
+                        return new RepetitionNumberAndDuration(dispenseRequest.getNumberOfRepeatsAllowed(), repetitionDuration.getDuration(), repetitionDuration.getDurationUnit());
+                    }
+                    return repetitionDuration;
+                }
+                if (dispenseRequest.hasNumberOfRepeatsAllowed())
+                    return new RepetitionNumber(dispenseRequest.getNumberOfRepeatsAllowed());
+            }
+            if (dispenseRequest.hasNumberOfRepeatsAllowed())
+                return new RepetitionNumber(dispenseRequest.getNumberOfRepeatsAllowed());
+        }
+        return null;
     }
 }

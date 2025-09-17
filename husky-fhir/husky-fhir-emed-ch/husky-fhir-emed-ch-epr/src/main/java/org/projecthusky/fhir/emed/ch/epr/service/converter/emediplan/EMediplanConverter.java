@@ -7,7 +7,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
-public sealed interface EMediplanConverter permits ChMed16AConverter, ChMed23AConverter {
+public sealed interface EMediplanConverter permits ChMed16ABaseConverter, ChMed23AConverter {
     /**
      * Converts the received PMLC document to an eMediplan object.
      * @param pmlc The PMLC document to be converted.
