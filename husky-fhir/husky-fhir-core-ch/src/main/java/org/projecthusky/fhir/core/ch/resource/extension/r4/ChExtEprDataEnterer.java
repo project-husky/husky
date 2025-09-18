@@ -1,4 +1,4 @@
-package org.projecthusky.fhir.emed.ch.epr.resource.extension;
+package org.projecthusky.fhir.core.ch.resource.extension.r4;
 
 import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
@@ -8,8 +8,8 @@ import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.DateType;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRole;
 
 import java.util.Date;
 
@@ -53,17 +53,17 @@ public class ChExtEprDataEnterer extends BackboneElement {
      * Resolves the person and organization that entered data or throws.
      *
      * @return the person and organization that entered data.
-     * @throws InvalidEmedContentException if the information is missing or isn't of a ChEmedEprPractitionerRole type.
+     * @throws InvalidContentException if the information is missing or isn't of a ChCorePractitionerRole type.
      */
     @ExpectsValidResource
-    public ChEmedEprPractitionerRole resolveEnterer() throws InvalidEmedContentException {
-        if (!this.hasEnterer()) throw new InvalidEmedContentException(
+    public ChCorePractitionerRole resolveEnterer() throws InvalidContentException {
+        if (!this.hasEnterer()) throw new InvalidContentException(
                 "Information about the person and organization that entered data is missing.");
         final var resource = this.enterer.getResource();
-        if (resource instanceof ChEmedEprPractitionerRole chPractitionerRole) {
+        if (resource instanceof ChCorePractitionerRole chPractitionerRole) {
             return chPractitionerRole;
         }
-        throw new InvalidEmedContentException("The resource isn't of a ChEmedEprPractitionerRole type.");
+        throw new InvalidContentException("The resource isn't of a ChCorePractitionerRole type.");
     }
 
     /**
@@ -83,7 +83,7 @@ public class ChExtEprDataEnterer extends BackboneElement {
      * @param practitionerRole the person and organization that entered data.
      * @return this.
      */
-    public ChExtEprDataEnterer setEnterer(final ChEmedEprPractitionerRole practitionerRole) {
+    public ChExtEprDataEnterer setEnterer(final ChCorePractitionerRole practitionerRole) {
         if (this.enterer == null) {
             this.enterer = new Reference();
         }
