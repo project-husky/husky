@@ -53,7 +53,6 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	@Nullable
 	@Child(name = "verificationStatus", min = 0, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status", definedLocally = false)
-//	protected ChVacdExtensionVerificationStatusExt verificationStatus;
 	protected Coding verificationStatus;
 
 	public ChVacdImmunization() {
