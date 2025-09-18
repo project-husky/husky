@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 /**
@@ -96,5 +95,10 @@ public class EMediplanRisk implements EMediplanObject {
     @Override
     public ValidationResult validate(@Nullable String basePath) {
         return new ValidationResult();
+    }
+
+    @Override
+    public boolean hasExtensions(boolean inDepth) {
+        return false;
     }
 }

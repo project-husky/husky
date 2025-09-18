@@ -1,0 +1,19 @@
+package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanEnum;
+
+@Getter
+public enum DoseType implements EMediplanEnum<Integer> {
+    SIMPLE(1),
+    FROM_TO(2),
+    RANGE(3);
+
+    @JsonValue
+    private final Integer code;
+
+    DoseType(int code) {
+        this.code = code;
+    }
+}

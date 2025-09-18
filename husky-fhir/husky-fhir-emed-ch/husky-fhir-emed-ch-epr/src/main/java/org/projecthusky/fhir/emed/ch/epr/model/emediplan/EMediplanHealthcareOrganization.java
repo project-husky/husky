@@ -1,61 +1,52 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
+import org.hl7.fhir.r4.model.Address;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class EMediplanHealthcareOrganization implements EMediplanObject {
-    /**
-     * The GLN. Required if not set in the HealthcarePerson object, otherwise optional.
-     */
-    protected @Nullable String gln;
-    /**
-     * Name of the organization.
-     */
-    protected String name;
-    /**
-     * Postal address of the patient.
-     */
-    @JsonUnwrapped
-    protected EMediplanPostalAddress address;
-    /**
-     * ZSR number. The ZSR number may only be set once, either in the HealthcarePerson object or in the
-     * HealthcareOrganization object.
-     */
-    protected @Nullable String zsr;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
+public abstract class EMediplanHealthcareOrganization<A extends EMediplanPostalAddress> implements EMediplanObject {
+    public abstract String getName();
+    public abstract A getAddress();
+    public abstract @Nullable String getZsr();
+
+    public abstract void setName(String name);
+    public abstract void setAddress(A address);
+    public abstract void setZsr(@Nullable String zsr);
+
+    @JsonIgnore
+    protected abstract String getNameFieldName();
+
+    @Override
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = new ValidationResult();
 
-        if (name == null || !name.isBlank()) result.add(getRequiredFieldValidationIssue(
-                getFieldValidationPath(basePath, "name"),
+        if (getName() == null || getName().isBlank()) result.add(getRequiredFieldValidationIssue(
+                getFieldValidationPath(basePath, getNameFieldName()),
                 "The healthcare organization's name is missing but it is mandatory."
         ));
 
-        if (address == null) result.add(getRequiredFieldValidationIssue(
+        if (getAddress() == null) result.add(getRequiredFieldValidationIssue(
                 basePath,
                 "The healthcare organization's address is missing but it is mandatory."
         ));
         else {
-            result.add(address.validate(basePath));
-            if (address.getStreet() == null || address.getStreet().isBlank()) result.add(getRequiredFieldValidationIssue(
-                    getFieldValidationPath(basePath, "street"),
+            result.add(getAddress().validate(basePath));
+            if (getAddress().getStreet() == null || getAddress().getStreet().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, getAddress().getStreetFieldName()),
                     "The healthcare organization's address is missing the street, but it is mandatory."
             ));
-            if (address.getPostalCode() == null || address.getPostalCode().isBlank()) result.add(getRequiredFieldValidationIssue(
-                    getFieldValidationPath(basePath, "zip"),
+            if (getAddress().getPostalCode() == null || getAddress().getPostalCode().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, getAddress().getPostalCodeFieldName()),
                     "The healthcare organization's address is missing the postal code, but it is mandatory."
             ));
-            if (address.getCity() == null || address.getCity().isBlank()) result.add(getRequiredFieldValidationIssue(
-                    getFieldValidationPath(basePath, "city"),
+            if (getAddress().getCity() == null || getAddress().getCity().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, getAddress().getCityFieldName()),
                     "The healthcare organization's city is missing but it is mandatory."
             ));
         }
@@ -63,34 +54,32 @@ public class EMediplanHealthcareOrganization implements EMediplanObject {
         return result;
     }
 
-    public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
-        final var result = validate(basePath);
-
-        if (mediplanType == EMediplanType.PRESCRIPTION) {
-            if (gln != null && !gln.isEmpty()) result.add(getIgnoredFieldValidationIssue(
-                    getFieldValidationPath(basePath, "gln"),
-                    "The healthcare organization's GLN is present but should not be included in eMediplan prescription documents. the healthcare professional GLN should be filled instead."
-            ));
-        }
-
-        return result;
+    @Override
+    public void trim() {
+        if (getAddress() != null) getAddress().trim();
     }
 
-    public void trim() {
-        if (address != null) address.trim();
+    @Override
+    public boolean hasExtensions(boolean inDepth) {
+        return inDepth && getAddress() != null && getAddress().hasExtensions(true);
     }
 
     /**
      * Gets an eMediplan organization object from a CH EMED EPR organization object.
      * @param organization The CH EMED EPR organization object to be converted.
+     * @param supplier     The new healthcare organization object supplier, normally an empty constructor.
+     * @param addressConverter The converter from FHIR address to the eMediplan address to be used.
      * @return The resulting eMediplan object.
      */
-    public static EMediplanHealthcareOrganization fromChEmedEprOrganization(final ChEmedEprOrganization organization) {
-        return new EMediplanHealthcareOrganization(
-                organization.resolveGln(),
-                organization.getName(),
-                EMediplanPostalAddress.fromFhirAddress(organization.resolveAddress()),
-                organization.resolveZsr()
-        );
+    protected static <T extends EMediplanHealthcareOrganization<Ad>, Ad extends EMediplanPostalAddress> @NotNull T fromChEmedEprOrganization(
+            final ChEmedEprOrganization organization,
+            final Supplier<? extends T> supplier,
+            final Function<Address, ? extends Ad> addressConverter) {
+
+        final var hcOrg = supplier.get();
+        hcOrg.setName(organization.getName());
+        hcOrg.setAddress(addressConverter.apply(organization.resolveAddress()));
+        hcOrg.setZsr(organization.resolveZsr());
+        return hcOrg;
     }
 }

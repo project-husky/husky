@@ -13,14 +13,9 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.HumanName;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Practitioner;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerEpr;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.core.ch.util.FhirSystem;
-import org.projecthusky.fhir.core.ch.util.Identifiers;
-
-import java.util.List;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Practitioner.
@@ -28,7 +23,7 @@ import java.util.List;
  * @author Quentin Ligier
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner")
-public class ChEmedEprPractitioner extends Practitioner {
+public class ChEmedEprPractitioner extends ChCorePractitionerEpr {
 
     /**
      * Empty constructor for the parser.
@@ -43,54 +38,14 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @return the GLN identifier.
      * @throws InvalidEmedContentException if the GLN is missing.
      */
+    @Override
     @ExpectsValidResource
     public String resolveGln() {
-        final var identifier = Identifiers.getBySystem(this.getIdentifier(), FhirSystem.GLN);
-        if (identifier == null || identifier.getValue() == null) {
+        final var gln = super.resolveGln();
+        if (gln == null) {
             throw new InvalidEmedContentException("The GLN is missing");
         }
-        return identifier.getValue();
-    }
-
-    /**
-     * Sets the practitioner's GLN identifier. If the GLN already exists, it's replaced.
-     *
-     * @param gln the practitioner's GLN identifier.
-     * @return the created Identifier.
-     */
-    public Identifier setGln(final String gln) {
-        var identifier = Identifiers.getBySystem(this.getIdentifier(), FhirSystem.GLN);
-        if (identifier == null) {
-            identifier = this.addIdentifier();
-            identifier.setSystem(FhirSystem.GLN);
-        }
-        identifier.setValue(gln);
-        return identifier;
-    }
-
-    /**
-     * Resolves the practitioner ZSR number(s). Zero or more identifiers are expected; in a prescription, at least one
-     * identifier is required.
-     *
-     * @return a list of ZSR numbers.
-     */
-    public List<String> resolveZsr() {
-        return Identifiers.findBySystem(this.getIdentifier(), FhirSystem.ZSR).stream()
-                .map(Identifier::getValue)
-                .toList();
-    }
-
-    /**
-     * Adds a practitioner's ZSR number.
-     *
-     * @param zsr The ZSR number.
-     * @return the created Identifier.
-     */
-    public Identifier addZsr(final String zsr) {
-        final var identifier = this.addIdentifier();
-        identifier.setSystem(FhirSystem.ZSR);
-        identifier.setValue(zsr);
-        return identifier;
+        return gln;
     }
 
     /**

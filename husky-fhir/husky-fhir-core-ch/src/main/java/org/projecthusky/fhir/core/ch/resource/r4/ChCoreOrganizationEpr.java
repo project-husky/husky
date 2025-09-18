@@ -11,13 +11,27 @@
 package org.projecthusky.fhir.core.ch.resource.r4;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.hl7.fhir.r4.model.Address;
 
 /**
  * 
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-organization-epr")
 public class ChCoreOrganizationEpr extends ChCoreOrganization {
-
 	private static final long serialVersionUID = 3227289686864894282L;
 
+	/**
+	 * Sets the organization's address. If the address already exists, it's replaced.
+	 *
+	 * @param address the organization's address.
+	 * @return this.
+	 */
+	public ChCoreOrganizationEpr setAddress(final Address address) {
+		if (this.hasAddress()) {
+			this.getAddress().set(0, address);
+		} else {
+			this.addAddress(address);
+		}
+		return this;
+	}
 }
