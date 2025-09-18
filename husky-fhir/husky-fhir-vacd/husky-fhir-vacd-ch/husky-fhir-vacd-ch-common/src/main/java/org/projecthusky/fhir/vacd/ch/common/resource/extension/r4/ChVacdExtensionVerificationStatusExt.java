@@ -25,7 +25,7 @@ public class ChVacdExtensionVerificationStatusExt extends BackboneElement {
 	private static final long serialVersionUID = -6962170083806333637L;
 	@Nullable
 	@Child(name = "valueCoding", min = 0, max = 1)
-	@ca.uhn.fhir.model.api.annotation.Extension(url = "conflict", definedLocally = false)
+//	@ca.uhn.fhir.model.api.annotation.Extension(url = "conflict", definedLocally = false)
 	protected Coding valueCoding;
 
 	/**
