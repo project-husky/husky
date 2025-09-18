@@ -13,6 +13,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganization;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitioner;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanPatient;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AGender;
@@ -181,15 +184,18 @@ public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> impleme
      *
      * @param eprFhirPatient    The CH EMED EPR patient to be converted.
      * @param weightObservation The CH EMED EPR weight observation, if any.
+     * @param informationRecipients The recipients of the CH EMED EPR content.
      * @param mediplanType      The type of eMediplan document for which to get the patient. Some fields should be
      *                          omitted depending on the document type.
      * @return The eMediplan patient.
      */
     public static ChMed16APatient fromEprFhir(final ChEmedEprPatient eprFhirPatient,
                                               final @Nullable Observation weightObservation,
+                                              final List<Reference> informationRecipients,
                                               final EMediplanType mediplanType) {
         String language = null;
         ChMed16APatientMedicalData medicalData = null;
+        String receiver = null;
         final var fhirAddress = eprFhirPatient.resolveAddress();
 
         if (mediplanType == EMediplanType.MEDICATION_PLAN) {
@@ -215,6 +221,8 @@ public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> impleme
                         ChMed16AMeasurementUnit.KILOGRAM
                 ));
             }
+        } else if (mediplanType == EMediplanType.PRESCRIPTION) {
+            receiver = getFirstProfessionalRecipient(informationRecipients);
         }
 
         final var phones = eprFhirPatient.resolvePhoneNumbersAsStrings(true);
@@ -229,11 +237,31 @@ public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> impleme
                 language,
                 phones.isEmpty() ? null : phones.getFirst(),
                 emails.isEmpty() ? null : emails.getFirst(),
-                null,
+                receiver,
                 eprFhirPatient.getIdentifier().stream().map(ChMed16APatientId::fromFhirIdentifier).filter(Objects::nonNull).toList(),
                 medicalData,
                 null
         );
+    }
+
+    protected static @Nullable String getFirstProfessionalRecipient(final List<Reference> recipients) {
+        for (Reference reference : recipients) {
+            if (reference != null) {
+                final var resource = reference.getResource();
+                if (resource != null) {
+                    switch(resource) {
+                        //we can assume that if we find a practitioner, CH EMED EPR always enforces having a GLN
+                        case ChCorePractitioner practitioner: return practitioner.resolveGln();
+                        case ChCoreOrganization org: {
+                            if (org.hasGln()) return org.resolveGln();
+                            break;
+                        }
+                        default:
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @Override

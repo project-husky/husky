@@ -17,7 +17,8 @@ import java.time.ZoneId;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+//TODO add a test with non-structured dosage?
+//TODO add a test with a prescription with several med requests?
 public class EPrescriptionConverterTest {
     @Test
     void convertAndValidatePrescription() throws IOException {

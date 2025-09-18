@@ -57,6 +57,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         emediplan.setPatient(ChMed16APatient.fromEprFhir(
                 pmlc.resolvePatient(),
                 pmlc.resolveComposition().resolvePatientWeightObservation(),
+                pmlc.resolveComposition().getInformationRecipient(),
                 EMediplanType.MEDICATION_PLAN
         ));
         // If the patient did not have a preferred language, we still need to fill it in the eMediplan since it is
@@ -89,7 +90,9 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
 
         emediplan.setTimestamp(pmlc.resolveTimestamp());
 
-        // TODO add validator professional (gln) and date?
+        // #289 add validator professional (gln) and date?
+        // it is unclear at this moment where and how this should be stored on the CH EMED EPR side
+        // most likely would be conveyed as the/an attester within the PMLC's composition.
 
         return emediplan;
     }
@@ -101,10 +104,10 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
 
         final var preComposition = pre.resolveComposition();
 
-        // TODO the patient in the case of a CHMED16A prescription can convey the recipient of the prescription, which might also be conveyed as a composition extension in CH EMED EPR
         emediplan.setPatient(ChMed16APatient.fromEprFhir(
                 pre.resolvePatient(),
                 preComposition.resolvePatientWeightObservation(),
+                preComposition.getInformationRecipient(),
                 EMediplanType.PRESCRIPTION
         ));
 
@@ -274,13 +277,13 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         return switch (mediplanType) {
             case MEDICATION_PLAN -> toPlanPosology(baseDosage, additionalDosages, medicament);
             case POLYMEDICATION_CHECK -> throw new UnsupportedOperationException("Polymedication check is not supported.");
-            case PRESCRIPTION -> toPlanPosology(baseDosage, additionalDosages, medicament);
+            case PRESCRIPTION -> toPrescriptionPosology(baseDosage, additionalDosages, medicament);
         };
     }
 
     /**
      * Converts the list of Dosage objects of a CH EMED EPR resource (either medication statement or medication request)
-     * to an {@link ChMed16APosology} object assumed to belong to a medication plan document.
+     * to a {@link ChMed16APosology} object assumed to belong to a medication plan document.
      *
      * @param baseDosage        The CH EMED EPR resource base dosage.
      * @param additionalDosages The CH EMED EPR list of additional dosages (if split dose). It can be empty.
@@ -294,8 +297,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                                              final List<@NonNull ChEmedEprDosage> additionalDosages,
                                              final ChMed16AMedicament medicament
                                               ) {
-        // TODO remove freeTextDosage flag?
-        boolean freeTextDosage = false;
         final var posology = new ChMed16APosology();
         if (baseDosage.hasBoundsPeriod()) {
             if (baseDosage.getBoundsPeriod().hasStart())
@@ -325,7 +326,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                                 })
                         );
                 posology.setDailyDoses(dailyDosage);
-                //TODO deal with in reserve with max dosages?
             } else {
                 /* there is a when and rate/quantity, but either the base dosage does not have range/quantity or some
                     additional dosages have range instead of quantity, a complex posology detail must be used
@@ -342,7 +342,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                                 )
                         );
                 posology.setTakingTimes(takingTimes);
-                //TODO deal with the max per period ?
             }
         } else {
             // No when or no dose/rate, hence there cannot be split dosage, we only care about base dosage
@@ -365,7 +364,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                     //nothing is structured, use patient instruction
                     medicament.setApplicationInstructions(baseDosage.getPatientInstruction());
                 }
-                freeTextDosage = true;
             }
         }
 
@@ -374,7 +372,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
 
     /**
      * Converts the list of Dosage objects of a CH EMED EPR resource (either medication statement or medication request)
-     * to an {@link ChMed16APosology} object assumed to belong to a prescription document.
+     * to a {@link ChMed16APosology} object assumed to belong to a prescription document.
      *
      * @param baseDosage        The CH EMED EPR resource base dosage.
      * @param additionalDosages The CH EMED EPR list of additional dosages (if split dose). It can be empty.
@@ -388,8 +386,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                                                       final List<@NonNull ChEmedEprDosage> additionalDosages,
                                                       final ChMed16AMedicament medicament
     ) {
-        // TODO remove freeTextDosage flag?
-        boolean freeTextDosage = false;
         final var posology = new ChMed16APosology();
         if (baseDosage.hasBoundsPeriod() && baseDosage.getBoundsPeriod().hasEnd()) {
                 posology.setEnd(baseDosage.getBoundsPeriod().getEndElement().getValueAsCalendar().toInstant());
@@ -420,7 +416,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                     additional dosages have range instead of quantity, a complex posology detail must be used but it is
                     not supported by the CHMED16A prescription. It must be transformed into free text.
                  */
-                freeTextDosage = true;
                 medicament.setApplicationInstructions((baseDosage.hasText() || !baseDosage.hasPatientInstruction())?
                         baseDosage.getText() : baseDosage.getPatientInstruction());
             }
@@ -430,7 +425,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                 // if we miss when, but there is doseAndRate, the CH EMED EPR convention is that it is a daily dosage.
                 // in CHMED16A there's no way but to express this as a taking time with a 24h cycle duration (default cycle)
                 // but the prescription does not allow for this, so a free text must be used.
-                freeTextDosage = true;
                 medicament.setApplicationInstructions((baseDosage.hasText() || !baseDosage.hasPatientInstruction())?
                         baseDosage.getText() : baseDosage.getPatientInstruction());
             } else {
@@ -443,7 +437,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                     //nothing is structured, use patient instruction
                     medicament.setApplicationInstructions(baseDosage.getPatientInstruction());
                 }
-                freeTextDosage = true;
             }
         }
 
