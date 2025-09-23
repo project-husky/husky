@@ -585,12 +585,6 @@
 			<!-- Hapi Hl7 Fhir section-->
 			<!-- hapi fhir -->
 			<dependency>
-				<groupId>ca.uhn.hapi</groupId> <!-- HAPI Java HL7 API Base
-				Module, (GPL + MPL 1.1) -->
-				<artifactId>hapi-base</artifactId>
-				<version>${hapi.fhir.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>hapi-fhir-structures-r4</artifactId>
 				<version>${hapi.fhir.version}</version>
