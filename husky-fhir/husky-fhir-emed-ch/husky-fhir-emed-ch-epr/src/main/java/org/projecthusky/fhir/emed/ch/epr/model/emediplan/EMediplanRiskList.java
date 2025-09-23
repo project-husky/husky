@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.ArrayList;
@@ -64,6 +63,11 @@ public class EMediplanRiskList implements EMediplanObject {
         }
 
         return result;
+    }
+
+    @Override
+    public boolean hasExtensions(boolean inDepth) {
+        return (risks != null && risks.stream().anyMatch(risk -> risk.hasExtensions(inDepth)));
     }
 
     public void trim() {
