@@ -27,7 +27,9 @@
                 <th:block th:with="activeIngredients=${medication.resolveActiveIngredients()}">
                     <ul class="medication-active-ingredients" th:unless="${activeIngredients.isEmpty}">
                         <li th:each="activeIngredient : ${activeIngredients}">
-                            [[${activeIngredient.resolveActiveIngredient().getDisplayName(lang.getLanguageCode())}]]
+                            <th:block th:with="resolvedActiveIngredient=${activeIngredient.resolveActiveIngredient()}">
+                                [[${resolvedActiveIngredient == null? activeIngredient.getItemCodeableConcept().getText() : resolvedActiveIngredient.getDisplayName(lang.getLanguageCode())}]]
+                            </th:block>
                         </li>
                     </ul>
                 </th:block>

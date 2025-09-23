@@ -50,16 +50,13 @@ public class ChEmedEprMedicationIngredient extends Medication.MedicationIngredie
      * Resolves the active ingredient name.
      *
      * @return the active ingredient name.
-     * @throws InvalidEmedContentException if the active ingredient is missing or unknown.
+     * @throws InvalidEmedContentException if the active ingredient codeable concept is missing or unknown.
      */
     @ExpectsValidResource
-    public ActivePharmaceuticalIngredient resolveActiveIngredient() throws InvalidEmedContentException {
+    public @Nullable ActivePharmaceuticalIngredient resolveActiveIngredient() throws InvalidEmedContentException {
         if (!this.hasItemCodeableConcept()) throw new InvalidEmedContentException("The active ingredient is missing.");
         final var ingredient = ActivePharmaceuticalIngredient.getEnum(this.getItemCodeableConcept().getCodingFirstRep().getCode());
-        if (ingredient != null) {
-            return ingredient;
-        }
-        throw new InvalidEmedContentException("The active ingredient name is unknown.");
+        return ingredient;
     }
 
     /**
