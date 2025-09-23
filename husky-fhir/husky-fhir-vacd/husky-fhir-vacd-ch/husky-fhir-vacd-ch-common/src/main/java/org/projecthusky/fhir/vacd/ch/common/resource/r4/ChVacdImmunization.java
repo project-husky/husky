@@ -18,7 +18,6 @@ import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreImmunization;
-import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdExtensionVerificationStatusExt;
 import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
 
 import ca.uhn.fhir.model.api.annotation.Child;
