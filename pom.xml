@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.projecthusky</groupId>
 	<artifactId>husky-api</artifactId>
-	<version>3.2.0-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<url>https://github.com/project-husky/husky</url>
 	<name>Husky</name>
 	<packaging>pom</packaging>
@@ -584,12 +584,12 @@
 
 			<!-- Hapi Hl7 Fhir section-->
 			<!-- hapi fhir -->
-			<dependency>
-				<groupId>ca.uhn.hapi</groupId> <!-- HAPI Java HL7 API Base
-				Module, (GPL + MPL 1.1) -->
+			<!--<dependency>
+				<groupId>ca.uhn.hapi</groupId>
 				<artifactId>hapi-base</artifactId>
 				<version>${hapi.fhir.version}</version>
 			</dependency>
+			-->
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>hapi-fhir-structures-r4</artifactId>
