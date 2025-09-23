@@ -12,6 +12,8 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.UUID;
 
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreAllergyIntolerance;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
@@ -33,5 +35,6 @@ public class ChVacdAllergyIntolerance extends ChCoreAllergyIntolerance {
 				.addCoding(new org.hl7.fhir.r4.model.Coding().setSystem(
 						"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")
 						.setCode("confirmed").setDisplay("Confirmed")));
+		setClinicalStatus(new CodeableConcept().addCoding(new Coding("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", "active", "Active")));
 	}
 }
