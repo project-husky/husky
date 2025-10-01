@@ -11,28 +11,27 @@ package org.projecthusky.communication.requests.xds;
 
 import java.util.List;
 
-import lombok.experimental.SuperBuilder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
-import org.projecthusky.common.communication.Destination;
 import org.projecthusky.common.enums.DateTimeRangeAttributes;
 import org.projecthusky.common.model.Code;
 import org.projecthusky.common.model.Identificator;
 import org.projecthusky.common.model.Person;
 import org.projecthusky.common.utils.XdsMetadataUtil;
 import org.projecthusky.communication.xd.storedquery.DateTimeRange;
-import org.projecthusky.xua.core.SecurityHeaderElement;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
- * This class is designed to contain all possible search parameters for finding a document with the webservice. Paramerers are optional (except patientID and destination), only
- * those which are set will be used by the webservice.<br/>
- * The patient {@link Identificator} is required.
- * Possible parameters to search Documents by are:
+ * This class is designed to contain all possible search parameters for finding
+ * a document with the webservice. Paramerers are optional (except patientID and
+ * destination), only those which are set will be used by the webservice.<br/>
+ * The patient {@link Identificator} is required. Possible parameters to search
+ * Documents by are:
  * <ul>
  * <li>Availability status</li>
  * <li>Type code</li>
@@ -44,18 +43,16 @@ import lombok.ToString;
  * <li>Datetime range code</li>
  * <li>Author</li>
  * </ul>
+ * 
  * @author szalai
  */
 @Getter
 @SuperBuilder
 @ToString
-public class XdsRegistryStoredFindDocumentsQuery {
+public class XdsRegistryStoredFindDocumentsQuery extends XdsStoredQuery {
+
 	@NonNull
-	private Destination destination;
-	@NonNull
-	private Identificator patientID;
-	/** may be null for testing environments like the EPD Playground */
-	private SecurityHeaderElement xuaToken;
+	private Identificator patientId;
 
 	@Singular("availabilityStatus")
 	private List<AvailabilityStatus> availabilityStatus;
@@ -73,19 +70,23 @@ public class XdsRegistryStoredFindDocumentsQuery {
 	private List<Code> confidentialityCodes;
 	@Singular
 	private List<DateTimeRange> dateTimeRanges;
+	
 	private Person authorPerson;
-	
-	public static abstract class XdsRegistryStoredFindDocumentsQueryBuilder<C extends XdsRegistryStoredFindDocumentsQuery, B extends XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder<C, B>> {}
-	
+
+	public static abstract class XdsRegistryStoredFindDocumentsQueryBuilder<C extends XdsRegistryStoredFindDocumentsQuery, B extends XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder<C, B>>
+			extends XdsStoredQuery.XdsStoredQueryBuilder<C, B> {
+	}
+
 	public StoredQuery getIpfQuery() {
 		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
-		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(this.patientID));
+		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(this.patientId));
 		findDocumentsQuery.setStatus(this.availabilityStatus);
 		findDocumentsQuery.setTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(typeCodes));
 		findDocumentsQuery.setClassCodes(XdsMetadataUtil.convertEhcCodeToCode(classCodes));
 		findDocumentsQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
 		findDocumentsQuery.setPracticeSettingCodes(XdsMetadataUtil.convertEhcCodeToCode(practiceSettingCodes));
-		findDocumentsQuery.setHealthcareFacilityTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(healthCareFacilityCodes));
+		findDocumentsQuery
+				.setHealthcareFacilityTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(healthCareFacilityCodes));
 		findDocumentsQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
 
 		if (authorPerson != null) {
@@ -95,12 +96,18 @@ public class XdsRegistryStoredFindDocumentsQuery {
 		if (dateTimeRanges != null) {
 			for (var index = 0; index < dateTimeRanges.size(); index++) {
 				if (dateTimeRanges.get(index) != null) {
-					if (dateTimeRanges.get(index).getDateTimeRangeAttribute().equals(DateTimeRangeAttributes.SERVICE_START_TIME)) {
-						findDocumentsQuery.getServiceStartTime().setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
-						findDocumentsQuery.getServiceStartTime().setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
-					} else if (dateTimeRanges.get(index).getDateTimeRangeAttribute().equals(DateTimeRangeAttributes.SERVICE_STOP_TIME)) {
-						findDocumentsQuery.getServiceStopTime().setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
-						findDocumentsQuery.getServiceStopTime().setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
+					if (dateTimeRanges.get(index).getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_START_TIME)) {
+						findDocumentsQuery.getServiceStartTime()
+								.setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
+						findDocumentsQuery.getServiceStartTime()
+								.setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
+					} else if (dateTimeRanges.get(index).getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_STOP_TIME)) {
+						findDocumentsQuery.getServiceStopTime()
+								.setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
+						findDocumentsQuery.getServiceStopTime()
+								.setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
 					}
 				}
 			}

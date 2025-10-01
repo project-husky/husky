@@ -21,10 +21,9 @@ import org.projecthusky.common.utils.XdsMetadataUtil;
  */
 @SuperBuilder
 @ToString
-@Deprecated(since = "3.3.0, use XdsRegistryStoredFindFoldersQuery instead", forRemoval = true)
-public class XdsFindFoldersStoredQuery extends XdsRegistryStoredFindDocumentsQuery {
+public class XdsRegistryStoredFindFoldersQuery extends XdsRegistryStoredFindDocumentsQuery {
 
-	public static abstract class XdsFindFoldersStoredQueryBuilder<C extends XdsFindFoldersStoredQuery, B extends XdsFindFoldersStoredQuery.XdsFindFoldersStoredQueryBuilder<C, B>>
+	public static abstract class XdsRegistryStoredFindFoldersQueryBuilder<C extends XdsRegistryStoredFindFoldersQuery, B extends XdsRegistryStoredFindFoldersQuery.XdsRegistryStoredFindFoldersQueryBuilder<C, B>>
 			extends XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder<C, B> {
 	}
 

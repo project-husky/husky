@@ -56,8 +56,22 @@ public enum DocumentDescriptor {
 			return HL7_LAB;
 		} else if (DICOM.getMimeType().equalsIgnoreCase(mimeType)) {
 			return DICOM;
+		} else if (CDA_R2.getMimeType().equalsIgnoreCase(mimeType)) {
+			return CDA_R2;
+		} else if (XDS_MS.getMimeType().equalsIgnoreCase(mimeType)) {
+			return XDS_MS;
+		} else if (XDS_LAB.getMimeType().equalsIgnoreCase(mimeType)) {
+			return XDS_LAB;
+		} else if (XDS_SD.getMimeType().equalsIgnoreCase(mimeType)) {
+			return XDS_SD;
+		} else if (CDA_R1.getMimeType().equalsIgnoreCase(mimeType)) {
+			return CDA_R1;
+		} else if (CCR.getMimeType().equalsIgnoreCase(mimeType)) {
+			return CCR;
+		} else if (FHIR_JSON.getMimeType().equalsIgnoreCase(mimeType)) {
+			return FHIR_JSON;
 		}
-
+		
 		return UNKNOWN;
 	}
 

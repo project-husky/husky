@@ -14,6 +14,7 @@ import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
@@ -25,16 +26,22 @@ import org.projecthusky.xua.core.SecurityHeaderElement;
 @Builder
 @ToString
 public class XdsProvideAndRetrieveDocumentSetQuery {
-  @Singular("documentWithMetadata")
-  private List<XdsDocumentWithMetadata> documentWithMetadata;
-  @NotNull
-  private SubmissionSetMetadata submissionSetMetadata;
-  /** may be null for testing environments like the EPD Playground */
-  private SecurityHeaderElement xuaToken;
-  @NotNull
-  private Destination destination;
-  /** If the Association field is not null the ProvideAndRetrieveDocumentSetQuery will be a replacement of an already existing document */
-  private Association association;
+	@NonNull
+	private Destination destination;
+	/** may be null for testing environments like the EPD Playground */
+	private SecurityHeaderElement xuaToken;
 
-  public static class XdsProvideAndRetrieveDocumentSetQueryBuilder {};
+	@Singular("documentWithMetadata")
+	private List<XdsDocumentWithMetadata> documentWithMetadata;
+	@NotNull
+	private SubmissionSetMetadata submissionSetMetadata;
+
+	/**
+	 * If the Association field is not null the ProvideAndRetrieveDocumentSetQuery
+	 * will be a replacement of an already existing document
+	 */
+	private Association association;
+
+	public static class XdsProvideAndRetrieveDocumentSetQueryBuilder {
+	};
 }

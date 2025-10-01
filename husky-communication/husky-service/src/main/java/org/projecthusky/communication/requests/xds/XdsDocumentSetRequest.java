@@ -23,19 +23,22 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * A simple class to collect {@link DocumentRequest}s and use them to send to the webservice. These requests will be answered by the service with documents' contents.
+ * A simple class to collect {@link DocumentRequest}s and use them to send to
+ * the webservice. These requests will be answered by the service with
+ * documents' contents.
+ * 
  * @author szalai
  */
 @Builder
 @Getter
 @ToString
-public class XdsDocumentSetRequest {
+public class XdsDocumentSetRequest  {
 	@NonNull
 	private Destination destination;
 	/** may be null for testing environments like the EPD Playground */
 	private SecurityHeaderElement xuaToken;
 	@Singular
 	private List<DocumentRequest> documentRequests;
-	
-	public static class XdsDocumentSetRequestBuilder {} 
+
+	public static class XdsDocumentSetRequestBuilder {	}
 }
