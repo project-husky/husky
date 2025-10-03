@@ -46,6 +46,12 @@ mvn release:prepare -DautoVersionSubmodules=true -DdevelopmentVersion=2.0.1-SNAP
 If you are not sure you can make a dryRun to check if everything will go well.
 
 
+Using the following command working only local. You have to push git commits and tags manually after release.
+```
+mvn release:prepare -DautoVersionSubmodules=true -DpushChanges=false  -Prelease
+```
+
+
 ## Release Perform
 
 To build the release and deploy the artefacts to the maven repository the following command will make a clean checkout of the tag which was created in the step before and runs a build including the deploy.
@@ -66,6 +72,12 @@ therefor the executing user must have upload rights to the maven repository. the
     </server>
 ...
 ```
+
+```
+mvn release:perform -DlocalCheckout=true -Prelease
+```
+
+
 
 ## Release publish
 
