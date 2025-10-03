@@ -5,6 +5,7 @@
 
 	<groupId>org.projecthusky.fhir.vacd</groupId>
 	<artifactId>husky-fhir-vacd</artifactId>
+	<name>Husky FHIR eVaccination</name>
 	<packaging>pom</packaging>
 
 	<parent>
