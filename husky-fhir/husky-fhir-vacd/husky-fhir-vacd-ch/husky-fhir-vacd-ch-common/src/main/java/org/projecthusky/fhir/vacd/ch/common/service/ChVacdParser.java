@@ -55,7 +55,7 @@ public class ChVacdParser {
 	public ChVacdParser(@Nullable final FhirContext fhirR4Context) {
 		if (fhirR4Context == null
 				|| fhirR4Context.getVersion().getVersion() != FhirVersionEnum.R4) {
-			throw new IllegalArgumentException("ChEmedEprParser requires a FHIR R4 context");
+			throw new IllegalArgumentException("ChVacdParser requires a FHIR R4 context");
 		}
 		this.context = fhirR4Context;
 	}

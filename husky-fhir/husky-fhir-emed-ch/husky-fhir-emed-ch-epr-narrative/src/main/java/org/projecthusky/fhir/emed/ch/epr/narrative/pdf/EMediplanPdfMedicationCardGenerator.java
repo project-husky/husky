@@ -13,7 +13,7 @@ import org.projecthusky.fhir.emed.ch.epr.narrative.html.ChEmedEprTemplateResolve
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.NarrativeFormat;
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.SoftwareProviderMetadataProvider;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
-import org.projecthusky.fhir.emed.ch.epr.service.EMediplanConverter;
+import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.ChMed23AConverter;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
 
 import javax.imageio.ImageIO;
@@ -98,7 +98,7 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
      */
     protected String generateQrCode(final ChEmedEprDocumentPmlc pmlcDocument) throws QrCodeGenerationException {
         try {
-            final var emediplan = EMediplanConverter.toEMediplan(pmlcDocument);
+            final var emediplan = new ChMed23AConverter().toEMediplan(pmlcDocument);
             emediplan.trim();
             final var validationResult = emediplan.validate();
             if (validationIssueConsumer != null)

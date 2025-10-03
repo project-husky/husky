@@ -26,7 +26,6 @@ import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.core.ch.util.FhirSystem;
-import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
 
 import java.time.Instant;
 import java.util.*;
@@ -55,23 +54,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
     @Child(name = "versionNumber")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber", definedLocally = false)
     protected UnsignedIntType versionNumber;
-
-    /**
-     * Extension for a list of recipients of this document (corresponds to the addressee of a letter - person or
-     * organization), equivalent to CDA informationRecipient.
-     */
-    @Nullable
-    @Child(name = "informationRecipient", min = 1, max = Child.MAX_UNLIMITED)
-    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient", definedLocally = false)
-    protected List<Reference> informationRecipient;
-
-    /**
-     * Person who entered information into this document if it is a person other than the author.
-     */
-    @Nullable
-    @Child(name = "dataEnterer")
-    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-dataenterer", definedLocally = false)
-    protected ChExtEprDataEnterer dataEnterer;
 
     /**
      * Empty constructor for the parser.
@@ -249,52 +231,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
         if (this.versionNumber == null)
             this.versionNumber = new UnsignedIntType();
         this.versionNumber.setValue(value);
-        return this;
-    }
-
-    /**
-     * Gets the list of recipients of this document.
-     *
-     * @return the list of recipients of this document.
-     */
-    public List<Reference> getInformationRecipient() {
-        if (this.informationRecipient == null) {
-            this.informationRecipient = new ArrayList<>(0);
-        }
-        return this.informationRecipient;
-    }
-
-    /**
-     * Sets list of recipients of this document.
-     *
-     * @param informationRecipient the list of recipients of this document.
-     * @return this.
-     */
-    public ChEmedEprComposition setInformationRecipient(final List<Reference> informationRecipient) {
-        this.informationRecipient = informationRecipient;
-        return this;
-    }
-
-    /**
-     * Gets the person who entered information into this document.
-     *
-     * @return the person who entered information into this document.
-     */
-    public ChExtEprDataEnterer getDataEnterer() {
-        if (this.dataEnterer == null) {
-            this.dataEnterer = new ChExtEprDataEnterer();
-        }
-        return dataEnterer;
-    }
-
-    /**
-     * Sets the person who entered information into this document.
-     *
-     * @param dataEnterer the person who entered information into this document.
-     * @return this.
-     */
-    public ChEmedEprComposition setDataEnterer(final ChExtEprDataEnterer dataEnterer) {
-        this.dataEnterer = dataEnterer;
         return this;
     }
 

@@ -13,10 +13,10 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 import java.util.UUID;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
-import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdExtensionVerificationStatusExt;
 import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
 
 import ca.uhn.fhir.model.api.annotation.Child;
@@ -51,12 +51,11 @@ public class ChVacdLaboratoryAndSerology extends Observation {
 	@Nullable
 	@Child(name = "verificationStatus", min = 0, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status", definedLocally = false)
-	protected ChVacdExtensionVerificationStatusExt verificationStatus;
+	protected Coding verificationStatus;
 
 	public ChVacdLaboratoryAndSerology() {
-		addIdentifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + UUID.randomUUID().toString());
-		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
+		addIdentifier().setSystem("urn:ietf:rfc:3986").setValue("urn:uuid:" + UUID.randomUUID().toString());
+//		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
 	}
 
 	public boolean hasRecorder() {
@@ -79,12 +78,19 @@ public class ChVacdLaboratoryAndSerology extends Observation {
 		this.relatesTo = relatesTo;
 	}
 
-	public ChVacdExtensionVerificationStatusExt getVerificationStatus() {
+	public Coding getVerificationStatus() {
+		if (verificationStatus == null) {
+			verificationStatus = new Coding("http://snomed.info/sct", "59156000", "Confirmed");
+		}
 		return verificationStatus;
 	}
 
-	public void setVerificationStatus(ChVacdExtensionVerificationStatusExt verificationStatus) {
+	public void setVerificationStatus(Coding verificationStatus) {
 		this.verificationStatus = verificationStatus;
+	}
+
+	public boolean hasVerificationStatus() {
+		return this.verificationStatus != null && !this.verificationStatus.isEmpty();
 	}
 
 	@Override
