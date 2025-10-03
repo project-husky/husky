@@ -43,6 +43,7 @@
 		<spring.version>6.2.10</spring.version>
 		<spring.boot.version>3.5.5</spring.boot.version>
 		<hapi.fhir.version>8.2.1</hapi.fhir.version>
+		<hapi.version>2.6.0</hapi.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>4.10.6</camel.version>
 		<zxing.version>3.5.3</zxing.version>
@@ -582,6 +583,13 @@
 				<version>${tomcat.embed.version}</version>
 			</dependency>-->
 
+            <!-- Hapi HL7v2 section -->
+			<dependency>
+				<groupId>ca.uhn.hapi</groupId> <!-- HAPI Java HL7 API Base
+				Module, (GPL + MPL 1.1) -->
+				<artifactId>hapi-base</artifactId>
+				<version>${hapi.version}</version>
+			</dependency>
 			<!-- Hapi Hl7 Fhir section-->
 			<!-- hapi fhir -->
 			<dependency>
