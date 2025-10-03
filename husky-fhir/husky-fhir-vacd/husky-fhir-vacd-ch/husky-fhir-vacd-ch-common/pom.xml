@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-fhir-vacd-ch-common</artifactId>
 	<name>Husky FHIR eVaccination Switzerland Common</name>
@@ -8,14 +6,14 @@
 	<parent>
 		<groupId>org.projecthusky.fhir.vacd.ch</groupId>
 		<artifactId>husky-fhir-vacd-ch</artifactId>
-		<version>3.2.0-SNAPSHOT</version>
+		<version>3.2.0</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.core.ch</groupId>
 			<artifactId>husky-fhir-core-ch</artifactId>
-			<version>3.2.0-SNAPSHOT</version>
+			<version>3.2.0</version>
 		</dependency>
 
 		<dependency>
