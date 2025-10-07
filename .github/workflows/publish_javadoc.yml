@@ -11,17 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
+
       - name: Set up JDK 21
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+
       - name: Generate Javadoc
         run: mvn javadoc:aggregate --batch-mode --no-transfer-progress --file pom.xml
+
       - name: Publish Javadoc 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: target/site/apidocs # The folder the action should deploy.
+          folder: target/reports/apidocs # The folder the action should deploy.
