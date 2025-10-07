@@ -15,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindFoldersQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
 import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindDocumentsQuery;
 
 /**
  * Represents a query to find XDS folders

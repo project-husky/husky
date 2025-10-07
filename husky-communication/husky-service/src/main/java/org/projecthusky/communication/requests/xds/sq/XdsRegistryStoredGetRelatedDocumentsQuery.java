@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.communication.requests.xds;
+package org.projecthusky.communication.requests.xds.sq;
 
 import java.util.List;
 

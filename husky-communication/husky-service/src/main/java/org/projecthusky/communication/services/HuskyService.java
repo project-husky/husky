@@ -38,22 +38,28 @@ import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
 import org.projecthusky.communication.requests.pix.PixMergePatientFeed;
 import org.projecthusky.communication.requests.pix.PixPatientIDQuery;
 import org.projecthusky.communication.requests.pix.PixUpdatePatientFeed;
+import org.projecthusky.communication.requests.rmu.RestrictedMetadataUpdateRequest;
+import org.projecthusky.communication.requests.rmu.RestrictedMetadataUpdateRequest.RestrictedMetadataUpdateRequestBuilder;
 import org.projecthusky.communication.requests.svs.SvsValueSetRequest;
 import org.projecthusky.communication.requests.xds.XdsDocumentSetRequest;
 import org.projecthusky.communication.requests.xds.XdsDocumentWithMetadata;
 import org.projecthusky.communication.requests.xds.XdsFindFoldersStoredQuery;
-import org.projecthusky.communication.requests.xds.XdsProvideAndRetrieveDocumentSetQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindDocumentsQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindSubmissionSetsQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindSubmissionSetsQuery.XdsRegistryStoredFindSubmissionSetsQueryBuilder;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetAllQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetAllQuery.XdsRegistryStoredGetAllQueryBuilder;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetAssociationsQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetAssociationsQuery.XdsRegistryStoredGetAssociationsQueryBuilder;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetDocumentsAndAssociationsQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetSubmissionSetsQuery;
-import org.projecthusky.communication.requests.xds.XdsStoredQuery;
+import org.projecthusky.communication.requests.xds.XdsProvideAndRegisterDocumentSetRequest;
+import org.projecthusky.communication.requests.xds.XdsProvideAndRegisterDocumentSetRequest.XdsProvideAndRegisterDocumentSetRequestBuilder;
+import org.projecthusky.communication.requests.xds.XdsUpdateDocumentSetRequest;
+import org.projecthusky.communication.requests.xds.XdsUpdateDocumentSetRequest.XdsUpdateDocumentSetRequestBuilder;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindDocumentsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindSubmissionSetsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetAllQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetAssociationsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetDocumentsAndAssociationsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetSubmissionSetsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsStoredQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindSubmissionSetsQuery.XdsRegistryStoredFindSubmissionSetsQueryBuilder;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetAllQuery.XdsRegistryStoredGetAllQueryBuilder;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredGetAssociationsQuery.XdsRegistryStoredGetAssociationsQueryBuilder;
+import org.projecthusky.communication.requests.xdsi.XdsiDocumentSetRequest;
 import org.projecthusky.communication.requests.xua.XuaRequest;
 import org.projecthusky.communication.responses.hpd.HpdResponse;
 import org.projecthusky.communication.responses.pdq.PdqSearchQueryResponse;
@@ -165,8 +171,20 @@ public class HuskyService {
 	}
 
 	/**
+	 * This method will start building a {@link XdsiDocumentSetRequest}, which
+	 * allows the user to download imaging documents of a Patient.
+	 * 
+	 * @param destination {@link Destination}
+	 * @return builder
+	 */
+	public XdsiDocumentSetRequest.XdsiDocumentSetRequestBuilder createImagingDocumentSetRequest(
+			Destination destination) {
+		return XdsiDocumentSetRequest.builder().destination(destination);
+	}
+
+	/**
 	 * This method will start building a {@link XdsDocumentWithMetadata}, which will
-	 * be used to build the {@link XdsProvideAndRetrieveDocumentSetQuery}
+	 * be used to build the {@link XdsProvideAndRegisterDocumentSetRequest}
 	 */
 	public XdsDocumentWithMetadata.XdsDocumentWithMetadataBuilder createDocumentWithMetadata() {
 		return XdsDocumentWithMetadata.builder();
@@ -380,11 +398,27 @@ public class HuskyService {
 
 	/**
 	 * This method will start building a
-	 * {@link XdsProvideAndRetrieveDocumentSetQuery}, which will be sent to the
+	 * {@link XdsProvideAndRegisterDocumentSetRequest}, which will be sent to the
 	 * webservice and allows the user to add or replace an existing document
+	 * 
+	 * @return builder
 	 */
-	public XdsProvideAndRetrieveDocumentSetQuery.XdsProvideAndRetrieveDocumentSetQueryBuilder createProvideAndRetrieveDocumentSetQuery() {
-		return XdsProvideAndRetrieveDocumentSetQuery.builder();
+	public XdsProvideAndRegisterDocumentSetRequestBuilder<?, ?> createProvideAndRegisterDocumentSetRequest() {
+		return XdsProvideAndRegisterDocumentSetRequest.builder();
+	}
+
+	/**
+	 * This method will start building a {@link XdsUpdateDocumentSetRequest}, which
+	 * will be sent to the
+	 * 
+	 * @return builder
+	 */
+	public XdsUpdateDocumentSetRequestBuilder<?, ?> createUpdateDocumentSetRequest() {
+		return XdsUpdateDocumentSetRequest.builder();
+	}
+
+	public RestrictedMetadataUpdateRequestBuilder<?, ?> createRestrictedMetadataUpdateDocumentSetRequest() {
+		return RestrictedMetadataUpdateRequest.builder();
 	}
 
 	/**
@@ -606,6 +640,12 @@ public class HuskyService {
 		return wsClient.send(retrievedDocumentsRequest, retrievedDocumentsRequest.getDestination().getUri(), null);
 	}
 
+	public RetrievedDocumentSet send(XdsiDocumentSetRequest retrievedImagingDocumentsRequest) throws Exception {
+		Assert.notNull(retrievedImagingDocumentsRequest, "The document set request query can not be null.");
+		return wsClient.send(retrievedImagingDocumentsRequest,
+				retrievedImagingDocumentsRequest.getDestination().getUri(), null);
+	}
+
 	public QueryResponse send(XdsStoredQuery query) throws Exception {
 		return wsClient.sendRegistryStoredQueryRequest(query, query.getDestination().getUri(),
 				QueryReturnType.LEAF_CLASS, null);
@@ -618,21 +658,49 @@ public class HuskyService {
 	 *
 	 * @return {@link QueryResponse}
 	 * @throws Exception thrown in the webservice call
+	 * @deprecated since 3.3.0, use {@link #send(XdsStoredQuery)} with
+	 *             {@link XdsRegistryStoredFindFoldersQuery} instead
 	 */
+	@Deprecated(since = "3.3.0, use XdsRegistryStoredFindFoldersQuery instead", forRemoval = true)
 	public QueryResponse send(XdsFindFoldersStoredQuery findFoldersStoredQuery) throws Exception {
 		return wsClient.sendQueryFoldersRequest(findFoldersStoredQuery);
 	}
 
 	/**
-	 * Use the {@link XdsProvideAndRetrieveDocumentSetQuery} to build the
+	 * Use the {@link XdsProvideAndRegisterDocumentSetRequest} to build the
 	 * ProvideAndRetrieveDocumentSet request which is sent to the webservice and
 	 * adds or replaces an existing document
 	 *
 	 * @return {@link Response}
 	 * @throws Exception thrown in the webservice call
 	 */
-	public Response send(XdsProvideAndRetrieveDocumentSetQuery documentSet) throws Exception {
+	public Response send(XdsProvideAndRegisterDocumentSetRequest documentSet) throws Exception {
 		return wsClient.sendProvideAndRegisterDocumentSetRequest(documentSet);
+	}
+
+	/**
+	 * Use the {@link XdsUpdateDocumentSetRequest} to build the UpdateDocumentSet
+	 * request which is sent to the webservice and updates or replaces an existing
+	 * document
+	 *
+	 * @return {@link Response}
+	 * @throws Exception thrown in the webservice call
+	 */
+	public Response send(XdsUpdateDocumentSetRequest updateDocumentSet) throws Exception {
+		return wsClient.sendUpdateDocumentSetRequest(updateDocumentSet);
+	}
+
+	/**
+	 * Use the {@link RestrictedMetadataUpdateRequest} to build the Restricted
+	 * Metadata Update request which is sent to the webservice and updates metadata
+	 * of an existing document
+	 * 
+	 * @param restrictedMetadataUpdateRequest the request to be sent
+	 * @return {@link Response}
+	 * @throws Exception thrown in the webservice call
+	 */
+	public Response send(RestrictedMetadataUpdateRequest restrictedMetadataUpdateRequest) throws Exception {
+		return wsClient.sendRestrictedMetadataUpdateRequest(restrictedMetadataUpdateRequest);
 	}
 
 	/**

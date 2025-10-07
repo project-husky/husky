@@ -19,22 +19,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import jakarta.xml.bind.DataBindingException;
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
+
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
-import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
-import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
-import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
-import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
@@ -52,11 +41,14 @@ import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.BatchRequest;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.BatchResponse;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.DsmlMessage;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.ErrorResponse;
+import org.openehealth.ipf.commons.ihe.xds.RAD;
+import org.openehealth.ipf.commons.ihe.xds.RMU;
 import org.openehealth.ipf.commons.ihe.xds.XDS;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveImagingDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
@@ -66,7 +58,6 @@ import org.opensaml.core.xml.XMLObject;
 import org.projecthusky.common.communication.AtnaConfig;
 import org.projecthusky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.projecthusky.common.communication.Destination;
-import org.projecthusky.common.communication.DocumentMetadata;
 import org.projecthusky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.projecthusky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.projecthusky.common.utils.xml.XmlFactories;
@@ -77,13 +68,15 @@ import org.projecthusky.communication.requests.hpd.HpdBatchRequest;
 import org.projecthusky.communication.requests.hpd.HpdRequest;
 import org.projecthusky.communication.requests.hpd.HpdSearchQuery;
 import org.projecthusky.communication.requests.pdq.PdqQuery;
+import org.projecthusky.communication.requests.rmu.RestrictedMetadataUpdateRequest;
 import org.projecthusky.communication.requests.svs.SvsValueSetRequest;
 import org.projecthusky.communication.requests.xds.XdsDocumentSetRequest;
 import org.projecthusky.communication.requests.xds.XdsFindFoldersStoredQuery;
-import org.projecthusky.communication.requests.xds.XdsProvideAndRetrieveDocumentSetQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindDocumentsQuery;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredGetAssociationsQuery;
-import org.projecthusky.communication.requests.xds.XdsStoredQuery;
+import org.projecthusky.communication.requests.xds.XdsProvideAndRegisterDocumentSetRequest;
+import org.projecthusky.communication.requests.xds.XdsUpdateDocumentSetRequest;
+import org.projecthusky.communication.requests.xds.sq.XdsRegistryStoredFindDocumentsQuery;
+import org.projecthusky.communication.requests.xds.sq.XdsStoredQuery;
+import org.projecthusky.communication.requests.xdsi.XdsiDocumentSetRequest;
 import org.projecthusky.communication.requests.xua.XuaRequest;
 import org.projecthusky.communication.responses.hpd.HpdFeedResponse;
 import org.projecthusky.communication.responses.hpd.HpdQueryResponse;
@@ -109,6 +102,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
+
+import jakarta.xml.bind.DataBindingException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
+import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
+import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
+import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
+import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 
 /**
  * This class is implemented for the mid/low-level access of the EPD Services.
@@ -204,6 +211,21 @@ public class HuskyWebServiceClient {
 		}
 
 		String endpoint = HuskyUtils.createEndpoint(XDS.Interactions.ITI_43.getWsTransactionConfiguration().getName(), //
+				destination, //
+				AtnaConfigMode.SECURE.equals(atnaConfigMode));
+		Exchange exchange = send(endpoint, retrieveDocumentSet, request.getXuaToken(), messageId, null);
+
+		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
+	}
+
+	public RetrievedDocumentSet send(XdsiDocumentSetRequest request, URI destination, String messageId)
+			throws SerializeException, ParserConfigurationException, IOException {
+		RetrieveImagingDocumentSet retrieveDocumentSet = new RetrieveImagingDocumentSet();
+
+		retrieveDocumentSet.getRetrieveStudies().addAll(request.getRetrieveStudies());
+		retrieveDocumentSet.getTransferSyntaxIds().addAll(request.getTransferSyntaxIds());
+
+		String endpoint = HuskyUtils.createEndpoint(RAD.Interactions.RAD_69.getWsTransactionConfiguration().getName(), //
 				destination, //
 				AtnaConfigMode.SECURE.equals(atnaConfigMode));
 		Exchange exchange = send(endpoint, retrieveDocumentSet, request.getXuaToken(), messageId, null);
@@ -353,7 +375,7 @@ public class HuskyWebServiceClient {
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
 
-	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRetrieveDocumentSetQuery documentSet)
+	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRegisterDocumentSetRequest documentSet)
 			throws SerializeException, ParserConfigurationException, IOException {
 		return sendProvideAndRegisterDocumentSetRequest(documentSet, submissionSetMetadataExtractionMode,
 				documentMetadataExtractionMode);
@@ -366,7 +388,7 @@ public class HuskyWebServiceClient {
 	 * Using this method, both extraction modes can be set explicitly, e.g. if the
 	 * default option is not suitable for all kinds of request.
 	 */
-	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRetrieveDocumentSetQuery documentSet,
+	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRegisterDocumentSetRequest documentSet,
 			SubmissionSetMetadataExtractionMode extractionMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode)
 			throws SerializeException, ParserConfigurationException, IOException {
@@ -403,6 +425,73 @@ public class HuskyWebServiceClient {
 		return exchange.getMessage().getBody(Response.class);
 	}
 
+	/**
+	 * Method to create the ProvideAndRegisterDocumentSet request object
+	 * 
+	 * @param updateDocumentSet the update document set request
+	 * @return the XDS response
+	 * @throws IOException                  thrown on occurring IO errors
+	 * @throws ParserConfigurationException thrown on occurring parser errors
+	 * @throws SerializeException           thrown on occurring serialization errors
+	 */
+	public Response sendUpdateDocumentSetRequest(XdsUpdateDocumentSetRequest updateDocumentSet)
+			throws SerializeException, ParserConfigurationException, IOException {
+
+		ProvideAndRegisterDocumentSet txnData = createProvideAndRegisterDocumentSet(updateDocumentSet);
+
+		updateDocumentSet.getDocumentWithMetadata()
+				.forEach(docMetadata -> XDSUtils.addDocument(docMetadata, txnData, documentMetadataExtractionMode));
+
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			log.debug("extract submission set metadata");
+			XDSUtils.generateDefaultSubmissionSetAttributes(txnData);
+			XDSUtils.linkDocumentEntryWithSubmissionSet(txnData);
+		}
+
+		String endpoint = HuskyUtils.createEndpoint(XDS.Interactions.ITI_57.getWsTransactionConfiguration().getName(), //
+				updateDocumentSet.getDestination().getUri(), //
+				AtnaConfigMode.SECURE.equals(atnaConfigMode));
+
+		Exchange exchange = send(endpoint, txnData, updateDocumentSet.getXuaToken(), null, null);
+		return exchange.getMessage().getBody(Response.class);
+	}
+
+	/**
+	 * Method to create the ProvideAndRegisterDocumentSet request object
+	 * 
+	 * @param restrictedMetadataUpdateRequest the restricted metadata update
+	 * @return the XDS response
+	 * @throws IOException                  thrown on occurring IO errors
+	 * @throws ParserConfigurationException thrown on occurring parser errors
+	 * @throws SerializeException           thrown on occurring serialization errors
+	 */
+	public Response sendRestrictedMetadataUpdateRequest(RestrictedMetadataUpdateRequest restrictedMetadataUpdateRequest)
+			throws SerializeException, ParserConfigurationException, IOException {
+		ProvideAndRegisterDocumentSet txnData = createProvideAndRegisterDocumentSet(restrictedMetadataUpdateRequest);
+
+		restrictedMetadataUpdateRequest.getDocumentWithMetadata()
+				.forEach(docMetadata -> XDSUtils.addDocument(docMetadata, txnData, documentMetadataExtractionMode));
+
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			log.debug("extract submission set metadata");
+			XDSUtils.generateDefaultSubmissionSetAttributes(txnData);
+			XDSUtils.linkDocumentEntryWithSubmissionSet(txnData);
+		}
+
+		String endpoint = HuskyUtils.createEndpoint(RMU.Interactions.ITI_92.getWsTransactionConfiguration().getName(), //
+				restrictedMetadataUpdateRequest.getDestination().getUri(), //
+				AtnaConfigMode.SECURE.equals(atnaConfigMode));
+
+		Exchange exchange = send(endpoint, txnData, restrictedMetadataUpdateRequest.getXuaToken(), null, null);
+		return exchange.getMessage().getBody(Response.class);
+	}
+
+	/**
+	 * Method to create the ProvideAndRegisterDocumentSet request object
+	 * 
+	 * @param documentSetRequest the document set request
+	 * @return the ProvideAndRegisterDocumentSet object
+	 */
 	public PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest,
 			String messageId) throws Exception {
 		String endpoint = HuskyUtils.createEndpoint(PIXV3.Interactions.ITI_45.getWsTransactionConfiguration().getName(), //
@@ -458,8 +547,9 @@ public class HuskyWebServiceClient {
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 */
-	public QueryResponse sendRegistryStoredQueryRequest(XdsStoredQuery query, URI destination, QueryReturnType returnType,
-			String messageId) throws SerializeException, ParserConfigurationException, IOException {
+	public QueryResponse sendRegistryStoredQueryRequest(XdsStoredQuery query, URI destination,
+			QueryReturnType returnType, String messageId)
+			throws SerializeException, ParserConfigurationException, IOException {
 		QueryRegistry queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
@@ -531,7 +621,22 @@ public class HuskyWebServiceClient {
 	}
 
 	private ProvideAndRegisterDocumentSet createProvideAndRegisterDocumentSet(
-			XdsProvideAndRetrieveDocumentSetQuery documentSet) {
+			XdsProvideAndRegisterDocumentSetRequest documentSet) {
+		ProvideAndRegisterDocumentSet txnData = new ProvideAndRegisterDocumentSet();
+		txnData.setSubmissionSet(new SubmissionSet());
+		documentSet.getSubmissionSetMetadata().toOhtSubmissionSetType(txnData.getSubmissionSet());
+		return txnData;
+	}
+
+	private ProvideAndRegisterDocumentSet createProvideAndRegisterDocumentSet(XdsUpdateDocumentSetRequest documentSet) {
+		ProvideAndRegisterDocumentSet txnData = new ProvideAndRegisterDocumentSet();
+		txnData.setSubmissionSet(new SubmissionSet());
+		documentSet.getSubmissionSetMetadata().toOhtSubmissionSetType(txnData.getSubmissionSet());
+		return txnData;
+	}
+
+	private ProvideAndRegisterDocumentSet createProvideAndRegisterDocumentSet(
+			RestrictedMetadataUpdateRequest documentSet) {
 		ProvideAndRegisterDocumentSet txnData = new ProvideAndRegisterDocumentSet();
 		txnData.setSubmissionSet(new SubmissionSet());
 		documentSet.getSubmissionSetMetadata().toOhtSubmissionSetType(txnData.getSubmissionSet());

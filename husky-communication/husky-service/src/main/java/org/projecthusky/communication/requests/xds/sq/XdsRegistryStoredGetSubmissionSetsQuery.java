@@ -8,11 +8,11 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.communication.requests.xds;
+package org.projecthusky.communication.requests.xds.sq;
 
 import java.util.List;
 
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetDocumentsAndAssociationsQuery;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetSubmissionSetsQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
 
 import lombok.Getter;
@@ -22,26 +22,26 @@ import lombok.experimental.SuperBuilder;
 
 /**
  * This class is designed to contain all possible search parameters for finding
- * documents and their associations with the webservice. Parameters are optional
- * (except patientId and destination), only those which are set will be used by
- * the webservice.<br/>
+ * submission sets with the webservice. Parameters are optional (except
+ * patientId and destination), only those which are set will be used by the
+ * webservice.<br/>
  */
 @Getter
 @SuperBuilder
 @ToString
-public class XdsRegistryStoredGetDocumentsAndAssociationsQuery extends XdsStoredQuery {
+public class XdsRegistryStoredGetSubmissionSetsQuery extends XdsStoredQuery {
 
 	/** List of SubmissionSet UUIDs to retrieve */
 	@Singular
 	private List<String> logicalUuids;
 
-	public static abstract class XdsRegistryStoredGetDocumentsAndAssociationsQueryBuilder<C extends XdsRegistryStoredGetDocumentsAndAssociationsQuery, B extends XdsRegistryStoredGetDocumentsAndAssociationsQuery.XdsRegistryStoredGetDocumentsAndAssociationsQueryBuilder<C, B>>
+	public static abstract class XdsRegistryStoredGetSubmissionSetQueryBuilder<C extends XdsRegistryStoredGetSubmissionSetsQuery, B extends XdsRegistryStoredGetSubmissionSetsQuery.XdsRegistryStoredGetSubmissionSetQueryBuilder<C, B>>
 			extends XdsStoredQuery.XdsStoredQueryBuilder<C, B> {
 	}
 
 	@Override
 	public StoredQuery getIpfQuery() {
-		var query = new GetDocumentsAndAssociationsQuery();
+		var query = new GetSubmissionSetsQuery();
 		query.setHomeCommunityId(getHomeCommunityId());
 		query.setMetadataLevel(getMetadataLevel());
 		query.setUuids(logicalUuids);

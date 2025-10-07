@@ -8,15 +8,18 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.communication.requests.xds;
+package org.projecthusky.communication.requests.xds.sq;
 
 import java.util.List;
 
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetSubmissionSetsQuery;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindSubmissionSetsQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
+import org.projecthusky.common.model.Identificator;
+import org.projecthusky.common.utils.XdsMetadataUtil;
 
 import lombok.Getter;
-import lombok.Singular;
+import lombok.NonNull;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
@@ -29,22 +32,25 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @ToString
-public class XdsRegistryStoredGetSubmissionSetsQuery extends XdsStoredQuery {
+public class XdsRegistryStoredFindSubmissionSetsQuery extends XdsStoredQuery {
 
-	/** List of SubmissionSet UUIDs to retrieve */
-	@Singular
-	private List<String> logicalUuids;
+	/** patientId as CX */
+	@NonNull
+	private Identificator patientId;
+	/** list of availability statuses */
+	private List<AvailabilityStatus> availabilityStatuses;
 
-	public static abstract class XdsRegistryStoredGetSubmissionSetQueryBuilder<C extends XdsRegistryStoredGetSubmissionSetsQuery, B extends XdsRegistryStoredGetSubmissionSetsQuery.XdsRegistryStoredGetSubmissionSetQueryBuilder<C, B>>
+	public static abstract class XdsRegistryStoredFindSubmissionSetQueryBuilder<C extends XdsRegistryStoredFindSubmissionSetsQuery, B extends XdsRegistryStoredFindSubmissionSetsQuery.XdsRegistryStoredFindSubmissionSetQueryBuilder<C, B>>
 			extends XdsStoredQuery.XdsStoredQueryBuilder<C, B> {
 	}
 
 	@Override
 	public StoredQuery getIpfQuery() {
-		var query = new GetSubmissionSetsQuery();
+		var query = new FindSubmissionSetsQuery();
+		query.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
 		query.setHomeCommunityId(getHomeCommunityId());
-		query.setMetadataLevel(getMetadataLevel());
-		query.setUuids(logicalUuids);
+		query.setStatus(availabilityStatuses);
+
 		return query;
 	}
 
