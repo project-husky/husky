@@ -403,16 +403,16 @@ public class HuskyWebServiceClient {
 			XDSUtils.linkDocumentEntryWithSubmissionSet(txnData);
 		}
 
-		if (documentSet.getAssociation() != null) {
-			txnData.getAssociations().add(documentSet.getAssociation());
+		if (documentSet.getReplaceAssociation() != null) {
+			txnData.getAssociations().add(documentSet.getReplaceAssociation());
 			log.debug("set association data");
 			if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
 					&& txnData.getDocuments().get(0) != null) {
-				documentSet.getAssociation()
+				documentSet.getReplaceAssociation()
 						.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
 			} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()
 					&& txnData.getFolders().get(0) != null) {
-				documentSet.getAssociation().setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
+				documentSet.getReplaceAssociation().setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
 			}
 		}
 

@@ -33,7 +33,7 @@ public class XdsProvideAndRegisterDocumentSetRequest extends AbstractXdsDocument
 	 * XdsProvideAndRegisterDocumentSetRequest will be a replacement of an already
 	 * existing document
 	 */
-	private Association association;
+	private Association replaceAssociation;
 
 	public static abstract class XdsProvideAndRegisterDocumentSetRequestBuilder<C extends XdsProvideAndRegisterDocumentSetRequest, B extends XdsProvideAndRegisterDocumentSetRequest.XdsProvideAndRegisterDocumentSetRequestBuilder<C, B>>
 			extends AbstractXdsDocumentSetRequest.AbstractXdsDocumentSetRequestBuilder<C, B> {
