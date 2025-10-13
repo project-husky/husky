@@ -41,7 +41,7 @@
 		version in the tags) -->
 		<jaxb.version>4.0.5</jaxb.version>
 		<spring.version>6.2.10</spring.version>
-		<spring.boot.version>3.5.5</spring.boot.version>
+		<spring.boot.version>3.5.6</spring.boot.version>
 		<hapi.fhir.version>8.2.1</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>4.10.6</camel.version>
