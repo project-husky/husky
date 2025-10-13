@@ -27,4 +27,14 @@ import lombok.Singular;
 public class PdqSearchResults {
 	@Singular
 	private List<FhirPatient> patients;
+
+	private String acknowledgementCode;
+	private String acknowledgementDetailCode;
+	private String acknowledgementDetailText;
+	private String queryAcknowledgement;
+	private String ErrorText;
+	
+	public PdqSearchResults(List<FhirPatient> patients) {
+		this.patients = patients;
+	}
 }

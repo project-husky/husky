@@ -519,7 +519,13 @@ public class HuskyService {
 		PRPAIN201306UV02Type sendITI47Query = wsClient.sendPdqSearchQueryRequest(patientSearchQuery.build(), null,
 				patientSearchQuery.getDestination().getUri(), null);
 		PdqSearchQueryResponse response = new PdqSearchQueryResponse(sendITI47Query);
-		PdqSearchResults results = new PdqSearchResults(PdqUtils.getPatientsFromSearchQueryResponse(response));
+
+		PdqSearchResults results = new PdqSearchResults(PdqUtils.getPatientsFromSearchQueryResponse(response), //
+				response.getAcknowledgementCode(), //
+				response.getAcknowledgementDetailCode(), //
+				response.getAcknowledgementDetailText(), //
+				response.getQueryAcknowledgement(), response.getErrorText());
+
 		log.debug("Patients found for the properties: {}", results.getPatients().size());
 		return results;
 	}
@@ -547,6 +553,26 @@ public class HuskyService {
 	}
 
 	/**
+	 * Send your built {@link PixAddPatientFeed} through the Internet to the
+	 * webservice and receive an answer, whether the Patient was added or not.
+	 *
+	 * @param addPatientFeed {@link PixAddPatientFeed}
+	 * @return {@link PixAddPatientResponse} containing the full response details
+	 * @throws Exception        errors occurring in the webservice client
+	 * @throws RuntimeException For errors/exceptions happening in the webservice
+	 *                          there will be a RuntimeException wrapped
+	 *                          SOAPException thrown.
+	 */
+	public PixAddPatientResponse sendWithResponse(PixAddPatientFeed addPatientFeed) throws Exception {
+		Assert.notNull(addPatientFeed, "The patient creation query can not be null.");
+		MCCIIN000002UV01Type iti44QueryResponseType = wsClient.sendPixAddPatientRequest(
+				addPatientFeed.build().getRootElement(), null, addPatientFeed.getDestination().getUri(),
+				"urn:hl7-org:v3:PRPA_IN201301UV02", null);
+		PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
+		return response;
+	}
+
+	/**
 	 * Send the built {@link PixMergePatientFeed} through the Internet to the
 	 * webservice and receive an answer.
 	 *
@@ -569,6 +595,26 @@ public class HuskyService {
 	}
 
 	/**
+	 * Send the built {@link PixMergePatientFeed} through the Internet to the
+	 * webservice and receive an answer.
+	 *
+	 * @param mergePatientFeed {@link PixMergePatientFeed}
+	 * @return {@link PixAddPatientResponse} containing the full response details
+	 * @throws Exception        errors occurring in the webservice client
+	 * @throws RuntimeException For errors/exceptions happening in the webservice
+	 *                          there will be a RuntimeException wrapped
+	 *                          SOAPException thrown.
+	 */
+	public PixAddPatientResponse sendWithResponse(PixMergePatientFeed mergePatientFeed) throws Exception {
+		Assert.notNull(mergePatientFeed, "The patient merge query can not be null.");
+		MCCIIN000002UV01Type mergePatientXMLResponse = wsClient.sendITI44Query(
+				mergePatientFeed.build().getRootElement(), null, mergePatientFeed.getDestination().getUri(),
+				"urn:hl7-org:v3:PRPA_IN201304UV02", null);
+		PixAddPatientResponse response = new PixAddPatientResponse(mergePatientXMLResponse);
+		return response;
+	}
+
+	/**
 	 * Send the built {@link PixPatientIDQuery} through the Internet to the
 	 * webservice and receive an answer.
 	 *
@@ -580,9 +626,17 @@ public class HuskyService {
 		Assert.notNull(searchPatientIDQuery, "The patient ID search query can not be null.");
 		PixV3QueryResponse response = wsClient.sendQuery(searchPatientIDQuery.build(), null,
 				searchPatientIDQuery.getDestination().getUri(), null);
-		PixPatientIDResult.PixPatientIDResultBuilder result = PixPatientIDResult.builder();
+
+		PixPatientIDResult.PixPatientIDResultBuilder result = PixPatientIDResult.builder()//
+				.queryResponseCode(response.getQueryResponseCode())//
+				.acknowledgementTypeCode(response.getAcknowledgementTypeCode());
+
 		for (String domainId : searchPatientIDQuery.getQueryDomainOids()) {
 			result.patientID(PdqUtils.getPatientDomainId(response, domainId));
+		}
+
+		for (String domainId : searchPatientIDQuery.getQueryDomainOids()) {
+			result.idEntry(PdqUtils.getPatientDomainIdEntry(response, domainId));
 		}
 
 		return result.build();
@@ -608,6 +662,26 @@ public class HuskyService {
 		PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
 		return !response.hasError(); // Inverting error flag to indicate success
 										// with true returned.
+	}
+
+	/**
+	 * Send your built {@link PixUpdatePatientFeed} through the Internet to the
+	 * webservice and receive an answer (updated or error).
+	 *
+	 * @param updatePatientFeed {@link PixUpdatePatientFeed}
+	 * @return {@link PixAddPatientResponse} containing the full response details
+	 * @throws Exception        errors occurring in the webservice client
+	 * @throws RuntimeException For errors/exceptions happening in the webservice
+	 *                          there will be a RuntimeException wrapped
+	 *                          SOAPException thrown.
+	 */
+	public PixAddPatientResponse sendWithResponse(PixUpdatePatientFeed updatePatientFeed) throws Exception {
+		Assert.notNull(updatePatientFeed, "The patient update query can not be null.");
+		MCCIIN000002UV01Type iti44QueryResponseType = wsClient.sendPixUpdatePatientRequest(
+				updatePatientFeed.build().getRootElement(), null, updatePatientFeed.getDestination().getUri(),
+				"urn:hl7-org:v3:PRPA_IN201302UV02", null);
+		PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
+		return response;
 	}
 
 	/**
@@ -640,12 +714,32 @@ public class HuskyService {
 		return wsClient.send(retrievedDocumentsRequest, retrievedDocumentsRequest.getDestination().getUri(), null);
 	}
 
+	/**
+	 * Send your built {@link XdsiDocumentSetRequest} through the Internet to the
+	 * webservice and receive the imaging documents of the Patient.
+	 * 
+	 * @param retrievedImagingDocumentsRequest {@link XdsiDocumentSetRequest}
+	 * @return {@link RetrievedDocumentSet}
+	 * @throws Exception        errors occurring in the webservice client
+	 * @throws RuntimeException For errors/exceptions happening in the webservice
+	 *                          there will be a RuntimeException wrapped
+	 *                          SOAPException thrown.
+	 */
 	public RetrievedDocumentSet send(XdsiDocumentSetRequest retrievedImagingDocumentsRequest) throws Exception {
 		Assert.notNull(retrievedImagingDocumentsRequest, "The document set request query can not be null.");
 		return wsClient.send(retrievedImagingDocumentsRequest,
 				retrievedImagingDocumentsRequest.getDestination().getUri(), null);
 	}
 
+	/**
+	 * Send your built {@link XdsStoredQuery} to the webservice to find documents,
+	 * submission sets, folders, associations or all of them (XDSDocumentEntry,
+	 * XDSSumbissionSet, XDSFolder, XDSAssociation objects) in the registry for a
+	 * given patientID with matching attributes
+	 *
+	 * @return {@link QueryResponse}
+	 * @throws Exception thrown in the webservice call
+	 */
 	public QueryResponse send(XdsStoredQuery query) throws Exception {
 		return wsClient.sendRegistryStoredQueryRequest(query, query.getDestination().getUri(),
 				QueryReturnType.LEAF_CLASS, null);

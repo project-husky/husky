@@ -17,13 +17,25 @@ import lombok.Getter;
 import lombok.Singular;
 
 /**
- * High level result class that contains the IDs asked for with a {@link PixPatientIDQuery}.
+ * High level result class that contains the IDs asked for with a
+ * {@link PixPatientIDQuery}.
+ * 
  * @author szalai
  */
 @Getter
 @Builder
 public class PixPatientIDResult {
+	/** List of patient IDs that were found. */
 	@Singular
 	private List<String> patientIDs;
 
+	/** List of ID entries that were found. */
+	@Singular
+	private List<PixPatientIDEntry> idEntries;
+
+	private String queryResponseCode;
+
+	private String acknowledgementTypeCode;
+	
+	private String errorText;
 }
