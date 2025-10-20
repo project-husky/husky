@@ -494,7 +494,7 @@ public class HuskyService {
 	 * @throws Exception thrown in the webservice call
 	 */
 	public BatchResponse sendRaw(BatchRequest batchRequest, Destination destination) throws Exception {
-		if (batchRequest != null) {
+		if (batchRequest == null) {
 			throw new IllegalArgumentException("Invalid request: mandatory constraints are not fulfilled!");
 		}
 
