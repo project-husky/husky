@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.projecthusky</groupId>
 		<artifactId>husky-cda</artifactId>
-		<version>3.2.1-OS4</version>
+		<version>3.2.2-OS4-SNAPSHOT</version>
 	</parent>
 
 
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-at</artifactId>
-			<version>3.2.1-OS4</version>
+			<version>3.2.2-OS4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
