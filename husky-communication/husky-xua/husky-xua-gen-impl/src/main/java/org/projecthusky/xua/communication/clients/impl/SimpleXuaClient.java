@@ -20,7 +20,13 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.xpath.XPathExpressionException;
 
-
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.opensaml.core.xml.io.UnmarshallingException;
+import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
+import org.opensaml.soap.wstrust.RequestSecurityTokenResponseCollection;
+import org.opensaml.soap.wstrust.WSTrustConstants;
+import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseCollectionUnmarshaller;
 import org.projecthusky.xua.communication.clients.XuaClient;
 import org.projecthusky.xua.communication.config.XuaClientConfig;
 import org.projecthusky.xua.communication.soap.impl.WsaHeaderValue;
@@ -37,18 +43,10 @@ import org.projecthusky.xua.serialization.impl.EncryptedAssertionSerializerImpl;
 import org.projecthusky.xua.serialization.impl.UsernameTokenSerializerImpl;
 import org.projecthusky.xua.serialization.impl.XUserAssertionRequestSerializerImpl;
 import org.projecthusky.xua.wssecurity.UsernameToken;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.opensaml.core.xml.io.UnmarshallingException;
-import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
-import org.opensaml.soap.wstrust.RequestSecurityTokenResponseCollection;
-import org.opensaml.soap.wstrust.WSTrustConstants;
-import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseCollectionUnmarshaller;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-import net.shibboleth.shared.xml.XMLParserException;
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -63,7 +61,9 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 
 	/**
 	 * Constructor with param.
-	 * @param clientConfiguration the client configuration
+	 * 
+	 * @param clientConfiguration
+	 *            the client configuration
 	 */
 	public SimpleXuaClient(XuaClientConfig clientConfiguration) {
 		setLogger(LoggerFactory.getLogger(getClass()));
@@ -78,14 +78,11 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 
 		Element headerAssertionElement = null;
 		if (aSecurityHeaderElement instanceof Assertion assertion) {
-			headerAssertionElement = new AssertionSerializerImpl()
-					.toXmlElement(assertion);
+			headerAssertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion assertion) {
-			headerAssertionElement = new EncryptedAssertionSerializerImpl()
-					.toXmlElement(assertion);
+			headerAssertionElement = new EncryptedAssertionSerializerImpl().toXmlElement(assertion);
 		} else if (aSecurityHeaderElement instanceof UsernameToken token) {
-			headerAssertionElement = new UsernameTokenSerializerImpl()
-					.toXmlElement(token);
+			headerAssertionElement = new UsernameTokenSerializerImpl().toXmlElement(token);
 		}
 		createHeader(headerAssertionElement, wsHeaders, envelopElement);
 
@@ -100,7 +97,8 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		getLogger().debug("SOAP Message\n {}", body);
 
 		// add string as body to httpentity
-		final var stringEntity = new StringEntity(body, ContentType.APPLICATION_SOAP_XML, null, false);
+		final var stringEntity = new StringEntity(body, "UTF-8");
+		stringEntity.setChunked(false);
 
 		return stringEntity;
 	}
@@ -121,13 +119,12 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 
 			final List<XUserAssertionResponse> retVal = new ArrayList<>();
 
-			wstResponses.forEach(c -> 
-				retVal.add(new XUserAssertionResponseBuilderImpl().create(c))
-			);
+			wstResponses
+					.forEach(c -> retVal.add(new XUserAssertionResponseBuilderImpl().create(c)));
 
 			return retVal;
-		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError | UnmarshallingException
-				| XPathExpressionException | XMLParserException e) {
+		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
+				| UnmarshallingException | XPathExpressionException | XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 	}
@@ -138,8 +135,7 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		try {
 			final var post = getHttpPost();
 
-			final var wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(),
+			final var wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(),
 					"http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", null);
 
 			post.setEntity(getSoapEntity(aSecurityHeaderElement, aRequest, wsHeaders));

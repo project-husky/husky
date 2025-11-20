@@ -67,15 +67,14 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.HEALTHCARE_PROFESSIONAL);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages().get(0));
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
         context = this.getContext(Role.ASSISTANT);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.VALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()==0);
+        assertNull(context.getValidationFailureMessage());
         assertEquals("2000000090108", context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
@@ -88,40 +87,35 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.TECHNICAL_USER);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.VALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()==0);
+        assertNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertEquals("1.2.3", context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
         context = this.getContext(Role.POLICY_ADMINISTRATOR);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
         context = this.getContext(Role.DOCUMENT_ADMINISTRATOR);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
         context = this.getContext(Role.PATIENT);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
         context = this.getContext(Role.REPRESENTATIVE);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
@@ -133,8 +127,7 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.ASSISTANT);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
@@ -149,8 +142,7 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.ASSISTANT);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
@@ -162,8 +154,7 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.ASSISTANT);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
 
@@ -175,8 +166,7 @@ class ChEprDelegationRestrictionConditionValidatorTest {
         context = this.getContext(Role.TECHNICAL_USER);
         result = VALIDATOR.validate(condition, null, context);
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessages());
-        assertTrue(context.getValidationFailureMessages().size()>0);
+        assertNotNull(context.getValidationFailureMessage());
         assertNull(context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN));
         assertNull(context.getDynamicParameters().get(CH_EPR_TCU_ID));
     }

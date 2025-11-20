@@ -17,15 +17,15 @@ import java.util.Map;
 import org.projecthusky.xua.exceptions.ValidationException;
 import org.opensaml.core.criterion.EntityIdCriterion;
 import org.opensaml.saml.security.impl.SAMLSignatureProfileValidator;
-import org.opensaml.security.credential.Credential;
 import org.opensaml.security.credential.impl.KeyStoreCredentialResolver;
 import org.opensaml.xmlsec.signature.Signature;
 import org.opensaml.xmlsec.signature.support.SignatureValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.shibboleth.shared.resolver.CriteriaSet;
-import net.shibboleth.shared.resolver.Criterion;
+import net.shibboleth.utilities.java.support.resolver.CriteriaSet;
+import net.shibboleth.utilities.java.support.resolver.Criterion;
+
 
 /**
  * <!-- @formatter:off -->
@@ -110,9 +110,10 @@ public abstract class AbstractValidator {
 			final Map<String, String> passwordMap = new HashMap<>();
 			final var resolver = new KeyStoreCredentialResolver(trustStore, passwordMap);
 
-			Criterion criterion = new EntityIdCriterion(aAlias);
-			CriteriaSet criteriaSet = new CriteriaSet(criterion);
-			Credential credential = resolver.resolveSingle(criteriaSet);
+			final Criterion criterion = new EntityIdCriterion(aAlias);
+			final var criteriaSet = new CriteriaSet(criterion);
+			final var credential = resolver.resolveSingle(criteriaSet);
+			
 			SignatureValidator.validate(aSignature, credential);
 
 		} catch (final Exception e) {

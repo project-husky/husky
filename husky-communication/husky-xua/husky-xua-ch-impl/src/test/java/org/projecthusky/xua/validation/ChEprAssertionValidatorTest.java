@@ -280,7 +280,7 @@ class ChEprAssertionValidatorTest {
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals(
                 "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
-                result.getContext().getValidationFailureMessages().get(0));
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -295,7 +295,7 @@ class ChEprAssertionValidatorTest {
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals(
                 "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
-                result.getContext().getValidationFailureMessages().get(0));
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -310,7 +310,7 @@ class ChEprAssertionValidatorTest {
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals(
                 "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
-                result.getContext().getValidationFailureMessages().get(0));
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -325,7 +325,7 @@ class ChEprAssertionValidatorTest {
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals(
                 "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
-                result.getContext().getValidationFailureMessages().get(0));
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -339,7 +339,7 @@ class ChEprAssertionValidatorTest {
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals(
                 "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
-                result.getContext().getValidationFailureMessages().get(0));
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -353,7 +353,7 @@ class ChEprAssertionValidatorTest {
         assertion = this.signAndUnmarshall(assertion);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertTrue(result.getContext().getValidationFailureMessages().get(0).startsWith(
+        assertTrue(result.getContext().getValidationFailureMessage().startsWith(
                 "Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotBefore condition of"));
 
         // NotOnOrAfter in the past
@@ -365,7 +365,7 @@ class ChEprAssertionValidatorTest {
         assertion = this.signAndUnmarshall(assertion);
         result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertTrue(result.getContext().getValidationFailureMessages().get(0).startsWith(
+        assertTrue(result.getContext().getValidationFailureMessage().startsWith(
                 "Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotOnOrAfter condition of"));
 
         // NotOnOrAfter before NotBefore
@@ -406,7 +406,7 @@ class ChEprAssertionValidatorTest {
         assertion = this.signAndUnmarshall(assertion);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("The Condition NotBefore attribute is missing", result.getContext().getValidationFailureMessages().get(0));
+        assertEquals("The Condition NotBefore attribute is missing", result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -416,7 +416,7 @@ class ChEprAssertionValidatorTest {
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals("Assertion was required to be signed, but was not",
-                     result.getContext().getValidationFailureMessages().get(0));
+                     result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -425,7 +425,7 @@ class ChEprAssertionValidatorTest {
         assertion.setSubject(null);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("The Subject is missing", result.getContext().getValidationFailureMessages().get(0));
+        assertEquals("The Subject is missing", result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -435,7 +435,7 @@ class ChEprAssertionValidatorTest {
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals("Assertion Issuer was missing and was required",
-                     result.getContext().getValidationFailureMessages().get(0));
+                     result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -450,12 +450,12 @@ class ChEprAssertionValidatorTest {
         result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
         
-        assertEquals("Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' has a one time use condition and has been used before",
-                result.getContext().getValidationFailureMessages().get(0));
-//        assertEquals("Condition '{urn:oasis:names:tc:SAML:2.0:assertion}OneTimeUse' of type 'null' in assertion " +
-//                             "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' was not valid.: Assertion " +
-//                             "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' has a one time use condition and has been used before",
-//                     result.getContext().getValidationFailureMessages().get(0));
+       
+		assertEquals(
+				"Condition '{urn:oasis:names:tc:SAML:2.0:assertion}OneTimeUse' of type 'null' in assertion "
+						+ "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' was not valid.: Assertion "
+						+ "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' has a one time use condition and has been used before",
+				result.getContext().getValidationFailureMessage());
         
         
     }

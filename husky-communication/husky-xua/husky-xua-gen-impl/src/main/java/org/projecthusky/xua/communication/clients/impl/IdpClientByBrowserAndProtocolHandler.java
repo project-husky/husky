@@ -67,7 +67,6 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	 * "Make sure publicly writable directories are used safely here." is
 	 * suppressed, because file is only writeable for the owner
 	 */
-	@SuppressWarnings("java:S5443")
 	private void openHtmlFormPage(AuthnRequest aAuthnRequest) throws SerializeException, IOException {
 		final var serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
