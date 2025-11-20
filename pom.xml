@@ -38,8 +38,8 @@
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.5</jaxb.version>
-		<spring.version>6.2.10</spring.version>
-		<spring.boot.version>3.5.5</spring.boot.version>
+		<spring.version>6.2.13</spring.version>
+		<spring.boot.version>3.5.7</spring.boot.version>
 		<hapi.fhir.version>8.2.1</hapi.fhir.version>
 		<hapi.version>2.6.0</hapi.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
@@ -863,7 +863,7 @@
 			<dependency>
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
-				<version>77.1</version>
+				<version>78.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
@@ -874,6 +874,12 @@
 				<groupId>org.apache.jena</groupId>
 				<artifactId>jena-shex</artifactId>
 				<version>5.5.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>33.4.3-jre</version>
 			</dependency>
 
 		</dependencies>
