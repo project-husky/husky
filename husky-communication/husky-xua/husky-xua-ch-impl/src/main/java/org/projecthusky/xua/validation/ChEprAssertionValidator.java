@@ -26,8 +26,9 @@ import org.opensaml.saml.saml2.core.NameIDType;
 import org.opensaml.saml.saml2.core.Subject;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 import org.opensaml.storage.ReplayCache;
+import org.opensaml.storage.StorageService;
 import org.opensaml.storage.impl.MemoryStorageService;
-import org.opensaml.storage.impl.StorageServiceReplayCache;
+
 import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
 import org.opensaml.xmlsec.signature.support.SignatureTrustEngine;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
@@ -42,7 +43,7 @@ import org.projecthusky.xua.validation.subject.ChEprSubjectConfirmationBearerVal
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.shibboleth.shared.component.ComponentInitializationException;
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
@@ -126,9 +127,9 @@ public class ChEprAssertionValidator {
 			storageService.setCleanupInterval(Duration.ofSeconds(900));
 			storageService.initialize();
 
-			StorageServiceReplayCache cache = new StorageServiceReplayCache();
+			final var cache = new ReplayCache();
 			cache.setStorage(storageService);
-			cache.doInitialize();
+			cache.initialize();
 			conditionValidators
 					.add(new OneTimeUseConditionValidator(cache, oneTimeUseConditionExpires));
 		}
@@ -227,8 +228,7 @@ public class ChEprAssertionValidator {
 				.orElse(Collections.emptyList()).stream()
 				.filter(a -> OASIS_XACML_ROLE.equals(a.getName())).findAny().orElse(null);
 		if (roleAttribute == null) {
-			context.getValidationFailureMessages().add(
-					ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + ERRMSG_IS_MISSING);
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + ERRMSG_IS_MISSING);
 			return ValidationResult.INVALID;
 		}
 		var role = Optional.ofNullable(roleAttribute.getAttributeValues())
@@ -243,8 +243,7 @@ public class ChEprAssertionValidator {
 				.map(AbstractImpl::getCode).map(Role::getEnum)
 				.filter(r -> r != Role.ASSISTANT && r != Role.TECHNICAL_USER).orElse(null);
 		if (role == null) {
-			context.getValidationFailureMessages().add(
-					ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + "' contains " + "an invalid value");
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + "' contains " + "an invalid value");
 			return ValidationResult.INVALID;
 		}
 
@@ -289,38 +288,35 @@ public class ChEprAssertionValidator {
 	ValidationResult validateSubject(@Nullable final Subject subject,
 			final ValidationContext context, final Role role) {
 		if (subject == null) {
-			context.getValidationFailureMessages().add("The Subject is missing");
+			context.setValidationFailureMessage("The Subject is missing");
 			return ValidationResult.INVALID;
 		}
 
 		final var nameId = subject.getNameID();
 		if (nameId == null || nameId.getNameQualifier() == null || nameId.getValue() == null) {
-			context.getValidationFailureMessages().add("The Subject NameID is missing");
+			context.setValidationFailureMessage("The Subject NameID is missing");
 			return ValidationResult.INVALID;
 		}
 
 		if ((role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT
 				|| role == Role.TECHNICAL_USER)
 				&& !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
-			context.getValidationFailureMessages().add(
-					"The healthcare professional GLN is missing in the Subject");
+			context.setValidationFailureMessage("The healthcare professional GLN is missing in the Subject");
 			return ValidationResult.INVALID;
 		} else if (role == Role.POLICY_ADMINISTRATOR
 				&& !POLICY_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
-			context.getValidationFailureMessages().add(
-					"The policy administrator ID is missing in the Subject");
+			context.setValidationFailureMessage("The policy administrator ID is missing in the Subject");
 			return ValidationResult.INVALID;
 		} else if (role == Role.DOCUMENT_ADMINISTRATOR
 				&& !DOCUMENT_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
-			context.getValidationFailureMessages().add(
-					"The document administrator ID is missing in the Subject");
+			context.setValidationFailureMessage("The document administrator ID is missing in the Subject");
 			return ValidationResult.INVALID;
 		} else if (role == Role.PATIENT && !EPR_SPID_URN.equals(nameId.getNameQualifier())) {
-			context.getValidationFailureMessages().add("The patient EPR-SPID is missing in the Subject");
+			context.setValidationFailureMessage("The patient EPR-SPID is missing in the Subject");
 			return ValidationResult.INVALID;
 		} else if (role == Role.REPRESENTATIVE
 				&& !REPRESENTATIVE_ID.equals(nameId.getNameQualifier())) {
-			context.getValidationFailureMessages().add("The representative ID is missing in the Subject");
+			context.setValidationFailureMessage("The representative ID is missing in the Subject");
 			return ValidationResult.INVALID;
 		}
 
@@ -344,67 +340,63 @@ public class ChEprAssertionValidator {
 	ValidationResult validateRequiredAssertions(final Assertion assertion,
 			final ValidationContext context, final Role role) {
 		if (context.getDynamicParameters().getOrDefault(CH_EPR_PURPOSE_OF_USE, null) == null) {
-			context.getValidationFailureMessages().add(	ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_IS_MISSING);
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_IS_MISSING);
 			return ValidationResult.INVALID;
 		}
 		if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_NAME, null) == null) {
-			context.getValidationFailureMessages().add(
-					ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_IS_MISSING);
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_IS_MISSING);
 			return ValidationResult.INVALID;
 		}
 		if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_ID, null) == null) {
-			context.getValidationFailureMessages().add(
-					ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
 			return ValidationResult.INVALID;
 		}
 		if (role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT
 				|| role == Role.TECHNICAL_USER) {
 			if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME))
 					.isEmpty()) {
-				context.getValidationFailureMessages().add(
-						ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not be empty");
+				context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not be empty");
 				return ValidationResult.INVALID;
 			}
 			if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID))
 					.isEmpty()) {
-				context.getValidationFailureMessages().add(
+				context.setValidationFailureMessage(
 						ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not be empty");
 				return ValidationResult.INVALID;
 			}
 		}
 		if (context.getDynamicParameters().getOrDefault(CH_EPR_HOME_COMMUNITY_ID, null) == null) {
-			context.getValidationFailureMessages().add(
-					ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);
+			context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);
 			return ValidationResult.INVALID;
 		}
 		if (context.getDynamicParameters().getOrDefault(CH_EPR_RESPONSIBLE_SUBJECT_ID,
 				null) == null) {
-			context.getValidationFailureMessages().add("The Subject is missing");
+			context.setValidationFailureMessage("The Subject is missing");
 			return ValidationResult.INVALID;
 		}
 
 		if (role == Role.ASSISTANT) {
 			if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_NAME, null) == null) {
-				context.getValidationFailureMessages().add(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
+				context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
 				return ValidationResult.INVALID;
 			}
 			if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_GLN, null) == null) {
-				context.getValidationFailureMessages().add(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
+				context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
 				return ValidationResult.INVALID;
 			}
 		}
 		if (role == Role.TECHNICAL_USER
 				&& context.getDynamicParameters().getOrDefault(CH_EPR_TCU_ID, null) == null) {
-			context.getValidationFailureMessages().add(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
+			context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
 			return ValidationResult.INVALID;
 		}
 
 		if (assertion.getConditions() == null || assertion.getConditions().getNotBefore() == null) {
-			context.getValidationFailureMessages().add("The Condition NotBefore attribute is missing");
+			context.setValidationFailureMessage("The Condition NotBefore attribute is missing");
 			return ValidationResult.INVALID;
 		}
 		if (assertion.getConditions().getNotOnOrAfter() == null) {
-			context.getValidationFailureMessages().add("The Condition NotOnOrAfter attribute is missing");
+			context.setValidationFailureMessage("The Condition NotOnOrAfter attribute is missing");
 			return ValidationResult.INVALID;
 		}
 

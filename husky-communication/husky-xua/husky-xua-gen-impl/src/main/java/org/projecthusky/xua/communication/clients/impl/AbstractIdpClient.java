@@ -16,17 +16,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.config.RequestConfig;
-import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.core5.http.HttpStatus;
-import org.apache.hc.core5.http.NameValuePair;
-import org.apache.hc.core5.http.NoHttpResponseException;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.clients.IdpClient;
 import org.projecthusky.xua.communication.config.IdpClientConfig;
@@ -36,6 +25,16 @@ import org.projecthusky.xua.exceptions.DeserializeException;
 import org.projecthusky.xua.exceptions.SerializeException;
 import org.projecthusky.xua.saml2.Response;
 import org.projecthusky.xua.serialization.impl.AuthnRequestSerializerImpl;
+import org.apache.http.HttpStatus;
+import org.apache.http.NoHttpResponseException;
+import org.apache.http.ParseException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +84,8 @@ public abstract class AbstractIdpClient implements IdpClient {
 		final CloseableHttpClient httpclient = getHttpClient();
 
 		final CloseableHttpResponse response = httpclient.execute(post);
-		if ((response.getCode() == HttpStatus.SC_OK)) {
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
 			return parseResponse(response);
 		} else {
 			throw new NoHttpResponseException("No valid response found: " + response);

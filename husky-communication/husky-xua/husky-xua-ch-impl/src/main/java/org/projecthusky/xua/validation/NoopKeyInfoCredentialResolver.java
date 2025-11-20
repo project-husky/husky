@@ -14,7 +14,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.opensaml.security.credential.Credential;
 import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
 
-import net.shibboleth.shared.resolver.CriteriaSet;
+import net.shibboleth.utilities.java.support.resolver.CriteriaSet;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collections;

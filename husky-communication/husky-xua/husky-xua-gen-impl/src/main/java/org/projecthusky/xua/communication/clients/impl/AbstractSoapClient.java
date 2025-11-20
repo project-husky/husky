@@ -15,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -30,7 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPathConstants;
@@ -40,21 +38,19 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.fileupload.MultipartStream;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.config.RequestConfig;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpHeaders;
-import org.apache.hc.core5.http.HttpStatus;
-import org.apache.hc.core5.http.ParseException;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
-import org.apache.hc.core5.ssl.SSLContexts;
-import org.apache.hc.core5.ssl.TrustStrategy;
-import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpStatus;
+import org.apache.http.ParseException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
+import org.apache.http.util.EntityUtils;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.projecthusky.common.utils.xml.XmlFactories;
 import org.projecthusky.xua.communication.config.SoapClientConfig;
 import org.projecthusky.xua.communication.config.SoapClientConfig.SoapVersion;
@@ -63,14 +59,14 @@ import org.projecthusky.xua.exceptions.ClientSendException;
 import org.projecthusky.xua.exceptions.SoapException;
 import org.projecthusky.xua.pki.PkiManager;
 import org.projecthusky.xua.pki.impl.PkiManagerImpl;
-import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import net.shibboleth.shared.xml.XMLParserException;
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
+
 
 /**
  * <!-- @formatter:off -->
@@ -217,12 +213,13 @@ public abstract class AbstractSoapClient<T> {
 		final CloseableHttpResponse response = httpclient.execute(post);
 
 		final HttpEntity responseEntity = response.getEntity();
-		logger.debug(responseEntity.getContentType());
+		logger.debug(responseEntity.getContentType().getValue());
 
 		var content = extractResponse(responseEntity);
 		logger.debug("SOAP Message\n {}", content);
 
-		if ((response.getCode() == HttpStatus.SC_OK)) {
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
 			return parseResponse(content);
 		} else {
 			return parseResponseError(content);
@@ -234,10 +231,10 @@ public abstract class AbstractSoapClient<T> {
 		try {
 			content = EntityUtils.toString(responseEntity, "UTF-8");
 
-			if (responseEntity.getContentType().startsWith("multipart")) {
+			if (responseEntity.getContentType().getValue().startsWith("multipart")) {
 				logger.debug("Multiparted Message\n {}", content);
 
-				final byte[] boundary = getBoundary(responseEntity.getContentType());
+				final byte[] boundary = getBoundary(responseEntity.getContentType().getValue());
 				logger.debug("Boundary: {}", boundary);
 
 				final var multipartStream = new MultipartStream(
@@ -311,14 +308,11 @@ public abstract class AbstractSoapClient<T> {
 
 				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain,
 						String authType) -> true;
-				final var sslContext = SSLContexts.custom()//
+				final var sslcontext = SSLContexts.custom()//
 						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
 						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
 						.build();
-				PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder
-						.create()//
-						.setTlsSocketStrategy(new DefaultClientTlsStrategy(sslContext)).build();
-				return HttpClients.custom().setConnectionManager(connectionManager).build();
+				return HttpClients.custom().setSSLContext(sslcontext).build();
 			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException
 					| NoSuchAlgorithmException | IOException e) {
 				throw new ClientSendException(e);
