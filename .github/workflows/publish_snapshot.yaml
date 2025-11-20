@@ -4,7 +4,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ develop, develop-3.x ]
+    branches: [ develop-os4-3.x ]
     
 jobs:
   build:
