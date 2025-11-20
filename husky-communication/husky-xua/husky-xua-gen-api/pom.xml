@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.projecthusky.communication</groupId>
 		<artifactId>husky-xua</artifactId>
-		<version>3.2.1-OS4-SNAPSHOT</version>
+		<version>3.2.1-OS4</version>
 	</parent>
 
 	<dependencies>

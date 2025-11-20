@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.projecthusky.common</groupId>
 		<artifactId>husky-common</artifactId>
-		<version>3.2.1-OS4-SNAPSHOT</version>
+		<version>3.2.1-OS4</version>
 	</parent>
 
 
