@@ -79,9 +79,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         context.setVariable("issuedDate", document.resolveTimestamp());
 
         context.setLocale(lang.getLocale());
-        //TODO support all enum values
-        return templateEngine
-                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "emediplan/emediplan_body", context);
+        return templateEngine.process(getMedicationCardNarrativeTemplate(), context);
     }
 
     @SafeVarargs
@@ -101,6 +99,19 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
         context.setLocale(lang.getLocale());
         return this.templateEngine.process(getPrescriptionNarrativeTemplate(), context);
+    }
+
+    /**
+     * Gets the prescription narrative template to be used by this HTML narrative generator depending on the selected
+     * {@link NarrativeFormat}.
+     */
+    protected String getMedicationCardNarrativeTemplate() {
+        return switch(narrativeFormat) {
+            case CH_EMED_EPR -> "medication_card";
+            case EMEDIPLAN, CHMED23A -> "emediplan/emediplan_body";
+            case CHMED16A -> throw new UnsupportedOperationException("The medication card with narrative format in CHMED16A format is not supported.");
+            case EPRESCRIPTION -> throw new UnsupportedOperationException("The ePrescription paper format cannot be used for a medication card.");
+        };
     }
 
     /**
