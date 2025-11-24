@@ -22,7 +22,7 @@ import org.projecthusky.fhir.core.ch.util.Identifiers;
  * 
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-organization")
-public class ChCoreOrganization extends Organization {
+public class ChCoreOrganization extends Organization implements ChCoreContactPointCarrier {
 	private static final long serialVersionUID = -8331079935172864165L;
 
 	/**

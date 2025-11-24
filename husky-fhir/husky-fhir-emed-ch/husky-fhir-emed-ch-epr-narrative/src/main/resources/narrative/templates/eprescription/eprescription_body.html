@@ -1,0 +1,44 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+
+<!--/*@thymesVar id="author" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole"*/-->
+<!--/*@thymesVar id="resource" type="org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre"*/-->
+<table class="eprescription-header">
+    <thead>
+        <tr>
+            <th>header zone: left</th>
+            <th>header zone: right</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="eprescription-zone-a" id="eprescription-zone-a"><th:block th:insert="~{eprescription/eprescription-zone-a::zone-a(${lang})}"></th:block></tr>
+        <tr class="eprescription-qrcode-and-author">
+            <td class="eprescription-zone-b" id="eprescription-zone-b"><img class="emediplan-qrcode" th:src="@{'data:image/png;base64,' + ${qrcode}}" alt="QR code"/></td>
+            <td class="eprescription-zone-c" id="eprescription-zone-c"
+                th:insert="~{eprescription/eprescription_zone_c::zone-c(${author.resolvePractitioner()}, ${author.resolveOrganization()}, ${resource.resolveTimestamp()}, ${lang})}"></td>
+        </tr>
+    </tbody>
+</table>
+<div class="eprescription-zone-d" id="eprescription-zone-d"
+    th:insert="~{eprescription/eprescription_zone_d::zone-d(${resource.resolvePatient()}, ${lang})}"></div>
+<div class="eprescription-zone-e" id="eprescription-zone-e"
+    th:insert="~{eprescription/eprescription_zone_e::zone-e(${resource.resolveComposition().getAnnotationSection().getText()}, ${treatments}, ${lang})}"></div>
+<div class="eprescription-zone-f" id="eprescription-zone-f">
+    <!-- add recipient of the prescription if present to the next line -->
+    <div class="eprescription-id">ID de l'ordonnance : [[${resource.resolveIdentifier()}]]</div>
+    <div class="eprescription-footnote">
+        L'ordonnance électronique est un jeu de données représenté ci-dessus sous forme de code QR lisible par machine.
+        Ce document est une impression directement lisible de l'ordonnance électronique.
+        <b>L'ordonnance électronique est signée numériquement, l'impression n'est pas signée.</b>
+        L'ordonnance électronique doit impérativement être honorée par voie électronique.
+        Les patientes et les patients sont libres de choisir leur lieu de délivrance (Suisse et Liechtenstein).
+        Plus d'information sur e-ordonnance.ch
+    </div>
+</div>

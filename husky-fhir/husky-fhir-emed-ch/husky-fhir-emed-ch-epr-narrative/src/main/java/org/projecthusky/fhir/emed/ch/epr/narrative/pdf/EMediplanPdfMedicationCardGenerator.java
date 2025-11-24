@@ -13,7 +13,10 @@ import org.projecthusky.fhir.emed.ch.epr.narrative.html.ChEmedEprTemplateResolve
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.NarrativeFormat;
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.SoftwareProviderMetadataProvider;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
+import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.ChMed16AConverter;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.ChMed23AConverter;
+import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EMediplanConverter;
+import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EPrescriptionConverter;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
 
 import javax.imageio.ImageIO;
@@ -26,6 +29,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+/**
+ * A medication card PDF generator following eMediplan (CHMED16A or CHMED23A) paper layouts.
+ */
 @Slf4j
 public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenerator {
     public static final Consumer<@NonNull ValidationIssue> SLF4J_VALIDATION_RESULT_CONSUMER = issue -> {
@@ -45,12 +51,20 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
     @Setter @Getter
     protected Consumer<@NonNull ValidationIssue> validationIssueConsumer = SLF4J_VALIDATION_RESULT_CONSUMER;
 
+    protected final EMediplanQrCodeGenerator qrCodeGenerator;
+
     public EMediplanPdfMedicationCardGenerator(final String template,
                                                final SoftwareProviderMetadataProvider softwareProviderMetadataProvider)
             throws IOException, ParserConfigurationException {
         super(NarrativeFormat.EMEDIPLAN, template, softwareProviderMetadataProvider);
+        qrCodeGenerator = new EMediplanQrCodeGenerator(getEmediplanConverter(), validationIssueConsumer);
     }
 
+    /**
+     * This constructor will use the umbrella {@link NarrativeFormat#EMEDIPLAN} code for the narrative.
+     * <p>This has no implications for the paper layout, since it is shared for CHMED16A and CHMED23A, but it has the
+     * implication of deciding which eMediplan content will be created and hence conveyed within the QR code.</p>
+     */
     public EMediplanPdfMedicationCardGenerator(final SoftwareProviderMetadataProvider softwareProviderMetadataProvider)
             throws IOException, ParserConfigurationException {
         super(NarrativeFormat.EMEDIPLAN, softwareProviderMetadataProvider);
@@ -58,8 +72,28 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
            within the PDF template.
          */
         pdfConverter.getTemplateEngine().setTemplateResolver(ChEmedEprTemplateResolver.get());
+        qrCodeGenerator = new EMediplanQrCodeGenerator(getEmediplanConverter(), validationIssueConsumer);
     }
 
+    /**
+     * This constructor allows the caller to specify exactly which kind of eMediplan narrative format can be used,
+     * either the umbrella {@link NarrativeFormat#EMEDIPLAN} format, which will use whatever it is considered as default
+     * by the library for generating the QR code content, or the more specific CHMED16A or CHMED23A codes.
+     * <p>Note that other codes are NOT supported.</p>
+     */
+    public EMediplanPdfMedicationCardGenerator(final NarrativeFormat narrativeFormat, final SoftwareProviderMetadataProvider softwareProviderMetadataProvider)
+            throws IOException, ParserConfigurationException {
+        super(Objects.requireNonNull(narrativeFormat), Objects.requireNonNull(softwareProviderMetadataProvider));
+        /* When using the default emediplan template, we need the internal template resolver since there are fragments
+           within the PDF template.
+         */
+        if (narrativeFormat != NarrativeFormat.EMEDIPLAN && narrativeFormat != NarrativeFormat.CHMED16A && narrativeFormat != NarrativeFormat.CHMED23A)
+            throw new UnsupportedOperationException("The specified narrative format is not supported by this class.");
+        pdfConverter.getTemplateEngine().setTemplateResolver(ChEmedEprTemplateResolver.get());
+        qrCodeGenerator = new EMediplanQrCodeGenerator(getEmediplanConverter(), validationIssueConsumer);
+    }
+
+    @Override
     public byte[] generate(final ChEmedEprDocumentPmlc pmlcDocument, final NarrativeLanguage lang) {
         final var body = this.htmlNarrativeGenerator.generate(pmlcDocument, lang);
 
@@ -123,24 +157,12 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
         }
     }
 
-    public static final class QrCodeGenerationException extends RuntimeException {
-        public QrCodeGenerationException() {
-        }
-
-        public QrCodeGenerationException(String message) {
-            super(message);
-        }
-
-        public QrCodeGenerationException(String message, Throwable cause) {
-            super(message, cause);
-        }
-
-        public QrCodeGenerationException(Throwable cause) {
-            super(cause);
-        }
-
-        public QrCodeGenerationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-            super(message, cause, enableSuppression, writableStackTrace);
-        }
+    protected EMediplanConverter getEmediplanConverter() {
+        return switch (htmlNarrativeGenerator.getNarrativeFormat()) {
+            case CH_EMED_EPR -> throw new UnsupportedOperationException("This PDF generator does not support CH EMED EPR narrative format.");
+            case EMEDIPLAN, CHMED23A -> new ChMed23AConverter();
+            case CHMED16A -> new ChMed16AConverter();
+            case EPRESCRIPTION -> new EPrescriptionConverter();
+        };
     }
 }

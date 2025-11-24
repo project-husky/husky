@@ -1,0 +1,99 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<!--/*@thymesVar id="comment" type="org.hl7.fhir.r4.model.Narrative"*/-->
+<!--/*@thymesVar id="requests" type="java.util.List<org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre>"*/-->
+<th:block th:fragment="zone-e(comment, requests, lang)">
+    <!-- TOODO: narrative might contain xhmtl tags -->
+    <div class="eprescription-comments" th:if="${comment.hasDiv()}">
+        <div class="eprescription-comments-label">Commentaire :</div>
+        <div class="eprescription-comments-content" th:text="${comment.getDivAsString()}">Tenir compte de l'eMediplan.</div>
+    </div>
+    <div class="eprescription-requests">
+        <table>
+            <thead>
+                <tr>
+                    <th>Prescription</th>
+                    <th>Instructions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="request:${requests}" class="eprescription-prescription-line">
+                    <!--/*@thymesVar id="request" type="org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre"*/-->
+                    <td class="eprescription-request">
+                        <div class="eprescription-prescribed-item">
+                            <th:block th:if="${request.hasDispenseRequest()}"><span class="eprescription-prescribed-item-quantity" th:insert="~{::prescribed-quantity(${request.getDispenseRequest().getQuantity()}, ${lang})}">1 x</span></th:block>
+                            <th:block th:unless="${request.hasDispenseRequest()}"><span class="eprescription-prescribed-item-quantity">1 x</span></th:block>
+                            <span class="eprescription-prescribed-item-description" th:insert="~{::item-description(${request.resolveMedication()}, ${lang})}"></span>
+                        </div>
+                        <div class="eprescription-prescribed-dosage" th:insert="~{::item-dosage(${request.resolveEffectiveDosageInstructions()}, ${lang})}"></div>
+                        <div class="eprescription-dispense-repetition" th:insert="~{::dispense-repetition(${request.getDispenseRequest()}, ${lang})}"></div>
+                        <div class="eprescription-dispense-substitution" th:if="${request.hasSubstitution()}">Ne pas substituer pour des raisons médicales.</div>
+                    </td>
+                    <!--TODO take into account if the patient instructions were already conveyed in the posology part?-->
+                    <td class="eprescription-request-patient-instructions"><br/><th:block th:text="${request.resolveEffectiveDosageInstructions().patientInstructions()}"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</th:block>
+
+<th:block th:fragment="prescribed-quantity(quantity, lang)">
+    <th:block th:insert="~{datatypes::amount-quantity(${quantity}, ${lang})}"></th:block> x
+</th:block>
+
+<th:block th:fragment="item-description(medication, lang)">
+    <!--/*@thymesVar id="medication" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication"*/-->
+    <span class="eprescription-prescribed-item-med-name" th:text="${medication.resolveMedicationName()}"></span>
+</th:block>
+
+<th:block th:fragment="item-dosage(effectiveDosage, lang)">
+    <span class="eprescription-prescribed-dosage-description">
+        <!--/*@thymesVar id="effectiveDosage" type="org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions"*/-->
+        <span class="eprescription-prescribed-dosage-intakes" th:if="${effectiveDosage.hasIntakes()}">
+            <th:block th:replace="~{::single-intake(${effectiveDosage.getMornIntake()}, ${lang})}"/>-<!--
+         --><th:block th:replace="~{::single-intake(${effectiveDosage.getNoonIntake()}, ${lang})}"/>-<!--
+         --><th:block th:replace="~{::single-intake(${effectiveDosage.getEveIntake()}, ${lang})}"/>-<!--
+         --><th:block th:replace="~{::single-intake(${effectiveDosage.getNightIntake()}, ${lang})}"/><!--
+         --><span class="eprescription-prescribed-dosage-intakes-unit" th:if="${effectiveDosage.getUnit()}" th:text="${', ' + fopase.getMessage(effectiveDosage.getUnit(), lang)}"></span><!--
+     --></span><!--
+     --><!-- else, use free text --><!--
+     --><th:block th:unless="${effectiveDosage.hasIntakes()}"><span th:replace="~{::free-text-dosage(${effectiveDosage}, ${lang})}"></span></th:block><!--
+     --><span th:if="${effectiveDosage.hasPeriod() && effectiveDosage.period().hasEnd()}"><!--
+         -->, jusqu'au : <th:block th:replace="~{emediplan/emediplan_datatypes::fhirDate(${effectiveDosage.period().getEndElement()}, ${lang})}"></th:block>
+        </span>
+    </span>
+</th:block>
+
+<th:block th:fragment="single-intake(intake, lang)"><!--
+ --><!--/*@thymesVar id="intake" type="org.projecthusky.fhir.emed.ch.epr.model.common.DosageIntake"*/--><!--
+ --><th:block th:if="${intake}" th:with="dose=${intake.dose()}"><!--
+     --><!--/*@thymesVar id="dose" type="org.projecthusky.fhir.emed.ch.epr.model.common.Dose"*/--><!--
+     --><span class="eprescription-prescribed-dosage-intake" th:text="${dose.quantity()? dose.quantity().value() : 'TBD'}">1</span><!--TODO range dosage --><!--
+ --></th:block><!--
+ --><span class="eprescription-prescribed-dosage-intake" th:unless="${intake}">0</span><!--
+--></th:block>
+
+<th:block th:fragment="free-text-dosage(effectiveDosage, lang)">
+    <!--/*@thymesVar id="effectiveDosage" type="org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions"*/-->
+    <span class="eprescription-prescribed-dosage-free-text" th:if="${effectiveDosage.narrative()}" th:text="${effectiveDosage.narrative()}"></span>
+    <span class="eprescription-prescribed-dosage-free-text" th:unless="${effectiveDosage.narrative()}" th:if="${effectiveDosage.patientInstructions()}" th:text="${effectiveDosage.patientInstructions()}"></span>
+</th:block>
+
+<th:block th:fragment="dispense-repetition(dispenseRequest, lang)">
+    <!--/*@thymesVar id="dispenseRequest" type="org.hl7.fhir.r4.model.MedicationRequest.MedicationRequestDispenseRequestComponent"*/-->
+    <th:block th:if="${dispenseRequest.hasNumberOfRepeatsAllowed()}">
+        Repétable&nbsp;
+        <th:block th:if="${dispenseRequest.hasNumberOfRepeatsAllowed()}" th:text="${dispenseRequest.getNumberOfRepeatsAllowed() + ' fois'}"/>
+        <th:block th:if="${dispenseRequest.hasValidityPeriod() && dispenseRequest.getValidityPeriod().hasEnd()}">
+            &nbsp;jusqu'au&nbsp;<th:block th:insert="~{emediplan/emediplan_datatypes::fhirDate(${dispenseRequest.getValidityPeriod().getEndElement()}, ${lang})}"/>
+        </th:block>
+    </th:block>
+    <span th:unless="${dispenseRequest.hasValidityPeriod() || dispenseRequest.hasNumberOfRepeatsAllowed()}">Non répétable.</span>
+</th:block>

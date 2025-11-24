@@ -86,6 +86,7 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
      *                                     any is invalid.
      */
     @ExpectsValidResource
+    @Override
     public ChEmedEprCompositionPre resolveComposition() {
         final var entry = this.getEntryByResourceType(ChEmedEprCompositionPre.class);
         if (entry instanceof final ChEmedEprCompositionPre composition) {

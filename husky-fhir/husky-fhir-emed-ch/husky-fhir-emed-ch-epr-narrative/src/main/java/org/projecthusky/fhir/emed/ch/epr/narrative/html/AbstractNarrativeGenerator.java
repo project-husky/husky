@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.html;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.narrative.services.MedicationImageProvider;
@@ -9,6 +10,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.AbstractMap;
 import java.util.EnumMap;
 import java.util.Objects;
 import java.util.PropertyResourceBundle;
@@ -73,8 +75,11 @@ abstract class AbstractNarrativeGenerator {
      *
      * @param document The prescription document.
      * @param lang The language of the narrative.
+     * @param extraContext extra context to be passed to the generator as pairs of keys (string) and objects.
      * @return The HTML content of the narrative.
      */
      abstract public String generate(final ChEmedEprDocumentPre document,
-                                     final NarrativeLanguage lang);
+                                     final NarrativeLanguage lang,
+                                     AbstractMap.SimpleImmutableEntry<@NonNull String, Object>... extraContext
+                                     );
 }
