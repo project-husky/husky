@@ -58,6 +58,9 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     @Override
+    public abstract ChEmedEprMedicationRequest copy();
+
+    @Override
     public EmedEntryType getEmedType() {
         return EmedEntryType.PRE;
     }
