@@ -28,7 +28,7 @@ public class EPrescriptionPdfGeneratorTest {
 
     @Test
     void testGeneratePdf() throws IOException, ParserConfigurationException, ValidationException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPreParacetamolAxapharmCaraPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var documents = parser.parse(xml, EmedDocumentType.PRE);
         assertInstanceOf(ChEmedEprDocumentPre.class, documents);
