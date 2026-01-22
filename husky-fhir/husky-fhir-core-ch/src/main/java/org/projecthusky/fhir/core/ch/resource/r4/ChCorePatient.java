@@ -37,7 +37,7 @@ import static org.projecthusky.fhir.core.ch.util.FhirSystem.VEKA;
 /**
  * The HAPI custom structure for CH-Core patient.
  * 
- * @author <a href="roelxºand.luykx@raly.ch">Roeland Luykx</a>
+ * @author <a href="roelxand.luykx@raly.ch">Roeland Luykx</a>
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient")
 public class ChCorePatient extends Patient implements ChCoreContactPointCarrier {
