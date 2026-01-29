@@ -11,7 +11,10 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.html;
 
 import ca.uhn.fhir.context.FhirContext;
+import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
@@ -41,6 +44,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
      */
     protected final TemplateEngine templateEngine;
 
+    @Getter
     protected final NarrativeFormat narrativeFormat;
 
     public HtmlNarrativeGenerator(final NarrativeFormat format) throws IOException {
@@ -75,22 +79,52 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         context.setVariable("issuedDate", document.resolveTimestamp());
 
         context.setLocale(lang.getLocale());
-        return templateEngine
-                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "emediplan/emediplan_body", context);
+        return templateEngine.process(getMedicationCardNarrativeTemplate(), context);
     }
 
+    @SafeVarargs
     @Override
-    public String generate(final ChEmedEprDocumentPre document,
-                           final NarrativeLanguage lang) {
+    public final String generate(final ChEmedEprDocumentPre document,
+                                 final NarrativeLanguage lang,
+                                 final AbstractMap.SimpleImmutableEntry<@NonNull String, Object>... extraContext
+    ) {
         final var context = new Context();
         context.setVariable("resource", document);
         context.setVariable("lang", lang);
         context.setVariable("fopase", this.valueSetEnumNarrativeForPatientService);
         context.setVariable("treatments", document.resolveComposition().resolveMedicationRequests());
-        context.setVariable("author", document.resolveComposition().resolveFirstHumanAuthor());
+        context.setVariable("author", (ChEmedEprPractitionerRole) document.resolveComposition().resolveFirstHumanAuthor());
+
+        for (final var contextObject : extraContext) context.setVariable(contextObject.getKey(), contextObject.getValue());
 
         context.setLocale(lang.getLocale());
-        return this.templateEngine.process("prescription", context);
+        return this.templateEngine.process(getPrescriptionNarrativeTemplate(), context);
+    }
+
+    /**
+     * Gets the prescription narrative template to be used by this HTML narrative generator depending on the selected
+     * {@link NarrativeFormat}.
+     */
+    protected String getMedicationCardNarrativeTemplate() {
+        return switch(narrativeFormat) {
+            case CH_EMED_EPR -> "medication_card";
+            case EMEDIPLAN, CHMED23A -> "emediplan/emediplan_body";
+            case CHMED16A -> throw new UnsupportedOperationException("The medication card with narrative format in CHMED16A format is not supported.");
+            case EPRESCRIPTION -> throw new UnsupportedOperationException("The ePrescription paper format cannot be used for a medication card.");
+        };
+    }
+
+    /**
+     * Gets the prescription narrative template to be used by this HTML narrative generator depending on the selected
+     * {@link NarrativeFormat}.
+     */
+    protected String getPrescriptionNarrativeTemplate() {
+        return switch(narrativeFormat) {
+            case CH_EMED_EPR -> "prescription";
+            case EMEDIPLAN, CHMED16A, CHMED23A ->
+                    throw new UnsupportedOperationException("Narrative templates for eMediplan prescription other than ePrescription layout are not supported.");
+            case EPRESCRIPTION -> "eprescription/eprescription_body";
+        };
     }
 
     /**

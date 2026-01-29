@@ -284,7 +284,7 @@ public non-sealed class ChMed23AConverter implements EMediplanConverter {
     protected static @Nullable Repetition toRepetition(final MedicationRequest.MedicationRequestDispenseRequestComponent dispenseRequest) {
         Objects.requireNonNull(dispenseRequest);
 
-        if (dispenseRequest.hasValidityPeriod() || dispenseRequest.hasNumberOfRepeatsAllowed()) {
+        if (dispenseRequest.hasNumberOfRepeatsAllowed()) {
             if (dispenseRequest.hasValidityPeriod()) {
                 final var repetitionDuration = RepetitionDuration.fromFhirPeriod(dispenseRequest.getValidityPeriod());
                 if (repetitionDuration != null) {
@@ -293,11 +293,8 @@ public non-sealed class ChMed23AConverter implements EMediplanConverter {
                     }
                     return repetitionDuration;
                 }
-                if (dispenseRequest.hasNumberOfRepeatsAllowed())
-                    return new RepetitionNumber(dispenseRequest.getNumberOfRepeatsAllowed());
             }
-            if (dispenseRequest.hasNumberOfRepeatsAllowed())
-                return new RepetitionNumber(dispenseRequest.getNumberOfRepeatsAllowed());
+            return new RepetitionNumber(dispenseRequest.getNumberOfRepeatsAllowed());
         }
         return null;
     }

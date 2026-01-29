@@ -69,6 +69,9 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     @Override
+    public abstract ChEmedEprMedicationStatement copy();
+
+    @Override
     public EmedEntryType getEmedType() {
         return EmedEntryType.MTP;
     }

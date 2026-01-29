@@ -1,0 +1,41 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  */-->
+<th:block th:fragment="zone-c(practitioner, organization, prescriptionTimestamp, lang)">
+    <div class="eprescription-zone-c">
+        <div class="eprescription-practitioner">
+            <span class="eprescription-practitioner-label">Médecin :</span>
+            <span class="eprescription-practitioner-name" th:insert="~{datatypes :: human-name(${practitioner.resolveName()}, ${lang})}">Elvira Exemple</span>
+            <!--/*@thymesVar id="practitioner" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner"*/-->
+            <span class="eprescription-practitioner-gln" th:text="'GLN : ' + ${practitioner.resolveGln()}">GLN : 7601007705555</span>
+        </div>
+        <div class="eprescription-organization">
+            <!--/*@thymesVar id="practitioner" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner"*/-->
+            <!--/*@thymesVar id="organization" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization"*/-->
+            <div class="eprescription-organization-name" th:if="${organization.hasName()}" th:text="${organization.getName()}">Cabinet Les mimosas</div>
+            <!-- note that the ZSR number can be conveyed with either the practitioner or the organization. Priority order is the following:
+                1. practitioner's ZSR
+                2. organization's ZSR
+                3. empty, but the label prefix (RCC:) should still be displayed
+             -->
+            <div class="eprescription-organization-zsr">
+                <span class="eprescription-organization-zsr-label">RCC : </span>
+                <span class="eprescription-organization-zsr-number" th:unless="${practitioner.resolveZsr().isEmpty()}" th:text="${practitioner.resolveZsr().getFirst()}">Q123405</span>
+                <span class="eprescription-organization-zsr-number" th:if="${practitioner.resolveZsr().isEmpty() && organization.resolveZsr() != null}" th:text="${organization.resolveZsr()}">Q123405</span>
+            </div>
+            <div class="eprescription-organization-address" th:insert="~{datatypes::address(${organization.resolveAddress()}, ${lang})}"></div>
+            <div class="eprescription-organization-phone" th:unless="${organization.resolvePhoneNumbers().isEmpty()}" th:text="${organization.resolvePreferredPhoneNumber().getValue()}">+41 33 418 28 13</div>
+            <div class="eprescription-organization-email" th:unless="${organization.resolveEmailAddresses().isEmpty()}" th:text="${organization.resolvePreferredEmailAddress().getValue()}"></div>
+        </div>
+        <div class="eprescription-timestamp">
+            <span class="eprescription-timestamp-label">Date d'émission :</span>
+            <span class="eprescription-timestamp-value" th:insert="~{emediplan/emediplan_datatypes::instant(${prescriptionTimestamp}, ${lang})}"></span>
+        </div>
+    </div>
+</th:block>

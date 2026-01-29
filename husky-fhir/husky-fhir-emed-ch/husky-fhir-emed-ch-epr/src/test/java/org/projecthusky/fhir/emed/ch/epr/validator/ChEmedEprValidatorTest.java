@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
@@ -24,14 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
-    @Test @Disabled
+    @Test
     void validateDocumentBundleWithMatchbox() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprMatchboxValidator("https://tx.fhir.org/");
         performValidate(ctx, validator);
     }
 
-    @Test @Disabled("Current fhir core version in the project, aligned with Matchbox', is newer than HAPI FHIR's, it is incompatible and will make this test fail.")
+    @Test //@Disabled("Current fhir core version in the project, aligned with Matchbox', is newer than HAPI FHIR's, it is incompatible and will make this test fail.")
     void validateDocumentBundleWithHapi() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprHapiValidator(ctx);
