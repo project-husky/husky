@@ -23,6 +23,7 @@ import java.util.Date;
  *
  * @author Ronaldo Loureiro
  */
+@Deprecated(forRemoval = true, since = "CH Core 6.0.0")
 @Block
 public class ChExtEprDataEnterer extends BackboneElement {
 
