@@ -11,7 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.RelatedPerson;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreRelatedPerson;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR RelatedPerson.
@@ -19,5 +19,5 @@ import org.hl7.fhir.r4.model.RelatedPerson;
  * @author Quentin Ligier
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-related-person")
-public class ChEmedEprRelatedPerson extends RelatedPerson {
+public class ChEmedEprRelatedPerson extends ChCoreRelatedPerson {
 }
