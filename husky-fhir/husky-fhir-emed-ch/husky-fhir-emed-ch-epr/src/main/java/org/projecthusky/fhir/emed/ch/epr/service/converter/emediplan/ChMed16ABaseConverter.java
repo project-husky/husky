@@ -4,7 +4,7 @@ import com.google.common.collect.Streams;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.MedicationRequest;
-import org.jetbrains.annotations.NotNull;
+import jakarta.annotation.Nonnull;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
@@ -51,7 +51,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
      */
     @Override
     @ExpectsValidResource
-    public @NotNull E toEMediplan(final ChEmedEprDocumentPmlc pmlc) {
+    public @Nonnull E toEMediplan(final ChEmedEprDocumentPmlc pmlc) {
         final var emediplan = getNewEmediplanInstance();
 
         emediplan.setPatient(ChMed16APatient.fromEprFhir(
@@ -99,7 +99,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
 
     @Override
     @ExpectsValidResource
-    public @NotNull E toEMediplan(final ChEmedEprDocumentPre pre) {
+    public @Nonnull E toEMediplan(final ChEmedEprDocumentPre pre) {
         final var emediplan = getNewEmediplanInstance();
 
         final var preComposition = pre.resolveComposition();
@@ -196,8 +196,8 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
             medicament.setId(medication.resolveMedicationName());
             medicament.setIdType(MedicamentIdType.NONE);
         }
-
-        medicament.setPosology(List.of(toPosology(baseDosage, additionalDosages, medicament, mediplanType)));
+        final var posology = toPosology(baseDosage, additionalDosages, medicament, mediplanType);
+        if (posology != null) medicament.setPosology(List.of(posology));
         if (baseDosage.hasDoseAndRate()) {
             final var baseDose = baseDosage.resolveDose();
             if (baseDose.isQuantity())
@@ -239,7 +239,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         // patient instructions, since the specs say that this should not contain the information stated as free text
         // dosage.
         //if (!freeTextDosage) posology.setApplicationInstructions(baseDosage.getPatientInstruction());
-        appendToApplicationInstructions(medicament, baseDosage.getPatientInstruction());
+        if (medicament.getApplicationInstructions() == null) appendToApplicationInstructions(medicament, baseDosage.getPatientInstruction());
 
         if (mediplanType == EMediplanType.MEDICATION_PLAN) {
             if (!medicament.isSelfMedication()) medicament.setPrescriber(medicalAuthorToPrescriber(medicalAuthor));
@@ -269,7 +269,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
      * @param mediplanType      The type of eMediplan document.
      * @return The equivalent eMediplan posology object.
      */
-    public ChMed16APosology toPosology(final ChEmedEprDosage baseDosage,
+    public @Nullable ChMed16APosology toPosology(final ChEmedEprDosage baseDosage,
                                        final List<@NonNull ChEmedEprDosage> additionalDosages,
                                        final ChMed16AMedicament medicament,
                                        final EMediplanType mediplanType
@@ -382,7 +382,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
      *                          CHMED16A structure.
      * @return The equivalent eMediplan posology object.
      */
-    protected ChMed16APosology toPrescriptionPosology(final ChEmedEprDosage baseDosage,
+    protected @Nullable ChMed16APosology toPrescriptionPosology(final ChEmedEprDosage baseDosage,
                                                       final List<@NonNull ChEmedEprDosage> additionalDosages,
                                                       final ChMed16AMedicament medicament
     ) {
@@ -440,6 +440,13 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
             }
         }
 
+        if (posology.getStart() == null &&
+                posology.getEnd() == null &&
+                posology.getDailyDoses() == null &&
+                posology.getCycle() == null &&
+                posology.getAsNeeded() == null &&
+                posology.getTakingTimes().isEmpty()
+        ) return null;
         return posology;
     }
 
