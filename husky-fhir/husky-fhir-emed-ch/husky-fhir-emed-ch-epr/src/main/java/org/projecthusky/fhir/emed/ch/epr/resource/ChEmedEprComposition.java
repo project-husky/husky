@@ -395,23 +395,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
     }
 
     /**
-     * Returns whether the list of recipients of this document.
-     *
-     * @return {@code true} if the list of recipients of this document exists, {@code false} otherwise.
-     */
-    public boolean hasInformationRecipient() {
-        if (this.informationRecipient == null) {
-            return false;
-        }
-        for (final var item : this.informationRecipient) {
-            if (!item.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns whether the original representation section exists.
      *
      * @return {@code true} if the original representation section exists, {@code false} otherwise.
@@ -460,11 +443,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
         if (dst instanceof final ChEmedEprComposition als) {
             als.versionNumber = versionNumber == null ? null : versionNumber.copy();
             als.dataEnterer = dataEnterer == null ? null : dataEnterer.copy();
-            if (informationRecipient != null) {
-                als.informationRecipient = new ArrayList<>();
-                for (final var i : informationRecipient)
-                    als.informationRecipient.add(i.copy());
-            }
         }
     }
 

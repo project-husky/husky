@@ -57,7 +57,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         emediplan.setPatient(ChMed16APatient.fromEprFhir(
                 pmlc.resolvePatient(),
                 pmlc.resolveComposition().resolvePatientWeightObservation(),
-                pmlc.resolveComposition().getInformationRecipient(),
+                List.of(),
                 EMediplanType.MEDICATION_PLAN
         ));
         // If the patient did not have a preferred language, we still need to fill it in the eMediplan since it is
@@ -107,7 +107,7 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
         emediplan.setPatient(ChMed16APatient.fromEprFhir(
                 pre.resolvePatient(),
                 preComposition.resolvePatientWeightObservation(),
-                preComposition.getInformationRecipient(),
+                List.of(),
                 EMediplanType.PRESCRIPTION
         ));
 

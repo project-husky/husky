@@ -14,11 +14,7 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChExtEprDataEnterer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The HAPI custom structure for CH-Core Composition.
@@ -28,15 +24,6 @@ import java.util.List;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-composition-epr")
 public class ChCoreCompositionEpr extends ChCoreComposition {
 	private static final long serialVersionUID = 6290265510559327928L;
-
-	/**
-	 * Extension for a list of recipients of this document (corresponds to the addressee of a letter - person or
-	 * organization), equivalent to CDA informationRecipient.
-	 */
-	@Nullable
-	@Child(name = "informationRecipient", min = 1, max = Child.MAX_UNLIMITED)
-	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient", definedLocally = false)
-	protected List<Reference> informationRecipient;
 
 	/**
 	 * Person who entered information into this document if it is a person other than the author.
@@ -49,30 +36,6 @@ public class ChCoreCompositionEpr extends ChCoreComposition {
 	public ChCoreCompositionEpr() {
 		super();
 		setLanguage("de-CH");
-	}
-
-
-	/**
-	 * Gets the list of recipients of this document.
-	 *
-	 * @return the list of recipients of this document.
-	 */
-	public List<Reference> getInformationRecipient() {
-		if (this.informationRecipient == null) {
-			this.informationRecipient = new ArrayList<>(0);
-		}
-		return this.informationRecipient;
-	}
-
-	/**
-	 * Sets list of recipients of this document.
-	 *
-	 * @param informationRecipient the list of recipients of this document.
-	 * @return this.
-	 */
-	public ChCoreComposition setInformationRecipient(final List<Reference> informationRecipient) {
-		this.informationRecipient = informationRecipient;
-		return this;
 	}
 
 	/**
