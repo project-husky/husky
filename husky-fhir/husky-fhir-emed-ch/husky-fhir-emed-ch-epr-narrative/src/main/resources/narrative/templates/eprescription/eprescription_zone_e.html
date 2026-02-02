@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="request:${requests}" class="eprescription-prescription-line">
+                <tr th:each="request:${requests}" class="eprescription-prescription-line" th:with="effectiveDosage=${request.resolveEffectiveDosageInstructions()}">
                     <!--/*@thymesVar id="request" type="org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre"*/-->
                     <td class="eprescription-request">
                         <div class="eprescription-prescribed-item">
@@ -32,12 +32,13 @@
                             <th:block th:unless="${request.hasDispenseRequest()}"><span class="eprescription-prescribed-item-quantity">1 x</span></th:block>
                             <span class="eprescription-prescribed-item-description" th:insert="~{::item-description(${request.resolveMedication()}, ${lang})}"></span>
                         </div>
-                        <div class="eprescription-prescribed-dosage" th:insert="~{::item-dosage(${request.resolveEffectiveDosageInstructions()}, ${lang})}"></div>
+                        <div class="eprescription-prescribed-dosage" th:insert="~{::item-dosage(${effectiveDosage}, ${lang})}"></div>
                         <div class="eprescription-dispense-repetition" th:insert="~{::dispense-repetition(${request.getDispenseRequest()}, ${lang})}"></div>
                         <div class="eprescription-dispense-substitution" th:if="${request.hasSubstitution()}">Ne pas substituer pour des raisons médicales.</div>
                     </td>
-                    <!--TODO take into account if the patient instructions were already conveyed in the posology part?-->
-                    <td class="eprescription-request-patient-instructions"><br/><th:block th:text="${request.resolveEffectiveDosageInstructions().patientInstructions()}"/></td>
+                    <td class="eprescription-request-patient-instructions">
+                        <br/><th:block th:if="${effectiveDosage.hasIntakes()}" th:text="${effectiveDosage.patientInstructions()}"/>
+                    </td>
                 </tr>
             </tbody>
         </table>
