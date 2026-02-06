@@ -2,7 +2,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
-import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.rest.server.interceptor.validation.ValidationMessagePostProcessingInterceptor;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ValidationOptions;
@@ -134,10 +133,5 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
         log.info("Validation result: {}", validationResult.isSuccessful()? "successful" : "failed");
         for (final var issue : validationResult.getIssues())
             log.info(issue.toString());
-    }
-
-    @ResourceDef(profile = "http://hl7.org/fhir/StructureDefinition/SimpleQuantity|4.0.1")
-    private static class PinnedQuantity extends SimpleQuantity {
-
     }
 }
