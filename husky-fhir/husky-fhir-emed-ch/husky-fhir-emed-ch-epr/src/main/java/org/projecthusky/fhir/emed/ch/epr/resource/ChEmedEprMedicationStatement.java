@@ -25,7 +25,6 @@ import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -398,7 +397,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return this.
      */
     public ChEmedEprMedicationStatement setInformationSource(final Author author) {
-        this.setInformationSource(References.createAuthorReference(author));
+        this.setInformationSource(author.getNewReference());
         if (author.getTime() != null) this.setDateAsserted(Date.from(author.getTime()));
         return this;
     }

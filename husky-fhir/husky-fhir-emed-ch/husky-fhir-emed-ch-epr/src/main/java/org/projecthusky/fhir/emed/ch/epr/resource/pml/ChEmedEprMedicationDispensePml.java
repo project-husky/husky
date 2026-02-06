@@ -16,7 +16,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -145,11 +144,11 @@ public class ChEmedEprMedicationDispensePml
 
     /**
      * Sets the author as performer (medical author) of the dispense.
-     * @param actor The author to set as performer.
+     * @param author The author to set as performer.
      * @return this.
      */
-    public ChEmedEprMedicationDispensePml setPerformer(final Author actor) {
-        this.getPerformerFirstRep().setActor(References.createAuthorReference(actor));
+    public ChEmedEprMedicationDispensePml setPerformer(final Author author) {
+        this.getPerformerFirstRep().setActor(author.getNewReference());
         return this;
     }
 
