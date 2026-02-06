@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import ca.uhn.fhir.rest.server.interceptor.validation.ValidationMessagePostProcessingInterceptor;
 import ca.uhn.fhir.validation.FhirValidator;
 import ca.uhn.fhir.validation.ValidationOptions;
@@ -11,8 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.common.hapi.validation.support.*;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
-import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.OperationOutcome;
+import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
@@ -72,13 +72,18 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
     public ChEmedEprHapiValidator(final FhirContext context, final @Nullable String txServer)  throws IOException {
         final var packageSupport = new NpmPackageValidationSupport(context);
         for (var packageResource : packageResourceList) packageSupport.loadPackageFromClasspath(packageResource);
+        final var prepopulatedValidationSupport = new PrePopulatedValidationSupport(context);
         final var chain = new ValidationSupportChain(
+                prepopulatedValidationSupport,
                 packageSupport,
                 new DefaultProfileValidationSupport(context),
+                new SnapshotGeneratingValidationSupport(context),
                 (txServer != null && !txServer.isBlank())? new RemoteTerminologyServiceValidationSupport(context, txServer)
                         : new InMemoryTerminologyServerValidationSupport(context),
                 new CommonCodeSystemsTerminologyService(context)
         );
+        final var def = chain.fetchStructureDefinition("http://hl7.org/fhir/StructureDefinition/SimpleQuantity");
+        prepopulatedValidationSupport.addStructureDefinition(((StructureDefinition) def).copy().setUrl("http://hl7.org/fhir/StructureDefinition/SimpleQuantity|4.0.1"));
         validator = context.newValidator();
         final var instanceValidator = new FhirInstanceValidator(chain);
         validator.registerValidatorModule(instanceValidator);
@@ -129,5 +134,10 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
         log.info("Validation result: {}", validationResult.isSuccessful()? "successful" : "failed");
         for (final var issue : validationResult.getIssues())
             log.info(issue.toString());
+    }
+
+    @ResourceDef(profile = "http://hl7.org/fhir/StructureDefinition/SimpleQuantity|4.0.1")
+    private static class PinnedQuantity extends SimpleQuantity {
+
     }
 }

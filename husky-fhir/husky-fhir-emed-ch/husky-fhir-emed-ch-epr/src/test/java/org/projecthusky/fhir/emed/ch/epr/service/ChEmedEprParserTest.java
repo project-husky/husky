@@ -44,7 +44,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseMtp() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
         assertInstanceOf(ChEmedEprDocumentMtp.class, document);
@@ -58,7 +58,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseDis() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-1-2-MedicationDispense.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-1-2-MedicationDispense.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.DIS);
         assertInstanceOf(ChEmedEprDocumentDis.class, document);
@@ -72,7 +72,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParsePml() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-1-MedicationList.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-1-MedicationList.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PML);
         assertInstanceOf(ChEmedEprDocumentPml.class, document);
@@ -83,7 +83,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseAndSerializePadv() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-2-PharmaceuticalAdvice.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-2-PharmaceuticalAdvice.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PADV);
         assertInstanceOf(ChEmedEprDocumentPadv.class, document);
@@ -101,7 +101,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseMtpSplitdose() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-3-MedicationTreatmentPlan.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-3-MedicationTreatmentPlan.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
         assertInstanceOf(ChEmedEprDocumentMtp.class, document);
@@ -118,7 +118,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseDis2() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-4-MedicationDispense.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-4-MedicationDispense.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.DIS);
         assertInstanceOf(ChEmedEprDocumentDis.class, document);
@@ -132,7 +132,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseMtpNorvasc() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-5-MedicationTreatmentPlan.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-5-MedicationTreatmentPlan.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
         assertInstanceOf(ChEmedEprDocumentMtp.class, document);
@@ -146,7 +146,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParsePreNorvasc() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-6-MedicationPrescription.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-6-MedicationPrescription.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PRE);
         assertInstanceOf(ChEmedEprDocumentPre.class, document);
@@ -157,7 +157,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParsePmlc() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-7-MedicationCard-UUIDfullUrl.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-7-MedicationCard-UUIDfullUrl.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PMLC);
         assertInstanceOf(ChEmedEprDocumentPmlc.class, document);
@@ -168,7 +168,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParsePadvChange() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-PharmaceuticalAdvice-ChangeDosage.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-PharmaceuticalAdvice-ChangeDosage.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PADV);
         assertInstanceOf(ChEmedEprDocumentPadv.class, document);
@@ -186,7 +186,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseEmptyPml() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-BundleUtc1Pml.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-BundleUtc1Pml.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PML);
         assertInstanceOf(ChEmedEprDocumentPml.class, document);
@@ -199,7 +199,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseMtp() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentMtpParacetamolCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentMtpParacetamolCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
         assertInstanceOf(ChEmedEprDocumentMtp.class, document);
@@ -213,7 +213,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCasePre() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PRE);
         assertInstanceOf(ChEmedEprDocumentPre.class, document);
@@ -224,7 +224,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCasePadvCancel() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPadvCancelParacetamolCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPadvCancelParacetamolCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PADV);
         assertInstanceOf(ChEmedEprDocumentPadv.class, document);
@@ -244,7 +244,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseMtp2() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentMtpParacetamolDafalganCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentMtpParacetamolDafalganCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
         assertInstanceOf(ChEmedEprDocumentMtp.class, document);
@@ -258,7 +258,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCasePre2() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPreParacetamolDafalganCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreParacetamolDafalganCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PRE);
         assertInstanceOf(ChEmedEprDocumentPre.class, document);
@@ -269,7 +269,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCasePmlc() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPmlcCARAPMP004DafalganEffParacetamol.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPmlcCARAPMP004DafalganEffParacetamol.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PMLC);
         assertInstanceOf(ChEmedEprDocumentPmlc.class, document);
@@ -281,7 +281,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseAlternativeFlowPadvChange() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPadvChangeParacetamolCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPadvChangeParacetamolCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PADV);
         assertInstanceOf(ChEmedEprDocumentPadv.class, document);
@@ -301,7 +301,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseAlternativeFlowPmlWithChangedResource() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-BundleUtc6bPml.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-BundleUtc6bPml.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PML);
         assertInstanceOf(ChEmedEprDocumentPml.class, document);
@@ -313,7 +313,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprCaseAlternativeFlowPmlWithChangedResourceJson() throws IOException {
-        final var json = new String(getClass().getResourceAsStream("/Bundle-BundleUtc6bPml.json").readAllBytes());
+        final var json = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-BundleUtc6bPml.json").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(json, EmedDocumentType.PML);
         assertInstanceOf(ChEmedEprDocumentPml.class, document);
@@ -325,7 +325,7 @@ class ChEmedEprParserTest {
 
     @Test
     void testParseChEmedEprPmlWithObservationCommentOnPre() throws IOException {
-        final var json = new String(getClass().getResourceAsStream("/pmlpmp.json").readAllBytes());
+        final var json = new String(getClass().getResourceAsStream("/examples/pmlpmp.json").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(json, EmedDocumentType.PML);
         assertInstanceOf(ChEmedEprDocumentPml.class, document);
