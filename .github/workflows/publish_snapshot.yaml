@@ -1,7 +1,6 @@
 # this workflow will deploy SNAPSHOT on pushes to develop branch
 
-name: Java CI with Maven
-
+name: Maven Deploy
 on:
   push:
     branches: [ develop, develop-3.x ]
