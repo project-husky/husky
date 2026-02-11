@@ -29,7 +29,7 @@ public interface ChEmedEprValidator {
             "/package/ch.fhir.ig.ch-term#3.3.0.tgz",
             "/package/ch.fhir.ig.ch-core#6.0.0.tgz",
             "/package/ch.fhir.ig.ch-emed#6.0.0.tgz",
-            "/package/ch.fhir.ig.ch-emed-epr#3.0.0-ci-build.tgz",
+            "/package/ch.fhir.ig.ch-emed-epr#3.0.0.tgz",
             "/package/ch.fhir.ig.ch-epr-fhir#5.0.0.tgz",
             "/package/ihe.iti.mhd#4.2.3.tgz"
             );
