@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
  **/
 public interface ChEmedEprValidator {
     List<String> packageResourceList = List.of(
-            "/package/ihe.formatcode.fhir#1.3.0.tgz",
-            "/package/ch.fhir.ig.ch-term#3.1.0.tgz",
-            "/package/ch.fhir.ig.ch-core#5.0.0.tgz",
-            "/package/ch.fhir.ig.ch-emed#5.0.0.tgz",
-            "/package/ch.fhir.ig.ch-emed-epr#2.0.0.tgz",
-            "/package/ch.fhir.ig.ch-epr-fhir#4.0.1.tgz",
-            "/package/ihe.iti.mhd#4.2.2.tgz"
+            "/package/ihe.formatcode.fhir#1.4.0.tgz",
+            "/package/ch.fhir.ig.ch-term#3.3.0.tgz",
+            "/package/ch.fhir.ig.ch-core#6.0.0.tgz",
+            "/package/ch.fhir.ig.ch-emed#6.0.0.tgz",
+            "/package/ch.fhir.ig.ch-emed-epr#3.0.0.tgz",
+            "/package/ch.fhir.ig.ch-epr-fhir#5.0.0.tgz",
+            "/package/ihe.iti.mhd#4.2.3.tgz"
             );
 
     /**

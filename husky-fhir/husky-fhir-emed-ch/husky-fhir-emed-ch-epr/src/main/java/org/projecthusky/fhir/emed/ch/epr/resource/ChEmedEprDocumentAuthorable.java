@@ -2,14 +2,12 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 /**
  * Interface defining common methods for all the resources having an authorDocument element.
@@ -52,7 +50,7 @@ public interface ChEmedEprDocumentAuthorable<T> {
      * @return this.
      */
     default T  setAuthorDocument(final Author author) {
-        return setAuthorDocument(References.createAuthorReference(author));
+        return setAuthorDocument(author.getNewReference());
     }
 
     /**
@@ -77,11 +75,7 @@ public interface ChEmedEprDocumentAuthorable<T> {
         if (resource == null) return null;
 
         if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
-            final var author = new Author(getAuthorDocument().getResource());
-            org.hl7.fhir.r4.model.Extension extension =
-                    getAuthorDocument().getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
-            if (extension != null) author.setTime(((DateTimeType) extension.getValue()).getValueAsCalendar().toInstant());
-            return author;
+            return new Author(getAuthorDocument().getResource());
         }
         throw new InvalidEmedContentException("The last author of the original document is invalid");
     }

@@ -28,30 +28,30 @@
 		<opensaml.version>5.1.3</opensaml.version>
 		<ph-schematron.version>6.3.4</ph-schematron.version>
 		<org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
-		<apache-httpclient5>5.4.3</apache-httpclient5>
+		<apache-httpclient5>5.5.1</apache-httpclient5>
 		<apache-httpcore5>5.3.4</apache-httpcore5>
 		<junit.version>5.10.0</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>5.1.0</ipf.version>
+		<ipf.version>5.2-m1</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
-		<jaxb.version>4.0.5</jaxb.version>
-		<spring.version>6.2.10</spring.version>
-		<spring.boot.version>3.5.5</spring.boot.version>
-		<hapi.fhir.version>8.2.1</hapi.fhir.version>
+		<jaxb.version>4.0.6</jaxb.version>
+		<spring.version>6.2.12</spring.version>
+		<spring.boot.version>3.5.7</spring.boot.version>
+		<hapi.fhir.version>8.6.0</hapi.fhir.version>
 		<hapi.version>2.6.0</hapi.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel.version>4.10.6</camel.version>
+		<camel.version>4.14.2</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
-		<org.hl7.fhir.version>6.5.22</org.hl7.fhir.version>
+		<org.hl7.fhir.version>6.6.7</org.hl7.fhir.version>
 		<fasterxml.version>2.17.2</fasterxml.version>
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
 		<tomcat.embed.version>10.1.40</tomcat.embed.version>
-		<bouncycastle.version>1.79</bouncycastle.version>
+		<bouncycastle.version>1.83</bouncycastle.version>
 		<logback.version>1.5.16</logback.version>
 		<apache_poi_version>5.4.1</apache_poi_version>
 	</properties>
@@ -244,13 +244,13 @@
     			<artifactId>spring-boot-starter-web</artifactId>
     			<version>${spring.boot.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpmime</artifactId>
 				<version>4.5.14</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.apache.httpcomponents.client5</groupId>
 				<version>${apache-httpclient5}</version>
@@ -554,20 +554,6 @@
 			<!--
 
 			-->
-
-
-
-			<dependency>
-				<groupId>health.matchbox</groupId>
-				<artifactId>matchbox-engine</artifactId>
-				<version>4.0.2</version>
-				<exclusions>
-					<exclusion>
-						<groupId>ca.uhn.hapi</groupId>
-						<artifactId>hapi-base</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
 
 			<!-- Tomcat Embed section -->
 			<!--<dependency>

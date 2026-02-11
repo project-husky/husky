@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="2-3-MedicationTreatmentPlan"/>
+  <meta>
+    <lastUpdated value="2020-03-09T12:31:59.738+00:00"/>
+    <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:56c82cf2-123e-4401-80a4-28a5dd059979"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2012-02-04T14:00:00+01:00"/>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Composition/2-3-Composition"/>
+    <resource>
+      <Composition>
+        <id value="2-3-Composition"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-composition-medicationtreatmentplan"/>
+        </meta>
+        <language value="de-CH"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><a name="Composition_2-3-Composition"> </a><p class="res-header-id"><b>Generated Narrative: Composition 2-3-Composition</b></p><a name="2-3-Composition"> </a><a name="hc2-3-Composition"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-medicationtreatmentplan.html">CH EMED Medication Treatment Plan Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.5.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:56c82cf2-123e-4401-80a4-28a5dd059979</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://loinc.org 77603-9}, {http://snomed.info/sct 761931002}">Medication treatment plan.extended Document</span></p><p><b>date</b>: 2012-02-04 14:00:00+0100</p><p><b>author</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>title</b>: Therapieentscheid Medikation</p><p><b>confidentiality</b>: normal</p></div>
+        </text>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:56c82cf2-123e-4401-80a4-28a5dd059979"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="77603-9"/>
+            <display value="Medication treatment plan.extended Document"/>
+          </coding>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="761931002"/>
+            <display value="Medication treatment plan report (record artifact)"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <date value="2012-02-04T14:00:00+01:00"/>
+        <author>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </author>
+        <title value="Therapieentscheid Medikation"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normal (qualifier value)"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <section>
+          <title value="Medikamentöser Behandlungsplan"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="77604-7"/>
+              <display value="Medication treatment plan.brief Document"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><table><thead><tr><th>Präpartename</th><th>Wirkstoffname</th><th>Galenische Form</th><th>Dosis pro Einheit</th><th>Dos.Morgen</th><th>Dos.Mittag</th><th>Dos.Abend</th><th>Dos.Nacht</th><th>Verabreichungsweg</th><th>Kommentar</th><th>Anwendungsdauer</th><th>Behandlungsgrund</th></tr></thead><tbody><tr id="mtp.1"><td id="mtp.1.brandedmedication">Beloc Zok</td><td id="mtp.1.ingredient">Metoprolol</td><td id="mtp.1.packageform">Ret Tbl</td><td id="mtp.1.dosequantity">50 mg</td><td id="mtp.1.dosagemorning">1</td><td id="mtp.1.dosagelunch">0</td><td id="mtp.1.dosageevening">0.5</td><td id="mtp.1.dosagenight">0</td><td id="mtp.1.routecode">oral</td><td id="mtp.1.note"/><td id="mtp.1.datefromto"/><td id="mtp.1.reason">Bluthochdruck</td></tr></tbody></table></div>
+          </text>
+          <entry>
+            <reference value="MedicationStatement/2-3-MedStatBeloczok"/>
+          </entry>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Patient/MonikaWegmueller"/>
+    <resource>
+      <Patient>
+        <id value="MonikaWegmueller"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_MonikaWegmueller"> </a><p class="res-header-id"><b>Generated Narrative: Patient MonikaWegmueller</b></p><a name="MonikaWegmueller"> </a><a name="hcMonikaWegmueller"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="http://fhir.ch/ig/ch-core/6.0.0/StructureDefinition-ch-core-patient-epr.html">CH Core Patient EPR</a></p></div><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Ways to contact the Patient">Contact Detail</td><td colspan="3">Wiesenstr. 12 Zürich 8003 CH </td></tr></table></div>
+        </text>
+        <identifier>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.999.1"/>
+          <value value="11111111"/>
+        </identifier>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <gender value="female"/>
+        <birthDate value="1943-05-15"/>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/PractitionerRole/FamilienHausarztAtHausarzt"/>
+    <resource>
+      <PractitionerRole>
+        <id value="FamilienHausarztAtHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitionerrole"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="PractitionerRole_FamilienHausarztAtHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: PractitionerRole FamilienHausarztAtHausarzt</b></p><a name="FamilienHausarztAtHausarzt"> </a><a name="hcFamilienHausarztAtHausarzt"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-practitionerrole.html">CH EMED PractitionerRole</a></p></div><p><b>practitioner</b>: <a href="Practitioner-FamilienHausarzt.html">Practitioner Familien Hausarzt </a></p><p><b>organization</b>: <a href="Organization-Hausarzt.html">Organization Hausarzt</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="Practitioner/FamilienHausarzt"/>
+        </practitioner>
+        <organization>
+          <reference value="Organization/Hausarzt"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Practitioner/FamilienHausarzt"/>
+    <resource>
+      <Practitioner>
+        <id value="FamilienHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitioner"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Practitioner_FamilienHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Practitioner FamilienHausarzt</b></p><a name="FamilienHausarzt"> </a><a name="hcFamilienHausarzt"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-practitioner.html">CH EMED Practitioner</a></p></div><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Hausarzt"/>
+          <given value="Familien"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Organization/Hausarzt"/>
+    <resource>
+      <Organization>
+        <id value="Hausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_Hausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Organization Hausarzt</b></p><a name="Hausarzt"> </a><a name="hcHausarzt"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-organization.html">CH EMED Organization</a></p></div><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000618627</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000618627"/>
+        </identifier>
+        <name value="Hausarzt"/>
+        <address>
+          <line value="Krankenstrasse 2"/>
+          <city value="Zürich"/>
+          <postalCode value="8005"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/MedicationStatement/2-3-MedStatBeloczok"/>
+    <resource>
+      <MedicationStatement>
+        <id value="2-3-MedStatBeloczok"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationstatement"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="MedicationStatement_2-3-MedStatBeloczok"> </a><p class="res-header-id"><b>Generated Narrative: MedicationStatement 2-3-MedStatBeloczok</b></p><a name="2-3-MedStatBeloczok"> </a><a name="hc2-3-MedStatBeloczok"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-medicationstatement.html">CH EMED MedicationStatement</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.5.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:56c82cf2-123e-4401-80a4-28a5dd059979</p><p><b>status</b>: Active</p><p><b>medication</b>: <a href="#hc2-3-MedStatBeloczok/Beloczok">Medication BELOC ZOK Ret Tabl 50 mg 30 Stk</a></p><p><b>subject</b>: <a href="Patient-MonikaWegmueller.html">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</a></p><p><b>dateAsserted</b>: 2012-02-04 14:00:00+0100</p><p><b>informationSource</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>reasonCode</b>: <span title="Codes:">Bluthochdruck</span></p><blockquote><p><b>dosage</b></p><p><b>sequence</b>: 1</p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Morning, Once</p><p><b>route</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 20053000}">zum Einnehmen</span></p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><blockquote><p><b>dosage</b></p><p><b>sequence</b>: 2</p><p><b>timing</b>: Evening, Once</p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>0.5 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><hr/><blockquote><p class="res-header-id"><b>Generated Narrative: Medication #Beloczok</b></p><a name="2-3-MedStatBeloczok/Beloczok"> </a><a name="hc2-3-MedStatBeloczok/Beloczok"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px"/><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-medication.html">CH EMED Medication</a></p></div><p><b>code</b>: <span title="Codes:{urn:oid:2.51.1.1 7680521101306}">BELOC ZOK Ret Tabl 50 mg</span></p><p><b>form</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 10219000}">Tablette</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td><span title="Codes:{http://snomed.info/sct 372826007}">Metoprolol</span></td><td>50 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM  codemg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="Beloczok"/>
+            <meta>
+              <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medication"/>
+            </meta>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680521101306"/>
+                <display value="BELOC ZOK Ret Tabl 50 mg 30 Stk"/>
+              </coding>
+              <text value="BELOC ZOK Ret Tabl 50 mg"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10219000"/>
+                <display value="Tablet"/>
+              </coding>
+              <text value="Tablette"/>
+            </form>
+            <amount>
+              <numerator>
+                <value value="20"/>
+                <unit value="Tablet (unit of presentation)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="Package - unit of product usage (qualifier value)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="1681000175101"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="372826007"/>
+                  <display value="Metoprolol (substance)"/>
+                </coding>
+                <text value="Metoprolol"/>
+              </itemCodeableConcept>
+              <strength>
+                <numerator>
+                  <value value="50"/>
+                  <unit value="milligram"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="mg"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="Tablet (unit of presentation)"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:56c82cf2-123e-4401-80a4-28a5dd059979"/>
+        </identifier>
+        <status value="active"/>
+        <medicationReference>
+          <reference value="#Beloczok"/>
+        </medicationReference>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <dateAsserted value="2012-02-04T14:00:00+01:00"/>
+        <informationSource>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </informationSource>
+        <reasonCode>
+          <text value="Bluthochdruck"/>
+        </reasonCode>
+        <dosage>
+          <sequence value="1"/>
+          <patientInstruction value="-"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2012-02-04"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+            <text value="zum Einnehmen"/>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="1"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+        <dosage>
+          <sequence value="2"/>
+          <timing>
+            <repeat>
+              <when value="EVE"/>
+            </repeat>
+          </timing>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="0.5"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+      </MedicationStatement>
+    </resource>
+  </entry>
+</Bundle>

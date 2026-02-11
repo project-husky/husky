@@ -12,7 +12,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocumentAuthorable;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
 
@@ -159,7 +158,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final Author performer) {
-        final var reference = References.createAuthorReference(performer);
+        final var reference = performer.getNewReference();
         if (getPerformer().isEmpty()) {
             addPerformer(reference);
         } else {

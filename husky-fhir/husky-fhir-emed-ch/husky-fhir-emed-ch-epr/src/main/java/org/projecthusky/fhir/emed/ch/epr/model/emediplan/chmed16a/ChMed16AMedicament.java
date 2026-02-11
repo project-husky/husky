@@ -120,6 +120,11 @@ public class ChMed16AMedicament extends EMediplanMedicament<ChMed16AExtension> i
         return extensions;
     }
 
+    public List<@NonNull ChMed16APosology> getPosology() {
+        if (posology == null) posology = new ArrayList<>();
+        return posology;
+    }
+
     /**
      * Convenience method to set the self-medication property using a boolean.
      */

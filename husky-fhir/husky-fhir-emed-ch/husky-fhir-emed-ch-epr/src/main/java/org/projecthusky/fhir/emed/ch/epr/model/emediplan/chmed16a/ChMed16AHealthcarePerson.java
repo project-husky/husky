@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -53,6 +54,7 @@ public class ChMed16AHealthcarePerson extends EMediplanHealthcarePerson {
         return LAST_NAME_FIELD_NAME;
     }
 
+    @JsonIgnore
     public @Nullable String getZsrFieldName() {
         return ZSR_FIELD_NAME;
     }

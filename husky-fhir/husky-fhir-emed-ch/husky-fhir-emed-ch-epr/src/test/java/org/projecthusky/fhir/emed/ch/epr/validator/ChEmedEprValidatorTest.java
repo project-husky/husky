@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for {@link ChEmedEprMatchboxValidator}.
+ * Tests for {@link ChEmedEprValidator} implementations.
  *
  * @author Quentin Ligier
  **/
@@ -24,13 +24,6 @@ class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
     @Test
-    void validateDocumentBundleWithMatchbox() throws IOException, URISyntaxException, EOperationOutcome {
-        final var ctx = FhirContext.forR4Cached();
-        final var validator = new ChEmedEprMatchboxValidator("https://tx.fhir.org/");
-        performValidate(ctx, validator);
-    }
-
-    @Test //@Disabled("Current fhir core version in the project, aligned with Matchbox', is newer than HAPI FHIR's, it is incompatible and will make this test fail.")
     void validateDocumentBundleWithHapi() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprHapiValidator(ctx);
@@ -40,10 +33,10 @@ class ChEmedEprValidatorTest {
     private void performValidate(final FhirContext ctx, final ChEmedEprValidator validator) throws IOException, EOperationOutcome {
         final var parser = new ChEmedEprParser(ctx);
 
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
         final var mtpDocument = parser.parse(xml, EmedDocumentType.MTP);
         ValidationResult results = validator.validateDocumentBundle(getClass().getResourceAsStream(
-                "/Bundle-1-1-MedicationTreatmentPlan.xml"), mtpDocument, Manager.FhirFormat.XML);
+                "/examples/ch-emed/Bundle-1-1-MedicationTreatmentPlan.xml"), mtpDocument, Manager.FhirFormat.XML);
 
         for (final var message : results.getIssues()) {
             log.info(String.format("[%s][%s] %s", message.getSeverity().name(), message.getType().name(),
@@ -52,9 +45,53 @@ class ChEmedEprValidatorTest {
 
         assertTrue(results.isSuccessful());
         final var preDocument = parser.parse(xml, EmedDocumentType.PRE);
-        results = validator.validateDocumentBundle(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml"),
+        results = validator.validateDocumentBundle(getClass().getResourceAsStream("/examples/ch-emed/Bundle-1-1-MedicationTreatmentPlan.xml"),
                 preDocument,
                 Manager.FhirFormat.XML);
         assertFalse(results.isSuccessful());
+    }
+
+    /**
+     * Note that Bundle-2-6-MedicationPrescription cannot pass CH EMED EPR validation because it contains an E
+     * substitution code, which is not allowed by CH EMED EPR (CH EMED EPR mandates that this is not filled or if filled
+     * it is filled to indicate N).
+     * @throws IOException
+     */
+    @Test
+    void validatePreDocumentBundleWithHapi() throws IOException {
+        final var ctx = FhirContext.forR4Cached();
+        final var validator = new ChEmedEprHapiValidator(ctx);
+        final var parser = new ChEmedEprParser(ctx);
+
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
+        final var doc = parser.parse(xml, EmedDocumentType.PRE);
+        ValidationResult results = validator.validateDocumentBundle(getClass().getResourceAsStream(
+                "/examples/ch-emed-epr/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml"), doc, Manager.FhirFormat.XML);
+
+        for (final var message : results.getIssues()) {
+            log.info(String.format("[%s][%s] %s", message.getSeverity().name(), message.getType().name(),
+                    message.getMessage()));
+        }
+
+        assertTrue(results.isSuccessful());
+    }
+
+    @Test
+    void validateDisDocumentBundleWithHapi() throws IOException {
+        final var ctx = FhirContext.forR4Cached();
+        final var validator = new ChEmedEprHapiValidator(ctx);
+        final var parser = new ChEmedEprParser(ctx);
+
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-1-2-MedicationDispense.xml").readAllBytes());
+        final var doc = parser.parse(xml, EmedDocumentType.DIS);
+        ValidationResult results = validator.validateDocumentBundle(getClass().getResourceAsStream(
+                "/examples/ch-emed/Bundle-1-2-MedicationDispense.xml"), doc, Manager.FhirFormat.XML);
+
+        for (final var message : results.getIssues()) {
+            log.info(String.format("[%s][%s] %s", message.getSeverity().name(), message.getType().name(),
+                    message.getMessage()));
+        }
+
+        assertTrue(results.isSuccessful());
     }
 }

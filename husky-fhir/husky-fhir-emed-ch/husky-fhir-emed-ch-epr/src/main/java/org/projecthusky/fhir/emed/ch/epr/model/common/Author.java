@@ -12,8 +12,10 @@ package org.projecthusky.fhir.emed.ch.epr.model.common;
 
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IAnyResource;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.epr.resource.*;
 
 import java.time.Instant;
@@ -80,6 +82,14 @@ public class Author {
     public Author(final IBaseResource resource, @Nullable Instant time) {
         this(resource);
         this.time = time;
+    }
+
+    /**
+     * Creates a reference to an author.
+     * @return The created reference to the author.
+     */
+    public Reference getNewReference() {
+        return new Reference((IAnyResource) getFirstNonNull());
     }
 
     /**

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ChMed16AConverterTest {
     @Test
     void convertAndValidateMedicationCard() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-7-MedicationCard-UUIDfullUrl.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed/Bundle-2-7-MedicationCard-UUIDfullUrl.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PMLC);
         assertInstanceOf(ChEmedEprDocumentPmlc.class, document);
@@ -40,7 +40,7 @@ public class ChMed16AConverterTest {
 
     @Test
     void convertAndValidatePrescription() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PRE);
         assertInstanceOf(ChEmedEprDocumentPre.class, document);

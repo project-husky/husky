@@ -60,7 +60,7 @@ public class ChCorePatient extends Patient implements ChCoreContactPointCarrier 
 	 * Extension for a placeOfOrigin.
 	 */
 	@Nullable
-	@Child(name = "placeOfOrigin", min = 0, max = 1)
+	@Child(name = "placeOfOrigin", min = 0, max = Child.MAX_UNLIMITED)
 	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-ech-11-placeoforigin", definedLocally = false)
 	protected List<CHCoreAddressECH11PlaceOfOrigin> placeOfOrigin;
 
@@ -68,7 +68,7 @@ public class ChCorePatient extends Patient implements ChCoreContactPointCarrier 
 	 * Extension for a citizenship.
 	 */
 	@Nullable
-	@Child(name = "citizenship", min = 0, max = 1)
+	@Child(name = "citizenship", min = 0, max = Child.MAX_UNLIMITED)
 	@Extension(url = "http://hl7.org/fhir/StructureDefinition/patient-citizenship", definedLocally = false)
 	protected List<ChCoreCitizenshipExt> citizenship;
 

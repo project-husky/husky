@@ -11,8 +11,6 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Block;
-import ca.uhn.fhir.model.api.annotation.Child;
-import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
@@ -46,14 +44,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
     public static final String CARD_SECTION_CODE_VALUE = "10160-0";
     public static final String ANNOTATION_SECTION_CODE_VALUE = "48767-8";
     public static final String VITAL_SIGNS_SECTION_CODE_VALUE = "29463-7";
-
-    /**
-     * Version number
-     */
-    @Nullable
-    @Child(name = "versionNumber")
-    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber", definedLocally = false)
-    protected UnsignedIntType versionNumber;
 
     /**
      * Empty constructor for the parser.
@@ -184,54 +174,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
             }
         }
         throw new InvalidEmedContentException("The composition has no human author");
-    }
-
-    /**
-     * Gets the version number element.
-     *
-     * @return the version number element.
-     */
-    public UnsignedIntType getVersionNumberElement() {
-        if (this.versionNumber == null) {
-            this.versionNumber = new UnsignedIntType();
-        }
-        return this.versionNumber;
-    }
-
-    /**
-     * Sets the version number element.
-     *
-     * @param versionNumber the version number element.
-     * @return this.
-     */
-    public ChEmedEprComposition setVersionNumberElement(final UnsignedIntType versionNumber) {
-        if (versionNumber.hasValue() && versionNumber.getValue() < 0) {
-            throw new IllegalArgumentException("The version number shall be positive or zero");
-        }
-        this.versionNumber = versionNumber;
-        return this;
-    }
-
-    /**
-     * Gets the version number.
-     *
-     * @return the version number.
-     */
-    public int getVersionNumber() {
-        return this.versionNumber == null || this.versionNumber.isEmpty() ? 0 : this.versionNumber.getValue();
-    }
-
-    /**
-     * Sets the version number.
-     *
-     * @param value the version number.
-     * @return this.
-     */
-    public ChEmedEprComposition setVersionNumber(int value) {
-        if (this.versionNumber == null)
-            this.versionNumber = new UnsignedIntType();
-        this.versionNumber.setValue(value);
-        return this;
     }
 
     /**
@@ -386,32 +328,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
     }
 
     /**
-     * Returns whether the version number.
-     *
-     * @return {@code true} if the version exists, {@code false} otherwise.
-     */
-    public boolean hasVersionNumber() {
-        return this.versionNumber != null && !this.versionNumber.isEmpty();
-    }
-
-    /**
-     * Returns whether the list of recipients of this document.
-     *
-     * @return {@code true} if the list of recipients of this document exists, {@code false} otherwise.
-     */
-    public boolean hasInformationRecipient() {
-        if (this.informationRecipient == null) {
-            return false;
-        }
-        for (final var item : this.informationRecipient) {
-            if (!item.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns whether the original representation section exists.
      *
      * @return {@code true} if the original representation section exists, {@code false} otherwise.
@@ -443,29 +359,6 @@ public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
                 .map(BaseReference::getResource)
                 .map(Observation.class::cast)
                 .orElse(null);
-    }
-
-    /**
-     * Returns whether the person who entered information into this document.
-     *
-     * @return {@code true} if the person who entered information into this document exists, {@code false} otherwise.
-     */
-    public boolean hasDataEnterer() {
-        return this.dataEnterer != null && this.dataEnterer.hasEnterer();
-    }
-
-    @Override
-    public void copyValues(final Composition dst) {
-        super.copyValues(dst);
-        if (dst instanceof final ChEmedEprComposition als) {
-            als.versionNumber = versionNumber == null ? null : versionNumber.copy();
-            als.dataEnterer = dataEnterer == null ? null : dataEnterer.copy();
-            if (informationRecipient != null) {
-                als.informationRecipient = new ArrayList<>();
-                for (final var i : informationRecipient)
-                    als.informationRecipient.add(i.copy());
-            }
-        }
     }
 
     /**
