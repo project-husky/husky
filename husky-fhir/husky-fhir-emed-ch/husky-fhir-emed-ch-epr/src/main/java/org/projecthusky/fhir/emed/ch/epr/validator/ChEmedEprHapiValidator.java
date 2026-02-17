@@ -94,7 +94,7 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
                                                    final Manager.FhirFormat streamFormat)
             throws IOException {
         final var validationOptions = new ValidationOptions();
-        validationOptions.addProfile(ChEmedEprValidator.getProfileUrl(document.getEmedType()));
+        validationOptions.addProfile(document.getEmedType().getProfileEpr());
         final var result =
                 validator.validateWithResult(new String(documentStream.readAllBytes(), StandardCharsets.UTF_8), validationOptions);
         handleValidationResult(result);
