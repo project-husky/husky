@@ -10,7 +10,7 @@
  */
 package org.projecthusky.communication.xdsmhdconversion.converters;
 
-import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.param.BaseParam;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 import ca.uhn.fhir.rest.param.TokenOrListParam;
 import ca.uhn.fhir.rest.param.TokenParam;
@@ -44,12 +44,12 @@ import java.util.stream.Collectors;
 public class ChPharm5RequestConverter {
     /**
      * Converts a PHARM-5 parameters object to a {@link ChPharmacyDocumentsQuery}.
-     *
+     * <p>
      * NOTE: CH EPR FHIR specifies that MHD transactions must use the EPR-SPID as patient.identifier, while for the XDS
      * transactions, the XAD-PID must be used. This converter does not perform any check on the patient.identifier
      * system and will be set as-is, any further checks and transformations should be done by the caller as
      * post-converter-processing.
-     * <p>
+     * </p><p>
      * NOTE: identifier param is ignored
      * </p>
      *
@@ -74,12 +74,12 @@ public class ChPharm5RequestConverter {
 
     /**
      * Converts a {@link ChPharm5FindMedicationCardSearchParameters} parameters object to a {@link ChPharmacyDocumentsQuery}.
-     *
+     * <p>
      * NOTE: CH EPR FHIR specifies that MHD transactions must use the EPR-SPID as patient.identifier, while for the XDS
      * transactions, the XAD-PID must be used. This converter does not perform any check on the patient.identifier
      * system and will be set as-is, any further checks and transformations should be done by the caller as
      * post-converter-processing.
-     * <p>
+     * </p><p>
      * NOTE: identifier param is ignored
      * </p>
      *
@@ -98,15 +98,15 @@ public class ChPharm5RequestConverter {
         if (searchParameters.getLanguage() != null)
             query.setLanguageCode(
                     searchParameters.getLanguage().getValuesAsQueryTokens().stream()
-                            .map(tokenParam -> tokenParam.getValueAsQueryToken(searchParameters.getFhirContext()))
+                            .map(BaseParam::getValueAsQueryToken)
                             .collect(Collectors.joining(","))
             );
 
         if (searchParameters.getIncludeNonActive() != null) {
-            query.setIncludeNonActive("true".equals(searchParameters.getIncludeNonActive().getValueAsQueryToken(searchParameters.getFhirContext())));
+            query.setIncludeNonActive("true".equals(searchParameters.getIncludeNonActive().getValueAsQueryToken()));
         }
 
-        query.setPaperFormat(parsePaperFormat(searchParameters.getPaperFormat(), searchParameters.getFhirContext()));
+        query.setPaperFormat(parsePaperFormat(searchParameters.getPaperFormat()));
 
         return query;
     }
@@ -272,10 +272,9 @@ public class ChPharm5RequestConverter {
     /**
      * Parses the paper format returning the resulting {@link Code} translation.
      * @param param       The paper format as received in the CH:PHARM-5 query.
-     * @param fhirContext The FHIR context.
      * @return The parsed paper format code.
      */
-    protected static @Nullable Code parsePaperFormat(final @Nullable TokenParam param, final FhirContext fhirContext) {
+    protected static @Nullable Code parsePaperFormat(final @Nullable TokenParam param) {
         if (param == null) return null;
         return new Code(param.getValue(), null, param.getSystem());
     }

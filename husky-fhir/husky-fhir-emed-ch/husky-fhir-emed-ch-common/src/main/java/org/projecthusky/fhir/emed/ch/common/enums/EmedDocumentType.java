@@ -10,6 +10,8 @@
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
+import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.communication.ch.enums.stable.ClassCode;
 import org.projecthusky.communication.ch.enums.stable.FormatCode;
 import org.projecthusky.communication.ch.enums.stable.TypeCode;
@@ -17,10 +19,11 @@ import org.projecthusky.communication.ch.enums.stable.TypeCode;
 import java.util.Objects;
 
 /**
- * Enumeration of the different kind of eMedication documents (CDA or FHIR).
+ * Enumeration of the different kind of eMedication documents (FHIR).
  *
  * @author Quentin Ligier
  */
+@Getter
 public enum EmedDocumentType {
 
     MTP(
@@ -28,42 +31,48 @@ public enum EmedDocumentType {
             TypeCode.MEDICATION_TREATMENT_PLAN,
             ClassCode.CARE_PLAN,
             FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan"
     ),
     PRE(
             "PRE",
             TypeCode.MEDICAL_PRESCRIPTION_RECORD,
             ClassCode.PRESCRIPTION,
             FormatCode.CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription"
     ),
     DIS(
             "DIS",
             TypeCode.MEDICATION_DISPENSE,
             ClassCode.EVENT_REPORT,
             FormatCode.CH_EMED_MEDICATION_DISPENSE_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationdispense"
     ),
     PADV(
             "PADV",
             TypeCode.RECORD_ARTIFACT,
             ClassCode.PRESCRIPTION,
             FormatCode.CH_EMED_PHARMACEUTICAL_ADVICE_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice"
     ),
     PML(
             "PML",
             TypeCode.MEDICATION_LIST,
             ClassCode.SUMMARY,
             FormatCode.CH_EMED_MEDICATION_LIST_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist"
     ),
     PMLC(
             "PMLC",
             TypeCode.MEDICATION_CARD_DOCUMENT,
             ClassCode.SUMMARY,
             FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
-            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard"
+            "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard",
+            "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationcard"
     );
 
 
@@ -88,54 +97,50 @@ public enum EmedDocumentType {
     private final FormatCode formatCode;
 
     /**
-     * The FHIR profile URN.
+     * The CH EMED FHIR profile URN.
      */
     private final String profile;
+
+    /**
+     * The CH EMED EPR FHIR profile URN
+     */
+    private final String profileEpr;
 
     EmedDocumentType(final String name,
                      final TypeCode typeCode,
                      final ClassCode classCode,
                      final FormatCode formatCode,
-                     final String profile) {
+                     final String profile,
+                     final String profileEpr) {
         this.name = Objects.requireNonNull(name);
         this.typeCode = Objects.requireNonNull(typeCode);
         this.classCode = Objects.requireNonNull(classCode);
         this.formatCode = Objects.requireNonNull(formatCode);
         this.profile = Objects.requireNonNull(profile);
+        this.profileEpr = Objects.requireNonNull(profileEpr);
     }
 
     /**
-     * Returns the name.
+     * Convenience method that gets the corresponding {@link EmedDocumentType} for the received profile URL. The profile
+     * URL can be either a CH EMED or a CH EMED EPR document profile URL.
+     * <p>
+     *     If the URL does not match either a  CH EMED or CH EMED EPR document bundle profile URL, the method returns
+     *     {@code null}
+     * </p>
+     * <p>
+     *     Note that this method does not handle pinned URLs, it expects versionless URLs.
+     * </p>
+     * @param profileUrl The string containing a URL profile, expected to be either a CH EMED or a CH EMED EPR document
+     *                   bundle profile URL.
+     * @return The corresponding {@link EmedDocumentType} if the profile matches either its CH EMED or its CH EMED EPR
+     *         official URL; {@code null} otherwise.
      */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Returns the type code.
-     */
-    public TypeCode getTypeCode() {
-        return this.typeCode;
-    }
-
-    /**
-     * Returns the class code.
-     */
-    public ClassCode getClassCode() {
-        return this.classCode;
-    }
-
-    /**
-     * Returns the format code.
-     */
-    public FormatCode getFormatCode() {
-        return this.formatCode;
-    }
-
-    /**
-     * Returns the FHIR profile URN.
-     */
-    public String getProfile() {
-        return this.profile;
+    public static @Nullable EmedDocumentType fromProfileUrl(final String profileUrl) {
+        Objects.requireNonNull(profileUrl, "The profile URL cannot be null.");
+        for (EmedDocumentType type : EmedDocumentType.values()) {
+            if (type.getProfile().equals(profileUrl)) return type;
+            if (type.getProfileEpr().equals(profileUrl)) return type;
+        }
+        return null;
     }
 }
