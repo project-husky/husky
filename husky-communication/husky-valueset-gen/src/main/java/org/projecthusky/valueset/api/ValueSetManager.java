@@ -78,6 +78,8 @@ import org.xml.sax.SAXException;
 import com.jayway.jsonpath.JsonPath;
 
 import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
 
 /**
  *
@@ -156,7 +158,31 @@ public class ValueSetManager {
 				downloadedString = downloadedString.replace("\r\n", "\n");
 				switch (valueSetConfig.getSourceFormatType()) {
 				case JSON:
-					retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
+					JSONObject wrapper = (JSONObject) JSONValue.parse(downloadedString);
+					// 2. Check for the "repository" key
+					if (wrapper != null && wrapper.containsKey("repository")) {
+						JSONArray repoArray = (JSONArray) wrapper.get("repository");
+						
+						if (!repoArray.isEmpty()) {
+							JSONObject firstRepo = (JSONObject) repoArray.get(0);
+							JSONArray vsArray = (JSONArray) firstRepo.get("valueSet");
+							
+							if (vsArray != null && !vsArray.isEmpty()) {
+								// Get the first (newest) ValueSet entry
+								JSONObject valueSetObj = (JSONObject) vsArray.get(0);
+								JSONArray wrappedArray = new JSONArray();
+								wrappedArray.add(valueSetObj);
+								
+								JSONObject rootWrapper = new JSONObject();
+								rootWrapper.put("valueSet", wrappedArray);
+								
+								retVal = this.loadValueSetJson(IOUtils.toInputStream(rootWrapper.toJSONString(), StandardCharsets.UTF_8));
+							}
+						}
+					} else {
+					// Fallback: if "repository" isn't there, try parsing the whole thing as a FHIR resource
+					retVal = this.loadValueSetJson(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
+					}
 					break;
 				case XML:
 					retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
