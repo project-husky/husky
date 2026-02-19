@@ -159,23 +159,30 @@ public class ValueSetManager {
 				switch (valueSetConfig.getSourceFormatType()) {
 				case JSON:
 					JSONObject wrapper = (JSONObject) JSONValue.parse(downloadedString);
-					// 2. Check for the "repository" key
 					if (wrapper != null && wrapper.containsKey("repository")) {
 						JSONArray repoArray = (JSONArray) wrapper.get("repository");
-						
 						if (!repoArray.isEmpty()) {
 							JSONObject firstRepo = (JSONObject) repoArray.get(0);
 							JSONArray vsArray = (JSONArray) firstRepo.get("valueSet");
-							
 							if (vsArray != null && !vsArray.isEmpty()) {
-								// Get the first (newest) ValueSet entry
 								JSONObject valueSetObj = (JSONObject) vsArray.get(0);
 								JSONArray wrappedArray = new JSONArray();
 								wrappedArray.add(valueSetObj);
-								
+								// Wrap it in the format loadValueSetJson expects
 								JSONObject rootWrapper = new JSONObject();
 								rootWrapper.put("valueSet", wrappedArray);
-								
+								retVal = this.loadValueSetJson(IOUtils.toInputStream(rootWrapper.toJSONString(), StandardCharsets.UTF_8));
+							}
+						}
+					} else if (wrapper.containsKey("project")) {
+						JSONArray projectArray = (JSONArray) wrapper.get("project");
+						if (!projectArray.isEmpty()) {
+							JSONObject firstProject = (JSONObject) projectArray.get(0);
+							JSONArray vsArray = (JSONArray) firstProject.get("valueSet");
+							if (vsArray != null && !vsArray.isEmpty()) {
+								// Wrap it in the format loadValueSetJson expects
+								JSONObject rootWrapper = new JSONObject();
+								rootWrapper.put("valueSet", vsArray); 
 								retVal = this.loadValueSetJson(IOUtils.toInputStream(rootWrapper.toJSONString(), StandardCharsets.UTF_8));
 							}
 						}
