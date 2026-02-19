@@ -11,11 +11,9 @@ package org.projecthusky.cda.elga.generated.artdecor;
 
 import java.util.List;
 import java.util.UUID;
-
 import javax.annotation.processing.Generated;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
-import org.projecthusky.common.hl7cdar2.CS;
+import org.projecthusky.common.hl7cdar2.CD;
 import org.projecthusky.common.hl7cdar2.II;
 import org.projecthusky.common.hl7cdar2.INT;
 import org.projecthusky.common.hl7cdar2.ObjectFactory;
@@ -23,14 +21,16 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * eimpf_document_KompletterImmunisierungsstatus
- * 
+ * <p>
  * Identifier: 1.2.40.0.34.6.0.11.0.4<br>
- * Effective date: 2022-01-25 12:13:30<br>
- * Version: 1.3.0+20220127<br>
+ * Effective date: 2025-03-17 09:23:13<br>
+ * Version: 2.0.1+20250320<br>
  * Status: active
+ * <p>
+ * Generated from the ArtDecor <a href="https://art-decor.org/art-decor/decor-templates--elgaimpf-?id=1.2.40.0.34.6.0.11.0.4&amp;effectiveTime=2025-03-17+09%3A23%3A13">eimpf_document_KompletterImmunisierungsstatus</a> page.
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-18")
+@Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2026-02-19")
 public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040ClinicalDocument {
 
     public EimpfDocumentKompletterImmunisierungsstatus() {
@@ -38,11 +38,12 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
         super.getMoodCode().add("EVN");
         super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3",
                                                   "POCD_HD000040"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1", null));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19", null));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.4", null));
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019",
-                                                                "1.2.40.0.34.6.0.11.0.4.1"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19.2"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.4",
+                                                                "XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.4.1",
+                                                                null));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2",
                                                                 null));
         super.setCode(createHl7CodeFixedValue("11369-6",
@@ -51,7 +52,6 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
                                               "HISTORY OF IMMUNIZATIONS"));
         super.setComponent(createHl7ComponentFixedValue("COMP",
                                                         "true"));
-		super.setLanguageCode(createHl7RealmCodeFixedValue("de-AT"));
     }
 
     /**
@@ -68,17 +68,6 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
         retVal.setDisplayName(displayName);
         return retVal;
     }
-
-	/**
-	 * Creates fixed contents for CDA Element hl7realmCode
-	 *
-	 * @param code the desired fixed value for this argument.
-	 */
-	private static org.projecthusky.common.hl7cdar2.CS createHl7RealmCodeFixedValue(String code) {
-		org.projecthusky.common.hl7cdar2.CS retVal = new CS();
-		retVal.setCode(code);
-		return retVal;
-	}
 
     /**
      * Creates fixed contents for CDA Element hl7Component
@@ -121,6 +110,17 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
         org.projecthusky.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory.createPOCDMT000040InfrastructureRootTypeId();
         retVal.setRoot(root);
         retVal.setExtension(extension);
+        return retVal;
+    }
+
+    /**
+     * Creates fixed contents for CDA Element hl7atFormatCode
+     *
+     * @param codeSystemName the desired fixed value for this argument.
+     */
+    private static org.projecthusky.common.hl7cdar2.CD createHl7atFormatCodeFixedValue(String codeSystemName) {
+        org.projecthusky.common.hl7cdar2.CD retVal = new org.projecthusky.common.hl7cdar2.CD();
+        retVal.setCodeSystemName(codeSystemName);
         return retVal;
     }
 
@@ -183,7 +183,7 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
     /**
      * Gets the hl7LanguageCode
      */
-	public CS getHl7LanguageCode() {
+    public org.projecthusky.common.hl7cdar2.CS getHl7LanguageCode() {
         return languageCode;
     }
 
@@ -241,6 +241,45 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
      */
     public org.projecthusky.common.hl7cdar2.INT getHl7VersionNumber() {
         return versionNumber;
+    }
+
+    /**
+     * Gets the hl7atFormatCode
+     */
+    public org.projecthusky.common.hl7cdar2.CD getHl7atFormatCode() {
+        return this;
+    }
+
+    /**
+     * Gets the hl7atPracticeSettingCode
+     */
+    public org.projecthusky.common.hl7cdar2.CD getHl7atPracticeSettingCode() {
+        return this;
+    }
+
+    /**
+     * Gets the hl7atTerminologyDate
+     */
+    public org.projecthusky.common.hl7cdar2.TS getHl7atTerminologyDate() {
+        return this;
+    }
+
+    /**
+     * Adds a predefined org.projecthusky.common.hl7cdar2.II, filled by: "1.2.40.0.34.6.0.11.0.4.1", null
+     * @return the predefined element.
+     */
+    public static org.projecthusky.common.hl7cdar2.II getPredefinedTemplateId12400346011041Null() {
+        return createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.4.1",
+                                             null);
+    }
+
+    /**
+     * Adds a predefined org.projecthusky.common.hl7cdar2.II, filled by: "1.2.40.0.34.6.0.11.0.4", "XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019"
+     * @return the predefined element.
+     */
+    public static org.projecthusky.common.hl7cdar2.II getPredefinedTemplateId1240034601104XdsdocumentEntryFormatCodeUrnHl7AtEImpf2019() {
+        return createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.4",
+                                             "XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019");
     }
 
     /**
@@ -339,7 +378,7 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
     /**
      * Sets the hl7LanguageCode
      */
-	public void setHl7LanguageCode(CS value) {
+    public void setHl7LanguageCode(org.projecthusky.common.hl7cdar2.CS value) {
         this.languageCode = value;
     }
 
@@ -401,6 +440,27 @@ public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040Cli
      */
     public void setHl7VersionNumber(org.projecthusky.common.hl7cdar2.INT value) {
         this.versionNumber = value;
+    }
+
+    /**
+     * Sets the hl7atFormatCode
+     */
+    public void setHl7atFormatCode(org.projecthusky.common.hl7cdar2.CD value) {
+        // TODO: NYI
+    }
+
+    /**
+     * Sets the hl7atPracticeSettingCode
+     */
+    public void setHl7atPracticeSettingCode(org.projecthusky.common.hl7cdar2.CD value) {
+        // TODO: NYI
+    }
+
+    /**
+     * Sets the hl7atTerminologyDate
+     */
+    public void setHl7atTerminologyDate(org.projecthusky.common.hl7cdar2.TS value) {
+        // TODO: NYI
     }
 
     /**
