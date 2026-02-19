@@ -3,8 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.hl7.fhir.r5.elementmodel.Manager;
-import org.hl7.fhir.r5.utils.EOperationOutcome;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -39,14 +37,12 @@ public interface ChEmedEprValidator {
      *
      * @param documentStream The document Bundle to validate as a stream.
      * @param document       The parsed CH EMED EPR document, for the logic validator.
-     * @param streamFormat   The FHIR format of the document stream content.
      * @return the validation result.
      * @implNote We need the parsed document for the logical validator and the serialized document for the instance
      * validator, because HAPI's parser messes with resource IDs.
      */
     ValidationResult validateDocumentBundle(final InputStream documentStream,
-                                            final ChEmedEprDocument document,
-                                            final Manager.FhirFormat streamFormat) throws EOperationOutcome, IOException;
+                                            final ChEmedEprDocument document) throws IOException;
 
     /**
      * Validates a CH-EMED-EPR document Bundle. No logic validation is performed on the content.
@@ -57,7 +53,7 @@ public interface ChEmedEprValidator {
      */
     ValidationResult validateDocumentBundle(final Bundle bundle,
                                                    final String profile
-    ) throws EOperationOutcome, IOException;
+    ) throws IOException;
 
     /**
      * Maps an {@link OperationOutcome} issue to Husky's own model of a validation issue.

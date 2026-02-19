@@ -12,7 +12,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.common.hapi.validation.support.*;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.*;
-import org.hl7.fhir.r5.elementmodel.Manager;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
 
@@ -90,8 +89,7 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
 
     @Override
     public ValidationResult validateDocumentBundle(final InputStream documentStream,
-                                                   final ChEmedEprDocument document,
-                                                   final Manager.FhirFormat streamFormat)
+                                                   final ChEmedEprDocument document)
             throws IOException {
         final var validationOptions = new ValidationOptions();
         validationOptions.addProfile(document.getEmedType().getProfileEpr());
