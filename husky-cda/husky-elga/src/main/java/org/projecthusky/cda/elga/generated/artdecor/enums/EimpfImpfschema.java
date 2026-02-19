@@ -357,13 +357,13 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Hepatitis AB, Schnellschema.<br>
      */
-    HEPATITIS_AB_SCHNELLSCHEMA("SCHEMA258",
-                               "1.2.40.0.34.5.183",
-                               "Hepatitis AB, Schnellschema",
-                               "Hepatitis AB, Schnellschema",
-                               "TOTRANSLATE",
-                               "TOTRANSLATE",
-                               "TOTRANSLATE"),
+    // HEPATITIS_AB_SCHNELLSCHEMA("SCHEMA258",
+    //                            "1.2.40.0.34.5.183",
+    //                            "Hepatitis AB, Schnellschema",
+    //                            "Hepatitis AB, Schnellschema",
+    //                            "TOTRANSLATE",
+    //                            "TOTRANSLATE",
+    //                            "TOTRANSLATE"),
     /**
      * EN: Hepatitis A Monokomponente Grundschema.<br>
      */
@@ -1637,13 +1637,13 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Tollwut, Schnellschema.<br>
      */
-    TOLLWUT_SCHNELLSCHEMA("SCHEMA250",
-                          "1.2.40.0.34.5.183",
-                          "Tollwut, Schnellschema",
-                          "Tollwut, Schnellschema",
-                          "TOTRANSLATE",
-                          "TOTRANSLATE",
-                          "TOTRANSLATE"),
+    // TOLLWUT_SCHNELLSCHEMA("SCHEMA250",
+    //                       "1.2.40.0.34.5.183",
+    //                       "Tollwut, Schnellschema",
+    //                       "Tollwut, Schnellschema",
+    //                       "TOTRANSLATE",
+    //                       "TOTRANSLATE",
+    //                       "TOTRANSLATE"),
     /**
      * EN: Tollwut Schnellschema (WHO).<br>
      */
@@ -1657,13 +1657,13 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Tollwut, Schnellschema (WHO).<br>
      */
-    TOLLWUT_SCHNELLSCHEMA_WHO("SCHEMA251",
-                              "1.2.40.0.34.5.183",
-                              "Tollwut, Schnellschema (WHO)",
-                              "Tollwut, Schnellschema (WHO)",
-                              "TOTRANSLATE",
-                              "TOTRANSLATE",
-                              "TOTRANSLATE"),
+    // TOLLWUT_SCHNELLSCHEMA_WHO("SCHEMA251",
+    //                           "1.2.40.0.34.5.183",
+    //                           "Tollwut, Schnellschema (WHO)",
+    //                           "Tollwut, Schnellschema (WHO)",
+    //                           "TOTRANSLATE",
+    //                           "TOTRANSLATE",
+    //                           "TOTRANSLATE"),
     /**
      * EN: Tollwut Schnellschema (WHO), intradermal.<br>
      */
@@ -1677,13 +1677,13 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Tollwut, Schnellschema (WHO) intradermal.<br>
      */
-    TOLLWUT_SCHNELLSCHEMA_WHO_INTRADERMAL("SCHEMA252",
-                                          "1.2.40.0.34.5.183",
-                                          "Tollwut, Schnellschema (WHO) intradermal",
-                                          "Tollwut, Schnellschema (WHO) intradermal",
-                                          "TOTRANSLATE",
-                                          "TOTRANSLATE",
-                                          "TOTRANSLATE"),
+    // TOLLWUT_SCHNELLSCHEMA_WHO_INTRADERMAL("SCHEMA252",
+    //                                       "1.2.40.0.34.5.183",
+    //                                       "Tollwut, Schnellschema (WHO) intradermal",
+    //                                       "Tollwut, Schnellschema (WHO) intradermal",
+    //                                       "TOTRANSLATE",
+    //                                       "TOTRANSLATE",
+    //                                       "TOTRANSLATE"),
     /**
      * EN: Typhus.<br>
      */
@@ -1928,7 +1928,7 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Code for Hepatitis AB, Schnellschema.<br>
      */
-    public static final String HEPATITIS_AB_SCHNELLSCHEMA_CODE = "SCHEMA258";
+    // public static final String HEPATITIS_AB_SCHNELLSCHEMA_CODE = "SCHEMA258";
 
     /**
      * EN: Code for Hepatitis A Monokomponente Grundschema.<br>
@@ -2568,7 +2568,7 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Code for Tollwut, Schnellschema.<br>
      */
-    public static final String TOLLWUT_SCHNELLSCHEMA_CODE = "SCHEMA250";
+    // public static final String TOLLWUT_SCHNELLSCHEMA_CODE = "SCHEMA250";
 
     /**
      * EN: Code for Tollwut Schnellschema (WHO).<br>
@@ -2578,7 +2578,7 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Code for Tollwut, Schnellschema (WHO).<br>
      */
-    public static final String TOLLWUT_SCHNELLSCHEMA_WHO_CODE = "SCHEMA251";
+    // public static final String TOLLWUT_SCHNELLSCHEMA_WHO_CODE = "SCHEMA251";
 
     /**
      * EN: Code for Tollwut Schnellschema (WHO), intradermal.<br>
@@ -2588,7 +2588,7 @@ public enum EimpfImpfschema implements ValueSetEnumInterface {
     /**
      * EN: Code for Tollwut, Schnellschema (WHO) intradermal.<br>
      */
-    public static final String TOLLWUT_SCHNELLSCHEMA_WHO_INTRADERMAL_CODE = "SCHEMA252";
+    // public static final String TOLLWUT_SCHNELLSCHEMA_WHO_INTRADERMAL_CODE = "SCHEMA252";
 
     /**
      * EN: Code for Typhus.<br>

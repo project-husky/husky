@@ -839,8 +839,8 @@ public enum EimpfHistorischeimpfstoffe implements ValueSetEnumInterface {
      */
     POLIO_SABIN_ORAL_SB_TROPFEN_UND_ZUCKERSUSPENSION("AHI073",
                                                      "1.2.40.0.34.5.186",
-                                                     "Polio Sabin (oral) "SB" - Tropfen und Zuckersuspension",
-                                                     "Polio Sabin (oral) "SB" - Tropfen und Zuckersuspension",
+                                                     "Polio Sabin (oral) \"SB\" - Tropfen und Zuckersuspension",
+                                                     "Polio Sabin (oral) \"SB\" - Tropfen und Zuckersuspension",
                                                      "TOTRANSLATE",
                                                      "TOTRANSLATE",
                                                      "TOTRANSLATE"),

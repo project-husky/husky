@@ -23,23 +23,27 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * eimpf_document_UpdateImmunisierungsstatus
  * <p>
  * Identifier: 1.2.40.0.34.6.0.11.0.2<br>
- * Effective date: 2023-01-23 14:48:21<br>
- * Version: 2.0.0+20230717<br>
+ * Effective date: 2026-02-04 15:13:13<br>
+ * Version: 2.0.2+20260204<br>
  * Status: active
  * <p>
- * Generated from the ArtDecor <a href="https://art-decor.org/art-decor/decor-templates--elgaimpf-?id=1.2.40.0.34.6.0.11.0.2&amp;effectiveTime=2023-01-23+14%3A48%3A21">eimpf_document_UpdateImmunisierungsstatus</a> page.
+ * Generated from the ArtDecor <a href="https://art-decor.org/art-decor/decor-templates--elgaimpf-?id=1.2.40.0.34.6.0.11.0.2&amp;effectiveTime=2026-02-04+15%3A13%3A13">eimpf_document_UpdateImmunisierungsstatus</a> page.
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 @Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2026-02-19")
 public class EimpfDocumentUpdateImmunisierungsstatus extends POCDMT000040ClinicalDocument {
+
+private org.projecthusky.common.hl7cdar2.TS hl7atTerminologyDate;
+private org.projecthusky.common.hl7cdar2.CD hl7atPracticeSettingCode;
+private org.projecthusky.common.hl7cdar2.CD hl7atFormatCode;
 
     public EimpfDocumentUpdateImmunisierungsstatus() {
         super.setClassCode(org.projecthusky.common.hl7cdar2.ActClinicalDocument.DOCCLIN);
         super.getMoodCode().add("EVN");
         super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3",
                                                   "POCD_HD000040"));
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1"));
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19.2"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1", null));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19.2", null));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2",
                                                                 "XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2.1",
@@ -268,21 +272,21 @@ public class EimpfDocumentUpdateImmunisierungsstatus extends POCDMT000040Clinica
      * Gets the hl7atFormatCode
      */
     public org.projecthusky.common.hl7cdar2.CD getHl7atFormatCode() {
-        return this;
+        return hl7atFormatCode;
     }
 
     /**
      * Gets the hl7atPracticeSettingCode
      */
     public org.projecthusky.common.hl7cdar2.CD getHl7atPracticeSettingCode() {
-        return this;
+        return hl7atPracticeSettingCode;
     }
 
     /**
      * Gets the hl7atTerminologyDate
      */
     public org.projecthusky.common.hl7cdar2.TS getHl7atTerminologyDate() {
-        return this;
+        return hl7atTerminologyDate;
     }
 
     /**
@@ -488,21 +492,21 @@ public class EimpfDocumentUpdateImmunisierungsstatus extends POCDMT000040Clinica
      * Sets the hl7atFormatCode
      */
     public void setHl7atFormatCode(org.projecthusky.common.hl7cdar2.CD value) {
-        // TODO: NYI
+        this.hl7atFormatCode = value;
     }
 
     /**
      * Sets the hl7atPracticeSettingCode
      */
     public void setHl7atPracticeSettingCode(org.projecthusky.common.hl7cdar2.CD value) {
-        // TODO: NYI
+        this.hl7atPracticeSettingCode = value;
     }
 
     /**
      * Sets the hl7atTerminologyDate
      */
     public void setHl7atTerminologyDate(org.projecthusky.common.hl7cdar2.TS value) {
-        // TODO: NYI
+        this.hl7atTerminologyDate = value;
     }
 
     /**
