@@ -44,8 +44,7 @@ private org.projecthusky.common.hl7cdar2.CD hl7atFormatCode;
                                                   "POCD_HD000040"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1", null));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19.2", null));
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2",
-                                                                "XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2", null));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2.1",
                                                                 null));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2",
