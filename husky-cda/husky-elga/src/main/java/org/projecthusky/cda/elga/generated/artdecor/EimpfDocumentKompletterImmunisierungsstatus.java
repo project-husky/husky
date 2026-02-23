@@ -33,8 +33,11 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 @Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2026-02-19")
 public class EimpfDocumentKompletterImmunisierungsstatus extends POCDMT000040ClinicalDocument {
 
+@javax.xml.bind.annotation.XmlElement(name = "terminologyDate", namespace = "urn:hl7-at:v3")
 private org.projecthusky.common.hl7cdar2.TS hl7atTerminologyDate;
+@javax.xml.bind.annotation.XmlElement(name = "practiceSettingCode", namespace = "urn:hl7-at:v3")
 private org.projecthusky.common.hl7cdar2.CD hl7atPracticeSettingCode;
+@javax.xml.bind.annotation.XmlElement(name = "formatCode", namespace = "urn:hl7-at:v3")
 private org.projecthusky.common.hl7cdar2.CD hl7atFormatCode;
 
     public EimpfDocumentKompletterImmunisierungsstatus() {
