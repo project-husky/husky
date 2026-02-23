@@ -54,6 +54,13 @@ private org.projecthusky.common.hl7cdar2.CD hl7atFormatCode;
                                               "2.16.840.1.113883.6.1",
                                               null,
                                               "HISTORY OF IMMUNIZATIONS"));
+        CD translation = new CD();
+        translation.setCode("82593-5");
+        translation.setCodeSystem("2.16.840.1.113883.6.1");
+        translation.setCodeSystemName("LOINC");
+        translation.setDisplayName("Immunization summary report");
+        super.getCode().getTranslation().add(translation);
+        super.getCode().getTranslation().add(translation);
         super.setComponent(createHl7ComponentFixedValue("COMP",
                                                         "true"));
     }
