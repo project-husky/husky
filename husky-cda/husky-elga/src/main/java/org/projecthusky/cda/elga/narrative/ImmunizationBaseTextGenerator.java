@@ -80,12 +80,13 @@ public class ImmunizationBaseTextGenerator extends BaseTextGenerator {
 		return list;
 	}
 
-	protected StrucDocTr getRowDose(POCDMT000040Precondition precondition) {
+	protected StrucDocTr getRowDose(POCDMT000040Precondition precondition, int index) {
 		StrucDocTr tr = new StrucDocTr();
 		tr.getThOrTd().add(getCellTd("Dosis:"));
 		if (precondition != null && precondition.getCriterion() != null
-				&& precondition.getCriterion().getValue() instanceof CD code) {
-			tr.getThOrTd().add(getCellTd(code.getDisplayName()));
+						&& precondition.getCriterion().getValue() instanceof CD code) {
+			String contentId = String.format("dose-immunization-%d", index);
+			tr.getThOrTd().add(getCellTdWithContent(code.getDisplayName(), contentId));
 		}
 
 		return tr;
