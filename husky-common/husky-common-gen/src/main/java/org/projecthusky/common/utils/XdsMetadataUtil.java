@@ -312,8 +312,16 @@ public class XdsMetadataUtil {
 			// Speciality
 			if (!at.getAuthorSpecialty().isEmpty()
 					&& at.getAuthorSpecialty().get(0) != null) {
+				String specialtySystem = "";
+				if (at.getAuthorSpecialty().get(0).getAssigningAuthority() != null) {
+					specialtySystem = at.getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId();
+				} else {
+					// Coming from a CDA for ELGA the specialty is a CE (coding element), thus it has no assigningAuthority.
+					// Thus, I have to hard code the system here, since it got lost somewhere along the way.
+					specialtySystem = "1.2.40.0.34.10.6";
+				}
 				a.setSpeciality(new Code(at.getAuthorSpecialty().get(0).getId(),
-						at.getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId(), null));
+						specialtySystem, null));
 			}
 
 			// Telecoms
