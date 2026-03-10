@@ -363,13 +363,14 @@ public class DocumentEntryConverter {
                     if (Oids.match(attachment.getUrl())) {
                         documentEntry.setRepositoryUniqueId(Oids.normalize(attachment.getUrl()));
                     } else {
-                        final var uriComponents = UriComponentsBuilder.fromUriString(attachment.getUrl()).build();
-                        //uriComponentsBuilder.
-                        final var params = uriComponents.getQueryParams();
-                        if (params.containsKey(SLOT_NAME_REPOSITORY_UNIQUE_ID)) {
-                            documentEntry.setRepositoryUniqueId(Oids.normalize(params.getFirst(SLOT_NAME_REPOSITORY_UNIQUE_ID)));
+                        if (attachment.getUrl().startsWith("http:") || attachment.getUrl().startsWith("https:")) {
+                            final var uriComponents = UriComponentsBuilder.fromUriString(attachment.getUrl()).build();
+                            final var params = uriComponents.getQueryParams();
+                            if (params.containsKey(SLOT_NAME_REPOSITORY_UNIQUE_ID)) {
+                                documentEntry.setRepositoryUniqueId(Oids.normalize(params.getFirst(SLOT_NAME_REPOSITORY_UNIQUE_ID)));
+                            }
+                            documentEntry.setUri(uriComponents.toUriString());
                         }
-                        documentEntry.setUri(uriComponents.toUriString());
                     }
                 }
 
