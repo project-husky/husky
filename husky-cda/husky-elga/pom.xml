@@ -6,6 +6,7 @@
 		<version>2.5.4-SNAPSHOT</version>
 	</parent>
 	<artifactId>husky-elga</artifactId>
+	<name>Husky Elga</name>
 
 	<dependencies>
 		<!-- Own dependencies -->
