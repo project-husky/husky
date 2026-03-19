@@ -138,7 +138,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
             builder.withProducer(this.producerName);
         }
         builder.useFastMode();
-        builder.usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_1_A);
+        builder.usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_A);
         builder.usePdfUaAccessibility(false);
         if (this.pdfRendererBuilderConsumer != null) {
             this.pdfRendererBuilderConsumer.accept(builder);
