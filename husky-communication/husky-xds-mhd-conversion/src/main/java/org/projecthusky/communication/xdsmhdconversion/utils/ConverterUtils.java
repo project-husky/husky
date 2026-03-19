@@ -87,13 +87,16 @@ public class ConverterUtils {
      *
      * @param ref       the desired reference
      * @param contained the list of resources
-     * @return the resource corresponding to the reference if available
+     * @return the contained resource corresponding to the reference if available
      */
     @Nullable
     public static Resource findResource(final Reference ref,
                                         final List<Resource> contained) {
+        final String reference = ref.getReference().startsWith("#")
+                ? ref.getReference().substring(1)
+                : ref.getReference();
         return contained.stream()
-                .filter(r -> r.getId().equals(ref.getReference()))
+                .filter(r -> r.getId().equals(reference))
                 .findFirst()
                 .orElse(null);
     }
@@ -119,7 +122,7 @@ public class ConverterUtils {
      * @return XDS Identifiable
      */
     public static Identifiable toIdentifiable(final Identifier identifier) {
-        final var assigningAuthority = identifier.getSystem() != null ? new AssigningAuthority(identifier.getSystem()) : null;
+        final var assigningAuthority = identifier.getSystem() != null ? new AssigningAuthority(Oids.normalize(identifier.getSystem())) : null;
         return new Identifiable(identifier.getValue(), assigningAuthority);
     }
 
