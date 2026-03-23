@@ -87,7 +87,7 @@ public class EMediplanQrCodeGenerator {
      * @throws QrCodeGenerationException In case of error either transforming the PRE to an eMediplan format or while
      *                                   generating the QR code itself.
      */
-    public String generateQrCode(final EMediplan<?,?> emediplan) throws QrCodeGenerationException {
+    public String generateQrCode(final EMediplan<?,?,?,?> emediplan) throws QrCodeGenerationException {
         return generateQrCode(emediplan, DEFAULT_SIZE);
     }
 
@@ -100,7 +100,7 @@ public class EMediplanQrCodeGenerator {
      * @throws QrCodeGenerationException In case of error either transforming the PRE to an eMediplan format or while
      *                                   generating the QR code itself.
      */
-    public String generateQrCode(final EMediplan<?,?> emediplan, final int size) throws QrCodeGenerationException {
+    public String generateQrCode(final EMediplan<?,?,?,?> emediplan, final int size) throws QrCodeGenerationException {
         try {
             emediplan.trim();
             final var validationResult = emediplan.validate();

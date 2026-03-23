@@ -17,24 +17,40 @@ public class ChMed16ADailyDosage implements EMediplanObject {
 
     protected @JsonIgnore @Nullable Double  morningDose, noonDose, eveningDose, nightDose;
 
-    public double  getMorningDose() {
+    public double getMorningDose() {
         if ( morningDose == null ) return 0f;
         return morningDose;
     }
 
-    public double  getNoonDose() {
+    public boolean hasMorningDose() {
+        return getMorningDose() != 0f;
+    }
+
+    public double getNoonDose() {
         if ( noonDose == null ) return 0f;
         return noonDose;
     }
 
-    public double  getEveningDose() {
+    public boolean hasNoonDose() {
+        return getNoonDose() != 0f;
+    }
+
+    public double getEveningDose() {
         if ( eveningDose == null ) return 0f;
         return eveningDose;
     }
 
-    public double  getNightDose() {
+    public boolean hasEveningDose() {
+        return getEveningDose() != 0f;
+    }
+
+    public double getNightDose() {
         if ( nightDose == null ) return 0f;
         return nightDose;
+    }
+
+    public boolean hasNightDose() {
+        return getNightDose() != 0f;
     }
 
     @JsonValue

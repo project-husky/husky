@@ -47,6 +47,23 @@ public interface ChCoreContactPointCarrier {
     }
 
     /**
+     * Adds an email address to the list of telecom entries.
+     * <p>
+     *     This convenience method sets the contact point system to {@link ContactPoint.ContactPointSystem#EMAIL}
+     * </p>
+     *
+     * @param emailAddress The email address to be added.
+     * @return The contact point containing the email address.
+     */
+    default ContactPoint addEmailAddress(String emailAddress) {
+        final var  contactPoint = new ContactPoint();
+        contactPoint.setSystem(ContactPoint.ContactPointSystem.EMAIL);
+        contactPoint.setValue(emailAddress);
+        getTelecom().add(contactPoint);
+        return contactPoint;
+    }
+
+    /**
      * Resolves the entity's phone numbers. It can be empty if no phone number was specified.
      */
     @ExpectsValidResource
@@ -66,6 +83,23 @@ public interface ChCoreContactPointCarrier {
     @ExpectsValidResource
     default @Nullable ContactPoint resolvePreferredPhoneNumber() {
         return getSinglePreferredContactPoint(this::resolvePhoneNumbers);
+    }
+
+    /**
+     * Adds a phone number to the list of telecom entries.
+     * <p>
+     *     This convenience method fixes the contact point system to {@link ContactPoint.ContactPointSystem#PHONE}
+     * </p>
+     *
+     * @param phoneNumber The phone number to be added.
+     * @return The contact point containing the phone number.
+     */
+    default ContactPoint addPhoneNumber(String phoneNumber) {
+        final var  contactPoint = new ContactPoint();
+        contactPoint.setSystem(ContactPoint.ContactPointSystem.PHONE);
+        contactPoint.setValue(phoneNumber);
+        getTelecom().add(contactPoint);
+        return contactPoint;
     }
 
     /**

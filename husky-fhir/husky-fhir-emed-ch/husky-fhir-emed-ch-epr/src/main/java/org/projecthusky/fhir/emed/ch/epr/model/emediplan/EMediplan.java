@@ -23,9 +23,11 @@ import java.util.zip.GZIPOutputStream;
 /**
  * Base class to model an eMediplan document object, be it of CHMED16A or CHMED23A specs.
  * @param <E> The type of eMediplan extension used by this document.
+ * @param <G> The type of eMediplan patient gender enum used by this document.
  * @param <M> The type of eMediplan medicament object used by this document.
+ * @param <I> The type of patient identifier object used by this document.
  */
-public abstract class EMediplan<E extends EMediplanObject, M extends EMediplanMedicament<E>> implements EMediplanExtendable<E> {
+public abstract class EMediplan<E extends EMediplanObject, G extends EMediplanGender , M extends EMediplanMedicament<E>, I extends EMediplanIdentifier> implements EMediplanExtendable<E> {
     public static final String EMEDIPLAN_TIMEZONE = "Europe/Zurich";
 
     @JsonIgnore
@@ -33,7 +35,7 @@ public abstract class EMediplan<E extends EMediplanObject, M extends EMediplanMe
     @JsonIgnore
     public abstract String getChTransmissionFormatPrefix();
 
-    public abstract EMediplanPatient<E> getPatient();
+    public abstract EMediplanPatient<E, G, I> getPatient();
     public abstract List<@NonNull M> getMedicaments();
     public abstract @Nullable EMediplanType getType();
     public abstract @Nullable String getId();
