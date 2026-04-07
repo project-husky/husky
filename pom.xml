@@ -34,7 +34,7 @@
 		<apache-httpcore5>5.3.4</apache-httpcore5>
 		<junit.version>5.10.0</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>5.2-rc1</ipf.version>
+		<ipf.version>5.2-rc2</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
