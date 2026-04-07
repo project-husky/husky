@@ -1,14 +1,22 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.common.utils.datatypes.Gln;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareProCarrier;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+
+import java.io.IOException;
+import java.util.Base64;
 
 /**
  * Model according to the specifications of
@@ -135,5 +143,28 @@ public class EPrescription extends ChMed16AEMediplan<EPrescriptionMedicament>
         return super.hasExtensions(inDepth)
                 || (inDepth && healthcarePerson != null && healthcarePerson.hasExtensions(true))
                 || (inDepth && healthcareOrganization != null && healthcareOrganization.hasExtensions(true));
+    }
+
+    /**
+     * Parses an ePrescription from a ChTransmissionFormat String, as specified by eMediplan.
+     *
+     * @param chTransmission The transmission content, e.g.
+     *                       {@code CHMED16A1H4sIAAAAAAAAAzWPMU/DMBCFZ/IrolvB0p3b+O6yUSEEEkUM3RCDW7uiQyNE3AFV+e84diN5ed/ze093bdoWPnw6xSFB316zzOD53Z9jlvDihxEeKnxb4PYypvi74M3THARSZkOUH9xlY5pd2MZwOuTUkMb857ME6kQ2X8OcYyfYEWuHa3S3zmLu/n7mNVvI1HwthTe+Krp2+OACd7I3qvFoSOloNAgZF0UcH7yGzpdqeLyk77qKhIjMwqLVqmdYtCuDzljZEfUo/Vrv0faI0Ez/cZpKMywBAAA=}
+     * @return The parsed EPrescription object.
+     * @throws IOException If there was an I/O parsing error.
+     * @throws InvalidEmedContentException if there were content errors that prevented parsing.
+     */
+    @ExpectsValidResource
+    public static EPrescription fromChTransmissionFormat(final String chTransmission) throws IOException {
+        if (chTransmission == null || chTransmission.isBlank())
+            throw new InvalidEmedContentException("The chTransmission content cannot be null or empty");
+        final var prefix = new EPrescription().getChTransmissionFormatPrefix();
+        if (chTransmission.startsWith(prefix)) {
+            final var compressedData = Base64.getDecoder().decode(chTransmission.substring(prefix.length()));
+            final var uncompressedData = EMediplan.uncompressJson(compressedData);
+            final var objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            return objectMapper.readValue(uncompressedData, EPrescription.class);
+        } else throw new InvalidEmedContentException("The ePrescription transmission content does not start with the appropriate prefix.");
     }
 }

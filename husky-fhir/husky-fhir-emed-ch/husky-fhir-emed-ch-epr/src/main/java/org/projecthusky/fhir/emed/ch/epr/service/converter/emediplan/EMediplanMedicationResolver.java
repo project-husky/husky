@@ -16,6 +16,7 @@ import java.util.Objects;
  *     <li>HCI index product number (not valid for prescriptions)</li>
  * </ul>
  */
+@FunctionalInterface
 public interface EMediplanMedicationResolver {
     /**
      * Gets a valid FHIR CH EMED EPR Medication resource from the medication

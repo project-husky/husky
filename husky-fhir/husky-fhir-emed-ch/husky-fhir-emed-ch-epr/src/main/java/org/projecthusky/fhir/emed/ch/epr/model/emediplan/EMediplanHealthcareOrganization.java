@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
@@ -81,5 +83,21 @@ public abstract class EMediplanHealthcareOrganization<A extends EMediplanPostalA
         hcOrg.setAddress(addressConverter.apply(organization.resolveAddress()));
         hcOrg.setZsr(organization.resolveZsr());
         return hcOrg;
+    }
+
+    /**
+     * Gets the CH EMED EPR equivalent of this eMediplan organization object, if possible.
+     */
+    @ExpectsValidResource
+    public ChEmedEprOrganization toFhir() {
+        if (getName() == null || getName().isBlank())
+            throw new InvalidEmedContentException("The healthcare organization's name is missing but it is mandatory.");
+        if (getAddress() == null)
+            throw new InvalidEmedContentException("The healthcare organization's address is missing but it is mandatory.");
+        final var org = new ChEmedEprOrganization();
+        org.setName(getName());
+        org.setAddress(getAddress().toFhir());
+        if (getZsr() != null && !getZsr().isBlank()) org.setZsr(getZsr());
+        return org;
     }
 }

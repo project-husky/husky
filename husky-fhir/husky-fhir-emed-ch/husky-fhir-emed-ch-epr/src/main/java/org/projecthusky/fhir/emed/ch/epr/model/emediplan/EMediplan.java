@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
@@ -97,7 +98,7 @@ public abstract class EMediplan<E extends EMediplanObject, G extends EMediplanGe
      * @return The GZIP compressed byte array.
      * @throws IOException In case of error compressing the JSON content.
      */
-    private static byte[] compressJson(final String rawJson) throws IOException {
+    protected static byte[] compressJson(final String rawJson) throws IOException {
         final var inputstream = new ByteArrayInputStream(rawJson.getBytes());
         final var outputStream = new ByteArrayOutputStream();
         final var gzipOutputStream = new GZIPOutputStream(outputStream);
@@ -107,6 +108,24 @@ public abstract class EMediplan<E extends EMediplanObject, G extends EMediplanGe
             gzipOutputStream.write(buffer, 0, bytesRead);
         }
         gzipOutputStream.close();
+        return outputStream.toByteArray();
+    }
+
+    /**
+     * Uncompresses a received serialized eMediplan (JSON) normally conveyed via ChTransmissionFormat, as specified
+     * by eMediplan.
+     *
+     * @param compressed The compressed content, as a byte array.
+     * @return The uncompressed content, as a byte array.
+     * @throws IOException In case of an I/O exception while uncompressing the received content.
+     */
+    protected static byte[] uncompressJson(final byte[] compressed) throws IOException {
+        final var inputStream = new GZIPInputStream(new ByteArrayInputStream(compressed));
+        final var outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[512];
+        int bytesRead = 0;
+        while ((bytesRead = inputStream.read(buffer)) > -1) outputStream.write(buffer, 0, bytesRead);
+        outputStream.close();
         return outputStream.toByteArray();
     }
 }

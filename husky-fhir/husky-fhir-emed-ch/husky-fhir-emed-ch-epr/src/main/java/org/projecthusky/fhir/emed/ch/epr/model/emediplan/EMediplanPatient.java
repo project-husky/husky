@@ -1,10 +1,12 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -26,6 +28,7 @@ import java.util.regex.Pattern;
  * @param <G> The specific type of eMediplan Gender enum.
  * @param <I> The specific type of patient identifier object.
  */
+@Slf4j
 public abstract class EMediplanPatient<E extends EMediplanObject, G extends EMediplanGender, I extends EMediplanIdentifier> implements EMediplanExtendable<E> {
     private static final Pattern LANGUAGE_CODE_PATTERN = Pattern.compile("^[a-zA-Z]{2}$" );
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile("^\\+?[0-9]+[ 0-9]*$");
@@ -228,9 +231,10 @@ public abstract class EMediplanPatient<E extends EMediplanObject, G extends EMed
         if (getBirthDate() == null)
             throw new InvalidEmedContentException("The patient's birth date is mandatory in the CH EMED EPR context.");
         fhirPatient.setBirthDate(getBirthDate());
-        if (getGender() == null)
-            throw new InvalidEmedContentException("The patient's gender is mandatory in the CH EMED EPR context.");
-        fhirPatient.setGender(getGender().toFhir());
+        if (getGender() == null) {
+            log.warn("The patient's gender is mandatory in the CH EMED EPR context. The converter will use \"unknown\", but this will result on a warning on the CH EMED EPR validation side.");
+            fhirPatient.setGender(Enumerations.AdministrativeGender.UNKNOWN);
+        } else fhirPatient.setGender(getGender().toFhir());
         if (getAddress() != null) fhirPatient.addAddress(getAddress().toFhir());
         if (getLanguageCode() != null)
             fhirPatient.addCommunication()

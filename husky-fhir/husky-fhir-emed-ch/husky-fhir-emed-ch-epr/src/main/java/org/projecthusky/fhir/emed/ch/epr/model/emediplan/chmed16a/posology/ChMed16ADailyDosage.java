@@ -2,6 +2,8 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.posology;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -12,6 +14,8 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 import java.util.List;
 
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChMed16ADailyDosage implements EMediplanObject {
     public static final String FIELD_NAME = "D";
 
