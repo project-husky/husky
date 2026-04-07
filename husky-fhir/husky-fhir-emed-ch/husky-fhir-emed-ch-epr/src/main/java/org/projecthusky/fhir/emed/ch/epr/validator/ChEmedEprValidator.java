@@ -102,17 +102,14 @@ public interface ChEmedEprValidator {
     /**
      * Returns the profile URL from the eMed type.
      *
+     * @deprecated Deprecated and marked for removal since Husky 3.2.2.
+     *             Use {@link EmedDocumentType#getProfileEpr()} instead.
+     *
      * @param type The eMed type.
      * @return the profile URL.
      */
+    @Deprecated(since = "3.2.2", forRemoval = true)
     static String getProfileUrl(final EmedDocumentType type) {
-        return switch (type) {
-            case MTP -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
-            case PRE -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription";
-            case DIS -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationdispense";
-            case PADV -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
-            case PML -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist";
-            case PMLC -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationcard";
-        };
+        return type.getProfileEpr();
     }
 }
