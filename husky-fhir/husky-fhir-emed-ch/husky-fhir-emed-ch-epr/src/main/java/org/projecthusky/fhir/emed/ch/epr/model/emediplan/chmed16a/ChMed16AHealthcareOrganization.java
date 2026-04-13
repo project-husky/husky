@@ -63,6 +63,10 @@ public class ChMed16AHealthcareOrganization extends EMediplanHealthcareOrganizat
         return NAME_FIELD_NAME;
     }
 
+    protected String getZsrFieldName() {
+        return ZSR_FIELD_NAME;
+    }
+
     @Override
     public void trim() {
         super.trim();

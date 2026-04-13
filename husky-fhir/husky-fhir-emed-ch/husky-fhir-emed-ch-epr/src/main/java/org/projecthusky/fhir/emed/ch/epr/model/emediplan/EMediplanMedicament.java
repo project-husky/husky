@@ -24,6 +24,7 @@ public abstract class EMediplanMedicament<E extends EMediplanObject> implements 
     protected abstract String getIdFieldName();
     @JsonIgnore
     protected abstract String getIdTypeFieldName();
+    @JsonIgnore
 
     /**
      * Whether the treatment is a self-medication, that is, it was added to the plan by the patient, or not.

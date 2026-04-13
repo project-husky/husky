@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan;
 
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
@@ -20,8 +21,6 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.ChMed16AHealth
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.ChMed16AHealthcarePerson;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.EPrescription;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.EPrescriptionMedicament;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.DurationBoundRepeatable;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.NumberBoundRepeatable;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
@@ -38,6 +37,7 @@ import java.util.*;
  * Specialized version of the CHMED16A converter that deals with the ePrescription format as defined by the latest
  * revision supported by this module (see {@link EPrescription}).
  */
+@Slf4j
 public class EPrescriptionConverter extends ChMed16ABaseConverter<EPrescriptionMedicament, EPrescription> {
     protected final EMediplanMedicationResolver  medicationResolver;
     protected final TreatmentPlanResolver treatmentPlanResolver;
@@ -126,8 +126,7 @@ public class EPrescriptionConverter extends ChMed16ABaseConverter<EPrescriptionM
                 mediplanType
         );
 
-        if (dispenseRequest != null)
-            medicament.setRepetitionObject(ChMed23AConverter.toRepetition(dispenseRequest));
+        // TODO: https://github.com/project-husky/husky/issues/352 (indicationCode)
 
         return medicament;
     }
@@ -241,12 +240,9 @@ public class EPrescriptionConverter extends ChMed16ABaseConverter<EPrescriptionM
 
         medRequest.setDosageInstruction(getDosage(medicament));
 
-        if (medicament.getRepetitionObject() != null) {
-            if (medicament.getRepetitionObject() instanceof NumberBoundRepeatable repeats)
-                medRequest.addDispenseRequest().setNumberOfRepeatsAllowed(repeats.getValue());
-            if (medicament.getRepetitionObject() instanceof DurationBoundRepeatable duration)
-                medRequest.addDispenseRequest().setValidityPeriod(new Period().setEnd(Date.from(duration.getEnd(timestamp))));
-        }
+        if (medicament.getRepetition() != null)
+            log.warn("The eMediplan ePrescription specifies repetitions in months, but this is not supported by CH EMED EPR. This field will be ignored by the conversion.");
+
         final var dispenseQuantity =
                 new Quantity(medicament.getNumberOfPackages() == null? 1 : medicament.getNumberOfPackages());
         dispenseQuantity.setCode(RegularUnitCodeAmbu.PACKAGE.getCodeValue());
@@ -258,6 +254,11 @@ public class EPrescriptionConverter extends ChMed16ABaseConverter<EPrescriptionM
             medRequest.setSubstitution(new MedicationRequest.MedicationRequestSubstitutionComponent(
                     SubstanceAdministrationSubstitutionCode.NONE.getCodeableConcept(language)
             ));
+
+        // TODO https://github.com/project-husky/husky/issues/352 (indicationCode)
+        if (medicament.getIndicationCode() != null && !medicament.getIndicationCode().isBlank()) {
+            log.warn("Clear support for the indication code has not yet been added to CH EMED and/or CH EMED EPR. It will be ignored by the conversion.");
+        }
 
         // IMPORTANT: this step must always be the last step, so that the fully converted med request is sent to the resolver
         medRequest.setTreatmentPlanElement(treatmentPlanResolver.getTreatmentPlan(medRequest));

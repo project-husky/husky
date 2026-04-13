@@ -215,7 +215,6 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                 // repetitions can't be translated, since in the CH EMED EPR format it is conveyed in number of repeats
                 // while in CHMED16A it is conveyed in months, so it is not a number of repeats but more like a validityPeriod
                 // allowing unlimited repeats...
-                // It is however allowed in the 3rd revision of ePrescription.
 
                 if (dispenseRequest.hasQuantity() && dispenseRequest.getQuantity().hasValue()) {
                     final var quantity = dispenseRequest.getQuantity();

@@ -76,7 +76,6 @@ public class EPrescriptionConverterTest {
         assertEquals(CdTyp9.TABLET, emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(lastRequest.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -149,7 +148,6 @@ public class EPrescriptionConverterTest {
         assertNull(emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(lastRequest.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -223,7 +221,6 @@ public class EPrescriptionConverterTest {
         assertNull(emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(request.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -257,7 +254,6 @@ public class EPrescriptionConverterTest {
         assertNull(medicament.getUnit());
         assertEquals(request.getDosageInstructionFirstRep().getPatientInstruction(), medicament.getApplicationInstructions());
         assertNull(medicament.getRepetition());
-        assertNull(medicament.getRepetitionObject());
         assertNull(medicament.getForbidSubstitution());
         assertNull(medicament.getNumberOfPackages());
         assertTrue(medicament.getExtensions().isEmpty());
