@@ -5,10 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.TimeUnit;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.DurationBoundRepeatable;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.Repetition;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+
+import java.util.regex.Pattern;
 
 /**
  * Extension of the {@link ChMed16AMedicament} for the revision 3 of the CHMED16A ePrescription format.
@@ -16,71 +15,41 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class EPrescriptionMedicament extends ChMed16AMedicament {
-    protected static final String REPETITION_EXTENDED_FIELD_NAME = "RepExtended";
+    protected static final String INDICATION_CODE_FIELD_NAME = "IndC";
+
+    protected static final Pattern INDICATION_CODE_PATTERN =
+            Pattern.compile("^[0-9]{5}\\.[0-9]{2}$");
 
     /**
-     * This field replaces the previous Rep field (Revision 2 and prior) which was a single integer field representing
-     * the number of months the prescription is valid for. To increase compatibility with older systems, it is advised
-     * to include the Rep field alongside the RepExtended field if RepExtended is set to either Duration or
-     * NumberAndDuration and the unit (u) is set to month (6).
+     * This is the FOPH assigned indication code, which becomes
+     * <a href="https://www.bag.admin.ch/dam/de/sd-web/PtwrsnPGN-1j/Rundschreiben%20des%20BAG%20zur%20%C3%9Cbermittlung%20des%20Indikationscode%20vom%2019.%20Februar%202026.pdf">mandatory for prescriptions</a>.
      * <p>
-     * The repetition object indicates how often a prescription can be repeated or how long the prescription is valid.
-     * </p><p>
-     * If no repetition object is set, it will be interpreted as if the RepetitionObject of the type Number had been set
-     * with v=1.
-     * </p><p>
-     * If the prescription of a medicament is not repeatable, use the RepetitionObject with the type Number and set v=0.
+     *     This has the following format {@code XXXXX.XX}. That is, 5 digits, a dot, and 2 more digits. The first five
+     *     digits correspond to the FOPH dossier number for the product, while the 2 last are a sequential number per
+     *     dossier's reimbursable indication.
      * </p>
      */
-    @JsonProperty(REPETITION_EXTENDED_FIELD_NAME)
-    protected @Nullable Repetition repetitionObject;
+    @JsonProperty(INDICATION_CODE_FIELD_NAME)
+    protected @Nullable String indicationCode;
 
-    /**
-     * This method sets not only sets the repetition object as the received parameter, but it will also set the
-     * legacy repetition value appropriately.
-     * @param repetitionObject The repetition object to be set for this medicament.
-     */
-    public void setRepetitionObject(@Nullable Repetition repetitionObject) {
-        this.repetitionObject = repetitionObject;
-        if (repetitionObject == null) repetition = null;
-        else {
-            if (repetitionObject instanceof DurationBoundRepeatable durationRepetition && durationRepetition.getDurationUnit() == TimeUnit.MONTH)
-                repetition = durationRepetition.getDuration();
-             else repetition = null;
-        }
+    protected String getIndicationCodeFieldName() {
+        return INDICATION_CODE_FIELD_NAME;
     }
 
     @Override
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = super.validate(basePath);
-        if (repetitionObject != null && repetition != null) {
-            if (!(repetitionObject instanceof DurationBoundRepeatable durationRepetition && durationRepetition.getDurationUnit() == TimeUnit.MONTH))
-                result.add(getValidationIssue(
-                        OperationOutcome.IssueSeverity.ERROR,
-                        OperationOutcome.IssueType.INVALID,
-                        basePath == null? "" : basePath,
-                        "Found the legacy repetition field, while the extended repetition object does not have a duration or the duration is not in months."
-                ));
-        } else {
-            if (repetition != null ) result.add(getValidationIssue(
-                    OperationOutcome.IssueSeverity.ERROR,
-                    OperationOutcome.IssueType.INVALID,
-                    basePath == null? "" : basePath,
-                    "The legacy repetition field is not null, but there is no extended repetition field. This is not allowed."
-            ));
-            else if (repetitionObject != null && repetitionObject instanceof DurationBoundRepeatable durationRepetition && durationRepetition.getDurationUnit() == TimeUnit.MONTH) result.add(getValidationIssue(
-                    OperationOutcome.IssueSeverity.WARNING,
-                    OperationOutcome.IssueType.INFORMATIONAL,
-                    basePath == null? "" : basePath,
-                    "There is an extended repetition field with a monthly duration. In these cases, the legacy repetition field should also be filled for compatibility reasons."
-            ));
-        }
+        if (indicationCode != null && !INDICATION_CODE_PATTERN.matcher(indicationCode).matches()) result.add(getValidationIssue(
+                OperationOutcome.IssueSeverity.ERROR,
+                OperationOutcome.IssueType.VALUE,
+                getFieldValidationPath(basePath, INDICATION_CODE_FIELD_NAME),
+                "The indication code, if present, must be of the form XXXXX.XX, that is 5 digits a dot and 2 digits."
+        ));
         return result;
     }
 
     @Override
     public void trim() {
         super.trim();
-        if (repetitionObject != null) repetitionObject.trim();
     }
 }

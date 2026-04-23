@@ -2,6 +2,8 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.posology;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -12,29 +14,47 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 import java.util.List;
 
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChMed16ADailyDosage implements EMediplanObject {
     public static final String FIELD_NAME = "D";
 
     protected @JsonIgnore @Nullable Double  morningDose, noonDose, eveningDose, nightDose;
 
-    public double  getMorningDose() {
+    public double getMorningDose() {
         if ( morningDose == null ) return 0f;
         return morningDose;
     }
 
-    public double  getNoonDose() {
+    public boolean hasMorningDose() {
+        return getMorningDose() != 0f;
+    }
+
+    public double getNoonDose() {
         if ( noonDose == null ) return 0f;
         return noonDose;
     }
 
-    public double  getEveningDose() {
+    public boolean hasNoonDose() {
+        return getNoonDose() != 0f;
+    }
+
+    public double getEveningDose() {
         if ( eveningDose == null ) return 0f;
         return eveningDose;
     }
 
-    public double  getNightDose() {
+    public boolean hasEveningDose() {
+        return getEveningDose() != 0f;
+    }
+
+    public double getNightDose() {
         if ( nightDose == null ) return 0f;
         return nightDose;
+    }
+
+    public boolean hasNightDose() {
+        return getNightDose() != 0f;
     }
 
     @JsonValue

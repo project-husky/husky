@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
@@ -310,7 +311,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     @Override
-    public MedicationRequest addDosageInstruction(final Dosage t) {
+    public ChEmedEprMedicationRequest addDosageInstruction(final Dosage t) {
         if (t instanceof final ChEmedEprDosage chEmedEprDosage) {
             this.dosageInstruction.add(chEmedEprDosage);
             return this;
@@ -318,6 +319,14 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         final var newDosage = new ChEmedEprDosage();
         t.copyValues(newDosage);
         this.dosageInstruction.add(newDosage);
+        return this;
+    }
+
+    @ExpectsValidResource
+    @Override
+    public ChEmedEprMedicationRequest setDosageInstruction(final List<@NonNull Dosage> dosageInstruction) {
+        this.dosageInstruction = new ArrayList<>();
+        for (final var dosage : dosageInstruction) addDosageInstruction(dosage);
         return this;
     }
 
@@ -375,6 +384,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
 
     /**
      * Sets the requester of the medication request.
+     *
      * @param author The author to be set as requester.
      * @return this.
      */
@@ -451,4 +461,15 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         }
         return this.getReasonCodeFirstRep().getText();
     }
+
+    /**
+     * Convenience method that returns the dispense request if it is set, otherwise creates a new empty one and sets it.
+     *
+     * @return The medication request's dispense request.
+     */
+    public MedicationRequestDispenseRequestComponent addDispenseRequest() {
+        if (!hasDispenseRequest()) setDispenseRequest(new MedicationRequestDispenseRequestComponent());
+        return getDispenseRequest();
+    }
+
 }

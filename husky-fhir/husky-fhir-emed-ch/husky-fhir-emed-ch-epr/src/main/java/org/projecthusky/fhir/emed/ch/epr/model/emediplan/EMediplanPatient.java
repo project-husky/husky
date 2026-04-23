@@ -1,15 +1,23 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.OperationOutcome;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -17,8 +25,11 @@ import java.util.regex.Pattern;
 /**
  * Base class for modelling an eMediplan patient object, be it for CHMED16A or CHMED23A.
  * @param <E> The specific type of eMediplan extension.
+ * @param <G> The specific type of eMediplan Gender enum.
+ * @param <I> The specific type of patient identifier object.
  */
-public abstract class EMediplanPatient<E extends EMediplanObject> implements EMediplanExtendable<E> {
+@Slf4j
+public abstract class EMediplanPatient<E extends EMediplanObject, G extends EMediplanGender, I extends EMediplanIdentifier> implements EMediplanExtendable<E> {
     private static final Pattern LANGUAGE_CODE_PATTERN = Pattern.compile("^[a-zA-Z]{2}$" );
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile("^\\+?[0-9]+[ 0-9]*$");
     private static final Pattern EMAIL_PATTERN =
@@ -38,12 +49,13 @@ public abstract class EMediplanPatient<E extends EMediplanObject> implements EMe
     public abstract @Nullable String getFirstName();
     public abstract @Nullable String getLastName();
     public abstract @Nullable LocalDate getBirthDate();
+    public abstract @Nullable G getGender();
     public abstract @Nullable EMediplanPostalAddress getAddress();
     public abstract @Nullable String getLanguageCode();
     public abstract @Nullable EMediplanPatientMedicalData<E> getMedicalData();
     public abstract List<@NonNull String> getPhones();
     public abstract List<@NonNull String> getEmails();
-    public abstract @Nullable List<? extends EMediplanObject> getIds();
+    public abstract @Nullable List<@NonNull I> getIds();
 
     /**
      * Base validation that performs or skips certain validation checks depending on whether the caller is context-aware
@@ -201,5 +213,39 @@ public abstract class EMediplanPatient<E extends EMediplanObject> implements EMe
                 "The patient's email address does not seem to be a valid email address."
         ));
         return result;
+    }
+
+    /**
+     * Gets the CH EMED EPR FHIR representation of the eMediplan patient object.
+     * @return The CH EMED EPR patient object.
+     * @throws InvalidEmedContentException if it is not possible to get a valid CH EMED EPR patient from the eMediplan
+     *                                     object.
+     */
+    @ExpectsValidResource
+    public ChEmedEprPatient toFhir() throws InvalidEmedContentException {
+        final var fhirPatient = new ChEmedEprPatient();
+        if (getFirstName() == null || getLastName() == null)
+            throw new InvalidEmedContentException("The patient's first and last name are mandatory in the CH EMED EPR context.");
+        final var name = fhirPatient.addName().setFamily(getLastName());
+        if (getFirstName() == null) Arrays.stream(getFirstName().split(" ")).forEach(name::addGiven);
+        if (getBirthDate() == null)
+            throw new InvalidEmedContentException("The patient's birth date is mandatory in the CH EMED EPR context.");
+        fhirPatient.setBirthDate(getBirthDate());
+        if (getGender() == null) {
+            log.warn("The patient's gender is mandatory in the CH EMED EPR context. The converter will use \"unknown\", but this will result on a warning on the CH EMED EPR validation side.");
+            fhirPatient.setGender(Enumerations.AdministrativeGender.UNKNOWN);
+        } else fhirPatient.setGender(getGender().toFhir());
+        if (getAddress() != null) fhirPatient.addAddress(getAddress().toFhir());
+        if (getLanguageCode() != null)
+            fhirPatient.addCommunication()
+                    .setLanguage(new CodeableConcept().addCoding(new Coding().setSystem("urn:ietf:bcp:47").setCode(getLanguageCode())));
+        for (final var phone : getPhones()) fhirPatient.addPhoneNumber(phone);
+        for (final var email : getEmails()) fhirPatient.addEmailAddress(email);
+        if (getIds() == null)
+            throw new InvalidEmedContentException("The patient must have at least one identifier in the CH EMED EPR context.");
+        else {
+            for (final var id : getIds()) fhirPatient.addIdentifier(id.toFhir());
+        }
+        return fhirPatient;
     }
 }

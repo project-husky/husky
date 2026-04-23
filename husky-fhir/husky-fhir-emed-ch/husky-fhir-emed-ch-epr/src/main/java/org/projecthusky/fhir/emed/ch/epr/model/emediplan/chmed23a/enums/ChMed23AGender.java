@@ -2,11 +2,12 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.projecthusky.common.enums.AdministrativeGender;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanEnum;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanGender;
 
 @Getter
-public enum ChMed23AGender implements EMediplanEnum<Integer> {
+public enum ChMed23AGender implements EMediplanGender {
     MALE(1),
     FEMALE(2),
     OTHER(3);
@@ -33,6 +34,15 @@ public enum ChMed23AGender implements EMediplanEnum<Integer> {
             case OTHER -> OTHER;
             case UNKNOWN -> OTHER;
             case NULL -> OTHER;
+        };
+    }
+
+    @Override
+    public org.hl7.fhir.r4.model.Enumerations.@NonNull AdministrativeGender toFhir() {
+        return switch(this) {
+            case MALE -> org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.MALE;
+            case FEMALE -> org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE;
+            case OTHER -> org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.OTHER;
         };
     }
 }

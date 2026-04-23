@@ -2,6 +2,8 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
@@ -110,5 +112,19 @@ public abstract class EMediplanHealthcarePerson implements EMediplanObject {
         hcPerson.setLastName(practitioner.resolveName().getFamily());
         hcPerson.setZsr(zsrNumber);
         return hcPerson;
+    }
+
+    /**
+     * Gets the FHIR representation of this eMediplan healthcare person as a {@link ChEmedEprPractitioner} object.
+     */
+    @ExpectsValidResource
+    public ChEmedEprPractitioner toFhir() {
+        if (getGln() == null || getGln().isBlank())
+            throw new InvalidEmedContentException("The GLN of the healthcare person is not present or empty, but it is mandatory.");
+        final var practitioner = new ChEmedEprPractitioner();
+        practitioner.setGln(getGln());
+        if (getZsr() != null && !getZsr().isBlank()) practitioner.addZsr(getZsr());
+        practitioner.addName().addGiven(getFirstName()).setFamily(getLastName());
+        return practitioner;
     }
 }

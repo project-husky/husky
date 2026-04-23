@@ -10,6 +10,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.common.utils.datatypes.Gln;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AGender;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ChMed16AEMediplan<M extends ChMed16AMedicament> extends EMediplan<ChMed16AExtension, M> implements ChMed16AExtendable {
+public class ChMed16AEMediplan<M extends ChMed16AMedicament> extends EMediplan<ChMed16AExtension, ChMed16AGender, M, ChMed16APatientId> implements ChMed16AExtendable {
     public static final String EMEDIPLAN_VERSION = "CHMED16A";
 
     protected static final String PATIENT_FIELD_NAME = "Patient";

@@ -2,14 +2,18 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcarePerson;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChMed16AHealthcarePerson extends EMediplanHealthcarePerson {
     protected static final String GLN_FIELD_NAME = "Gln";
     protected static final String FIRST_NAME_FIELD_NAME = "FName";

@@ -6,6 +6,8 @@ import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.PrimitiveType;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.datatype.ChCoreAddressAdapter;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.Objects;
@@ -78,6 +80,24 @@ public abstract class EMediplanPostalAddress implements EMediplanObject {
         address.setCity( city );
         address.setCountry(country);
         return address;
+    }
+
+    @ExpectsValidResource
+    public Address toFhir() {
+        final var addressAdapter = new ChCoreAddressAdapter();
+
+        if (getStreet() != null && !getStreet().isEmpty())
+            addressAdapter.addLine(new ChCoreAddressAdapter.AddressLineAdapter(getStreet()));
+        if (getPostalCode() != null && !getPostalCode().isEmpty())
+            addressAdapter.getAddress().setPostalCode(getPostalCode());
+        if (getCity() != null && !getCity().isEmpty())
+            addressAdapter.getAddress().setCity(getCity());
+        if (getCountry() != null && !getCountry().isEmpty()) {
+            addressAdapter.getAddress().setCountry(getCountry());
+            addressAdapter.setCountryCode(getCountry());
+        }
+
+        return addressAdapter.getAddress();
     }
 
     @Override

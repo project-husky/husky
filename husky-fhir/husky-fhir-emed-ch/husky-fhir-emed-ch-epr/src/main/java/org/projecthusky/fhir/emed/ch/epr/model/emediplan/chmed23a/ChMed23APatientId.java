@@ -8,14 +8,16 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.utils.datatypes.Oids;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanIdentifier;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.PatientIdType;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChMed23APatientId implements EMediplanObject {
+public class ChMed23APatientId implements EMediplanIdentifier {
     protected PatientIdType type;
     @JsonProperty("sId")
     protected @Nullable String system;
@@ -66,5 +68,20 @@ public class ChMed23APatientId implements EMediplanObject {
             identifier.getSystem(),
             identifier.getValue()
         );
+    }
+
+    @Override @ExpectsValidResource
+    public Identifier toFhir() {
+        if (type == null) throw new InvalidEmedContentException("The patient id type must be specified.");
+        if (value == null || value.isBlank()) throw new InvalidEmedContentException("The patient id cannot be null or empty.");
+        return switch(type) {
+            case INSURANCE_CARD_NUMBER ->
+                    (new Identifier()).setSystem(Oids.PREFIX_OID + CodeSystems.SWISS_VEKA_NR.getCodeSystemId()).setValue(value);
+            case LOCAL_PID -> {
+                if (system == null || system.isBlank()) throw new InvalidEmedContentException("The patient id system cannot be null or empty for local PIDs.");
+                final var fhirSystem = Oids.match(system)? Oids.PREFIX_OID + Oids.normalize(system) : system;
+                yield (new Identifier()).setSystem(fhirSystem).setValue(value);
+            }
+        };
     }
 }

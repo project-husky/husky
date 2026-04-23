@@ -1,26 +1,38 @@
 package org.projecthusky.fhir.emed.ch.epr.service;
 
 import ca.uhn.fhir.context.FhirContext;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.junit.jupiter.api.Test;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.CdTyp9;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.MedicamentIdType;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.EPrescription;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.*;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AGender;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.posology.ChMed16ADailyDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.posology.ChMed16APosology;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EPrescriptionConverter;
+import org.projecthusky.fhir.emed.ch.epr.validator.ChEmedEprHapiValidator;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.ChMed16APatientId.PATIENT_ID_TYPE_INSURANCE_CARD;
 
 public class EPrescriptionConverterTest {
+    private static final String CHMED16A_PRE_CH_TRANSMISSION_FORMAT_EXAMPLE = "CHMED16A1H4sIAAAAAAAAAzWPMU/DMBCFZ/IrolvB0p3b+O6yUSEEEkUM3RCDW7uiQyNE3AFV+e84diN5ed/ze093bdoWPnw6xSFB316zzOD53Z9jlvDihxEeKnxb4PYypvi74M3THARSZkOUH9xlY5pd2MZwOuTUkMb857ME6kQ2X8OcYyfYEWuHa3S3zmLu/n7mNVvI1HwthTe+Krp2+OACd7I3qvFoSOloNAgZF0UcH7yGzpdqeLyk77qKhIjMwqLVqmdYtCuDzljZEfUo/Vrv0faI0Ez/cZpKMywBAAA=";
+
     @Test
-    void convertAndValidatePrescription() throws IOException {
+    void convertChEmedEprPrescriptionAndValidate() throws IOException {
         final var xml = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreParacetamolAxapharmCARAPMP004.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PRE);
@@ -64,7 +76,6 @@ public class EPrescriptionConverterTest {
         assertEquals(CdTyp9.TABLET, emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(lastRequest.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -99,7 +110,7 @@ public class EPrescriptionConverterTest {
     }
 
     @Test
-    void convertAndValidateFreeTextDosagePrescription() throws IOException {
+    void convertChEmedEprFreeTextDosagePrescriptionAndValidate() throws IOException {
         final var json = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreCARAPMP004MarcoumarFreeTextDosage.json").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(json, EmedDocumentType.PRE);
@@ -137,7 +148,6 @@ public class EPrescriptionConverterTest {
         assertNull(emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(lastRequest.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -172,7 +182,7 @@ public class EPrescriptionConverterTest {
     }
 
     @Test
-    void convertAndValidateMultipleMedicationsPrescription() throws IOException {
+    void convertChEmedEprMultipleMedicationsPrescriptionAndValidate() throws IOException {
         final var json = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentUCSF7CARAPMP004PREDafalgan.json").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(json, EmedDocumentType.PRE);
@@ -211,7 +221,6 @@ public class EPrescriptionConverterTest {
         assertNull(emediplan.getMedicaments().getFirst().getUnit());
         assertEquals(request.getDosageInstructionFirstRep().getPatientInstruction(), emediplan.getMedicaments().getFirst().getApplicationInstructions());
         assertNull(emediplan.getMedicaments().getFirst().getRepetition());
-        assertNull(emediplan.getMedicaments().getFirst().getRepetitionObject());
         assertNull(emediplan.getMedicaments().getFirst().getForbidSubstitution());
         assertNull(emediplan.getMedicaments().getFirst().getNumberOfPackages());
         assertTrue(emediplan.getMedicaments().getFirst().getExtensions().isEmpty());
@@ -245,7 +254,6 @@ public class EPrescriptionConverterTest {
         assertNull(medicament.getUnit());
         assertEquals(request.getDosageInstructionFirstRep().getPatientInstruction(), medicament.getApplicationInstructions());
         assertNull(medicament.getRepetition());
-        assertNull(medicament.getRepetitionObject());
         assertNull(medicament.getForbidSubstitution());
         assertNull(medicament.getNumberOfPackages());
         assertTrue(medicament.getExtensions().isEmpty());
@@ -277,5 +285,52 @@ public class EPrescriptionConverterTest {
         emediplan.trim();
         final var serializedEmediplan = emediplan.toChTransmissionFormat();
         assertNotNull(serializedEmediplan);
+    }
+
+    @Test
+    public void convertEPrescriptionAndValidate() throws IOException {
+        final var ePrescription = EPrescription.fromChTransmissionFormat(CHMED16A_PRE_CH_TRANSMISSION_FORMAT_EXAMPLE);
+        assertNotNull(ePrescription);
+        //the ePrescription example from eRezept site is actually from the original CHMED16A specs, so it is missing
+        //some stuff from the revisions that we should add now
+        ePrescription.setRevision(EPrescription.LAST_SUPPORTED_REVISION);
+        ePrescription.setHealthcarePerson(new ChMed16AHealthcarePerson(
+                ePrescription.getAuthor(),
+                "John",
+                "Doe",
+                ePrescription.getZsr()
+        ));
+        final var orgAddress = new ChMed16AExtendedPostalAddress();
+        orgAddress.setPostalCode("12345");
+        orgAddress.setStreet("1 Rue de la Barbe-à-papa");
+        orgAddress.setCity("Fausseville");
+        ePrescription.setHealthcareOrganization(new ChMed16AHealthcareOrganization(
+            "Example Cabinet",
+                null,
+                orgAddress,
+                null,
+                null,
+                null
+        ));
+        final var posology = new ChMed16APosology();
+        posology.setDailyDoses(new ChMed16ADailyDosage(0.0, 1.0, 0.0, 1.0));
+        ePrescription.getMedicaments().getFirst().getPosology().add(posology);
+        ePrescription.getMedicaments().getFirst().setUnit(CdTyp9.TABLET);
+        ePrescription.getPatient().setIds(List.of(new ChMed16APatientId(PATIENT_ID_TYPE_INSURANCE_CARD, "80756012345678912345")));
+        assertTrue(ePrescription.validate().isSuccessful());
+
+        final var converter = new EPrescriptionConverter(
+                (type, id) -> {
+                    final var med = new ChEmedEprMedication();
+                    med.setCode(new CodeableConcept().setText("IBUPROFEN"));
+                    return med;
+                },
+                medReq -> new ChEmedExtTreatmentPlan(UUID.randomUUID(), UUID.randomUUID())
+        );
+        final var pre = converter.toChEmedEprPrescription(ePrescription, LanguageCode.ENGLISH, null);
+
+        //validate the resulting PRE
+        final var validator = new ChEmedEprHapiValidator(FhirContext.forR4Cached());
+        assertTrue(validator.validateDocumentBundle(pre, EmedDocumentType.PRE.getProfile()).isSuccessful());
     }
 }
