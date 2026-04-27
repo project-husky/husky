@@ -40,12 +40,12 @@
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.6</jaxb.version>
-		<spring.version>6.2.16</spring.version>
-		<spring.boot.version>3.5.10</spring.boot.version>
+		<spring.version>6.2.18</spring.version>
+		<spring.boot.version>3.5.14</spring.boot.version>
 		<hapi.fhir.version>8.6.5</hapi.fhir.version>
 		<hapi.version>2.6.0</hapi.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel-version>4.16.0</camel-version>
+		<camel-version>4.18.0</camel-version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
 		<org.hl7.fhir.version>6.6.7</org.hl7.fhir.version>
@@ -250,6 +250,36 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-spring-boot-starter</artifactId>
+				<version>${camel-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-core-engine</artifactId>
+				<version>${camel-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-management</artifactId>
+				<version>${camel-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-http-common</artifactId>
+				<version>${camel-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-core-languages</artifactId>
+				<version>${camel-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-direct</artifactId>
+				<version>${camel-version}</version>
 			</dependency>
 
 			<dependency>
@@ -547,6 +577,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+
 			<!-- Schematron validator (Apache 2.0) -->
 			<dependency>
 				<groupId>com.helger.schematron</groupId>
@@ -654,6 +685,12 @@
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>org.hl7.fhir.convertors</artifactId>
 				<version>${org.hl7.fhir.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.thymeleaf</groupId>
+				<artifactId>thymeleaf</artifactId>
+				<version>3.1.5.RELEASE</version>
 			</dependency>
 
 			<!-- HTML to PDF conversion -->
@@ -1363,7 +1400,7 @@
 								<format>HTML</format>
 								<format>JSON</format>
 							</formats>
-							<nvdApiServerId>nvd-server</nvdApiServerId>
+							<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
 						</configuration>
 						<executions>
 							<execution>
