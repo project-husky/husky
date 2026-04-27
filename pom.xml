@@ -42,13 +42,13 @@
 		<jaxb.version>4.0.6</jaxb.version>
 		<spring.version>6.2.18</spring.version>
 		<spring.boot.version>3.5.14</spring.boot.version>
-		<hapi.fhir.version>8.6.5</hapi.fhir.version>
-		<hapi.version>2.6.0</hapi.version>
+		<hapi.fhir.version>8.8.0</hapi.fhir.version>
+		<org.hl7.fhir.version>6.7.9</org.hl7.fhir.version>
+		<hapi.version>2.6.0</hapi.version> <!-- HL7v2 -->
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel-version>4.18.0</camel-version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
-		<org.hl7.fhir.version>6.6.7</org.hl7.fhir.version>
 		<fasterxml.version>2.17.2</fasterxml.version>
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
