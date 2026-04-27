@@ -1363,7 +1363,7 @@
 								<format>HTML</format>
 								<format>JSON</format>
 							</formats>
-							<nvdApiServerId>nvd-server</nvdApiServerId>
+							<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
 						</configuration>
 						<executions>
 							<execution>
