@@ -2,6 +2,8 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.common.enums.UnitCode;
 import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 
 /**
@@ -128,6 +130,62 @@ public enum CdTyp9 implements EMediplanEnum<String> {
             case UL -> MICROLITRE;
             case UMOL -> MICROMOLE;
             case UNIT -> UNIT;
+        };
+    }
+
+    /**
+     * Gets the FHIR representation of the unit, if possible, {@code null} otherwise.
+     */
+    public @Nullable UnitCode toFhir() {
+        return switch(this) {
+            case PERCENT -> UnitCode.PERCENT;
+            case APPLICATION -> UnitCode.APPLICATION_UNIT_OF_PRODUCT_USAGE_QUALIFIER_VALUE;
+            case BLISTER -> UnitCode.BLISTER;
+            case BECQUEREL -> UnitCode.BQ;
+            case SACHET -> UnitCode.BAG;
+            case DOSE -> UnitCode.DOSE;
+            case PIPETTE -> UnitCode.PIPETTE;
+            case SYRINGE -> UnitCode.SYRINGE;
+            case UNIT_ALT, UNIT -> UnitCode.UNIT;
+            case TABLESPOON -> UnitCode.TABLESPOON_METRIC;
+            case BOTTLE -> UnitCode.BOTTLE;
+            case GRAM -> UnitCode.G;
+            case GIGABECQUEREL -> UnitCode.GBQ;
+            case DROP -> UnitCode.DROP;
+            case ACTUATION -> UnitCode.ACTUATION;
+            case KILOBECQUEREL -> UnitCode.KBQ;
+            case KILOCALORIE -> UnitCode.KCAL;
+            case KILOGRAM -> UnitCode.KG;
+            case KILOJOULE -> UnitCode.KJ;
+            case LITRE -> UnitCode.LT;
+            case CUP -> UnitCode.CUP;
+            case MEGABECQUEREL -> UnitCode.MBQ;
+            case MICROGRAM -> UnitCode.UG;
+            case MICROLITRE -> UnitCode.UL;
+            case MICROMOLE -> UnitCode.UMOL;
+            case MILLIGRAM -> UnitCode.MG;
+            case MILLION_UNIT, MILLION_UNIT_ALT -> UnitCode.MIOU;
+            case MILLION_INTERNATIONAL_UNIT -> UnitCode.MILLIONINTERNATIONALUNIT;
+            case MILLILITRE -> UnitCode.ML;
+            case MILLIMOLE -> UnitCode.MMOL;
+            case MOLE -> UnitCode.MOL;
+            case NANOGRAM -> UnitCode.NG;
+            case SPOONFUL -> UnitCode.SPOONFUL;
+            case NANOMOLE -> UnitCode.NMOL;
+            case CARTRIDGE -> UnitCode.CARTRIDGE;
+            case PACKAGE, INDIVIDUAL_PACKAGE -> UnitCode.PACKAGE;
+            case PLASTER -> UnitCode.PLASTER;
+            case PIECE -> UnitCode.PIECE;
+            case TABLET -> UnitCode.TABLET;
+            case TUBE -> UnitCode.TUBE;
+            case TEASPOON -> UnitCode.TEASPOON_METRIC;
+            case THOUSAND_UNIT -> UnitCode.THOUSAND_PER_STAR_UNIT;
+            case INTERNATIONAL_UNIT -> UnitCode.INTERNATIONAL_UNIT;
+            case HOUR -> UnitCode.H;
+            case YEAR -> UnitCode.A;
+            case MONTH -> UnitCode.MO;
+            case DAY -> UnitCode.D;
+            case UNKNOWN -> null;
         };
     }
 }

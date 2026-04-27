@@ -42,4 +42,6 @@ public interface ChEmedEprEntry extends IBaseResource {
      */
     @ExpectsValidResource
     Instant resolveMedicalAuthorshipTimestamp();
+
+    ChEmedEprEntry copy();
 }

@@ -9,13 +9,15 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.utils.datatypes.Oids;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanIdentifier;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChMed16APatientId implements EMediplanObject {
+public class ChMed16APatientId implements EMediplanIdentifier {
     public static final int PATIENT_ID_TYPE_INSURANCE_CARD = 1;
     protected static final String TYPE_FIELD_NAME = "Type";
 
@@ -69,5 +71,14 @@ public class ChMed16APatientId implements EMediplanObject {
         return CodeSystems.SWISS_VEKA_NR.getCodeSystemId().equalsIgnoreCase(Oids.normalize(identifier.getSystem()))?
                 new ChMed16APatientId(PATIENT_ID_TYPE_INSURANCE_CARD, identifier.getValue())
                 : null;
+    }
+
+    @Override @ExpectsValidResource
+    public Identifier toFhir() {
+        if (type == null || type !=  PATIENT_ID_TYPE_INSURANCE_CARD) throw new InvalidEmedContentException("Unexpected patient id type.");
+        if (value == null || value.isBlank()) throw new InvalidEmedContentException("The patient id cannot be null or empty.");
+        return (new Identifier())
+                .setSystem(Oids.PREFIX_OID + CodeSystems.SWISS_VEKA_NR.getCodeSystemId())
+                .setValue(value);
     }
 }

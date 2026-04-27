@@ -3,8 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.hl7.fhir.r5.elementmodel.Manager;
-import org.hl7.fhir.r5.utils.EOperationOutcome;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -25,13 +23,13 @@ import java.util.stream.Collectors;
  **/
 public interface ChEmedEprValidator {
     List<String> packageResourceList = List.of(
-            "/package/ihe.formatcode.fhir#1.3.0.tgz",
-            "/package/ch.fhir.ig.ch-term#3.1.0.tgz",
-            "/package/ch.fhir.ig.ch-core#5.0.0.tgz",
-            "/package/ch.fhir.ig.ch-emed#5.0.0.tgz",
-            "/package/ch.fhir.ig.ch-emed-epr#2.0.0.tgz",
-            "/package/ch.fhir.ig.ch-epr-fhir#4.0.1.tgz",
-            "/package/ihe.iti.mhd#4.2.2.tgz"
+            "/package/ihe.formatcode.fhir#1.4.0.tgz",
+            "/package/ch.fhir.ig.ch-term#3.3.0.tgz",
+            "/package/ch.fhir.ig.ch-core#6.0.0.tgz",
+            "/package/ch.fhir.ig.ch-emed#6.0.0.tgz",
+            "/package/ch.fhir.ig.ch-emed-epr#3.0.0.tgz",
+            "/package/ch.fhir.ig.ch-epr-fhir#5.0.0.tgz",
+            "/package/ihe.iti.mhd#4.2.3.tgz"
             );
 
     /**
@@ -39,14 +37,12 @@ public interface ChEmedEprValidator {
      *
      * @param documentStream The document Bundle to validate as a stream.
      * @param document       The parsed CH EMED EPR document, for the logic validator.
-     * @param streamFormat   The FHIR format of the document stream content.
      * @return the validation result.
      * @implNote We need the parsed document for the logical validator and the serialized document for the instance
      * validator, because HAPI's parser messes with resource IDs.
      */
     ValidationResult validateDocumentBundle(final InputStream documentStream,
-                                            final ChEmedEprDocument document,
-                                            final Manager.FhirFormat streamFormat) throws EOperationOutcome, IOException;
+                                            final ChEmedEprDocument document) throws IOException;
 
     /**
      * Validates a CH-EMED-EPR document Bundle. No logic validation is performed on the content.
@@ -57,7 +53,7 @@ public interface ChEmedEprValidator {
      */
     ValidationResult validateDocumentBundle(final Bundle bundle,
                                                    final String profile
-    ) throws EOperationOutcome, IOException;
+    ) throws IOException;
 
     /**
      * Maps an {@link OperationOutcome} issue to Husky's own model of a validation issue.
@@ -102,17 +98,14 @@ public interface ChEmedEprValidator {
     /**
      * Returns the profile URL from the eMed type.
      *
+     * @deprecated Deprecated and marked for removal since Husky 3.2.2.
+     *             Use {@link EmedDocumentType#getProfileEpr()} instead.
+     *
      * @param type The eMed type.
      * @return the profile URL.
      */
+    @Deprecated(since = "3.2.2", forRemoval = true)
     static String getProfileUrl(final EmedDocumentType type) {
-        return switch (type) {
-            case MTP -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
-            case PRE -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription";
-            case DIS -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationdispense";
-            case PADV -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
-            case PML -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist";
-            case PMLC -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationcard";
-        };
+        return type.getProfileEpr();
     }
 }

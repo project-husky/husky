@@ -12,6 +12,7 @@ import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareProCarrier;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.ChMed23AGender;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.EMediplanAuthor;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AMedicament>
+public class ChMed23AEMediplan extends EMediplan<ChMed23AExtension, ChMed23AGender, ChMed23AMedicament, ChMed23APatientId>
         implements ChMed23AExtendable, EMediplanHealthcareProCarrier<ChMed23AHealthcarePerson, ChMed23AHealthcareOrganization> {
     public static final String EMEDIPLAN_VERSION = "CHMED23A";
 

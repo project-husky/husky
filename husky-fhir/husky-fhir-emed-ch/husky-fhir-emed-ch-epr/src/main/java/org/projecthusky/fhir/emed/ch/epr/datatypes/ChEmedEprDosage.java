@@ -144,7 +144,7 @@ public class ChEmedEprDosage extends Dosage {
      * @return this.
      */
     @Override
-    public ChEmedEprDosage setPatientInstruction(final String patientInstruction) {
+    public ChEmedEprDosage setPatientInstruction(final @Nullable String patientInstruction) {
         super.setPatientInstruction(patientInstruction);
         return this;
     }

@@ -1,0 +1,199 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<html th:lang="${lang.getLanguageCode().getCodeValue()}">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${title}"/>
+    <meta name="subject" th:content="${subject}"/>
+    <meta name="author" th:content="${author}"/>
+    <meta name="description" th:content="${description}"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <bookmarks>
+        <bookmark th:each="bookmark: ${bookmarks.instanceMap}"
+                  th:href="${bookmark.value}"
+                  th:name="${bookmark.key}"/>
+    </bookmarks>
+    <style>
+        @page {
+            font-family: "carlito", "arimo", sans-serif;
+            margin: 99.8mm 12mm 32mm 12mm;
+            size: a4 portrait;
+
+            @top-center {
+                content: element(zones-a-b-c)
+            }
+
+            @bottom-center {
+                content: element(zone-f);
+            }
+        }
+
+        body {
+            font-family: "carlito", "arimo", sans-serif;
+            font-size: 11pt;
+            line-height: 14pt;
+        }
+
+        .eprescription-header {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            position: running(zones-a-b-c);
+        }
+        .eprescription-header th {
+            display: none;
+        }
+        td.eprescription-logo {
+            vertical-align: top;
+        }
+        #eprescription-logo {
+            width: 70mm;
+            display: inline-block;
+            /*margin-top: 20mm;*/
+            padding: 7mm 0 0 0;
+            vertical-align: top;
+        }
+        .eprescription-main-title {
+            display: inline-block;
+            margin-top: 12mm;
+            /*margin-bottom: -5mm;*/
+            background-color: lightgray;
+            vertical-align: top;
+            padding: 0 1em 0 0.5em;
+        }
+        .eprescription-main-title-content {
+            font-weight: bold;
+            font-size: 17pt;
+            line-height: 20pt;
+        }
+        .eprescription-main-title-disclaimer {
+            font-weight: bold;
+            font-size: 11pt;
+            line-height: 14pt;
+        }
+        .eprescription-zone-b {
+            overflow: hidden;
+        }
+        .emediplan-qrcode {
+            /*margin: 0 0 -12mm -12mm;*/
+            height: 94mm;
+            width: 94mm;
+            margin: -12mm;
+        }
+        div.eprescription-zone-c {
+            width: 97mm;
+            height: 70mm;
+            position: relative;
+            vertical-align: top;
+        }
+        .eprescription-practitioner {
+            margin-top: 7.5mm;
+        }
+        .eprescription-practitioner span {
+            display: block;
+        }
+        .eprescription-organization-name {
+            margin-top: 7.2mm;
+        }
+        .eprescription-organization-name, .eprescription-organization-zsr {
+            display:block;
+        }
+        .eprescription-timestamp {
+            display: inline-block;
+            width: 100%;
+            margin-top: 6mm;
+            margin-bottom: 12mm;
+            position: absolute;
+            bottom: 0;
+        }
+        .eprescription-timestamp-value {
+            display: block;
+        }
+        .eprescription-timestamp-value:after {
+            content: 'Page ' counter(page) '/' counter(pages);
+            float:right;
+            display: inline-block;
+        }
+
+        .eprescription-zone-d {
+            margin: 0;
+            padding: 0;
+        }
+
+        .eprescription-zone-e {
+            margin: 6mm 0 6mm 0;
+            padding: 0;
+        }
+        .eprescription-requests > table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .eprescription-requests > table > thead {
+            border-collapse: collapse;
+            display: none;
+        }
+        .eprescription-requests > table > tbody > tr {
+            page-break-inside: avoid;
+        }
+        .eprescription-requests > table > tbody > tr > td {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-left: 1px dashed black;
+            padding: 0.5em;
+        }
+        .eprescription-requests > table > tbody > tr > td:first-child {
+            border-left: 0;
+        }
+        .eprescription-request-patient-instructions {
+            vertical-align: top;
+        }
+        .eprescription-zone-f {
+            margin: 0;
+            padding: 0;
+            position: running(zone-f);
+        }
+        .eprescription-id {
+            text-align: right;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        /*fonts:*/
+        /*small titles*/
+        .eprescription-practitioner-label, .eprescription-timestamp-label, .eprescription-patient-label, .eprescription-comments-label, .eprescription-id {
+            font-size: 9pt;
+            line-height: 14pt;
+        }
+        /*practitioner, organization*/
+        .eprescription-practitioner-name, .eprescription-organization-name {
+            font-weight: bold;
+        }
+        /*addresses, dosages: normal body font*/
+        /*patient, medications*/
+        .eprescription-patient-name-and-birthdate, .eprescription-prescribed-item {
+            font-weight: bold;
+            font-size: 13pt;
+            line-height: 14pt;
+        }
+        /*remarques pour pharmacie / patient*/
+        .eprescription-comments-content, .eprescription-request-patient-instructions, .eprescription-dispense-substitution {
+            font-style: italic;
+        }
+        /*footnote*/
+        .eprescription-footnote {
+            font-style: italic;
+            font-size: 9pt;
+            line-height: 11pt;
+        }
+    </style>
+</head>
+<body>
+    <th:block th:utext="${content}">eMediplan content placeholder</th:block>
+</body>
+</html>

@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.camel.util.json.JsonArray;
 import org.apache.commons.io.IOUtils;
 import org.projecthusky.common.basetypes.AddressBaseType;
 import org.projecthusky.common.basetypes.CodeBaseType;
@@ -102,7 +104,7 @@ public class ValueSetManager {
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
 	 * definition file</div>
 	 */
-	public static final String JSON_VALUE_SET_BASE_PATH = "$.valueSet[0]";
+	public static final String JSON_VALUE_SET_BASE_PATH = "$..valueSet[0]";
 
 	/**
 	 * <div class="en">Build the complete URL to retrieve a value set from
@@ -111,18 +113,58 @@ public class ValueSetManager {
 	 * <div class="de">Erstellt die vollständige URL, um einen Wertesatz von
 	 * ART-DECOR abzurufen.</div>
 	 *
-	 * @param baseUrl       The base URL that includes host, path and prefix.
-	 * @param id            the id
-	 * @param effectiveDate the effective date
+	 * @param baseUrl
+	 *            The base URL that includes host, path and prefix.
+	 * @param id
+	 *            the id
+	 * @param effectiveDate
+	 *            the effective date
 	 * @return The complete URL to download a value set in JSON format.
-	 * @throws MalformedURLException When the provided baseUrl is invalid.
+	 * @throws MalformedURLException
+	 *             When the provided baseUrl is invalid.
 	 */
-	public static URL buildValueSetArtDecorUrl(String baseUrl, IdentificatorBaseType id, Date effectiveDate)
-			throws MalformedURLException {
+	public static URL buildValueSetArtDecorUrl(String baseUrl, IdentificatorBaseType id,
+			Date effectiveDate) throws MalformedURLException {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		return new URL(
-				baseUrl + "&id=" + java.net.URLEncoder.encode(id.getRoot(), StandardCharsets.UTF_8) + "&effectiveDate="
-						+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), StandardCharsets.UTF_8));
+				baseUrl + "&id=" + java.net.URLEncoder.encode(id.getRoot(), StandardCharsets.UTF_8)
+						+ "&effectiveDate=" + java.net.URLEncoder
+								.encode(dateFormat.format(effectiveDate), StandardCharsets.UTF_8));
+	}
+
+	/**
+	 * Method to build ART-DECOR FHIR ValueSet URL with different format
+	 * options.
+	 * 
+	 * 
+	 * @param urlTemplate
+	 *            the url template i.e.
+	 *            https://art-decor.org/exist/apps/api/valueset/{id}/{effectiveDate}/$extract?project=ch-epr-&language=en-US&format={format}
+	 * @param id
+	 *            the id
+	 * @param effectiveDate
+	 *            the effective date
+	 * @param format
+	 *            the format i.e. json or xml
+	 * @return The complete URL to download a value set in specified format.
+	 * @throws MalformedURLException
+	 *             the malformed URL exception
+	 */
+	public static URL buildValueSetArtDecorUrl2(String urlTemplate, IdentificatorBaseType id,
+			Date effectiveDate, String format) throws MalformedURLException {
+		// String urlStr = String.format(urlTemplate, //
+		// id.getRoot(), (effectiveDate != null) ? java.net.URLEncoder.encode(//
+		// new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(effectiveDate),
+		// StandardCharsets.UTF_8) : "", //
+		// format);
+		String urlStr = urlTemplate//
+				.replace("{id}", id.getRoot())//
+				.replace("{effectiveDate}",
+						(effectiveDate != null) ? java.net.URLEncoder.encode(
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(effectiveDate),
+								StandardCharsets.UTF_8) : "")//
+				.replace("{format}", format);
+		return new URL(urlStr);
 	}
 
 	/**
@@ -132,19 +174,22 @@ public class ValueSetManager {
 	 * <div class="de">Lädt einen Wertesatz herunter wie in der angegebenen
 	 * Konfiguration definiert.</div>
 	 *
-	 * @param valueSetConfig the value set config
+	 * @param valueSetConfig
+	 *            the value set config
 	 * @return the value set
-	 * @throws MalformedURLException        the malformed URL exception
-	 * @throws IOException                  Signals that an I/O exception has
-	 *                                      occurred.
+	 * @throws MalformedURLException
+	 *             the malformed URL exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 * @throws InitializationException
 	 */
-	public ValueSet downloadValueSet(ValueSetConfig valueSetConfig)
-			throws IOException, ParserConfigurationException, SAXException, InitializationException {
+	public ValueSet downloadValueSet(ValueSetConfig valueSetConfig) throws IOException,
+			ParserConfigurationException, SAXException, InitializationException {
 		ValueSet retVal = null;
-		if (valueSetConfig != null && SourceSystemType.ARTDECOR_FHIR.equals(valueSetConfig.getSourceSystemType())) {
+		if (valueSetConfig != null
+				&& SourceSystemType.ARTDECOR_FHIR.equals(valueSetConfig.getSourceSystemType())) {
 			var sourceUrlString = valueSetConfig.getSourceUrl();
 			var downloadedString = "";
 			try {
@@ -157,13 +202,16 @@ public class ValueSetManager {
 				downloadedString = downloadedString.replace("\r\n", "\n");
 				switch (valueSetConfig.getSourceFormatType()) {
 				case JSON:
-					retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
+					retVal = loadValueSetJson(
+							IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 					break;
 				case XML:
-					retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
+					retVal = loadValueSetXml(
+							IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 					break;
 				case IHESVS:
-					retVal = loadValueSetIheSvs(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
+					retVal = loadValueSetIheSvs(
+							IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 					break;
 				}
 			} catch (RuntimeException e) {
@@ -182,21 +230,24 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Downloads a value set as defined in the given configuration.
-	 * It will be returned in raw dformat exactly as downloaded.</div>
+	 * <div class="en">Downloads a value set as defined in the given
+	 * configuration. It will be returned in raw dformat exactly as
+	 * downloaded.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz herunter wie in der angegebenen
 	 * Konfiguration definiert. Es wird im Roh-Format genau wie heruntergeladen
 	 * zurückgegeben.</div>
 	 *
-	 * @param valueSetConfig the value set config
+	 * @param valueSetConfig
+	 *            the value set config
 	 * @return the output stream
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 */
 	public byte[] downloadValueSetRaw(ValueSetConfig valueSetConfig) throws IOException {
 		byte[] retVal = null;
-		if (valueSetConfig != null && SourceSystemType.ARTDECOR_FHIR.equals(valueSetConfig.getSourceSystemType())) {
+		if (valueSetConfig != null
+				&& SourceSystemType.ARTDECOR_FHIR.equals(valueSetConfig.getSourceSystemType())) {
 			retVal = VsUtils.downloadAsByteArray(new URL(valueSetConfig.getSourceUrl()));
 		}
 		return retVal;
@@ -205,8 +256,10 @@ public class ValueSetManager {
 	/**
 	 * Evaluates the given XPath expression into a node list.
 	 *
-	 * @param xmlDoc    the xml doc
-	 * @param xpathExpr the xpath expr
+	 * @param xmlDoc
+	 *            the xml doc
+	 * @param xpathExpr
+	 *            the xpath expr
 	 * @return the node list
 	 */
 	private NodeList evaluateXpathExprAsNodeList(Document xmlDoc, String xpathExpr) {
@@ -232,8 +285,10 @@ public class ValueSetManager {
 	/**
 	 * Evaluates the given XPath expression as string.
 	 *
-	 * @param xmlDoc    the xml doc
-	 * @param xpathExpr the xpath expr
+	 * @param xmlDoc
+	 *            the xml doc
+	 * @param xpathExpr
+	 *            the xpath expr
 	 * @return the string
 	 */
 	private String evaluateXpathExprAsString(Document xmlDoc, String xpathExpr) {
@@ -251,10 +306,12 @@ public class ValueSetManager {
 					try {
 						var transformerFactory = TransformerFactory.newInstance();
 						transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-						transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+						transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET,
+								"");
 						transformer = transformerFactory.newTransformer();
 						transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-						transformer.transform(new DOMSource(nodes.item(i)), new StreamResult(writer));
+						transformer.transform(new DOMSource(nodes.item(i)),
+								new StreamResult(writer));
 						retVal.append(writer.toString());
 					} catch (TransformerFactoryConfigurationError | TransformerException e) {
 						// Do nothing
@@ -267,10 +324,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Gets the language code from a given textContent out of JSON or XML (including
-	 * IHE SVS).
+	 * Gets the language code from a given textContent out of JSON or XML
+	 * (including IHE SVS).
 	 *
-	 * @param textContent the text content
+	 * @param textContent
+	 *            the text content
 	 * @return the language code
 	 */
 	private LanguageCode getLanguageCode(String textContent) {
@@ -283,13 +341,16 @@ public class ValueSetManager {
 	/**
 	 * Gets the value set as a json map.
 	 *
-	 * @param reader the reader
+	 * @param reader
+	 *            the reader
 	 * @return the value set as a json map
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private Map<String, Object> getValueSetJsonMap(InputStreamReader reader) throws IOException {
 		var json = IOUtils.toString(reader);
-		return JsonPath.read(json, JSON_VALUE_SET_BASE_PATH);
+		JSONArray jsonArray = JsonPath.read(json, JSON_VALUE_SET_BASE_PATH);
+		return (Map<String, Object>) jsonArray.get(0);
 	}
 
 	/**
@@ -298,7 +359,8 @@ public class ValueSetManager {
 	 * <div class="de">Lädt eine Wertesatzkonfiguration aus der angegebenen
 	 * Datei</div>
 	 *
-	 * @param config the config
+	 * @param config
+	 *            the config
 	 * @return the value set config
 	 * @throws IOException
 	 */
@@ -314,7 +376,8 @@ public class ValueSetManager {
 	 * <div class="de">Lädt eine Wertesatzkonfiguration aus dem angegebenen
 	 * Stream</div>
 	 *
-	 * @param inputStream the config
+	 * @param inputStream
+	 *            the config
 	 * @return the value set config
 	 */
 	public ValueSetConfig loadValueSetConfig(InputStream inputStream) {
@@ -324,13 +387,15 @@ public class ValueSetManager {
 
 	/**
 	 * <div class="en">Loads a value set config from the given file (the given
-	 * filename must contain the relative or full path to access the file).</div>
+	 * filename must contain the relative or full path to access the
+	 * file).</div>
 	 *
-	 * <div class="de">Lädt eine Wertesatzkonfiguration aus der angegebenen Datei
-	 * (der angegebene Dateiname muss den relativen oder vollständigen Pfad
-	 * enthalten, um auf die Datei zuzugreifen)</div>
+	 * <div class="de">Lädt eine Wertesatzkonfiguration aus der angegebenen
+	 * Datei (der angegebene Dateiname muss den relativen oder vollständigen
+	 * Pfad enthalten, um auf die Datei zuzugreifen)</div>
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the value set config
 	 * @throws IOException
 	 */
@@ -339,32 +404,35 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * IHE SVS format.</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in IHE SVS format.</div>
 	 *
-	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im IHE
-	 * SVS-Format bereitgestellt wird.</div>
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * IHE SVS-Format bereitgestellt wird.</div>
 	 *
-	 * @param valueSet the value set
+	 * @param valueSet
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public ValueSet loadValueSetIheSvs(File valueSet) throws IOException, ParserConfigurationException, SAXException {
+	public ValueSet loadValueSetIheSvs(File valueSet)
+			throws IOException, ParserConfigurationException, SAXException {
 		try (var is = new FileInputStream(valueSet)) {
 			return loadValueSetIheSvs(is);
 		}
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given stream, which is provided in
-	 * IHE SVS format.</div>
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in IHE SVS format.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
 	 * IHE-SVS-Format bereitgestellt wird.</div>
 	 *
-	 * @param inputStream the value set
+	 * @param inputStream
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
@@ -379,7 +447,8 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@id");
 		if (textContent != null)
-			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(textContent).build());
+			valueSet.setIdentificator(
+					IdentificatorBaseType.builder().withRoot(textContent).build());
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Purpose//node()");
 		if (textContent != null)
@@ -389,7 +458,8 @@ public class ValueSetManager {
 		if (textContent != null)
 			valueSet.setDisplayName(textContent);
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:EffectiveDate/text()");
+		textContent = evaluateXpathExprAsString(xmlDoc,
+				"//ihesvs:ValueSet/ihesvs:EffectiveDate/text()");
 		if (textContent != null)
 			version.setValidFrom(getValidFromDate(textContent));
 
@@ -399,7 +469,8 @@ public class ValueSetManager {
 
 		ArrayList<LanguageCode> langCodes = new ArrayList<>();
 		NodeList nodeList;
-		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ihesvs:ValueSet/ihesvs:ConceptList/@lang");
+		nodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"//ihesvs:ValueSet/ihesvs:ConceptList/@lang");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
@@ -409,7 +480,8 @@ public class ValueSetManager {
 			}
 		}
 
-		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ihesvs:ValueSet/ihesvs:ConceptList[1]/ihesvs:Concept");
+		nodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"//ihesvs:ValueSet/ihesvs:ConceptList[1]/ihesvs:Concept");
 
 		if (nodeList != null) {
 			valueSet.getValueSetEntryList().addAll(getValueSetEntries(nodeList, langCodes, xmlDoc));
@@ -427,8 +499,8 @@ public class ValueSetManager {
 		return valueSet;
 	}
 
-	private List<ValueSetEntry> getValueSetEntries(NodeList nodeList, ArrayList<LanguageCode> langCodes,
-			Document xmlDoc) {
+	private List<ValueSetEntry> getValueSetEntries(NodeList nodeList,
+			ArrayList<LanguageCode> langCodes, Document xmlDoc) {
 		List<ValueSetEntry> entries = new LinkedList<>();
 		String textContent = null;
 
@@ -443,9 +515,10 @@ public class ValueSetManager {
 
 					for (LanguageCode languageCode : langCodes) {
 						textContent = evaluateXpathExprAsString(xmlDoc,
-								"//ihesvs:ValueSet/ihesvs:ConceptList[@lang='" + languageCode.getCodeValue()
-										+ "' or starts-with(@lang,'" + languageCode.getCodeValue()
-										+ "')]/Concept[@code='" + code.getCode() + "' and @codeSystem='"
+								"//ihesvs:ValueSet/ihesvs:ConceptList[@lang='"
+										+ languageCode.getCodeValue() + "' or starts-with(@lang,'"
+										+ languageCode.getCodeValue() + "')]/Concept[@code='"
+										+ code.getCode() + "' and @codeSystem='"
 										+ code.getCodeSystem() + "']/@displayName");
 						if (textContent != null) {
 							var designation = Designation.builder().withLanguageCode(languageCode)
@@ -472,32 +545,36 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * IHE SVS format (the given filename must contain the relative or full path to
-	 * access the file).</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in IHE SVS format (the given filename must contain the relative or full
+	 * path to access the file).</div>
 	 *
-	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im IHE
-	 * SVS-Format bereitgestellt wird (der angegebene Dateiname muss den relativen
-	 * oder vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * IHE SVS-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public ValueSet loadValueSetIheSvs(String fileName) throws IOException, ParserConfigurationException, SAXException {
+	public ValueSet loadValueSetIheSvs(String fileName)
+			throws IOException, ParserConfigurationException, SAXException {
 		return loadValueSetIheSvs(new File(fileName));
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * JSON format.</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in JSON format.</div>
 	 *
-	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im JSON
-	 * bereitgestellt wird.</div>
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * JSON bereitgestellt wird.</div>
 	 *
-	 * @param valueSet the value set
+	 * @param valueSet
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 */
@@ -508,13 +585,14 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given stream, which is provided in
-	 * JSON format.</div>
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in JSON format.</div>
 	 *
-	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im JSON
-	 * bereitgestellt wird.</div>
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
+	 * JSON bereitgestellt wird.</div>
 	 *
-	 * @param inputStream the value set
+	 * @param inputStream
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 */
@@ -538,7 +616,8 @@ public class ValueSetManager {
 		}
 
 		if ("id".contentEquals(key)) {
-			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(value.toString()).build());
+			valueSet.setIdentificator(
+					IdentificatorBaseType.builder().withRoot(value.toString()).build());
 		} else if ("name".contentEquals(key)) {
 			valueSet.setName(value.toString());
 		} else if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(key)) {
@@ -550,16 +629,14 @@ public class ValueSetManager {
 		} else if ("statusCode".contentEquals(key)) {
 			var status = value.toString();
 			valueSet.setStatus(getStatusCode(status));
-		} else if ("desc".contentEquals(key)
-				&& (value.getClass() == JSONArray.class)) {
+		} else if ("desc".contentEquals(key) && (value.getClass() == JSONArray.class)) {
 			JSONArray descs = (JSONArray) value;
 			valueSet.getDescriptionList().addAll(getDescriptions(descs));
 		} else if ("publishingAuthority".contentEquals(key)
 				&& (value.getClass() == JSONArray.class)) {
 			JSONArray descs = (JSONArray) value;
 			valueSet.getVersion().setPublishingAuthority(getPublishingAuthority(descs));
-		} else if ("conceptList".contentEquals(key) 
-				&& (value.getClass() == JSONArray.class)) {
+		} else if ("conceptList".contentEquals(key) && (value.getClass() == JSONArray.class)) {
 			JSONArray concepts = (JSONArray) value;
 			addValueSetEntries(concepts, valueSet);
 		}
@@ -577,7 +654,8 @@ public class ValueSetManager {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date: [" + value + "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
+					"Cannot parse date: [" + value + "]. Expected format is yyyy-MM-ddTHH:mm:ss.",
+					e);
 		}
 	}
 
@@ -590,7 +668,8 @@ public class ValueSetManager {
 			for (Entry<String, Object> subEntry : subMap.entrySet()) {
 				String subKey = subEntry.getKey();
 				if ("name".contentEquals(subKey) && (subEntry.getValue() != null)) {
-					org.addName(NameBaseType.builder().withName(subEntry.getValue().toString()).build());
+					org.addName(NameBaseType.builder().withName(subEntry.getValue().toString())
+							.build());
 				}
 				if ("addrLine".contentEquals(subKey) && (subEntry.getValue() != null)) {
 					JSONArray contents = (JSONArray) subEntry.getValue();
@@ -658,11 +737,12 @@ public class ValueSetManager {
 					String lang = subEntry.getValue().toString();
 					languageCode = getLanguageCode(lang);
 				}
-				if (("content".equals(subKey) || "#text".equals(subKey)) && (subEntry.getValue() != null))
+				if (("content".equals(subKey) || "#text".equals(subKey))
+						&& (subEntry.getValue() != null))
 					content = subEntry.getValue().toString();
 			}
-			descriptions.add(new LangText(languageCode,
-					content.replace("\r\n", "\n").replace("\n", "").replaceAll("\\s+", " ").trim()));
+			descriptions.add(new LangText(languageCode, content.replace("\r\n", "\n")
+					.replace("\n", "").replaceAll("\\s+", " ").trim()));
 		}
 
 		return descriptions;
@@ -687,7 +767,8 @@ public class ValueSetManager {
 
 	/* complexity borderline => do not fix */
 	@SuppressWarnings("java:S3776")
-	private ValueSetEntry addValueSetEntry(Object object2, ValueSet valueSet, ValueSetEntry lastValueSetEntry) {
+	private ValueSetEntry addValueSetEntry(Object object2, ValueSet valueSet,
+			ValueSetEntry lastValueSetEntry) {
 
 		var valueSetEntry = getValueSetEntry(object2);
 
@@ -733,7 +814,8 @@ public class ValueSetManager {
 				// the new entry has a higher level as
 				// the last one. It gets added to the
 				// parent list.
-				if (lastValueSetEntry.getParent() == null || lastValueSetEntry.getParent().getParent() == null)
+				if (lastValueSetEntry.getParent() == null
+						|| lastValueSetEntry.getParent().getParent() == null)
 					// there is no parent. The entry is
 					// added to the main list
 					valueSet.addValueSetEntry(valueSetEntry);
@@ -803,14 +885,16 @@ public class ValueSetManager {
 			var designation = new Designation();
 			for (Entry<String, Object> subEntry3 : subMap3.entrySet()) {
 				String subKey3 = subEntry3.getKey();
-				if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey3) && (subEntry3.getValue() != null)) {
-					
+				if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey3)
+						&& (subEntry3.getValue() != null)) {
+
 					designation.setLanguageCode(getLanguageCode(subEntry3.getValue()));
 				}
 				if ("type".contentEquals(subKey3) && (subEntry3.getValue() != null)) {
 					designation.setType(getDesignationType(subEntry3.getValue().toString()));
 				}
-				if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey3) && (subEntry3.getValue() != null))
+				if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey3)
+						&& (subEntry3.getValue() != null))
 					designation.setDisplayName(subEntry3.getValue().toString());
 			}
 			designationList.add(designation);
@@ -818,12 +902,11 @@ public class ValueSetManager {
 
 		return designationList;
 	}
-	
+
 	private LanguageCode getLanguageCode(Object value) {
 		var languageCode = LanguageCode.getEnum(value.toString().toLowerCase());
 		if (languageCode == null)
-			languageCode = LanguageCode
-					.getEnum(value.toString().toLowerCase().substring(0, 2));
+			languageCode = LanguageCode.getEnum(value.toString().toLowerCase().substring(0, 2));
 
 		return languageCode;
 	}
@@ -877,15 +960,17 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * JSON format (the given filename must contain the relative or full path to
-	 * access the file).</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in JSON format (the given filename must contain the relative or full path
+	 * to access the file).</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
-	 * JSON-Format bereitgestellt wird (der angegebene Dateiname muss den relativen
-	 * oder vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
+	 * JSON-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the value set
 	 * @throws IOException
 	 */
@@ -894,32 +979,35 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * XML format.</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in XML format.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
 	 * XML-Format bereitgestellt wird.</div>
 	 *
-	 * @param valueSet the value set
+	 * @param valueSet
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public ValueSet loadValueSetXml(File valueSet) throws IOException, ParserConfigurationException, SAXException {
+	public ValueSet loadValueSetXml(File valueSet)
+			throws IOException, ParserConfigurationException, SAXException {
 		try (var is = new FileInputStream(valueSet)) {
 			return loadValueSetXml(is);
 		}
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given stream, which is provided in
-	 * XML format.</div>
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in XML format.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
 	 * XML-Format bereitgestellt wird.</div>
 	 *
-	 * @param inputStream the value set
+	 * @param inputStream
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
@@ -934,23 +1022,28 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@id");
 		if (textContent != null)
-			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(textContent).build());
+			valueSet.setIdentificator(
+					IdentificatorBaseType.builder().withRoot(textContent).build());
 
 		valueSet.getDescriptionList().addAll(getDescriptions(xmlDoc));
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@displayName");
+		textContent = evaluateXpathExprAsString(xmlDoc,
+				"//valueSets/project/valueSet/@displayName");
 		if (textContent != null)
 			valueSet.setDisplayName(textContent);
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@effectiveDate");
+		textContent = evaluateXpathExprAsString(xmlDoc,
+				"//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
 			version.setValidFrom(getValidFromDate(textContent));
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@versionLabel");
+		textContent = evaluateXpathExprAsString(xmlDoc,
+				"//valueSets/project/valueSet/@versionLabel");
 		if (textContent != null)
 			version.setLabel(textContent);
 
-		var nodeList = evaluateXpathExprAsNodeList(xmlDoc, "/valueSets/project/valueSet/conceptList/concept");
+		var nodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"/valueSets/project/valueSet/conceptList/concept");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
@@ -976,7 +1069,8 @@ public class ValueSetManager {
 	private List<LangText> getDescriptions(Document xmlDoc) {
 		List<LangText> descriptions = new LinkedList<>();
 		ArrayList<LanguageCode> langCodes = new ArrayList<>();
-		var nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//valueSets/project/valueSet/desc/@language");
+		var nodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"//valueSets/project/valueSet/desc/@language");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
@@ -990,7 +1084,8 @@ public class ValueSetManager {
 		for (LanguageCode languageCode : langCodes) {
 			textContent = evaluateXpathExprAsString(xmlDoc,
 					"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
-							+ "' or starts-with(@language,'" + languageCode.getCodeValue() + "')]/node()");
+							+ "' or starts-with(@language,'" + languageCode.getCodeValue()
+							+ "')]/node()");
 			if (textContent != null)
 				descriptions.add(new LangText(languageCode, textContent));
 
@@ -1013,8 +1108,9 @@ public class ValueSetManager {
 		}
 
 		NodeList subNnodeList;
-		subNnodeList = evaluateXpathExprAsNodeList(xmlDoc, "/valueSets/project/valueSet/conceptList/concept[@code='"
-				+ code.getCode() + "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
+		subNnodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"/valueSets/project/valueSet/conceptList/concept[@code='" + code.getCode()
+						+ "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
 
 		if (subNnodeList != null) {
 			for (var j = 0; j < subNnodeList.getLength(); j++) {
@@ -1030,7 +1126,8 @@ public class ValueSetManager {
 	private Designation getDesignation(Node subNode) {
 		var designation = new Designation();
 
-		String textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_LANGUAGE).getNodeValue();
+		String textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_LANGUAGE)
+				.getNodeValue();
 		if (textContent != null) {
 			var languageCode = LanguageCode.getEnum(textContent.toLowerCase());
 			if (languageCode == null)
@@ -1043,7 +1140,8 @@ public class ValueSetManager {
 			designation.setType(DesignationType.getEnum(textContent));
 		}
 
-		textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
+		textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME)
+				.getNodeValue();
 		if (textContent != null)
 			designation.setDisplayName(textContent);
 
@@ -1056,7 +1154,8 @@ public class ValueSetManager {
 
 		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
 
-		try (InputStream is = IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8)) {
+		try (InputStream is = IOUtils.toInputStream(IOUtils.toString(reader),
+				StandardCharsets.UTF_8)) {
 			return docBuilder.parse(is);
 		}
 	}
@@ -1080,32 +1179,36 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * XML format (the given filename must contain the relative or full path to
-	 * access the file).</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in XML format (the given filename must contain the relative or full path
+	 * to access the file).</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
-	 * XML-Format bereitgestellt wird (der angegebene Dateiname muss den relativen
-	 * oder vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
+	 * XML-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the value set
 	 * @throws IOException
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
 	 */
-	public ValueSet loadValueSetXml(String fileName) throws IOException, ParserConfigurationException, SAXException {
+	public ValueSet loadValueSetXml(String fileName)
+			throws IOException, ParserConfigurationException, SAXException {
 		return loadValueSetXml(new File(fileName));
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * YAML format.</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in YAML format.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
 	 * YAML-Format bereitgestellt wird.</div>
 	 *
-	 * @param valueSet the value set
+	 * @param valueSet
+	 *            the value set
 	 * @return the value set
 	 * @throws IOException
 	 */
@@ -1116,13 +1219,14 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given stream, which is provided in
-	 * YAML format.</div>
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in YAML format.</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
 	 * YAML-Format bereitgestellt wird.</div>
 	 *
-	 * @param inputStream the value set
+	 * @param inputStream
+	 *            the value set
 	 * @return the value set
 	 */
 	public ValueSet loadValueSetYaml(InputStream inputStream) {
@@ -1131,15 +1235,17 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Loads a value set from the given file, which is provided in
-	 * YAML format (the given filename must contain the relative or full path to
-	 * access the file).</div>
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in YAML format (the given filename must contain the relative or full path
+	 * to access the file).</div>
 	 *
 	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
-	 * YAML-Format bereitgestellt wird (der angegebene Dateiname muss den relativen
-	 * oder vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
+	 * YAML-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
-	 * @param fileName the file name
+	 * @param fileName
+	 *            the file name
 	 * @return the value set
 	 * @throws IOException
 	 */
@@ -1154,9 +1260,12 @@ public class ValueSetManager {
 	 * <div class="de">Speichert den angegebenen Wertesatz im YAML-Format in der
 	 * angegebenen Datei.</div>
 	 *
-	 * @param valueSet the value set
-	 * @param file     the file
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSet
+	 *            the value set
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, File file) throws IOException {
 		try (var fileOutputStream = new FileOutputStream(file)) {
@@ -1165,15 +1274,18 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Saves the given value set in YAML format to the given output
-	 * stream.</div>
+	 * <div class="en">Saves the given value set in YAML format to the given
+	 * output stream.</div>
 	 *
 	 * <div class="de">Speichert den angegebenen Wertesatz im YAML-Format in der
 	 * angegebenen Datei.</div>
 	 *
-	 * @param valueSet     the value set
-	 * @param outputStream the outputStream
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSet
+	 *            the value set
+	 * @param outputStream
+	 *            the outputStream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, OutputStream outputStream) throws IOException {
 		var writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
@@ -1183,32 +1295,38 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Saves the given value set in YAML format to the given file
-	 * (the given filename must contain the relative or full path to access the
-	 * file).</div>
+	 * <div class="en">Saves the given value set in YAML format to the given
+	 * file (the given filename must contain the relative or full path to access
+	 * the file).</div>
 	 *
 	 * <div class="de">Speichert den angegebenen Wertesatz im YAML-Format in der
 	 * angegebenen Datei (der angegebene Dateiname muss den relativen oder
 	 * vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
 	 *
-	 * @param valueSet the value set
-	 * @param fileName the file name
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSet
+	 *            the value set
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, String fileName) throws IOException {
 		saveValueSet(valueSet, new File(fileName));
 	}
 
 	/**
-	 * <div class="en">Saves the given value set configuration in YAML format to the
-	 * given file.</div>
+	 * <div class="en">Saves the given value set configuration in YAML format to
+	 * the given file.</div>
 	 *
 	 * <div class="de">Speichert die angegebene Wertesatz-Konfiguration im
 	 * YAML-Format in der angegebenen Datei.</div>
 	 *
-	 * @param valueSetConfig the value set config
-	 * @param file           the file
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSetConfig
+	 *            the value set config
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSetConfig(ValueSetConfig valueSetConfig, File file) throws IOException {
 		try (var fileOutputStream = new FileOutputStream(file)) {
@@ -1217,17 +1335,21 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Saves the given value set configuration in YAML format to the
-	 * given output stream.</div>
+	 * <div class="en">Saves the given value set configuration in YAML format to
+	 * the given output stream.</div>
 	 *
 	 * <div class="de">Speichert die angegebene Wertesatz-Konfiguration im
 	 * YAML-Format in der angegebenen Datei.</div>
 	 *
-	 * @param valueSetConfig the value set config
-	 * @param outputStream   the outputStream
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSetConfig
+	 *            the value set config
+	 * @param outputStream
+	 *            the outputStream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void saveValueSetConfig(ValueSetConfig valueSetConfig, OutputStream outputStream) throws IOException {
+	public void saveValueSetConfig(ValueSetConfig valueSetConfig, OutputStream outputStream)
+			throws IOException {
 		var writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSetConfig));
 		writer.flush();
@@ -1235,20 +1357,24 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Saves the given value set configuration in YAML format to the
-	 * given file (the given filename must contain the relative or full path to
-	 * access the file).</div>
+	 * <div class="en">Saves the given value set configuration in YAML format to
+	 * the given file (the given filename must contain the relative or full path
+	 * to access the file).</div>
 	 *
 	 * <div class="de">Speichert die angegebene Wertesatz-Konfiguration im
 	 * YAML-Format in der angegebenen Datei (der angegebene Dateiname muss den
 	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
 	 * zuzugreifen).</div>
 	 *
-	 * @param valueSetConfig the value set config
-	 * @param fileName       the file name
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param valueSetConfig
+	 *            the value set config
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void saveValueSetConfig(ValueSetConfig valueSetConfig, String fileName) throws IOException {
+	public void saveValueSetConfig(ValueSetConfig valueSetConfig, String fileName)
+			throws IOException {
 		saveValueSetConfig(valueSetConfig, new File(fileName));
 	}
 

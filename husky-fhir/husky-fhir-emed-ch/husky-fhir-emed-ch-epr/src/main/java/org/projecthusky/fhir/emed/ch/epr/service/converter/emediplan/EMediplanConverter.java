@@ -14,7 +14,7 @@ public sealed interface EMediplanConverter permits ChMed16ABaseConverter, ChMed2
      * @return A best-effort equivalent eMediplan object.
      */
     @ExpectsValidResource
-    EMediplan<?,?> toEMediplan(final ChEmedEprDocumentPmlc pmlc);
+    EMediplan<?,?,?,?> toEMediplan(final ChEmedEprDocumentPmlc pmlc);
 
     /**
      * Converts the received PRE document to an eMediplan object.
@@ -22,7 +22,7 @@ public sealed interface EMediplanConverter permits ChMed16ABaseConverter, ChMed2
      * @return A best-effort equivalent eMediplan object.
      */
     @ExpectsValidResource
-    EMediplan<?,?> toEMediplan(final ChEmedEprDocumentPre pre);
+    EMediplan<?,?,?,?> toEMediplan(final ChEmedEprDocumentPre pre);
 
     /**
      * Translates a {@link Author} to a prescriber string for eMediplan. The prescriber string, according to the

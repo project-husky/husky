@@ -20,7 +20,7 @@ import java.util.function.Function;
  */
 public record EffectiveDosageInstructions(
         @Nullable String patientInstructions,
-        String narrative,
+        @Nullable String narrative,
         boolean isAsNeeded,
         List<DosageIntake> intakes,
         @Nullable Dose simpleDose,

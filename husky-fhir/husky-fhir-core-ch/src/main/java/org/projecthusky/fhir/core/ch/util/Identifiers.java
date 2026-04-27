@@ -13,7 +13,9 @@ package org.projecthusky.fhir.core.ch.util;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Identifier;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -128,5 +130,18 @@ public class Identifiers {
         identifier.setValue("urn:oid:" + oid);
         identifier.setSystem("urn:ietf:rfc:3986"); // TODO ?
         return identifier;
+    }
+
+    /**
+     * Determines whether an identifier is considered to be valid at the current date and time.
+     */
+    public static boolean isIdentifierActive(final Identifier identifier) {
+        if (identifier.hasPeriod() && (identifier.getPeriod().hasStart() || identifier.getPeriod().hasEnd())) {
+            if (identifier.getPeriod().hasStart() && identifier.getPeriod().getStartElement().getValueAsCalendar().after(Calendar.getInstance()))
+                return false;
+            if (identifier.getPeriod().hasEnd() && FhirDateTimes.completeToLatestInstant(identifier.getPeriod().getEndElement()).isBefore(Instant.now()))
+                return false;
+        }
+        return true;
     }
 }

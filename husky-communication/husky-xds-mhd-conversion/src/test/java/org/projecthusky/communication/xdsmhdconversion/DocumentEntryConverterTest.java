@@ -1,6 +1,8 @@
 package org.projecthusky.communication.xdsmhdconversion;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
@@ -17,6 +19,8 @@ import org.projecthusky.communication.xdsmhdconversion.converters.ChEprFhirDocum
 import org.projecthusky.communication.xdsmhdconversion.converters.DocumentEntryConverter;
 
 import jakarta.xml.bind.JAXBContext;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
 import java.util.Date;
@@ -136,6 +140,22 @@ class DocumentEntryConverterTest {
 
         final var documentEntry2 = new DocumentEntryConverter().convertDocumentReference(documentReference);
         testDocumentEntry(documentEntry, documentEntry2);
+    }
+
+    /**
+     * This tests the conversion of an ITI-65 received DocumentReference to a DocumentEntry. This is a particular case
+     * in which the attachment.url is a full URL (or a relative bundle reference) and hence it should not be translated
+     * as a DocumentEntry.URI metadata field.
+     * */
+    @Test
+    void testConvertChEprFhirIti65DocumentReference() throws IOException {
+        final var json = new String(DocumentEntryConverter.class.getResourceAsStream("/ProvideDocumentBundleRequest/ChEprFhir-Bundle-BundleProvideDocument.json").readAllBytes());
+        final var fhirContext = FhirContext.forR4();
+        final var parser = fhirContext.newJsonParser();
+        final var bundle = parser.parseResource(Bundle.class, json);
+        final var docRef = (DocumentReference) bundle.getEntry().get(1).getResource();
+        final var documentEntry = new DocumentEntryConverter().convertDocumentReference(docRef);
+        assertNull(documentEntry.getUri());
     }
 
     void testDocumentReference(DocumentReference documentReference,

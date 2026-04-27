@@ -106,6 +106,9 @@ public abstract class ChEmedEprObservation<S extends ChEmedEprMedicationStatemen
         this.setCode(padvType.getCodeableConcept());
     }
 
+    @Override
+    public abstract ChEmedEprObservation<S,R> copy();
+
     /**
      * Constructor that pre-populates fields. The advice type display name is in the requested language.
      *

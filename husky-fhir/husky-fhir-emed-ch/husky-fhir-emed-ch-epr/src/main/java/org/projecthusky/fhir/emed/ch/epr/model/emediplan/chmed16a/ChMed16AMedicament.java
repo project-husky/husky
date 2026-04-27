@@ -104,6 +104,18 @@ public class ChMed16AMedicament extends EMediplanMedicament<ChMed16AExtension> i
     @JsonProperty(ChMed16AExtension.EXTENSIONS_FIELD_NAME)
     protected @Nullable List<@NonNull ChMed16AExtension> extensions;
 
+    public ChMed16AMedicament() {
+        posology =  new ArrayList<>();
+    }
+
+    public String getRepetitionFieldName() {
+        return REPETITION_FIELD_NAME;
+    }
+
+    public String getNumberOfPackagesFieldName() {
+        return NUMBER_OF_PACKAGES_FIELD_NAME;
+    }
+
     @Override
     public String getIdFieldName() {
         return ID_FIELD_NAME;
@@ -118,6 +130,11 @@ public class ChMed16AMedicament extends EMediplanMedicament<ChMed16AExtension> i
     public List<@NonNull ChMed16AExtension> getExtensions() {
         if ( extensions == null ) extensions = new ArrayList<>();
         return extensions;
+    }
+
+    public List<@NonNull ChMed16APosology> getPosology() {
+        if (posology == null) posology = new ArrayList<>();
+        return posology;
     }
 
     /**

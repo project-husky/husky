@@ -2,9 +2,13 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareOrganization;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization;
 
@@ -15,6 +19,9 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Slf4j
 public class ChMed16AHealthcareOrganization extends EMediplanHealthcareOrganization<ChMed16AExtendedPostalAddress> {
     protected static final String NAME_FIELD_NAME = "Name";
     protected static final String NAME_AFFIX_FIELD_NAME = "NameAffix";
@@ -56,6 +63,10 @@ public class ChMed16AHealthcareOrganization extends EMediplanHealthcareOrganizat
         return NAME_FIELD_NAME;
     }
 
+    protected String getZsrFieldName() {
+        return ZSR_FIELD_NAME;
+    }
+
     @Override
     public void trim() {
         super.trim();
@@ -77,5 +88,19 @@ public class ChMed16AHealthcareOrganization extends EMediplanHealthcareOrganizat
                 ChMed16AHealthcareOrganization::new,
                 ChMed16AExtendedPostalAddress::fromFhirAddress
         );
+    }
+
+    /**
+     * Gets the CH EMED EPR FHIR representation of this object.
+     * @return The {@link ChEmedEprOrganization} representation of this object.
+     */
+    @ExpectsValidResource
+    public ChEmedEprOrganization toFhir() {
+        final var org = super.toFhir();
+        if (nameAffix != null && !nameAffix.isBlank())
+            log.warn("The name affix field of the healthcare organization is not supported by the converter. Skipped.");
+        if (phoneNumber != null && !phoneNumber.isBlank()) org.addPhoneNumber(phoneNumber);
+        if (email != null && !email.isBlank()) org.addEmailAddress(email);
+        return org;
     }
 }

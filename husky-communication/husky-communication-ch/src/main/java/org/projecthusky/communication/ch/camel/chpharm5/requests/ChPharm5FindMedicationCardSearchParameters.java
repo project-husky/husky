@@ -87,16 +87,16 @@ public class ChPharm5FindMedicationCardSearchParameters extends Pharm5SearchPara
                     DocumentReference.SP_LANGUAGE,
                     new StringType(
                             language.getValuesAsQueryTokens().stream()
-                                    .map(tokenParam -> tokenParam.getValueAsQueryToken(getFhirContext()))
+                                    .map(BaseParam::getValueAsQueryToken)
                                     .collect(Collectors.joining(","))
                     )
             );
         }
         if (includeNonActive != null) {
-            params.addParameter(INCLUDE_NON_ACTIVE_PARAM_NAME, new BooleanType(includeNonActive.getValueAsQueryToken(getFhirContext())));
+            params.addParameter(INCLUDE_NON_ACTIVE_PARAM_NAME, new BooleanType(includeNonActive.getValueAsQueryToken()));
         }
         if (paperFormat != null) {
-            params.addParameter(PAPER_FORMAT_PARAM_NAME, new StringType(paperFormat.getValueAsQueryToken(getFhirContext())));
+            params.addParameter(PAPER_FORMAT_PARAM_NAME, new StringType(paperFormat.getValueAsQueryToken()));
         }
         return params;
     }

@@ -35,7 +35,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> implements ChMed16AExtendable {
+public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension, ChMed16AGender, ChMed16APatientId> implements ChMed16AExtendable {
     protected static final String FIRST_NAME_FIELD_NAME = "FName";
     protected static final String LAST_NAME_FIELD_NAME = "LName";
     protected static final String BIRTH_DATE_FIELD_NAME = "BDt";
@@ -97,7 +97,7 @@ public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> impleme
      * The list of patient identifiers
      */
     @JsonProperty(IDS_FIELD_NAME)
-    protected @Nullable List<ChMed16APatientId> ids;
+    protected @Nullable List<@NonNull ChMed16APatientId> ids;
     /**
      * Medical data information.
      */

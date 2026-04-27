@@ -1,0 +1,45 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  */-->
+<!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+<th:block th:fragment="zone-d(patient, lang)">
+    <div class="eprescription-patient-label">Patiente/Patient :</div>
+    <!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+    <div class="eprescription-patient-name-and-birthdate">
+        <span class="eprescription-patient-full-name" th:with="patientName=${patient.getNameFirstRep()}">
+            <!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+            <span class="eprescription-patient-surname" th:if="${patientName.hasFamily()}" th:text="${patientName.getFamily()}">SANSOUCY</span>
+            <!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+            <span class="eprescription-patient-first-name" th:each="givenName:${patientName.given}" th:if="${!givenName.isEmpty()}" th:text="${givenName.value}">Félix</span></span>,
+        <!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+        <span class="eprescription-patient-birthdate" th:insert="~{emediplan/emediplan_datatypes::fhirDate(${patient.getBirthDateElement()}, ${lang})}"></span>,
+        <th:block th:switch="${patient.gender.name}">
+            <span class="eprescription-patient-gender" th:case="'MALE'">M</span>
+            <span class="eprescription-patient-gender" th:case="'FEMALE'">M</span>
+            <span class="eprescription-patient-gender" th:case="*">?</span>
+        </th:block>
+    </div>
+    <div class="eprescription-patient-contact-info">
+        <!--/*@thymesVar id="patient" type="org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient"*/-->
+        <span th:if="${patient.hasAddress()}" class="eprescription-patient-address">
+            <span th:replace="~{emediplan/emediplan_datatypes :: address(${patient.getAddress()}, ${lang})}"></span>
+        </span>
+        <th:block th:with="patientPhone=${patient.resolvePreferredPhoneNumber()}">
+            <span class="eprescription-patient-phone" th:if="${patientPhone}" th:text="${', Tél. : ' + patientPhone.value}"></span>
+        </th:block>
+        <th:block th:with="patientEmail=${patient.resolvePreferredEmailAddress()}">
+            <span class="eprescription-patient-email" th:if="${patientEmail}" th:text="${', e-mail : ' + patientEmail.value}"></span>
+        </th:block>
+    </div>
+    <th:block th:with="insuranceCards=${patient.getInsuranceCardNumbers(true)}">
+        <div class="eprescription-patient-insurance-card" th:if="${!insuranceCards.isEmpty()}" th:text="${'Nº de carte d\'assuré : ' + insuranceCards.getFirst().value}">
+            Nº de carte d'assuré: 888888888
+        </div>
+    </th:block>
+</th:block>

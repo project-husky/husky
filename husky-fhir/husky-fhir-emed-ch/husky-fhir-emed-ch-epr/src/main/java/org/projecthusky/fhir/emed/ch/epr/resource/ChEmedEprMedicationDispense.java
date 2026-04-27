@@ -86,6 +86,9 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         this.setWhenHandedOver(Date.from(whenHandedOver));
     }
 
+    @Override
+    public abstract ChEmedEprMedicationDispense copy();
+
     /**
      * Resolves the medication dispense UUID or throws.
      *

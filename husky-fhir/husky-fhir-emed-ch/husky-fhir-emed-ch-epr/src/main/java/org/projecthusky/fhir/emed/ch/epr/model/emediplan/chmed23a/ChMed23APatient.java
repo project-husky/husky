@@ -27,7 +27,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-public class ChMed23APatient extends EMediplanPatient<ChMed23AExtension> implements ChMed23AExtendable {
+public class ChMed23APatient extends EMediplanPatient<ChMed23AExtension, ChMed23AGender, ChMed23APatientId> implements ChMed23AExtendable {
     protected static final String LANGUAGE_FIELD_NAME = "lng";
     protected static final String IDS_FIELD_NAME = "ids";
     protected static final String MEDICAL_DATA_FIELD_NAME = "mData";
@@ -68,7 +68,7 @@ public class ChMed23APatient extends EMediplanPatient<ChMed23AExtension> impleme
     /**
      * List of patient identifiers.
      */
-    protected List<ChMed23APatientId> ids;
+    protected List<@NonNull ChMed23APatientId> ids;
     /**
      * The list of extensions. Optional if empty.
      */
