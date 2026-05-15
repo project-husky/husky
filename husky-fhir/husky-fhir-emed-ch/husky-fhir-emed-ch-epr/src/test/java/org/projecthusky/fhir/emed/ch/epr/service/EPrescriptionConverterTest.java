@@ -317,6 +317,9 @@ public class EPrescriptionConverterTest {
         ePrescription.getMedicaments().getFirst().getPosology().add(posology);
         ePrescription.getMedicaments().getFirst().setUnit(CdTyp9.TABLET);
         ePrescription.getPatient().setIds(List.of(new ChMed16APatientId(PATIENT_ID_TYPE_INSURANCE_CARD, "80756012345678912345")));
+
+        ePrescription.getMedicaments().getFirst().setRepetition(6);
+
         assertTrue(ePrescription.validate().isSuccessful());
 
         final var converter = new EPrescriptionConverter(

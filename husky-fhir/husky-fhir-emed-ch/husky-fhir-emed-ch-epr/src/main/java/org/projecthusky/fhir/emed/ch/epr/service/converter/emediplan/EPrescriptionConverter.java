@@ -31,6 +31,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequest
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
@@ -243,12 +244,20 @@ public class EPrescriptionConverter extends ChMed16ABaseConverter<EPrescriptionM
         if (medicament.getRepetition() != null)
             log.warn("The eMediplan ePrescription specifies repetitions in months, but this is not supported by CH EMED EPR. This field will be ignored by the conversion.");
 
+        final var dispenseRequest = medRequest.addDispenseRequest();
         final var dispenseQuantity =
                 new Quantity(medicament.getNumberOfPackages() == null? 1 : medicament.getNumberOfPackages());
         dispenseQuantity.setCode(RegularUnitCodeAmbu.PACKAGE.getCodeValue());
         dispenseQuantity.setSystem(RegularUnitCodeAmbu.PACKAGE.getCodeSystemId());
         dispenseQuantity.setUnit(RegularUnitCodeAmbu.PACKAGE.getDisplayName(language));
-        medRequest.addDispenseRequest().setQuantity(dispenseQuantity);
+        dispenseRequest.setQuantity(dispenseQuantity);
+        if (medicament.getRepetition() != null) {
+            if (medicament.getRepetition() == 0) dispenseRequest.setNumberOfRepeatsAllowed(0);
+            else dispenseRequest
+                    .setValidityPeriod(new Period()
+                            .setStart(Date.from(timestamp))
+                            .setEnd(Date.from(Instant.from(ZonedDateTime.ofInstant(timestamp, TimeZone.getDefault().toZoneId()).plusMonths(medicament.getRepetition()).toInstant()))));
+        }
 
         if (medicament.isSubstitutionForbidden())
             medRequest.setSubstitution(new MedicationRequest.MedicationRequestSubstitutionComponent(
