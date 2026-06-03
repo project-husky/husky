@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan;
 
 import com.google.common.collect.Streams;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.MedicationRequest;
@@ -28,6 +29,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatem
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -40,6 +42,7 @@ import static org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanMedicam
  * <a href="https://github.com/ig-emediplan/specification/tree/main/chmed16a">CHMED16A specifications</a>.
  *
  */
+@Slf4j
 public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicament, E extends ChMed16AEMediplan<M>>
         implements EMediplanConverter {
     /**
@@ -212,9 +215,22 @@ public non-sealed abstract class ChMed16ABaseConverter<M extends ChMed16AMedicam
                 medicament.forbidSubstitution(true);
 
             if (dispenseRequest != null) {
-                // repetitions can't be translated, since in the CH EMED EPR format it is conveyed in number of repeats
-                // while in CHMED16A it is conveyed in months, so it is not a number of repeats but more like a validityPeriod
-                // allowing unlimited repeats...
+                // repetitions can't be easily translated, since in the CH EMED EPR format it may be conveyed in number
+                // of repeats as well as time period (and both) while in CHMED16A it is conveyed exclusively in months,
+                // so it is not a number of repeats but more like a validityPeriod allowing unlimited repeats...
+                if ((!dispenseRequest.hasNumberOfRepeatsAllowed() || dispenseRequest.getNumberOfRepeatsAllowed() > 0) && dispenseRequest.hasValidityPeriod() && dispenseRequest.getValidityPeriod().hasEnd()) {
+                    if (dispenseRequest.getValidityPeriod().hasStart()) {
+                        medicament.setRepetition(Period.between(
+                                dispenseRequest.getValidityPeriod().getStartElement().getValueAsCalendar().toZonedDateTime().toLocalDate()
+                                , // add one day to end, because Java period constructors are end exclusive [S,E) unlike FHIR specs
+                                dispenseRequest.getValidityPeriod().getEndElement().getValueAsCalendar().toZonedDateTime().toLocalDate().plusDays(1)
+                        ).getMonths());
+                    }
+                    else throw new InvalidEmedContentException("Dispense request has a validityPeriod with no specified start.");
+                }
+                if (dispenseRequest.hasNumberOfRepeatsAllowed()) {
+                    log.warn("Dispense request has a maximum number of repeats allowed, which cannot be directly translated to eMediplan. Ignored.");
+                }
 
                 if (dispenseRequest.hasQuantity() && dispenseRequest.getQuantity().hasValue()) {
                     final var quantity = dispenseRequest.getQuantity();
