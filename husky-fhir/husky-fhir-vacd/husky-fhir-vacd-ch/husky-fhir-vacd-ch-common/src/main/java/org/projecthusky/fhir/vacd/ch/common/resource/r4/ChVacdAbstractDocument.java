@@ -71,14 +71,30 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the immunization to add.
 	 */
 	public void addImmunization(ChVacdImmunization immunization) {
-		if (this.resolveComposition().hasSubject()) {
+		if (!this.resolveComposition().hasSubject()) {
 			immunization.setPatient(this.resolveComposition().getSubject());
 		}
 
-		this.getEntry().add(new BundleEntryComponent().setResource(immunization)
-				.setFullUrl("urn:uuid:" + immunization.getId()));
-		this.resolveComposition().resolveAdministrationSection()
-				.addEntry(new Reference("urn:uuid:" + immunization.getId()));
+		if (immunization.getId() == null) {
+			immunization.setId(UUID.randomUUID().toString());
+		}
+
+		if (immunization.getId().startsWith("urn:uuid:")) {
+			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
+					.setFullUrl(immunization.getId()));
+			this.resolveComposition().resolveAdministrationSection()
+					.addEntry(new Reference(immunization.getId()));
+		} else {
+			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
+					.setFullUrl("urn:uuid:" + immunization.getId()));
+			this.resolveComposition().resolveAdministrationSection()
+					.addEntry(new Reference("urn:uuid:" + immunization.getId()));
+		}
+		// this.getEntry().add(new
+		// BundleEntryComponent().setResource(immunization)
+		// .setFullUrl("urn:uuid:" + immunization.getId()));
+		// this.resolveComposition().resolveAdministrationSection()
+		// .addEntry(new Reference("urn:uuid:" + immunization.getId()));
 	}
 
 	/**
@@ -300,7 +316,8 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
 		this.getEntry().add(new BundleEntryComponent().setResource(subject)
 				.setFullUrl("urn:uuid:" + subject.getId()));
-//		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
+		// this.resolveComposition().setSubject(new Reference("urn:uuid:" +
+		// subject.getId()));
 	}
 
 	public void addAuthor(DomainResource author, Date timeOfDataInput) {

@@ -55,8 +55,8 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	protected Coding verificationStatus;
 
 	public ChVacdImmunization() {
-		addIdentifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+//		addIdentifier().setSystem("urn:ietf:rfc:3986")
+//				.setValue("urn:uuid:" + UUID.randomUUID().toString());
 		setStatus(ImmunizationStatus.COMPLETED);
 //		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
 	}
