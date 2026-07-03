@@ -34,6 +34,11 @@ public class ChCoreImmunization extends Immunization {
 	@Child(name = "recorder", min = 0, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author", definedLocally = false)
 	protected Reference recorder;
+	
+	@Nullable
+	@Child(name = "indicationCode", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epl-regulated-authorization-limitation-indication-code", definedLocally = false)
+	protected String indicationCode;
 
 	public ChCoreImmunization() {
 		super();
@@ -50,6 +55,18 @@ public class ChCoreImmunization extends Immunization {
 	public void setRecorder(Reference recorder) {
 		this.recorder = recorder;
 	}
+	
+	public boolean hasIndicationCode() {
+		return indicationCode != null;
+	}
+	
+	public String getIndicationCode() {
+		return indicationCode;
+	}
+	
+	public void setIndicationCode(String indicationCode) {
+		this.indicationCode = indicationCode;
+	}
 
 	@Override
 	public ChCoreImmunization copy() {
@@ -63,6 +80,7 @@ public class ChCoreImmunization extends Immunization {
 		super.copyValues(dst);
 		if (dst instanceof final ChCoreImmunization als) {
 			als.recorder = recorder == null ? null : recorder.copy();
+			als.indicationCode = indicationCode;
 		}
 	}
 
