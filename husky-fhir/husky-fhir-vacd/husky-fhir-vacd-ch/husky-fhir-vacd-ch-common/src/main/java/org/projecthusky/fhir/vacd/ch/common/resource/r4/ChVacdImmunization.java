@@ -10,7 +10,7 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.UUID;
+import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
@@ -29,7 +29,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization", id = "ch-vacd-immunization")
 public class ChVacdImmunization extends ChCoreImmunization {
 
 	private static final long serialVersionUID = 6995187686545492514L;
@@ -40,49 +40,86 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	protected ChCoreResourceCrossReferenceExt relatesTo;
 
 	@Nullable
-	@Child(name = "conflict", min = 0, max = 1)
-	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-merging-conflict-entry-reference", definedLocally = false)
-	protected ChVacdMergingConflictExt conflict;
-
-	@Nullable
 	@Child(name = "medication", min = 0, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference", definedLocally = false)
 	protected Reference medication;
 
 	@Nullable
-	@Child(name = "verificationStatus", min = 0, max = 1)
+	@Child(name = "conflict", min = 0, max = Child.MAX_UNLIMITED)
+	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-merging-conflict-entry-reference", definedLocally = false)
+	protected List<ChVacdMergingConflictExt> conflict;
+
+	@Nullable
+	@Child(name = "verificationStatus", min = 1, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status", definedLocally = false)
 	protected Coding verificationStatus;
 
 	public ChVacdImmunization() {
-//		addIdentifier().setSystem("urn:ietf:rfc:3986")
-//				.setValue("urn:uuid:" + UUID.randomUUID().toString());
 		setStatus(ImmunizationStatus.COMPLETED);
-//		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
+	}
+
+	public boolean hasRelatesTo() {
+		return this.relatesTo != null && !this.relatesTo.isEmpty();
 	}
 
 	public ChCoreResourceCrossReferenceExt getRelatesTo() {
 		return relatesTo;
 	}
 
-	public void setRelatesTo(ChCoreResourceCrossReferenceExt relatesTo) {
+	public ChVacdImmunization setRelatesTo(ChCoreResourceCrossReferenceExt relatesTo) {
 		this.relatesTo = relatesTo;
+		return this;
 	}
 
-	public ChVacdMergingConflictExt getConflict() {
+	public boolean hasConflict() {
+		return this.conflict != null && !this.conflict.isEmpty();
+	}
+
+	public List<ChVacdMergingConflictExt> getConflict() {
+		if (this.conflict == null) {
+			this.conflict = new java.util.ArrayList<>();
+		}
 		return conflict;
 	}
 
-	public void setConflict(ChVacdMergingConflictExt conflict) {
-		this.conflict = conflict;
+	public ChVacdImmunization setConflict(List<ChVacdMergingConflictExt> conflicts) {
+		this.conflict = conflicts;
+		return this;
+	}
+
+	public ChVacdImmunization addConflict(ChVacdMergingConflictExt conflict) {
+		this.getConflict().add(conflict);
+		return this;
+	}
+
+	public ChVacdMergingConflictExt addConflict() {
+		ChVacdMergingConflictExt conflict = new ChVacdMergingConflictExt();
+		this.getConflict().add(conflict);
+		return conflict;
+	}
+
+	public void removeConflict(ChVacdMergingConflictExt conflict) {
+		this.getConflict().remove(conflict);
+	}
+
+	public boolean hasMedication() {
+		return this.medication != null && !this.medication.isEmpty();
 	}
 
 	public ChVacdMedicationForImmunization getMedication() {
-		return (ChVacdMedicationForImmunization) medication.getResource();
+		if (hasMedication()) {
+			return (ChVacdMedicationForImmunization) medication.getResource();
+		}
+		return null;
 	}
 
-	public void setMedication(ChVacdMedicationForImmunization medication) {
+	public ChVacdImmunization setMedication(ChVacdMedicationForImmunization medication) {
 		this.medication = new Reference(medication);
+		return this;
+	}
+
+	public boolean hasVerificationStatus() {
+		return this.verificationStatus != null && !this.verificationStatus.isEmpty();
 	}
 
 	public Coding getVerificationStatu() {
@@ -92,12 +129,9 @@ public class ChVacdImmunization extends ChCoreImmunization {
 		return verificationStatus;
 	}
 
-	public void setVerificationStatus(Coding verificationStatus) {
+	public ChVacdImmunization setVerificationStatus(Coding verificationStatus) {
 		this.verificationStatus = verificationStatus;
-	}
-
-	public boolean hasVerificationStatus() {
-		return this.verificationStatus != null && !this.verificationStatus.isEmpty();
+		return this;
 	}
 
 	@Override
@@ -112,7 +146,12 @@ public class ChVacdImmunization extends ChCoreImmunization {
 		super.copyValues(dst);
 		if (dst instanceof final ChVacdImmunization als) {
 			als.relatesTo = relatesTo == null ? null : relatesTo.copy();
-			als.conflict = conflict == null ? null : conflict.copy();
+			if (conflict != null) {
+				als.conflict = new java.util.ArrayList<>();
+				for (final ChVacdMergingConflictExt conflict : conflict) {
+					als.conflict.add(conflict.copy());
+				}
+			}
 			als.medication = medication == null ? null : medication.copy();
 			als.verificationStatus = verificationStatus == null ? null : verificationStatus.copy();
 		}

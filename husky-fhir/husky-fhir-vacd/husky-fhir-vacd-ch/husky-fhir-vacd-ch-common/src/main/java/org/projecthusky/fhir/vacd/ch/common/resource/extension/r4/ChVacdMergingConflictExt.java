@@ -33,8 +33,12 @@ public class ChVacdMergingConflictExt extends BackboneElement {
 	@Child(name = "conflict", min = 0, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "conflict", definedLocally = false)
 	protected CodeType conflict;
+	
+	public ChVacdMergingConflictExt() {
+		super();
+	}
 
-	public Reference getEntry() {
+	public @Nullable Reference getEntry() {
 		return entry;
 	}
 
@@ -42,7 +46,7 @@ public class ChVacdMergingConflictExt extends BackboneElement {
 		this.entry = entry;
 	}
 
-	public CodeType getConflict() {
+	public @Nullable CodeType getConflict() {
 		return conflict;
 	}
 
