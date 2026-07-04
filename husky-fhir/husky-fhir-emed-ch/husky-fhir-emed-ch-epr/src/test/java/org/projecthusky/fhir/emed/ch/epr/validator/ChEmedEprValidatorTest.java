@@ -90,4 +90,23 @@ class ChEmedEprValidatorTest {
 
         assertTrue(results.isSuccessful());
     }
+
+    @Test
+    void validatePreDocumentBundleWithPatientWithManagingOrgWithHapi() throws IOException {
+        final var ctx = FhirContext.forR4Cached();
+        final var validator = new ChEmedEprHapiValidator(ctx);
+        final var parser = new ChEmedEprParser(ctx);
+
+        final var json = new String(getClass().getResourceAsStream("/examples/ch-emed-epr/Bundle-DocumentPreCARAPMP004MarcoumarFreeTextDosage.json").readAllBytes());
+        final var doc = parser.parse(json, EmedDocumentType.PRE);
+        ValidationResult results = validator.validateDocumentBundle(getClass().getResourceAsStream(
+                "/examples/ch-emed-epr/Bundle-DocumentPreCARAPMP004MarcoumarFreeTextDosage.json"), doc);
+
+        for (final var message : results.getIssues()) {
+            log.info(String.format("[%s][%s] %s", message.getSeverity().name(), message.getType().name(),
+                    message.getMessage()));
+        }
+
+        assertTrue(results.isSuccessful());
+    }
 }

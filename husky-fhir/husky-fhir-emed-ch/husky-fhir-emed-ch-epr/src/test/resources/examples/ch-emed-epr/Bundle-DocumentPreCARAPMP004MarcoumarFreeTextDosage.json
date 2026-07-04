@@ -116,6 +116,17 @@
       "meta" : {
         "profile" : ["http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"]
       },
+      "contained": [
+        {
+          "resourceType": "Organization",
+          "id": "1",
+          "identifier": [
+            {
+              "value": "urn:oid:2.16.756.5.30.1.191.1.0.2.1"
+            }
+          ]
+        }
+      ],
       "text" : {
         "status" : "generated",
         "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Patient_PatientCARAPMP004\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Patient PatientCARAPMP004</b></p><a name=\"PatientCARAPMP004\"> </a><a name=\"hcPatientCARAPMP004\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-ch-emed-epr-patient.html\">CH EMED EPR Patient</a></p></div><p style=\"border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;\">Michaël Christopher Karce  Male, DoB: 1973-12-25 ( Medical record number\u00a0(use:\u00a0official,\u00a0))</p><hr/><table class=\"grid\"><tr><td style=\"background-color: #f3f5da\" title=\"Record is active\">Active:</td><td>true</td><td style=\"background-color: #f3f5da\" title=\"Known Marital status of Patient\">Marital Status:</td><td colspan=\"3\"><span title=\"Codes:{http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus 9}\">unbekannt</span></td></tr><tr><td style=\"background-color: #f3f5da\" title=\"Other Ids (see the one above)\">Other Ids:</td><td colspan=\"3\"><ul><li>Medical record number/100001368\u00a0(use:\u00a0secondary,\u00a0)</li><li>Medical record number/CARAPMP004\u00a0(use:\u00a0secondary,\u00a0)</li></ul></td></tr></table></div>"
@@ -160,6 +171,9 @@
       }],
       "gender" : "male",
       "birthDate" : "1973-12-25",
+      "managingOrganization": {
+        "reference": "#1"
+      },
       "maritalStatus" : {
         "coding" : [{
           "system" : "http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus",

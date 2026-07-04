@@ -80,8 +80,10 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
                         : new InMemoryTerminologyServerValidationSupport(context),
                 new CommonCodeSystemsTerminologyService(context)
         );
-        final var def = chain.fetchStructureDefinition("http://hl7.org/fhir/StructureDefinition/SimpleQuantity");
+        var def = chain.fetchStructureDefinition("http://hl7.org/fhir/StructureDefinition/SimpleQuantity");
         prepopulatedValidationSupport.addStructureDefinition(((StructureDefinition) def).copy().setUrl("http://hl7.org/fhir/StructureDefinition/SimpleQuantity|4.0.1"));
+        def = chain.fetchStructureDefinition("http://hl7.org/fhir/StructureDefinition/Organization");
+        prepopulatedValidationSupport.addStructureDefinition(((StructureDefinition) def).copy().setUrl("http://hl7.org/fhir/StructureDefinition/Organization|4.0.1"));
         validator = context.newValidator();
         final var instanceValidator = new FhirInstanceValidator(chain);
         validator.registerValidatorModule(instanceValidator);
