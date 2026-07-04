@@ -48,7 +48,7 @@ class ChVacdImmunizationTest extends TestHelper {
 		String refString = toString(ref);
 		logger.info(refString);
 		assertNotNull(refString);
-		assertTrue(refString.contains("ch-vacd-ext-merging-conflict-entry-reference"));
+		assertTrue(refString.contains("ch-core-ext-entry-resource-cross-references"));
 	}
 
 	@Test
