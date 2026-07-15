@@ -61,7 +61,7 @@ public class ImmunizationRecommendationNarrativeTextGenerator extends Immunizati
 
 		for (POCDMT000040Precondition precondition : substanceAdministration.getPrecondition()) {
 			if (precondition != null) {
-				body.getTr().add(getRowDose(precondition));
+				body.getTr().add(getRowDose(precondition, idxImmunization));
 				body.getTr().add(getRowScheme(precondition, idxImmunization));
 			}
 		}
