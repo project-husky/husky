@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.projecthusky</groupId>
 	<artifactId>husky-api</artifactId>
@@ -32,28 +34,29 @@
 		<apache-httpcore5>5.3.4</apache-httpcore5>
 		<junit.version>5.10.0</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>5.2-rc2</ipf.version>
+		<ipf.version>5.2.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.6</jaxb.version>
-		<spring.version>6.2.18</spring.version>
-		<spring.boot.version>3.5.14</spring.boot.version>
+		<spring.version>6.2.19</spring.version>
+		<spring.boot.version>3.5.16</spring.boot.version>
 		<hapi.fhir.version>8.8.0</hapi.fhir.version>
 		<org.hl7.fhir.version>6.7.9</org.hl7.fhir.version>
 		<hapi.version>2.6.0</hapi.version> <!-- HL7v2 -->
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel-version>4.18.0</camel-version>
+		<camel-version>4.21.0</camel-version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
 		<fasterxml.version>2.17.2</fasterxml.version>
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
-		<tomcat.embed.version>10.1.40</tomcat.embed.version>
+		<tomcat.embed.version>10.1.57</tomcat.embed.version>
 		<bouncycastle.version>1.83</bouncycastle.version>
 		<logback.version>1.5.16</logback.version>
 		<apache_poi_version>5.4.1</apache_poi_version>
+		<cxf.version>4.1.7</cxf.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -247,6 +250,11 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-validation</artifactId>
 				<version>${spring.boot.version}</version>
 			</dependency>
 			<dependency>
@@ -576,6 +584,76 @@
 				</exclusions>
 			</dependency>
 
+			<!--  apache cxf -->
+			<!--
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-parent</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			-->
+			
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-core</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-wsdl</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-ws-addr</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-bindings-xml</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-bindings-soap</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-simple</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-transports-http</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-features-logging</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-features-metrics</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-spring-boot-autoconfigure</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+
 			<!-- Schematron validator (Apache 2.0) -->
 			<dependency>
 				<groupId>com.helger.schematron</groupId>
@@ -593,7 +671,7 @@
 			-->
 
 			<!-- Tomcat Embed section -->
-			<!--<dependency>
+			<dependency>
 				<groupId>org.apache.tomcat.embed</groupId>
 				<artifactId>tomcat-embed-core</artifactId>
 				<version>${tomcat.embed.version}</version>
@@ -602,7 +680,7 @@
 				<groupId>org.apache.tomcat.embed</groupId>
 				<artifactId>tomcat-embed-el</artifactId>
 				<version>${tomcat.embed.version}</version>
-			</dependency>-->
+			</dependency>
 
 			<!-- Hapi HL7v2 section -->
 			<dependency>
@@ -684,7 +762,7 @@
 				<artifactId>org.hl7.fhir.convertors</artifactId>
 				<version>${org.hl7.fhir.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.thymeleaf</groupId>
 				<artifactId>thymeleaf</artifactId>
