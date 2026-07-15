@@ -30,24 +30,24 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
     final private FhirValidator validator;
     final private LogicValidator logicValidator = new LogicValidator();
 
+    /**
+     * Whether the validation outcome should be logged with logger when calling a validation method.
+     */
+    @Setter
+    private boolean logValidationOutcome = true;
+
+    /**
+     * The logger to use in case validation result logger is enabled.
+     */
+    @Setter
+    private @Nullable ValidationResultLogger validationResultLogger;
+
+    /**
+     * A list of validation message post-processing interceptors. These interceptors are handled right after performing
+     * the base HAPI validation but before (optionally) logging and then returning the result.
+     */
     @Setter
     private List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors = new ArrayList<>();
-
-    /**
-     * Gets the list of validation message post-processing interceptors to be processed after validation.
-     */
-    public List<@NonNull ValidationMessagePostProcessingInterceptor>  getInterceptors() {
-        if (interceptors == null) interceptors = new ArrayList<>();
-        return interceptors;
-    }
-
-    /**
-     * Adds an interceptor to the list of validation message post-processing interceptors.
-     */
-    public ChEmedEprHapiValidator addValidationMessagePostProcessingInterceptor(final ValidationMessagePostProcessingInterceptor interceptor) {
-        getInterceptors().add(interceptor);
-        return this;
-    }
 
     /**
      * Creates an instance of an <i>offline</i> {@link ChEmedEprValidator}, that is, a validator that will not try to
@@ -87,6 +87,22 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
         validator.registerValidatorModule(instanceValidator);
     }
 
+    /**
+     * Gets the list of validation message post-processing interceptors to be processed after validation.
+     */
+    public List<@NonNull ValidationMessagePostProcessingInterceptor>  getInterceptors() {
+        if (interceptors == null) interceptors = new ArrayList<>();
+        return interceptors;
+    }
+
+    /**
+     * Adds an interceptor to the list of validation message post-processing interceptors.
+     */
+    public ChEmedEprHapiValidator addValidationMessagePostProcessingInterceptor(final ValidationMessagePostProcessingInterceptor interceptor) {
+        getInterceptors().add(interceptor);
+        return this;
+    }
+
     @Override
     public ValidationResult validateDocumentBundle(final InputStream documentStream,
                                                    final ChEmedEprDocument document)
@@ -124,12 +140,23 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
     }
 
     /**
-     * Logs a validation result as info messages, to loosely imitate matchbox-engine behaviour.
+     * Logs the validation result if enabled in the validator config. If enabled and no explicit
+     * {@link ValidationResultLogger} has been set, a default one will be automatically set and used.
+     *
      * @param validationResult The validation result to be logged.
      */
     protected void logValidationResult(final ValidationResult validationResult) {
-        log.info("Validation result: {}", validationResult.isSuccessful()? "successful" : "failed");
-        for (final var issue : validationResult.getIssues())
-            log.info(issue.toString());
+        if (logValidationOutcome) {
+            if (validationResultLogger == null) validationResultLogger = getDefaultValidationResultLogger();
+            if (validationResultLogger != null) validationResultLogger.logValidationResult(validationResult);
+            else log.error("The CH EMED EPR validator is set to log results, but no logger is set. Cannot log results.");
+        }
+    }
+
+    /**
+     * Gets a default validation result logger.
+     */
+    public ValidationResultLogger getDefaultValidationResultLogger() {
+        return new ValidationResultLogger(log);
     }
 }
