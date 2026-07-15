@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.extension.r4;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.CodeType;
 import org.hl7.fhir.r4.model.Reference;
@@ -19,20 +18,24 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 
 /**
- * 	
+ * 	HAPI FHIR model of the
+ * 	<a href="http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-merging-conflict-entry-reference">
+ * 	CH VACD Extension Merging Conflict Entry Reference </a> extension.
  */
 @Block
 public class ChVacdMergingConflictExt extends BackboneElement {
 
-	@Nullable
-	@Child(name = "entry", min = 0, max = 1)
+	@Child(name = "entry", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "entry", definedLocally = false)
 	protected Reference entry;
 
-	@Nullable
-	@Child(name = "conflict", min = 0, max = 1)
+	@Child(name = "conflict", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "conflict", definedLocally = false)
 	protected CodeType conflict;
+	
+	public ChVacdMergingConflictExt() {
+		super();
+	}
 
 	public Reference getEntry() {
 		return entry;
@@ -64,5 +67,10 @@ public class ChVacdMergingConflictExt extends BackboneElement {
 			als.entry = entry == null ? null : entry.copy();
 			als.conflict = conflict == null ? null : conflict.copy();
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() && ca.uhn.fhir.util.ElementUtil.isEmpty(entry, conflict);
 	}
 }

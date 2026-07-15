@@ -10,6 +10,9 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +27,6 @@ import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.core.ch.TestHelper;
 import org.projecthusky.fhir.core.ch.datatype.r4.CHCoreAddressECH11PlaceOfOrigin;
 import org.projecthusky.fhir.core.ch.datatype.r4.CHCoreAddressEch11PlaceOfBirth;
-import org.projecthusky.fhir.core.ch.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreCitizenshipExt;
 
 /**
@@ -51,7 +53,10 @@ class ChCorePatientTest extends TestHelper {
 		placeOfBirth.setCity("Musterhausen");
 		ref.setPlaceOfBirth(placeOfBirth);
 
-		prettyPrint(ref);
+		String refString = toString(ref);
+		logger.info(refString);
+		assertNotNull(refString);
+		assertTrue(refString.contains("http://hl7.org/fhir/StructureDefinition/patient-birthPlace"));
 	}
 
 	/**
@@ -63,12 +68,23 @@ class ChCorePatientTest extends TestHelper {
 		ChCorePatient ref = new ChCorePatient();
 		ref.addName(new HumanName().setFamily("Muster").addGiven("Max"));
 		List<CHCoreAddressECH11PlaceOfOrigin> listPlaceOfOrigin = new ArrayList<>();
-		CHCoreAddressECH11PlaceOfOrigin placeOfOrigin = new CHCoreAddressECH11PlaceOfOrigin();
-		placeOfOrigin.setCity("Testinghausen");
-		listPlaceOfOrigin.add(placeOfOrigin);
+		{
+			CHCoreAddressECH11PlaceOfOrigin placeOfOrigin = new CHCoreAddressECH11PlaceOfOrigin();
+			placeOfOrigin.setCity("Testinghausen");
+			listPlaceOfOrigin.add(placeOfOrigin);
+		}
+		{
+			CHCoreAddressECH11PlaceOfOrigin placeOfOrigin = new CHCoreAddressECH11PlaceOfOrigin();
+			placeOfOrigin.setCity("Musterhausen");
+			listPlaceOfOrigin.add(placeOfOrigin);
+		}
+
 		ref.setPlaceOfOrigin(listPlaceOfOrigin);
 
-		prettyPrint(ref);
+		String refString = toString(ref);
+		logger.info(refString);
+		assertNotNull(refString);
+		assertTrue(refString.contains("http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-ech-11-placeoforigin"));
 	}
 
 	/**
@@ -82,29 +98,37 @@ class ChCorePatientTest extends TestHelper {
 		List<ChCoreCitizenshipExt> citizenShipList = new ArrayList<>();
 		ChCoreCitizenshipExt chCoreCitizenshipExt = new ChCoreCitizenshipExt();
 		chCoreCitizenshipExt.setId(UUID.randomUUID().toString());
-		chCoreCitizenshipExt.setCode(new CodeableConcept(new Coding("http://hl7.org/fhir/ValueSet/iso3166-1-2", "CH", "Switzerland")));
+		chCoreCitizenshipExt.setCode(new CodeableConcept(
+				new Coding("http://hl7.org/fhir/ValueSet/iso3166-1-2", "CH", "Switzerland")));
 		chCoreCitizenshipExt.setPeriod(new Period().setStart(new Date()).setEnd(new Date()));
 		citizenShipList.add(chCoreCitizenshipExt);
 		ref.setCitizenship(citizenShipList);
 
-		prettyPrint(ref);
+
+		String refString = toString(ref);
+		logger.info(refString);
+		assertNotNull(refString);
+		assertTrue(refString.contains("http://hl7.org/fhir/StructureDefinition/patient-citizenship"));
+	
 	}
-//
-//	/**
-//	 * Test method for
-//	 * {@link org.projecthusky.fhir.core.ch.resource.r4.ChCorePatient#setReligion(org.hl7.fhir.r4.model.CodeableConcept)}.
-//	 */
-//	@Test
-//	void testSetReligion() {
-//		ChCorePatient ref = new ChCorePatient();
-//		ref.addName(new HumanName().setFamily("Muster").addGiven("Max"));
-////		CodeableConcept religion = new CodeableConcept(
-////				new Coding("http://hl7.org/fhir/v3/ReligiousAffiliation", "B", "Buddhist"));
-//		
-////		ReligiousAffiliation religion = new ReligiousAffiliation.getEnum(null)
-//		ref.setReligion(null);
-//
-//		prettyPrint(ref);
-//	}
+	//
+	// /**
+	// * Test method for
+	// * {@link
+	// org.projecthusky.fhir.core.ch.resource.r4.ChCorePatient#setReligion(org.hl7.fhir.r4.model.CodeableConcept)}.
+	// */
+	// @Test
+	// void testSetReligion() {
+	// ChCorePatient ref = new ChCorePatient();
+	// ref.addName(new HumanName().setFamily("Muster").addGiven("Max"));
+	//// CodeableConcept religion = new CodeableConcept(
+	//// new Coding("http://hl7.org/fhir/v3/ReligiousAffiliation", "B",
+	// "Buddhist"));
+	//
+	//// ReligiousAffiliation religion = new ReligiousAffiliation.getEnum(null)
+	// ref.setReligion(null);
+	//
+	// prettyPrint(ref);
+	// }
 
 }

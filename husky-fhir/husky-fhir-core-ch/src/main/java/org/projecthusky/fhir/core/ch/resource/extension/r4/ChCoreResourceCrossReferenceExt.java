@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.core.ch.resource.extension.r4;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.CodeType;
 import org.hl7.fhir.r4.model.Reference;
@@ -19,23 +18,24 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 
 /**
+ * HAPI FHIR model for the
+ * <a href="https://fhir.ch/ig/ch-core/StructureDefinition-ch-core-ext-entry-resource-cross-references.html">
+ * Entry Resource Cross References</a> extension.
+ *
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
 @Block
 public class ChCoreResourceCrossReferenceExt extends BackboneElement {
 
-	@Nullable
-	@Child(name = "entry", min = 0, max = 1)
+	@Child(name = "entry", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "entry", definedLocally = false)
 	protected Reference entry;
 
-	@Nullable
-	@Child(name = "container", min = 0, max = 1)
+	@Child(name = "container", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "container", definedLocally = false)
 	protected Reference container;
 
-	@Nullable
-	@Child(name = "relationcode", min = 0, max = 1)
+	@Child(name = "relationcode", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "relationcode", definedLocally = false)
 	protected CodeType relationcode;
 
@@ -78,6 +78,12 @@ public class ChCoreResourceCrossReferenceExt extends BackboneElement {
 			copy.container = container == null ? null : container.copy();
 			copy.relationcode = relationcode == null ? null : relationcode.copy();
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() &&
+				ca.uhn.fhir.util.ElementUtil.isEmpty(entry, container, relationcode);
 	}
 
 }
