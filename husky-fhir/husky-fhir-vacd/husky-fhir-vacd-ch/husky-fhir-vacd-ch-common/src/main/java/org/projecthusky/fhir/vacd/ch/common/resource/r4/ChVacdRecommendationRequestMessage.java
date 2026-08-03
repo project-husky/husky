@@ -13,13 +13,9 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 import java.util.List;
 import java.util.UUID;
 
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Reference;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-
-import org.hl7.fhir.r4.model.Bundle.BundleEntryComponent;
 
 /**
  * 
@@ -39,17 +35,12 @@ public class ChVacdRecommendationRequestMessage extends ChVacdAbstractMessage {
 			ChVacdRecommendationRequestMessageHeader messageHeader = new ChVacdRecommendationRequestMessageHeader();
 			messageHeader.setId(UUID.randomUUID().toString());
 
-			messageHeader.setEvent(new Coding().setSystem(
-					"http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-clinical-decision-support-event-cs")
-					.setCode("immunrecorequest")
-					.setDisplay("Immunization Recommendation Request"));
-
-			this.getEntry().add(new BundleEntryComponent().setResource(messageHeader)
+			this.getEntry().add(0, new BundleEntryComponent().setResource(messageHeader)
 					.setFullUrl("urn:uuid:" + messageHeader.getId()));
 			return messageHeader;
 		}
 	}
-	
+
 	/**
 	 * Adds an immunization to the document.
 	 * 
@@ -277,7 +268,5 @@ public class ChVacdRecommendationRequestMessage extends ChVacdAbstractMessage {
 	public List<ChVacdPastIllness> resolvePastIllnesses() {
 		return this.getEntryResourceByResourceType(ChVacdPastIllness.class);
 	}
-
-	
 
 }

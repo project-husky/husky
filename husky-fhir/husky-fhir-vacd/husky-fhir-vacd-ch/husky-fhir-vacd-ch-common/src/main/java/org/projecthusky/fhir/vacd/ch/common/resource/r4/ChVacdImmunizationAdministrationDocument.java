@@ -60,7 +60,7 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 			composition.addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
 					"urn:che:epr:ch-vacd:immunization-administration:2022", "CH VACD Immunization Administration")));
 
-			this.getEntry().add(new BundleEntryComponent().setResource(composition)
+			this.getEntry().add(0, new BundleEntryComponent().setResource(composition)
 					.setFullUrl("urn:uuid:" + composition.getId()));
 			return composition;
 		}

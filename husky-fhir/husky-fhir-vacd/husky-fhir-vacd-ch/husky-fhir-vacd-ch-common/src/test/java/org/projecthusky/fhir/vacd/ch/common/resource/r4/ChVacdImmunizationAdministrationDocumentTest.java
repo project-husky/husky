@@ -53,6 +53,10 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
 		ChVacdImmunizationAdministrationComposition ref = doc.resolveComposition();
 		assertNotNull(ref);
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 
 		prettyPrint(doc);
 	}
@@ -66,6 +70,10 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		imm.setMedication(testMedication);
 
 		doc.addImmunization(imm);
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 
 		prettyPrint(doc);
 	}
@@ -91,14 +99,22 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		List<ChVacdImmunization> ref = doc.resolveImmunizations();
 		assertNotNull(ref);
 		assertTrue(ref.size() == 2);
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 
 	}
 
 	@Test
 	void testSerialize() {
-		ChVacdImmunizationAdministrationDocument ref = new ChVacdImmunizationAdministrationDocument();
-		ref.setPatient(testPatient);
-		prettyPrint(ref);
+		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
+		doc.setPatient(testPatient);
+		prettyPrint(doc);
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 	}
 
 	/**
@@ -113,6 +129,10 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 		assertNotNull(ref);
 		assertNotNull(doc.resolveBasicImmunizations());
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 	}
 
 	/**
@@ -127,6 +147,10 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 		assertNotNull(ref);
 		assertNotNull(doc.resolveMedicalProblems());
+		
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 	}
 
 	/**
@@ -141,6 +165,10 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 		assertNotNull(ref);
 		assertNotNull(doc.resolveLaboratoryAndSerologies());
+
+		assertTrue(doc.getEntryFirstRep() != null && //
+				doc.getEntryFirstRep()
+						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 	}
 
 	/**

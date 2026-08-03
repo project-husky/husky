@@ -49,7 +49,7 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 			ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
 			composition.setId(UUID.randomUUID().toString());
 
-			this.getEntry().add(new BundleEntryComponent().setResource(composition)
+			this.getEntry().add(0,new BundleEntryComponent().setResource(composition)
 					.setFullUrl("urn:uuid:" + composition.getId()));
 			return composition;
 		}
