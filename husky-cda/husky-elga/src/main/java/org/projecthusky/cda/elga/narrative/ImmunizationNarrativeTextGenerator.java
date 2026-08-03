@@ -129,7 +129,7 @@ public class ImmunizationNarrativeTextGenerator extends ImmunizationBaseTextGene
 		return tr;
 	}
 
-	protected StrucDocTr getRowVaccine(POCDMT000040Consumable vaccine) {
+	protected StrucDocTr getRowVaccine(POCDMT000040Consumable vaccine, int index) {
 		if (vaccine != null && vaccine.getManufacturedProduct() != null
 				&& vaccine.getManufacturedProduct().getManufacturedMaterial() != null
 				&& vaccine.getManufacturedProduct().getManufacturedMaterial().getCode() != null) {
@@ -137,6 +137,8 @@ public class ImmunizationNarrativeTextGenerator extends ImmunizationBaseTextGene
 			tr.getThOrTd().add(getCellTd("Impfstoff:"));
 			tr.getThOrTd().add(
 					getCellTd(vaccine.getManufacturedProduct().getManufacturedMaterial().getCode().getDisplayName()));
+			String contentId = String.format("manufactured-material-%d", index);
+			tr.getThOrTd().add(getCellTdWithContent(vaccine.getManufacturedProduct().getManufacturedMaterial().getCode().getDisplayName(), contentId));
 			return tr;
 		}
 
@@ -176,13 +178,13 @@ public class ImmunizationNarrativeTextGenerator extends ImmunizationBaseTextGene
 
 		for (POCDMT000040Precondition precondition : substanceAdministration.getPrecondition()) {
 			if (precondition != null) {
-				body.getTr().add(getRowDose(precondition));
+				body.getTr().add(getRowDose(precondition, idxImmunization));
 				body.getTr().add(getRowScheme(precondition, idxImmunization));
 			}
 		}
 
 		if (substanceAdministration.getConsumable() != null) {
-			body.getTr().add(getRowVaccine(substanceAdministration.getConsumable()));
+			body.getTr().add(getRowVaccine(substanceAdministration.getConsumable(), idxImmunization));
 		}
 
 		body.getTr().addAll(getRowTargetDiseases(substanceAdministration.getEntryRelationship()));

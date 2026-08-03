@@ -236,7 +236,13 @@ public enum FormatCode implements ValueSetEnumInterfaceAt {
 	ELGA_PHC_2017("urn:elga:phc:2017", "PHC Statusbericht", "PHC Statusbericht"),
 
 	ELGA_IMMUNIZATION_RECORD_2019("urn:hl7-at:eImpf:2019", "HL7 Austria e-Impfpass 2019",
-			"HL7 Austria e-Impfpass 2019");
+			"HL7 Austria e-Impfpass 2019"),
+
+	ELGA_IMMUNIZATION_RECORD_20230717("urn:hl7-at:eImpf:2.0.0+20230717", "HL7 Austria e-Impfpass 2.0.0+20230717",
+			"HL7 Austria e-Impfpass 2.0.0+20230717"),
+
+	ELGA_IMMUNIZATION_RECORD_20260204("urn:hl7-at:eImpf:2.0.2+20260204", "HL7 Austria e-Impfpass 2.0.2+20260204",
+			"HL7 Austria e-Impfpass 2.0.2+20260204");
 
 	/**
 	 * Identifier of the value set
