@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.core.ch;
 
-import org.hl7.fhir.instance.model.api.IBaseBackboneElement;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +20,18 @@ import ca.uhn.fhir.context.FhirContext;
  * 
  */
 public class TestHelper {
-	
+
 	protected Logger logger = LoggerFactory.getLogger(TestHelper.class);
 
 	public void prettyPrint(IBaseResource ref) {
 		FhirContext ctx = FhirContext.forR4();
-//		System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
+		// System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
 		logger.info(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
 	}
-	
+
+	public String toString(IBaseResource ref) {
+		FhirContext ctx = FhirContext.forR4();
+		return ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref);
+	}
+
 }

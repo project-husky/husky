@@ -13,6 +13,7 @@ package org.projecthusky.fhir.core.ch.resource.r4;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.StringType;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
@@ -35,6 +36,11 @@ public class ChCoreImmunization extends Immunization {
 	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author", definedLocally = false)
 	protected Reference recorder;
 
+	@Nullable
+	@Child(name = "indicationCode", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epl-regulated-authorization-limitation-indication-code", definedLocally = false)
+	protected StringType indicationCode;
+
 	public ChCoreImmunization() {
 		super();
 	}
@@ -51,6 +57,18 @@ public class ChCoreImmunization extends Immunization {
 		this.recorder = recorder;
 	}
 
+	public boolean hasIndicationCode() {
+		return indicationCode != null;
+	}
+
+	public StringType getIndicationCode() {
+		return indicationCode;
+	}
+
+	public void setIndicationCode(StringType indicationCode) {
+		this.indicationCode = indicationCode;
+	}
+
 	@Override
 	public ChCoreImmunization copy() {
 		final var copy = new ChCoreImmunization();
@@ -63,6 +81,7 @@ public class ChCoreImmunization extends Immunization {
 		super.copyValues(dst);
 		if (dst instanceof final ChCoreImmunization als) {
 			als.recorder = recorder == null ? null : recorder.copy();
+			als.indicationCode = indicationCode;
 		}
 	}
 

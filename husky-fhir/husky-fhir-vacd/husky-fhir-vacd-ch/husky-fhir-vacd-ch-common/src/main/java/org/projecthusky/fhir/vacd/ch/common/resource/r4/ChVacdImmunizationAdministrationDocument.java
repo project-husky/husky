@@ -11,6 +11,9 @@
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.UUID;
+
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 
@@ -53,6 +56,9 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 		} else {
 			ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
 			composition.setId(UUID.randomUUID().toString());
+			
+			composition.addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
+					"urn:che:epr:ch-vacd:immunization-administration:2022", "CH VACD Immunization Administration")));
 
 			this.getEntry().add(new BundleEntryComponent().setResource(composition)
 					.setFullUrl("urn:uuid:" + composition.getId()));

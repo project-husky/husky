@@ -10,60 +10,46 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.hl7.fhir.r4.model.DateTimeType;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Organization;
-import org.hl7.fhir.r4.model.Patient;
-import org.hl7.fhir.r4.model.Practitioner;
-import org.hl7.fhir.r4.model.PractitionerRole;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.RelatedPerson;
-import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
-import org.projecthusky.fhir.core.ch.exceptions.InvalidResourceException;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCoreDocumentEpr;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganizationEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerEpr;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRoleEpr;
+
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
+
+import org.hl7.fhir.r4.model.Bundle.BundleEntryComponent;
 
 /**
- * The HAPI custom structure for CH-VACD ImmunizationAdministrationDocument.
  * 
- * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-recommendation-request-message")
+public class ChVacdRecommendationRequestMessage extends ChVacdAbstractMessage {
 
-public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
+	private static final long serialVersionUID = -4534977400325685315L;
 
-	private static final long serialVersionUID = 8722090116058643360L;
+	@Override
+	public ChVacdRecommendationRequestMessageHeader resolveMessageHeader() {
+		final var entry = this
+				.getEntryByResourceType(ChVacdRecommendationRequestMessageHeader.class);
+		if (entry != null) {
+			return entry;
+		} else {
+			ChVacdRecommendationRequestMessageHeader messageHeader = new ChVacdRecommendationRequestMessageHeader();
+			messageHeader.setId(UUID.randomUUID().toString());
 
-	protected ChVacdAbstractDocument() {
-		this.setLanguage("en-US");
+			messageHeader.setEvent(new Coding().setSystem(
+					"http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-clinical-decision-support-event-cs")
+					.setCode("immunrecorequest")
+					.setDisplay("Immunization Recommendation Request"));
 
-		this.getEntry().clear();
-		this.setId(UUID.randomUUID().toString());
-		this.setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + this.getId()));
-		this.setTimestamp(new Date());
-		this.setType(BundleType.DOCUMENT);
+			this.getEntry().add(new BundleEntryComponent().setResource(messageHeader)
+					.setFullUrl("urn:uuid:" + messageHeader.getId()));
+			return messageHeader;
+		}
 	}
-
-	/**
-	 * Returns the composition or throws.
-	 *
-	 * @return the composition.
-	 * @throws InvalidContentException
-	 *             if the composition is missing.
-	 */
-	@ExpectsValidResource
-	public abstract ChVacdAbstractComposition resolveComposition();
-
+	
 	/**
 	 * Adds an immunization to the document.
 	 * 
@@ -71,8 +57,8 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the immunization to add.
 	 */
 	public void addImmunization(ChVacdImmunization immunization) {
-		if (!this.resolveComposition().hasSubject()) {
-			immunization.setPatient(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			immunization.setPatient(new Reference(this.resolvePatient()));
 		}
 
 		if (immunization.getId() == null) {
@@ -82,19 +68,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (immunization.getId().startsWith("urn:uuid:")) {
 			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
 					.setFullUrl(immunization.getId()));
-			this.resolveComposition().resolveAdministrationSection()
-					.addEntry(new Reference(immunization.getId()));
+			this.resolveMessageHeader().addFocus(new Reference(immunization.getId()));
 		} else {
 			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
 					.setFullUrl("urn:uuid:" + immunization.getId()));
-			this.resolveComposition().resolveAdministrationSection()
-					.addEntry(new Reference("urn:uuid:" + immunization.getId()));
+			this.resolveMessageHeader().addFocus(new Reference("urn:uuid:" + immunization.getId()));
 		}
-		// this.getEntry().add(new
-		// BundleEntryComponent().setResource(immunization)
-		// .setFullUrl("urn:uuid:" + immunization.getId()));
-		// this.resolveComposition().resolveAdministrationSection()
-		// .addEntry(new Reference("urn:uuid:" + immunization.getId()));
 	}
 
 	/**
@@ -125,14 +104,14 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the basic immunization to add.
 	 */
 	public void addBasicImmunization(ChVacdBasicImmunization basicImmunization) {
-		if (this.resolveComposition().hasSubject()) {
-			basicImmunization.setSubject(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			basicImmunization.setSubject(new Reference(this.resolvePatient()));
 		}
 
 		this.getEntry().add(new BundleEntryComponent().setResource(basicImmunization)
 				.setFullUrl("urn:uuid:" + basicImmunization.getId()));
-		this.resolveComposition().resolveAdministrationSection()
-				.addEntry(new Reference("urn:uuid:" + basicImmunization.getId()));
+		this.resolveMessageHeader()
+				.addFocus(new Reference("urn:uuid:" + basicImmunization.getId()));
 	}
 
 	/**
@@ -175,14 +154,13 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the MedicalProblem resource to be added
 	 */
 	public void addMedicalProblem(ChVacdMedicalProblem medicalProblem) {
-		if (this.resolveComposition().hasSubject()) {
-			medicalProblem.setSubject(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			medicalProblem.setSubject(new Reference(this.resolvePatient()));
 		}
 
 		this.getEntry().add(new BundleEntryComponent().setResource(medicalProblem)
 				.setFullUrl("urn:uuid:" + medicalProblem.getId()));
-		this.resolveComposition().resolveMedicalProblemSection()
-				.addEntry(new Reference("urn:uuid:" + medicalProblem.getId()));
+		this.resolveMessageHeader().addFocus(new Reference("urn:uuid:" + medicalProblem.getId()));
 	}
 
 	/**
@@ -213,14 +191,13 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the LaboratoryAndSerology resource to be added
 	 */
 	public void addLaboratoryAndSerology(ChVacdLaboratoryAndSerology labandser) {
-		if (this.resolveComposition().hasSubject()) {
-			labandser.setSubject(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			labandser.setSubject(new Reference(this.resolvePatient()));
 		}
 
 		this.getEntry().add(new BundleEntryComponent().setResource(labandser)
 				.setFullUrl("urn:uuid:" + labandser.getId()));
-		this.resolveComposition().resolveLaboratorySerologySection()
-				.addEntry(new Reference("urn:uuid:" + labandser.getId()));
+		this.resolveMessageHeader().addFocus(new Reference("urn:uuid:" + labandser.getId()));
 	}
 
 	/**
@@ -248,14 +225,13 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 * Method to add AllergyIntolerance resource.
 	 */
 	public void addAllergyIntolerance(ChVacdAllergyIntolerance allInt) {
-		if (this.resolveComposition().hasSubject()) {
-			allInt.setPatient(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			allInt.setPatient(new Reference(this.resolvePatient()));
 		}
 
 		this.getEntry().add(new BundleEntryComponent().setResource(allInt)
 				.setFullUrl("urn:uuid:" + allInt.getId()));
-		this.resolveComposition().resolveAllergyIntolerancesSection()
-				.addEntry(new Reference("urn:uuid:" + allInt.getId()));
+		this.resolveMessageHeader().addFocus(new Reference("urn:uuid:" + allInt.getId()));
 
 	}
 
@@ -288,14 +264,13 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the PastIllness resource to be added
 	 */
 	public void addPastIllness(ChVacdPastIllness pastill) {
-		if (this.resolveComposition().hasSubject()) {
-			pastill.setSubject(this.resolveComposition().getSubject());
+		if (this.hasPatient()) {
+			pastill.setSubject(new Reference(this.resolvePatient()));
 		}
 
 		this.getEntry().add(new BundleEntryComponent().setResource(pastill)
 				.setFullUrl("urn:uuid:" + pastill.getId()));
-		this.resolveComposition().resolvePastIllnessSection()
-				.addEntry(new Reference("urn:uuid:" + pastill.getId()));
+		this.resolveMessageHeader().addFocus(new Reference("urn:uuid:" + pastill.getId()));
 
 	}
 
@@ -303,77 +278,6 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		return this.getEntryResourceByResourceType(ChVacdPastIllness.class);
 	}
 
-	/**
-	 * Set the patient for the document.
-	 * 
-	 * @param testPatient
-	 *            the patient to set.
-	 */
-	public void setPatient(Patient subject) {
-		if (subject.getId() == null) {
-			subject.setId(UUID.randomUUID().toString());
-		}
-		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
-		this.getEntry().add(new BundleEntryComponent().setResource(subject)
-				.setFullUrl("urn:uuid:" + subject.getId()));
-		// this.resolveComposition().setSubject(new Reference("urn:uuid:" +
-		// subject.getId()));
-	}
-
-	public void addAuthor(DomainResource author, Date timeOfDataInput) {
-		// Device
-		// RelatedPerson
-		// CH Core Patient EPR
-		// CH Core Practitioner EPR
-		// CH Core PractitionerRole EPR
-		// CH Core Organization EPR
-		if (author instanceof RelatedPerson || //
-				author instanceof Device || //
-				author instanceof ChCorePatientEpr || //
-				author instanceof ChCorePractitionerEpr || //
-				author instanceof ChCorePractitionerRoleEpr || //
-				author instanceof ChCoreOrganizationEpr //
-		) {
-			if (author.getId() == null) {
-				author.setId(UUID.randomUUID().toString());
-			}
-			var ref = new Reference("urn:uuid:" + author.getId());
-			ref.addExtension()
-					.setUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time")
-					.setValue(new DateTimeType(timeOfDataInput));
-			this.resolveComposition().addAuthor(ref);
-			if (!this.hasEntryByResourceTypeAndId(author)) {
-
-				this.addEntry(new BundleEntryComponent().setResource(author)
-						.setFullUrl("urn:uuid:" + author.getId()));
-				if (author instanceof PractitionerRole) {
-					var practRole = ((PractitionerRole) author);
-					if (practRole.getOrganization() == null
-							|| practRole.getPractitioner() == null) {
-						throw new InvalidResourceException(
-								"The author must have an organization and a practitioner");
-					}
-					var org = (Organization) practRole.getOrganization().getResource();
-					if (!this.hasEntryByResourceTypeAndId(org)) {
-						this.addEntry(new BundleEntryComponent().setResource(org)
-								.setFullUrl("urn:uuid:" + (org.getId() != null ? org.getId()
-										: UUID.randomUUID().toString())));
-					}
-					var pract = (Practitioner) practRole.getPractitioner().getResource();
-					if (!this.hasEntryByResourceTypeAndId(pract)) {
-						this.addEntry(new BundleEntryComponent().setResource(pract)
-								.setFullUrl("urn:uuid:" + (pract.getId() != null ? pract.getId()
-										: UUID.randomUUID().toString())));
-					}
-				}
-
-			}
-
-		} else {
-			throw new InvalidResourceException(
-					"The author must be of type RelatedPerson, Device, ChCorePatientEpr, ChCorePractitionerEpr, ChCorePractitionerRoleEpr or ChCoreOrganizationEpr");
-		}
-
-	}
+	
 
 }
