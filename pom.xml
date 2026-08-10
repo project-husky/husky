@@ -54,7 +54,7 @@
 		<bouncycastle.version>1.83</bouncycastle.version>
 		<logback.version>1.5.16</logback.version>
 		<apache_poi_version>5.4.1</apache_poi_version>
-		<cxf.version>4.1.7</cxf.version>
+		<cxf.version>4.1.8</cxf.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -301,6 +301,12 @@
 				<groupId>org.apache.httpcomponents.core5</groupId>
 				<version>${apache-httpcore5}</version>
 				<artifactId>httpcore5</artifactId>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.thrift</groupId>
+			    <artifactId>libthrift</artifactId>
+			    <version>0.24.0</version>
 			</dependency>
 
 			<!-- XUA stuff -->
