@@ -36,6 +36,10 @@
 			<artifactId>hapi-fhir-caching-caffeine</artifactId>
 			<version>${hapi.fhir.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-server</artifactId>
+		</dependency>
 
 		<!-- Tests (EPL 2.0) -->
 		<dependency>
@@ -54,5 +58,5 @@
 			<!--<version>1.5.18</version>-->
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
 </project>

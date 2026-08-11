@@ -18,6 +18,7 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.validation.model.ValidationIssue;
 import org.projecthusky.fhir.validation.model.ValidationResult;
+import org.slf4j.Logger;
 
 public interface HuskyFhirValidator {
 
@@ -33,6 +34,11 @@ public interface HuskyFhirValidator {
 	 */
 	ValidationResult validateDocumentBundle(final Bundle bundle, final String profile)
 			throws IOException;
+
+	/**
+	 * Gets the class logger.
+	 */
+	Logger getLog();
 
 	/**
 	 * Maps an {@link OperationOutcome} issue to Husky's own model of a

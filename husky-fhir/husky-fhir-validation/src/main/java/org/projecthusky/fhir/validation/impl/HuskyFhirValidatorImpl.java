@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import ca.uhn.fhir.rest.server.interceptor.validation.ValidationMessagePostProcessingInterceptor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.common.hapi.validation.support.CommonCodeSystemsTerminologyService;
@@ -27,7 +28,6 @@ import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.hl7.fhir.r4.model.StructureDefinition;
 import org.projecthusky.fhir.validation.HuskyFhirValidator;
 import org.projecthusky.fhir.validation.logging.ValidationResultLogger;
 import org.projecthusky.fhir.validation.model.ValidationResult;
@@ -46,18 +46,31 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 
 	private static final Logger log = LoggerFactory.getLogger(HuskyFhirValidatorImpl.class);
 
-	private FhirValidator validator;
+	protected final FhirValidator validator;
+
+	/**
+	 * Validation support chain.
+	 */
+	protected final ValidationSupportChain chain;
+
+	protected final PrePopulatedValidationSupport prepopulatedValidationSupport;
 
 	/**
 	 * Whether the validation outcome should be logged with logger when calling
 	 * a validation method.
 	 */
-	private boolean logValidationOutcome = true;
+	protected boolean logValidationOutcome = true;
 
 	/**
 	 * The logger to use in case validation result logger is enabled.
 	 */
-	private @Nullable ValidationResultLogger validationResultLogger;
+	protected @Nullable ValidationResultLogger validationResultLogger;
+
+	/**
+	 * A list of validation message post-processing interceptors. These interceptors are handled right after performing
+	 * the base HAPI validation but before (optionally) logging and then returning the result.
+	 */
+	private List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors = new ArrayList<>();
 
 	/**
 	 * Creates an instance of a {@link HuskyFhirValidatorImpl}, that is, a
@@ -81,48 +94,64 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 		final var packageSupport = new NpmPackageValidationSupport(context);
 		for (var packageResource : resourcePackages)
 			packageSupport.loadPackageFromClasspath(packageResource);
-		final var prepopulatedValidationSupport = new PrePopulatedValidationSupport(context);
-		final var chain = new ValidationSupportChain(prepopulatedValidationSupport, packageSupport,
+		prepopulatedValidationSupport = new PrePopulatedValidationSupport(context);
+		chain = new ValidationSupportChain(prepopulatedValidationSupport, packageSupport,
 				new DefaultProfileValidationSupport(context),
 				new SnapshotGeneratingValidationSupport(context),
 				(txServer != null && !txServer.isBlank())
 						? new RemoteTerminologyServiceValidationSupport(context, txServer)
 						: new InMemoryTerminologyServerValidationSupport(context),
 				new CommonCodeSystemsTerminologyService(context));
-		final var def = chain
-				.fetchStructureDefinition("http://hl7.org/fhir/StructureDefinition/SimpleQuantity");
-		prepopulatedValidationSupport.addStructureDefinition(((StructureDefinition) def).copy()
-				.setUrl("http://hl7.org/fhir/StructureDefinition/SimpleQuantity|4.0.1"));
 		validator = context.newValidator();
 		final var instanceValidator = new FhirInstanceValidator(chain);
 		validator.registerValidatorModule(instanceValidator);
 	}
 
 	@Override
-	public ValidationResult validateDocumentBundle(Bundle bundle, String profile)
-			throws IOException {
+	public Logger getLog() {
+		return log;
+	}
+
+	/**
+	 * Gets the list of validation message post-processing interceptors to be processed after validation.
+	 */
+	public List<@NonNull ValidationMessagePostProcessingInterceptor>  getInterceptors() {
+		if (interceptors == null) interceptors = new ArrayList<>();
+		return interceptors;
+	}
+
+	public void setInterceptors(final List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors) {
+		this.interceptors = interceptors;
+	}
+
+	/**
+	 * Adds an interceptor to the list of validation message post-processing interceptors.
+	 */
+	public HuskyFhirValidatorImpl addValidationMessagePostProcessingInterceptor(final ValidationMessagePostProcessingInterceptor interceptor) {
+		getInterceptors().add(interceptor);
+		return this;
+	}
+
+	/**
+	 * Handles the HAPI FHIR validation result by having all registered post-processors handle it. The result is
+	 * expected to be potentially modified by the handling. No new instance will be kept, results must be modified.
+	 */
+	protected void handleValidationResult(final ca.uhn.fhir.validation.ValidationResult result) {
+		for (final var interceptor : getInterceptors()) interceptor.handle(result);
+	}
+
+	@Override
+	public ValidationResult validateDocumentBundle(Bundle bundle, String profile) {
 		final var validationOptions = new ValidationOptions();
 		validationOptions.addProfile(Objects.requireNonNull(profile));
 		final var result = validator.validateWithResult(Objects.requireNonNull(bundle),
 				validationOptions);
-		// handleValidationResult(result);
+		handleValidationResult(result);
 		final var huskyResult = HuskyFhirValidator
 				.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
 		logValidationResult(huskyResult);
 		return huskyResult;
 	}
-
-	// /**
-	// * Handles the HAPI FHIR validation result by having all registered
-	// * post-processors handle it. The result is expected to be potentially
-	// * modified by the handling. No new instance will be kept, results must be
-	// * modified.
-	// */
-	// protected void handleValidationResult(final
-	// ca.uhn.fhir.validation.ValidationResult result) {
-	// for (final var interceptor : getInterceptors())
-	// interceptor.handle(result);
-	// }
 
 	/**
 	 * Logs the validation result if enabled in the validator config. If enabled
@@ -139,7 +168,7 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 			if (validationResultLogger != null)
 				validationResultLogger.logValidationResult(validationResult);
 			else
-				log.error(
+				getLog().error(
 						"The CH EMED EPR validator is set to log results, but no logger is set. Cannot log results.");
 		}
 	}
@@ -148,7 +177,7 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 	 * Gets a default validation result logger.
 	 */
 	public ValidationResultLogger getDefaultValidationResultLogger() {
-		return new ValidationResultLogger(log);
+		return new ValidationResultLogger(getLog());
 	}
 
 	public void setLogValidationOutcome(boolean logValidationOutcome) {
