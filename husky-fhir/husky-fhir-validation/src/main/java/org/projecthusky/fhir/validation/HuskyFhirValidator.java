@@ -13,6 +13,7 @@ package org.projecthusky.fhir.validation;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
@@ -34,6 +35,8 @@ public interface HuskyFhirValidator {
 	 */
 	ValidationResult validateDocumentBundle(final Bundle bundle, final String profile)
 			throws IOException;
+	
+	ValidationResult validateResource(final IBaseResource resource, final String profile) throws IOException;
 
 	/**
 	 * Gets the class logger.

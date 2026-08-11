@@ -26,6 +26,7 @@ import org.hl7.fhir.common.hapi.validation.support.RemoteTerminologyServiceValid
 import org.hl7.fhir.common.hapi.validation.support.SnapshotGeneratingValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.ValidationSupportChain;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.validation.HuskyFhirValidator;
@@ -67,8 +68,9 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 	protected @Nullable ValidationResultLogger validationResultLogger;
 
 	/**
-	 * A list of validation message post-processing interceptors. These interceptors are handled right after performing
-	 * the base HAPI validation but before (optionally) logging and then returning the result.
+	 * A list of validation message post-processing interceptors. These
+	 * interceptors are handled right after performing the base HAPI validation
+	 * but before (optionally) logging and then returning the result.
 	 */
 	private List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors = new ArrayList<>();
 
@@ -113,31 +115,39 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 	}
 
 	/**
-	 * Gets the list of validation message post-processing interceptors to be processed after validation.
+	 * Gets the list of validation message post-processing interceptors to be
+	 * processed after validation.
 	 */
-	public List<@NonNull ValidationMessagePostProcessingInterceptor>  getInterceptors() {
-		if (interceptors == null) interceptors = new ArrayList<>();
+	public List<@NonNull ValidationMessagePostProcessingInterceptor> getInterceptors() {
+		if (interceptors == null)
+			interceptors = new ArrayList<>();
 		return interceptors;
 	}
 
-	public void setInterceptors(final List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors) {
+	public void setInterceptors(
+			final List<@NonNull ValidationMessagePostProcessingInterceptor> interceptors) {
 		this.interceptors = interceptors;
 	}
 
 	/**
-	 * Adds an interceptor to the list of validation message post-processing interceptors.
+	 * Adds an interceptor to the list of validation message post-processing
+	 * interceptors.
 	 */
-	public HuskyFhirValidatorImpl addValidationMessagePostProcessingInterceptor(final ValidationMessagePostProcessingInterceptor interceptor) {
+	public HuskyFhirValidatorImpl addValidationMessagePostProcessingInterceptor(
+			final ValidationMessagePostProcessingInterceptor interceptor) {
 		getInterceptors().add(interceptor);
 		return this;
 	}
 
 	/**
-	 * Handles the HAPI FHIR validation result by having all registered post-processors handle it. The result is
-	 * expected to be potentially modified by the handling. No new instance will be kept, results must be modified.
+	 * Handles the HAPI FHIR validation result by having all registered
+	 * post-processors handle it. The result is expected to be potentially
+	 * modified by the handling. No new instance will be kept, results must be
+	 * modified.
 	 */
 	protected void handleValidationResult(final ca.uhn.fhir.validation.ValidationResult result) {
-		for (final var interceptor : getInterceptors()) interceptor.handle(result);
+		for (final var interceptor : getInterceptors())
+			interceptor.handle(result);
 	}
 
 	@Override
@@ -145,6 +155,20 @@ public class HuskyFhirValidatorImpl implements HuskyFhirValidator {
 		final var validationOptions = new ValidationOptions();
 		validationOptions.addProfile(Objects.requireNonNull(profile));
 		final var result = validator.validateWithResult(Objects.requireNonNull(bundle),
+				validationOptions);
+		handleValidationResult(result);
+		final var huskyResult = HuskyFhirValidator
+				.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
+		logValidationResult(huskyResult);
+		return huskyResult;
+	}
+
+	@Override
+	public ValidationResult validateResource(IBaseResource resource, String profile)
+			throws IOException {
+		final var validationOptions = new ValidationOptions();
+		validationOptions.addProfile(Objects.requireNonNull(profile));
+		final var result = validator.validateWithResult(Objects.requireNonNull(resource),
 				validationOptions);
 		handleValidationResult(result);
 		final var huskyResult = HuskyFhirValidator
