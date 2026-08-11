@@ -1,9 +1,10 @@
-package org.projecthusky.fhir.emed.ch.epr.validator;
+package org.projecthusky.fhir.validation.logging;
 
-import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.event.Level;
 
@@ -17,7 +18,6 @@ import java.util.function.Predicate;
  * A logger class for validation results. This class allows for clients to specify issue filters and an issue severity
  * to logging level mapping to further refine logging.
  */
-@Getter
 public class ValidationResultLogger {
     public static final DefaultSeverityMapper  DEFAULT_SEVERITY_MAPPER = new DefaultSeverityMapper();
 
@@ -85,7 +85,7 @@ public class ValidationResultLogger {
      * Logs the validation result.
      * @param validationResult The validation result to be logged.
      */
-    protected void logValidationResult(final ValidationResult validationResult) {
+    public void logValidationResult(final ValidationResult validationResult) {
         logAtLevel(
                 validationResult.isSuccessful()? Level.INFO : Level.ERROR,
                 String.format("Validation result: %s", validationResult.isSuccessful() ? "successful" : "failed")
@@ -135,4 +135,22 @@ public class ValidationResultLogger {
             };
         }
     }
+
+	public Logger getLog() {
+		return log;
+	}
+
+	public Function<OperationOutcome.IssueSeverity, Level> getSeverityMapper() {
+		return severityMapper;
+	}
+
+	public List<Predicate<ValidationIssue>> getFilters() {
+		return filters;
+	}
+
+	public Predicate<ValidationIssue> getReducedFilters() {
+		return reducedFilters;
+	}
+    
+    
 }

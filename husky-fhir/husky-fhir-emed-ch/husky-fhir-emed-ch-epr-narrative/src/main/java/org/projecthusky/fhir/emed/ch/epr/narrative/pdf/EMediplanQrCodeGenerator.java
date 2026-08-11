@@ -9,7 +9,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EMediplanConverter;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;

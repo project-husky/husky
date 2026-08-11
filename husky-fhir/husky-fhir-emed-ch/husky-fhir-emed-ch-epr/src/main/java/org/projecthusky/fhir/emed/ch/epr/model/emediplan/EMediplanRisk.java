@@ -3,7 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * This sould be an enum representation of the CDSCODE table of HCI INDEX used by the

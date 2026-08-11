@@ -14,6 +14,9 @@ import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
+import org.projecthusky.fhir.validation.HuskyFhirValidator;
+import org.projecthusky.fhir.validation.logging.ValidationResultLogger;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -112,7 +115,7 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
         final var result =
                 validator.validateWithResult(new String(documentStream.readAllBytes(), StandardCharsets.UTF_8), validationOptions);
         handleValidationResult(result);
-        final var huskyResult = ChEmedEprValidator.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
+        final var huskyResult = HuskyFhirValidator.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
         if (huskyResult.isSuccessful())
             huskyResult.add(logicValidator.validate(document));
         logValidationResult(huskyResult);
@@ -126,7 +129,7 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
         final var result = validator.validateWithResult(Objects.requireNonNull(bundle), validationOptions);
         handleValidationResult(result);
         final var huskyResult =
-                ChEmedEprValidator.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
+        		HuskyFhirValidator.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
         logValidationResult(huskyResult);
         return huskyResult;
     }

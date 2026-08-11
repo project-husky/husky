@@ -2,7 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import java.util.List;
 

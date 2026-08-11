@@ -4,6 +4,7 @@ import ca.uhn.fhir.context.FhirContext;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
