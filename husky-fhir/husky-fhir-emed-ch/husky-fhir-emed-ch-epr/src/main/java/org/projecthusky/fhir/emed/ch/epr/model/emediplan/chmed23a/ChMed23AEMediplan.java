@@ -14,8 +14,8 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareProCarrier;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.ChMed23AGender;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.EMediplanAuthor;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
 import java.util.ArrayList;

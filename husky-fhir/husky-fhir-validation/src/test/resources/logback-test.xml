@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+	<appender name="Console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{ISO8601} %highlight(%-5level) [%blue(%t)]
+				%green(${application.title}) %yellow(%C{30}):
+				%msg%n%throwable
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- LOG everything at ERROR level -->
+	<root level="info">
+		<appender-ref ref="Console" />
+	</root>
+
+</configuration>

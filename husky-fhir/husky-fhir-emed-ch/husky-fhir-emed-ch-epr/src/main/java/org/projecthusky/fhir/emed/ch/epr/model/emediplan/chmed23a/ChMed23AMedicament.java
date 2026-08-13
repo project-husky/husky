@@ -13,7 +13,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.ChMed
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.Repetition;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.RepetitionDuration;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.repetition.RepetitionNumber;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.util.ArrayList;
 import java.util.List;

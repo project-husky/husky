@@ -11,7 +11,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanPatientMedicalData;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanRisk;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanRiskList;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

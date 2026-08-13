@@ -10,7 +10,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.CdTyp9;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.RelativeToMeal;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.PosologyDetail;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.time.Instant;
 import java.util.Objects;

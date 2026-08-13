@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.ChMed23AMedicament;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.PosologyType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Describes when (morning, moon, evening, night) and how much of a medication must be applied daily, in a structured
