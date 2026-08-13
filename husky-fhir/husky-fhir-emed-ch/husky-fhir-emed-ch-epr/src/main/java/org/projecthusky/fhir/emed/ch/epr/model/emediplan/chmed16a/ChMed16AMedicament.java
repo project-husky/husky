@@ -14,7 +14,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.MedicamentIdType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.CdTyp26;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.posology.ChMed16APosology;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.util.ArrayList;
 import java.util.List;

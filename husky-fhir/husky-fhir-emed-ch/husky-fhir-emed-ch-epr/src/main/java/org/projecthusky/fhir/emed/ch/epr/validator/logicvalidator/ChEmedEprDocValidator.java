@@ -6,7 +6,7 @@ import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import java.util.ArrayList;
 import java.util.EnumSet;

@@ -17,5 +17,6 @@
 		<module>husky-fhir-emed-ch</module>
 		<module>husky-fhir-vacd</module>
 		<module>husky-fhir-core-ch</module>
+		<module>husky-fhir-validation</module>
 	</modules>
 </project>

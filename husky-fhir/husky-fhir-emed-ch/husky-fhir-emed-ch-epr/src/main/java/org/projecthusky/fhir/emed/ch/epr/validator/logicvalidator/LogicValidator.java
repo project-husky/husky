@@ -10,7 +10,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.projecthusky.fhir.emed.ch.epr.validator.ChEmedEprValidator;
 import org.projecthusky.fhir.emed.ch.epr.validator.ChEmedEprValidatorInternalException;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import java.util.List;
 

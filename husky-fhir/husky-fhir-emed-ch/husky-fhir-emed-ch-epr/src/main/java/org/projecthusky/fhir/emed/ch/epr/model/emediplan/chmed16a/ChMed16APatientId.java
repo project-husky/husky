@@ -12,7 +12,7 @@ import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanIdentifier;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 @Data
 @NoArgsConstructor
