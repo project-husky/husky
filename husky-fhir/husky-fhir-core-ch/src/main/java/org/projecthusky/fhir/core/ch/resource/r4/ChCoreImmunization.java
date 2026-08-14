@@ -10,7 +10,10 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
+import java.util.List;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.StringType;
@@ -83,6 +86,11 @@ public class ChCoreImmunization extends Immunization {
 			als.recorder = recorder == null ? null : recorder.copy();
 			als.indicationCode = indicationCode;
 		}
+	}
+
+	public ChCoreImmunization setTargetDiseases(List<CodeableConcept> theTargetDisease) {
+		this.getProtocolAppliedFirstRep().setTargetDisease(theTargetDisease);
+		return this;
 	}
 
 }

@@ -12,7 +12,6 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.UUID;
 
-import org.hl7.fhir.r4.model.Composition.CompositionStatus;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 

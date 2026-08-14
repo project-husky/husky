@@ -320,6 +320,45 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		// subject.getId()));
 	}
 
+	public void addPractitionerRole(PractitionerRole practitionerRole) {
+		if (!this.hasEntryByResourceTypeAndId(practitionerRole)) {
+			if (practitionerRole.getOrganization() == null
+					|| practitionerRole.getPractitioner() == null) {
+				throw new InvalidResourceException(
+						"The author must have an organization and a practitioner");
+			}
+			if (practitionerRole.getId() == null) {
+				practitionerRole.setId(UUID.randomUUID().toString());
+			}
+			this.getEntry().add(new BundleEntryComponent().setResource(practitionerRole)
+					.setFullUrl("urn:uuid:" + practitionerRole.getId()));
+			var org = (Organization) practitionerRole.getOrganization().getResource();
+			addOrganization(org);
+			var pract = (Practitioner) practitionerRole.getPractitioner().getResource();
+			addPractitioner(pract);
+		}
+	}
+
+	public void addOrganization(Organization organization) {
+		if (organization != null && !this.hasEntryByResourceTypeAndId(organization)) {
+			if (organization.getId() == null) {
+				organization.setId(UUID.randomUUID().toString());
+			}
+			this.addEntry(new BundleEntryComponent().setResource(organization)
+					.setFullUrl("urn:uuid:" + organization.getId()));
+		}
+	}
+
+	public void addPractitioner(Practitioner practitioner) {
+		if (practitioner != null && !this.hasEntryByResourceTypeAndId(practitioner)) {
+			if (practitioner.getId() == null) {
+				practitioner.setId(UUID.randomUUID().toString());
+			}
+			this.addEntry(new BundleEntryComponent().setResource(practitioner)
+					.setFullUrl("urn:uuid:" + practitioner.getId()));
+		}
+	}
+
 	public void addAuthor(DomainResource author, Date timeOfDataInput) {
 		// Device
 		// RelatedPerson
@@ -344,27 +383,11 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 			this.resolveComposition().addAuthor(ref);
 			if (!this.hasEntryByResourceTypeAndId(author)) {
 
-				this.addEntry(new BundleEntryComponent().setResource(author)
-						.setFullUrl("urn:uuid:" + author.getId()));
 				if (author instanceof PractitionerRole) {
-					var practRole = ((PractitionerRole) author);
-					if (practRole.getOrganization() == null
-							|| practRole.getPractitioner() == null) {
-						throw new InvalidResourceException(
-								"The author must have an organization and a practitioner");
-					}
-					var org = (Organization) practRole.getOrganization().getResource();
-					if (!this.hasEntryByResourceTypeAndId(org)) {
-						this.addEntry(new BundleEntryComponent().setResource(org)
-								.setFullUrl("urn:uuid:" + (org.getId() != null ? org.getId()
-										: UUID.randomUUID().toString())));
-					}
-					var pract = (Practitioner) practRole.getPractitioner().getResource();
-					if (!this.hasEntryByResourceTypeAndId(pract)) {
-						this.addEntry(new BundleEntryComponent().setResource(pract)
-								.setFullUrl("urn:uuid:" + (pract.getId() != null ? pract.getId()
-										: UUID.randomUUID().toString())));
-					}
+					addPractitionerRole((PractitionerRole) author);
+				} else {
+					this.addEntry(new BundleEntryComponent().setResource(author)
+							.setFullUrl("urn:uuid:" + author.getId()));
 				}
 
 			}
@@ -374,6 +397,32 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 					"The author must be of type RelatedPerson, Device, ChCorePatientEpr, ChCorePractitionerEpr, ChCorePractitionerRoleEpr or ChCoreOrganizationEpr");
 		}
 
+	}
+
+	/**
+	 * Method to create and add MedicationForImmunization
+	 * 
+	 * @return the created and added MedicationForImmunization resource
+	 */
+	public ChVacdMedicationForImmunization addMedication() {
+		ChVacdMedicationForImmunization medication = new ChVacdMedicationForImmunization();
+		medication.setId(UUID.randomUUID().toString());
+		addMedication(medication);
+		return medication;
+	}
+
+	/**
+	 * Method to add MedicationForImmunization
+	 * 
+	 * @param medication
+	 *            the MedicationForImmunization resource to be added
+	 */
+	public void addMedication(ChVacdMedicationForImmunization medication) {
+		if (medication.getId() == null) {
+			medication.setId(UUID.randomUUID().toString());
+		}
+		this.getEntry().add(new BundleEntryComponent().setResource(medication)
+				.setFullUrl("urn:uuid:" + medication.getId()));
 	}
 
 }
