@@ -12,20 +12,22 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Reference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganizationEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRoleEpr;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 import org.projecthusky.fhir.vacd.ch.common.TestHelper;
-import org.slf4j.LoggerFactory;
-
-import ca.uhn.fhir.context.FhirContext;
 
 /**	
  * 
@@ -33,6 +35,8 @@ import ca.uhn.fhir.context.FhirContext;
 class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 	private Patient testPatient;
+
+	private ChCorePractitionerRoleEpr testAuthor;
 
 	private ChVacdMedicationForImmunization testMedication;
 
@@ -42,10 +46,20 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 	@BeforeEach
 	void setUp() throws Exception {
 		testPatient = new Patient();
-		testPatient.setId("testPatient");
+		testPatient.setId(IdUtil.generateUrnUuid());
 		testPatient.addName().setFamily("Test").addGiven("Patient");
 
+		testAuthor = new ChCorePractitionerRoleEpr();
+		testAuthor.setId(UUID.randomUUID().toString());
+		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
+		practitioner.setId(UUID.randomUUID().toString());
+		testAuthor.setPractitioner(new Reference(practitioner));
+		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
+		organization.setId(UUID.randomUUID().toString());
+		testAuthor.setOrganization(new Reference(organization));
+
 		testMedication = new ChVacdMedicationForImmunization();
+		testMedication.setId(UUID.randomUUID().toString());
 	}
 
 	@Test
@@ -53,7 +67,7 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
 		ChVacdImmunizationAdministrationComposition ref = doc.resolveComposition();
 		assertNotNull(ref);
-		
+
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
@@ -64,18 +78,40 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 	@Test
 	void testAddImmunization() {
 		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
-		ChVacdImmunization imm = new ChVacdImmunization();
-		imm.setId(UUID.randomUUID().toString());
-		imm.setRecorder(new Reference(testPatient));
-		imm.setMedication(testMedication);
+		doc.setPatient(testPatient);
+		doc.addAuthor(testAuthor, new Date());
+		ChVacdImmunization imm = doc.addImmunization();
+		imm.setRecorder(new Reference(testAuthor));
+		imm.setMedication(doc.addMedication());
 
-		doc.addImmunization(imm);
-		
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
 
 		prettyPrint(doc);
+	}
+
+	@Test
+	void testBundle() {
+		// Create a Patient
+		Patient patient = new Patient();
+		// patient.setId("Patient-01");
+		patient.setId("urn:uuid:" + UUID.randomUUID().toString());
+		patient.addName().setFamily("Smith").addGiven("John");
+
+		// Create an Observation and reference the Patient
+		Observation observation = new Observation();
+		observation.setId("Observation-01");
+		observation.setSubject(new Reference(patient));
+
+		// Serialize Bundle or individual resource containing the reference
+		Bundle bundle = new Bundle();
+		bundle.setType(Bundle.BundleType.DOCUMENT);
+		bundle.addEntry().setResource(patient).setFullUrl(patient.getIdElement().getIdPart());
+		bundle.addEntry().setResource(observation);
+
+		prettyPrint(bundle);
+
 	}
 
 	@Test
@@ -99,7 +135,7 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		List<ChVacdImmunization> ref = doc.resolveImmunizations();
 		assertNotNull(ref);
 		assertTrue(ref.size() == 2);
-		
+
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
@@ -111,7 +147,7 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
 		doc.setPatient(testPatient);
 		prettyPrint(doc);
-		
+
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
@@ -129,7 +165,7 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 		assertNotNull(ref);
 		assertNotNull(doc.resolveBasicImmunizations());
-		
+
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);
@@ -147,7 +183,7 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 
 		assertNotNull(ref);
 		assertNotNull(doc.resolveMedicalProblems());
-		
+
 		assertTrue(doc.getEntryFirstRep() != null && //
 				doc.getEntryFirstRep()
 						.getResource() instanceof ChVacdImmunizationAdministrationComposition);

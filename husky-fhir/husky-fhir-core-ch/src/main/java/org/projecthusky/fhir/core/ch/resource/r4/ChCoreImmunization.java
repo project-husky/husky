@@ -93,4 +93,10 @@ public class ChCoreImmunization extends Immunization {
 		return this;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() && //
+				ca.uhn.fhir.util.ElementUtil.isEmpty(recorder, indicationCode);
+	}
+
 }

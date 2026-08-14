@@ -51,10 +51,10 @@ public class ChCoreDocumentEpr  extends ChCoreDocument {
 	 * @throws InvalidContentException if the document already contains a composition.
 	 */
 	public ChCoreCompositionEpr addComposition(final ChCoreCompositionEpr composition) throws InvalidContentException {
-		if (this.getEntryComponentByResourceType(Composition.class) != null)
-			throw new InvalidContentException("The document already contains a composition.");
-		this.getEntry().add(new BundleEntryComponent().setResource(composition));
-		return composition;
+//		if (this.getEntryComponentByResourceType(Composition.class) != null)
+//			throw new InvalidContentException("The document already contains a composition.");
+//		this.getEntry().add(new BundleEntryComponent().setResource(composition));
+		return (ChCoreCompositionEpr)super.addComposition(composition);
 	}
 
 	/**

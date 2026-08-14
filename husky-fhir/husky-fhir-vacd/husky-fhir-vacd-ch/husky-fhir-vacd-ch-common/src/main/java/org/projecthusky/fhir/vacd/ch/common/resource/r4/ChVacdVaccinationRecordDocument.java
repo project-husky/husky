@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreCompositionEpr;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
@@ -45,15 +46,19 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 		if (entry != null) {
 			return entry;
 		} else {
-			ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
-			composition.setId(UUID.randomUUID().toString());
-
-			this.getEntry().add(0,new BundleEntryComponent().setResource(composition)
-					.setFullUrl("urn:uuid:" + composition.getId()));
-			return composition;
+			return addComposition();
 		}
-//		throw new InvalidContentException(
-//				"The ChVacdVaccinationRecordComposition is missing in the document Bundle");
+		// throw new InvalidContentException(
+		// "The ChVacdVaccinationRecordComposition is missing in the document
+		// Bundle");
+	}
+
+	@Override
+	public ChVacdVaccinationRecordComposition addComposition() throws InvalidContentException {
+		ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
+		composition.setId(UUID.randomUUID().toString());
+		super.addComposition(composition);
+		return composition;
 	}
 
 }

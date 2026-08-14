@@ -47,4 +47,9 @@ public class ChCoreImmunizationRecommendation extends ImmunizationRecommendation
 		}
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() && //
+				ca.uhn.fhir.util.ElementUtil.isEmpty(indicationCode);
+	}
 }

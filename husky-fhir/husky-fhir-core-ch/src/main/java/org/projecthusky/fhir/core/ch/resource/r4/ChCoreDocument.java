@@ -13,6 +13,7 @@ package org.projecthusky.fhir.core.ch.resource.r4;
 import org.hl7.fhir.r4.model.Composition;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
@@ -54,7 +55,8 @@ public class ChCoreDocument extends AbstractDocument {
 	public ChCoreComposition addComposition(final ChCoreComposition composition) throws InvalidContentException {
 		if (this.getEntryComponentByResourceType(Composition.class) != null)
 			throw new InvalidContentException("The document already contains a composition.");
-		this.getEntry().add(new BundleEntryComponent().setResource(composition));
+		IdUtil.checkId(composition);
+		this.getEntry().add(new BundleEntryComponent().setResource(composition).setFullUrl(composition.getId()));
 		return composition;
 	}
 

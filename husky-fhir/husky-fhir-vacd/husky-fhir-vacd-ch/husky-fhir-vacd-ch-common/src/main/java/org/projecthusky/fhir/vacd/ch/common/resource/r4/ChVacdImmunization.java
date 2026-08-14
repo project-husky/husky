@@ -114,6 +114,8 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	}
 
 	public ChVacdImmunization setMedication(ChVacdMedicationForImmunization medication) {
+		// this.medication = new Reference("urn:uuid:" +
+		// medication.getIdElement().getIdPart());
 		this.medication = new Reference(medication);
 		return this;
 	}
@@ -157,4 +159,12 @@ public class ChVacdImmunization extends ChCoreImmunization {
 		}
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() && //
+				ca.uhn.fhir.util.ElementUtil.isEmpty(relatesTo, medication, conflict,
+						verificationStatus);
+	}
+	
+	
 }
