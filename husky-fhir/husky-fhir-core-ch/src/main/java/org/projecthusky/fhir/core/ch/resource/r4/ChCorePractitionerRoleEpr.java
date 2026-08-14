@@ -12,7 +12,6 @@ package org.projecthusky.fhir.core.ch.resource.r4;
 
 import java.util.UUID;
 
-import org.hl7.fhir.instance.model.api.IBaseReference;
 import org.hl7.fhir.r4.model.Reference;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;

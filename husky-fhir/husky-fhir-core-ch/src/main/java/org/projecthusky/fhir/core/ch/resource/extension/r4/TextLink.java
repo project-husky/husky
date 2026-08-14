@@ -30,7 +30,9 @@ import static ca.uhn.fhir.model.api.annotation.Child.MAX_UNLIMITED;
 @DatatypeDef(name = "TextLink", isSpecialization = true)
 @Getter @Setter
 public class TextLink extends org.hl7.fhir.r4.model.Extension {
-    @Child(name = "htmlid", min = 1, max = MAX_UNLIMITED)
+    private static final long serialVersionUID = -1162851680363194526L;
+
+	@Child(name = "htmlid", min = 1, max = MAX_UNLIMITED)
     @Extension(url = "htmlid", definedLocally = false)
     protected List<@NonNull StringType> htmlid;
 

@@ -19,7 +19,9 @@ import ca.uhn.fhir.model.api.annotation.DatatypeDef;
  */
 @DatatypeDef(name = "CHCoreAddressECH11PlaceOfOrigin", isSpecialization = true, profileOf = Address.class)
 public class CHCoreAddressECH11PlaceOfOrigin extends ChCoreAddress {
-    @Override
+    private static final long serialVersionUID = 5704973465525786898L;
+
+	@Override
     public CHCoreAddressECH11PlaceOfOrigin copy() {
         final var copy = new CHCoreAddressECH11PlaceOfOrigin();
         copyValues(copy);
