@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
-import org.hl7.fhir.r4.model.Composition;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 
