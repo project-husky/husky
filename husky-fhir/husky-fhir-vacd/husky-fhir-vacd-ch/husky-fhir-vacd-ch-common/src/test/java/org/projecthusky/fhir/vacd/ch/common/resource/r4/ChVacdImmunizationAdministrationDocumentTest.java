@@ -53,9 +53,11 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		testAuthor.setId(UUID.randomUUID().toString());
 		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
 		practitioner.setId(UUID.randomUUID().toString());
+		practitioner.addName().setFamily("Test").addGiven("Author");
 		testAuthor.setPractitioner(new Reference(practitioner));
 		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
 		organization.setId(UUID.randomUUID().toString());
+		organization.setName("Test Organization");
 		testAuthor.setOrganization(new Reference(organization));
 
 		testMedication = new ChVacdMedicationForImmunization();

@@ -12,7 +12,7 @@ a browser.
 
 <div>
 	<table>
-		<tr th:if="${not resource.practitioner.resource.empty}">
+		<tr th:if="${not resource.practitioner.resource.empty and not resource.practitioner.resource.name.empty}">
 			<td>Practitioner</td>
 			<td th:narrative="${resource.practitioner.resource.name[0]}">Practitioner</td>
 		</tr>

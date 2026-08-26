@@ -25,8 +25,9 @@ public class ChVacdThymeleafNarrativeGenerator extends CustomThymeleafNarrativeG
 
 	public ChVacdThymeleafNarrativeGenerator() {
 		logger = LoggerFactory.getLogger(getClass());
-		setPropertyFile("classpath:narrative/chvacd-narrative.properties",
-				"classpath:ca/uhn/fhir/narrative/narratives.properties");
+		setPropertyFile("classpath:org/projecthusky/fhir/vacd/ch/common/narrative/chvacd-narrative.properties",
+				"classpath:ca/uhn/fhir/narrative/narratives.properties",
+				"classpath:ca/uhn/fhir/narrative/narratives-hapiserver.properties");
 	}
 
 	@Override

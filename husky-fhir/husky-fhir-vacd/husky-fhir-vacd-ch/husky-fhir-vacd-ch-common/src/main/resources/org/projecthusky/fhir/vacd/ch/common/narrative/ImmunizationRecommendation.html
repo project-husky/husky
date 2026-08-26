@@ -19,9 +19,9 @@ a browser.
 					<td>Identifier</td>
 					<td th:narrative="${resource.identifier[0]}">intentifier1</td>
 				</tr>
-				<tr th:if="${not resource.date}">
+				<tr th:if="${resource.date}">
 					<td>Vaccination Date</td>
-					<td th:text="${#dates.format(resource.date.value,'dd MMMM yyyy')}">date</td>
+					<td th:text="${#dates.format(resource.date,'dd MMMM yyyy')}">date</td>
 				</tr>
 
 				<tr th:if="${not resource.patient}">

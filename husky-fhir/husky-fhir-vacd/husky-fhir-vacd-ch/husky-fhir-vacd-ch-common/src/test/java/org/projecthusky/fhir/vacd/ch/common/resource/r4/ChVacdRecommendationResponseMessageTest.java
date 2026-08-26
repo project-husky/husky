@@ -18,6 +18,7 @@ class ChVacdRecommendationResponseMessageTest extends TestHelper {
 	void testAddImmunizationRecommendation() {
 		ChVacdRecommendationResponseMessage ref = new ChVacdRecommendationResponseMessage();
 		ChVacdImmunizationRecommendation entry = ref.addImmunizationRecommendation();
+		entry.setDate(new java.util.Date());
 
 		List<ChVacdImmunizationRecommendation> list = ref.resolveImmunizationRecommendations();
 		assertNotNull(list);
