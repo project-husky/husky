@@ -1,0 +1,29 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="narrative.css"/>
+	</head>
+	<body>
+<!--*/-->
+
+<div>
+	<table>
+		<tr th:if="${not resource.practitioner.resource.empty}">
+			<td>Practitioner</td>
+			<td th:narrative="${resource.practitioner.resource.name[0]}">Practitioner</td>
+		</tr>
+		<tr th:if="${not resource.organization.resource.empty}">
+			<td>Organization</td>
+			<td th:text="${resource.organization.resource.name}">Org Name</td>
+		</tr>
+	</table>
+</div>
+
+<!--/*-->
+	</body>
+</html>
+<!--*/-->

@@ -10,8 +10,6 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.UUID;
-
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 import org.projecthusky.fhir.core.ch.util.IdUtil;

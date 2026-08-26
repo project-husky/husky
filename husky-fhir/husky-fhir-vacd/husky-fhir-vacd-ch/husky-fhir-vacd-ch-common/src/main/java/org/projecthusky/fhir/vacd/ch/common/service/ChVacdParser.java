@@ -84,7 +84,7 @@ public class ChVacdParser {
 			postHapiParsing(document);
 			return document;
 		}
-		throw new InvalidVacdContentException("The given resource isn't a CH-EMED Document");
+		throw new InvalidVacdContentException("The given resource isn't a CH-VACD Document");
 	}
 	
 //	public <T extends ChVacdAbstractDocument> T parse(final InputStream resource, final ChVacdDocumentType type) {

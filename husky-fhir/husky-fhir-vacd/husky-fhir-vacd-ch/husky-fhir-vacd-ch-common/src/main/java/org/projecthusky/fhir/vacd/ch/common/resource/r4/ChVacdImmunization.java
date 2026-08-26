@@ -10,11 +10,14 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
+import java.util.Date;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Immunization;
+import org.hl7.fhir.r4.model.PositiveIntType;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreImmunization;
@@ -165,6 +168,17 @@ public class ChVacdImmunization extends ChCoreImmunization {
 				ca.uhn.fhir.util.ElementUtil.isEmpty(relatesTo, medication, conflict,
 						verificationStatus);
 	}
-	
-	
+
+	public void setOccurrence(Date date) {
+		super.setOccurrence(new DateTimeType(new Date()));
+	}
+
+	public void setDoseNumber(int value) {
+		this.getProtocolAppliedFirstRep().setDoseNumber(new PositiveIntType(value));
+	}
+
+	public void setSeriesDoses(int value) {
+		this.getProtocolAppliedFirstRep().setSeriesDoses(new PositiveIntType(value));
+	}
+
 }

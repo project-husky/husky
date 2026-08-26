@@ -1,0 +1,62 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="narrative.css"/>
+	</head>
+	<body>
+<!--*/-->
+
+
+<div>
+	<table class="hapiPropertyTable">
+		<tbody>
+			
+			<tr th:if="${not resource.identifier.empty}">
+				<td>Identifier</td>
+				<td th:narrative="${resource.identifier[0]}">intentifier1</td>
+			</tr>
+			<tr th:if="${not resource.statusElement.empty}">
+				<td>Status</td>
+				<td th:text="${resource.status}">status</td>
+			</tr>
+			<tr th:if="${not resource.vaccineCode.empty}">
+				<td>Vaccine Code</td>
+				<td th:narrative="${resource.vaccineCode}">VaccineCode</td>
+			</tr>
+			<tr th:if="${not resource.occurrenceDateTimeType.empty}">
+				<td>Vaccination Date</td>
+				<td th:text="${#dates.format(resource.occurrenceDateTimeType.value,'dd MMMM yyyy')}">occurence</td>
+			</tr>
+			<tr th:if="${not resource.recordedElement.empty}">
+				<td>Recorded Date</td>
+				<td th:text="${#dates.format(resource.recorded,'dd MMMM yyyy')}">recorded</td>
+			</tr>
+			<tr th:if="${not #lists.isEmpty(resource.performer)}">
+				<td>Performer</td>
+				<td th:narrative="${resource.performer[0].actor.resource}">performer</td>
+			</tr>
+			<tr th:if="${not resource.patient}">
+				<td>Patient</td>
+				<td th:narrative="${resource.patient.resource}">Patient</td>
+			</tr>
+			
+			<tr th:if="${not #lists.isEmpty(resource.protocolApplied) and not #lists.isEmpty(resource.protocolApplied[0].targetDisease) }">
+				<td>Target Disease</td>
+				<td>
+					<th:block th:each="disease: ${resource.protocolApplied[0].targetDisease}">
+						<span th:narrative="${disease}">disease</span>
+					</th:block>
+				</td>
+			</tr>
+		</tbody>	
+	</table>
+</div>
+
+<!--/*-->
+	</body>
+</html>
+<!--*/-->

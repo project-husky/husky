@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.vacd.ch.common;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.projecthusky.fhir.vacd.ch.common.narrative.ChVacdThymeleafNarrativeGenerator;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,8 @@ public class TestHelper {
 
 	public void prettyPrint(IBaseResource ref) {
 		FhirContext ctx = FhirContext.forR4();
-//		System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
+		ctx.setNarrativeGenerator(new ChVacdThymeleafNarrativeGenerator());
+		// System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
 		String json = ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref);
 		logger.info(json);
 	}
