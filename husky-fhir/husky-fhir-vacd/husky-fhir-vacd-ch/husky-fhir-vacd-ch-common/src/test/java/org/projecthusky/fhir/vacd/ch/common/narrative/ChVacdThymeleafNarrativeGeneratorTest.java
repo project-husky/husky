@@ -13,6 +13,7 @@ import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRoleEpr;
 import org.projecthusky.fhir.core.ch.util.IdUtil;
 import org.projecthusky.fhir.vacd.ch.common.TestHelper;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunization;
@@ -43,10 +44,11 @@ class ChVacdThymeleafNarrativeGeneratorTest extends TestHelper {
 
 		ChVacdImmunization immunization = new ChVacdImmunization();
 		immunization.setId(UUID.randomUUID().toString());
-//		Narrative text = new Narrative();
-//		text.setStatus(NarrativeStatus.GENERATED).setDivAsString(
-//				"<div xmlns=\"http://www.w3.org/1999/xhtml\">COVID-19 mRNA vaccine</div>");
-//		immunization.setText(text);
+		// Narrative text = new Narrative();
+		// text.setStatus(NarrativeStatus.GENERATED).setDivAsString(
+		// "<div xmlns=\"http://www.w3.org/1999/xhtml\">COVID-19 mRNA
+		// vaccine</div>");
+		// immunization.setText(text);
 
 		immunization.setPatient(new Reference(patient));
 		immunization.setVaccineCode(new CodeableConcept().addCoding(
@@ -59,11 +61,27 @@ class ChVacdThymeleafNarrativeGeneratorTest extends TestHelper {
 		immunization.setDoseNumber(1);
 		immunization.setVerificationStatus(
 				new Coding("http://snomed.info/sct", "59156000", "Confirmed by"));
-		
-		assertTrue(new ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext, immunization));
-		
+
+		assertTrue(new ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
+				immunization));
+
 		var ref = toString(immunization);
 		assertNotNull(ref);
+		
+		prettyPrint(immunization);
 	}
 
+	@Test
+	void testPopulateResourceNarrativePractitionerRole() {
+		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
+		practitionerRole.setId(UUID.randomUUID().toString());
+
+		practitionerRole.setPractitioner(new Reference("urn:uuid:" + UUID.randomUUID().toString()));
+		practitionerRole.setOrganization(new Reference("urn:uuid:" + UUID.randomUUID().toString()));
+
+		assertTrue(new ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
+				practitionerRole));
+
+		prettyPrint(practitionerRole);
+	}
 }

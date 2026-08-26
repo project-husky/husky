@@ -12,13 +12,21 @@ a browser.
 
 <div>
 	<table>
-		<tr th:if="${not resource.practitioner.resource.empty and not resource.practitioner.resource.name.empty}">
+		<tr th:if="${resource.practitioner.resource and resource.practitioner.resource.name}">
 			<td>Practitioner</td>
 			<td th:narrative="${resource.practitioner.resource.name[0]}">Practitioner</td>
 		</tr>
-		<tr th:if="${not resource.organization.resource.empty}">
+		<tr th:if="${resource.practitioner.reference}">
+			<td>Practitioner</td>
+			<td th:text="${resource.practitioner.reference}">Practitioner</td>
+		</tr>
+		<tr th:if="${resource.organization.resource}">
 			<td>Organization</td>
 			<td th:text="${resource.organization.resource.name}">Org Name</td>
+		</tr>
+		<tr th:if="${resource.organization.reference}">
+			<td>Organization</td>
+			<td th:text="${resource.organization.reference}">Org Name</td>
 		</tr>
 	</table>
 </div>
