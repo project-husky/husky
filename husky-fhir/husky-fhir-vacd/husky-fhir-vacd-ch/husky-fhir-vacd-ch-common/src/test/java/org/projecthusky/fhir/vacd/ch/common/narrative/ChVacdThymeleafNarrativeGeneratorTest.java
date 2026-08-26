@@ -12,7 +12,9 @@ import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganizationEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRoleEpr;
 import org.projecthusky.fhir.core.ch.util.IdUtil;
 import org.projecthusky.fhir.vacd.ch.common.TestHelper;
@@ -67,12 +69,12 @@ class ChVacdThymeleafNarrativeGeneratorTest extends TestHelper {
 
 		var ref = toString(immunization);
 		assertNotNull(ref);
-		
+
 		prettyPrint(immunization);
 	}
 
 	@Test
-	void testPopulateResourceNarrativePractitionerRole() {
+	void testPopulateResourceNarrativePractitionerRole1() {
 		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
 		practitionerRole.setId(UUID.randomUUID().toString());
 
@@ -81,6 +83,54 @@ class ChVacdThymeleafNarrativeGeneratorTest extends TestHelper {
 
 		assertTrue(new ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
 				practitionerRole));
+
+		prettyPrint(practitionerRole);
+	}
+
+	@Test
+	void testPopulateResourceNarrativePractitionerRole2() {
+		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
+		practitionerRole.setId(UUID.randomUUID().toString());
+
+		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
+		// practitioner.setId("urn:uuid:" + UUID.randomUUID().toString());
+		practitioner.setId(UUID.randomUUID().toString());
+
+		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
+		// organization.setId("urn:uuid:" + UUID.randomUUID().toString());
+		organization.setId(UUID.randomUUID().toString());
+		
+		practitionerRole.setPractitioner(new Reference(practitioner));
+		practitionerRole.setOrganization(new Reference(organization));
+
+		// assertTrue(new
+		// ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
+		// practitionerRole));
+
+		prettyPrint(practitionerRole);
+	}
+
+	@Test
+	void testPopulateResourceNarrativePractitionerRole3() {
+		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
+		practitionerRole.setId(UUID.randomUUID().toString());
+
+		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
+		// practitioner.setId("urn:uuid:" + UUID.randomUUID().toString());
+		practitioner.setId(UUID.randomUUID().toString());
+		practitioner.addName().setFamily("Test").addGiven("Practitioner");
+
+		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
+		// organization.setId("urn:uuid:" + UUID.randomUUID().toString());
+		organization.setId(UUID.randomUUID().toString());
+		organization.setName("Test Organization");
+
+		practitionerRole.setPractitioner(new Reference(practitioner));
+		practitionerRole.setOrganization(new Reference(organization));
+
+		// assertTrue(new
+		// ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
+		// practitionerRole));
 
 		prettyPrint(practitionerRole);
 	}
