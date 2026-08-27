@@ -41,16 +41,21 @@ public class ChVacdThymeleafNarrativeGenerator extends CustomThymeleafNarrativeG
 
 	@Override
 	protected String applyTemplate(FhirContext theFhirContext, INarrativeTemplate theTemplate, IBase theTargetContext) {
-		String retVal = super.applyTemplate(theFhirContext, theTemplate, theTargetContext);
+		try {
+			return super.applyTemplate(theFhirContext, theTemplate, theTargetContext);
+		} catch (Exception e) {
+			logger.error("Error applying template", e);
+		}
+		
 //		if (logger.isTraceEnabled()) {
 //			logger.info("INarrativeTemplate: " + theTemplate.getTemplateName() + ", IBase: " + theTargetContext
 //					+ ", retVal: " + retVal);
-			logger.info("INarrativeTemplate: " + theTemplate.getTemplateName() + ", IBase: " + theTargetContext);
-			if(theTargetContext instanceof Composition) {
-				logger.info("retVal: "+retVal);
-			}
+//			logger.info("INarrativeTemplate: " + theTemplate.getTemplateName() + ", IBase: " + theTargetContext);
+//			if(theTargetContext instanceof Composition) {
+//				logger.info("retVal: "+retVal);
+//			}
 //		}
-		return retVal;
+		return theTargetContext.fhirType();
 	}
 
 	@Override

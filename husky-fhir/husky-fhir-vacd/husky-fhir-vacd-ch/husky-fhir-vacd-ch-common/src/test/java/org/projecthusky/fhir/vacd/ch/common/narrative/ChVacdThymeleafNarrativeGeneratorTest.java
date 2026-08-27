@@ -134,4 +134,29 @@ class ChVacdThymeleafNarrativeGeneratorTest extends TestHelper {
 
 		prettyPrint(practitionerRole);
 	}
+	
+	@Test
+	void testPopulateResourceNarrativePractitionerRole4() {
+		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
+		practitionerRole.setId(UUID.randomUUID().toString());
+
+		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
+		// practitioner.setId("urn:uuid:" + UUID.randomUUID().toString());
+//		practitioner.setId(UUID.randomUUID().toString());
+		practitioner.addName().setFamily("Test").addGiven("Practitioner");
+
+		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
+		// organization.setId("urn:uuid:" + UUID.randomUUID().toString());
+//		organization.setId(UUID.randomUUID().toString());
+		organization.setName("Test Organization");
+
+		practitionerRole.setPractitioner(new Reference(practitioner));
+		practitionerRole.setOrganization(new Reference(organization));
+
+		// assertTrue(new
+		// ChVacdThymeleafNarrativeGenerator().populateResourceNarrative(fhirContext,
+		// practitionerRole));
+
+		prettyPrint(practitionerRole);
+	}
 }
