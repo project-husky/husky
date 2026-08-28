@@ -54,17 +54,24 @@ class ChVacdValidatorTest extends TestHelper {
 	void testValidateDocumentBundleSimple() {
 		ChVacdImmunizationAdministrationDocument document = new ChVacdImmunizationAdministrationDocument();
 
+		prettyPrint(document);
+		
 		ValidationResult res = validator.validateDocumentBundle(document,
 				"http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-immunization-administration");
 		assertNotNull(res);
 		log.info("Validation result: {}", res);
+		
 
 		assertTrue(!res.isSuccessful(), "Validation should not be successful");
-		assertEquals(5, res.getIssues().size());
+		assertEquals(42, res.getIssues().size());
 		assertEquals(0, res.getFatals().size());
-		assertEquals(5, res.getErrors().size());
-		assertEquals(0, res.getWarnings().size());
-		assertEquals(0, res.getInformations().size());
+		assertEquals(7, res.getErrors().size());
+		assertEquals(1, res.getWarnings().size());
+		assertEquals(34, res.getInformations().size());
+		
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.author: minimum required = 1")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.subject: minimum required = 1")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.section: minimum required = 1")).findAny().isPresent());
 	}
 
 	@Test
