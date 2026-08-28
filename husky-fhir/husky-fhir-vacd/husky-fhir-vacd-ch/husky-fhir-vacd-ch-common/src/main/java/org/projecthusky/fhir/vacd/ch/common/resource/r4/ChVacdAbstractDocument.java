@@ -339,6 +339,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	}
 
 	public void addPractitionerRole(PractitionerRole practitionerRole) {
+		this.resolveComposition();
 		if (!this.hasEntryByResourceTypeAndId(practitionerRole)) {
 			if (practitionerRole.getOrganization() == null
 					|| practitionerRole.getPractitioner() == null) {
@@ -365,6 +366,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	}
 
 	public void addOrganization(Organization organization) {
+		this.resolveComposition();
 		if (organization != null && !this.hasEntryByResourceTypeAndId(organization)) {
 			IdUtil.checkId(organization);
 			this.addEntry(new BundleEntryComponent().setResource(organization)
@@ -380,6 +382,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	}
 
 	public void addPractitioner(Practitioner practitioner) {
+		this.resolveComposition();
 		if (practitioner != null && !this.hasEntryByResourceTypeAndId(practitioner)) {
 			IdUtil.checkId(practitioner);
 			this.addEntry(new BundleEntryComponent().setResource(practitioner)
@@ -388,6 +391,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	}
 
 	public void addAuthor(DomainResource author, Date timeOfDataInput) {
+		this.resolveComposition();
 		// Device
 		// RelatedPerson
 		// CH Core Patient EPR
@@ -410,8 +414,6 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 					.setUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time")
 					.setValue(new DateTimeType(timeOfDataInput));
 
-			this.resolveComposition().addAuthor(ref);
-			
 			if (!this.hasEntryByResourceTypeAndId(author)) {
 
 				if (author instanceof PractitionerRole) {
@@ -422,6 +424,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 				}
 
 			}
+			this.resolveComposition().addAuthor(ref);
 			
 
 		} else {
@@ -450,6 +453,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the MedicationForImmunization resource to be added
 	 */
 	public void addMedication(ChVacdMedicationForImmunization medication) {
+		this.resolveComposition();
 		IdUtil.checkId(medication);
 		this.getEntry().add(new BundleEntryComponent().setResource(medication)
 				.setFullUrl(medication.getIdElement().getIdPart()));
