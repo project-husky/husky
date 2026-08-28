@@ -53,6 +53,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		this.setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986").setValue("urn:uuid:"+this.getIdElement().getIdPart()));
 		this.setTimestamp(new Date());
 		this.setType(BundleType.DOCUMENT);
+		this.resolveComposition();
 	}
 
 	/**
@@ -409,6 +410,8 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 					.setUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time")
 					.setValue(new DateTimeType(timeOfDataInput));
 
+			this.resolveComposition().addAuthor(ref);
+			
 			if (!this.hasEntryByResourceTypeAndId(author)) {
 
 				if (author instanceof PractitionerRole) {
@@ -419,7 +422,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 				}
 
 			}
-			this.resolveComposition().addAuthor(ref);
+			
 
 		} else {
 			throw new InvalidResourceException(
