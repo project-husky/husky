@@ -35,4 +35,11 @@ public class ChVacdPastIllness extends ChVacdCondition {
 		this.setOnset(new DateTimeType(new Date()));
 	}
 
+	
+	@Override
+	public ChVacdPastIllness copy() {
+		final var copy = new ChVacdPastIllness();
+		this.copyValues(copy);
+		return copy;
+	}
 }

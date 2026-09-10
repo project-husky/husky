@@ -16,5 +16,12 @@ public class ChVacdRecommendationRequestMessageHeader extends ChVacdAbstractMess
 				.setCode("immunrecorequest").setDisplay("Immunization Recommendation Request"));
 
 	}
+	
+	@Override
+	public ChVacdRecommendationRequestMessageHeader copy() {
+		final var copy = new ChVacdRecommendationRequestMessageHeader();
+		this.copyValues(copy);
+		return copy;
+	}
 
 }

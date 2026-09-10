@@ -37,5 +37,12 @@ public class ChVacdBasicImmunization extends ChVacdCondition {
 	public Date resolveOnsetDate() {
 		return getOnsetDateTimeType().getValue();
 	}
+	
+	@Override
+	public ChVacdBasicImmunization copy() {
+		final var copy = new ChVacdBasicImmunization();
+		this.copyValues(copy);
+		return copy;
+	}
 
 }

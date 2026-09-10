@@ -87,5 +87,12 @@ public class ChVacdRecommendationResponseMessage extends ChVacdAbstractMessage {
 	public List<ChVacdImmunizationRecommendation> resolveImmunizationRecommendations() {
 		return this.getEntryResourceByResourceType(ChVacdImmunizationRecommendation.class);
 	}
+	
+	@Override
+	public ChVacdRecommendationResponseMessage copy() {
+		final var copy = new ChVacdRecommendationResponseMessage();
+		this.copyValues(copy);
+		return copy;
+	}
 
 }

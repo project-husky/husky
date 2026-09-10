@@ -268,5 +268,12 @@ public class ChVacdRecommendationRequestMessage extends ChVacdAbstractMessage {
 	public List<ChVacdPastIllness> resolvePastIllnesses() {
 		return this.getEntryResourceByResourceType(ChVacdPastIllness.class);
 	}
+	
+	@Override
+	public ChVacdRecommendationRequestMessage copy() {
+		final var copy = new ChVacdRecommendationRequestMessage();
+		this.copyValues(copy);
+		return copy;
+	}
 
 }

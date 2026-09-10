@@ -33,4 +33,11 @@ public class ChVacdMedicalProblem extends ChVacdCondition {
 				.setCode("problem-list-item");
 		setOnset(new DateTimeType().setValue(new Date()));
 	}
+	
+	@Override
+	public ChVacdMedicalProblem copy() {
+		final var copy = new ChVacdMedicalProblem();
+		this.copyValues(copy);
+		return copy;
+	}
 }

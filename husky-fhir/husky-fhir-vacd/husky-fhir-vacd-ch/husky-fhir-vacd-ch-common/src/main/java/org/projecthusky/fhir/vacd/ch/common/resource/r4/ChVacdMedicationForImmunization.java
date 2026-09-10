@@ -30,4 +30,12 @@ public class ChVacdMedicationForImmunization extends ChCoreMedication {
 		addIdentifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString());
 	}
+	
+	
+	@Override
+	public ChVacdMedicationForImmunization copy() {
+		final var copy = new ChVacdMedicationForImmunization();
+		this.copyValues(copy);
+		return copy;
+	}
 }
