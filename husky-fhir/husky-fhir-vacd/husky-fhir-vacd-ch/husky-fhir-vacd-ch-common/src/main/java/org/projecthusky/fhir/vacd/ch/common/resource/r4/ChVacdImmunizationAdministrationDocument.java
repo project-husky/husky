@@ -57,13 +57,20 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 		// "The ChVacdImmunizationAdministrationComposition is missing in the
 		// document Bundle");
 	}
-	
+
 	@Override
-	public ChVacdImmunizationAdministrationComposition addComposition() throws InvalidContentException {
+	public ChVacdImmunizationAdministrationComposition addComposition()
+			throws InvalidContentException {
 		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
 		composition.setId(IdUtil.generateUrnUuid());
 		super.addComposition(composition);
 		return composition;
 	}
 
+	@Override
+	public ChVacdImmunizationAdministrationDocument copy() {
+		final var copy = new ChVacdImmunizationAdministrationDocument();
+		this.copyValues(copy);
+		return copy;
+	}
 }

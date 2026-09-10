@@ -11,8 +11,11 @@
 package org.projecthusky.fhir.vacd.ch.common;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.projecthusky.fhir.vacd.ch.common.enums.ChVacdDocumentType;
 import org.projecthusky.fhir.vacd.ch.common.narrative.ChVacdThymeleafNarrativeGenerator;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunization;
+import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunizationAdministrationDocument;
+import org.projecthusky.fhir.vacd.ch.common.service.ChVacdParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,4 +40,7 @@ public class TestHelper {
 		FhirContext ctx = FhirContext.forR4();
 		return ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref);
 	}
+
+	
+
 }

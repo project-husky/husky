@@ -53,7 +53,6 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		this.setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986").setValue("urn:uuid:"+this.getIdElement().getIdPart()));
 		this.setTimestamp(new Date());
 		this.setType(BundleType.DOCUMENT);
-		this.resolveComposition();
 	}
 
 	/**

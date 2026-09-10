@@ -61,4 +61,11 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 		return composition;
 	}
 
+	@Override
+	public ChVacdVaccinationRecordDocument copy() {
+		final var copy = new ChVacdVaccinationRecordDocument();
+		this.copyValues(copy);
+		return copy;
+	}
+
 }

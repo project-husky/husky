@@ -98,5 +98,4 @@ public class ChCoreImmunization extends Immunization {
 		return super.isEmpty() && //
 				ca.uhn.fhir.util.ElementUtil.isEmpty(recorder, indicationCode);
 	}
-
 }
