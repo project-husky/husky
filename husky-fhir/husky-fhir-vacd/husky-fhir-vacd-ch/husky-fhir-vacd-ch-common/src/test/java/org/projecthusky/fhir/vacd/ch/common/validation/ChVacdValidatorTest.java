@@ -47,7 +47,7 @@ class ChVacdValidatorTest extends TestHelper {
 		DefaultThymeleafNarrativeGenerator narr = new DefaultThymeleafNarrativeGenerator();
 		ctx.setNarrativeGenerator(narr);
 
-		validator = new ChVacdValidator(ctx, null, "https://tx.fhir.ch/r4");
+		validator = new ChVacdValidator(ctx, null, null);//"https://tx.fhir.org/r4");
 	}
 
 	@Test
@@ -63,15 +63,17 @@ class ChVacdValidatorTest extends TestHelper {
 		
 
 		assertTrue(!res.isSuccessful(), "Validation should not be successful");
-		assertEquals(42, res.getIssues().size());
 		assertEquals(0, res.getFatals().size());
-		assertEquals(7, res.getErrors().size());
-		assertEquals(1, res.getWarnings().size());
-		assertEquals(34, res.getInformations().size());
+		assertEquals(5, res.getErrors().size());
+		assertEquals(0, res.getWarnings().size());
+		assertEquals(0, res.getInformations().size());
+		assertEquals(5, res.getIssues().size());
 		
-		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.author: minimum required = 1")).findAny().isPresent());
-		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.subject: minimum required = 1")).findAny().isPresent());
-		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Composition.section: minimum required = 1")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Bundle.entry: minimum required = 2, but only found 0")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Slice 'Bundle.entry:Composition': a matching slice is required, but not found")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Slice 'Bundle.entry:Patient': a matching slice is required, but not found")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Constraint failed: bdl-11: 'A document must have a Composition as the first resource'")).findAny().isPresent());
+		assertTrue(res.getErrors().stream().map(i -> i.getMessage()).filter(m -> m.contains("Documents or Messages must contain at least one entry")).findAny().isPresent());
 	}
 
 	@Test
@@ -117,9 +119,9 @@ class ChVacdValidatorTest extends TestHelper {
 
 		assertEquals(0, res.getFatals().size());
 		assertEquals(0, res.getErrors().size());
-		assertEquals(5, res.getWarnings().size());
+		assertEquals(7, res.getWarnings().size());
 		assertEquals(9, res.getInformations().size());
-		assertEquals(14, res.getIssues().size());
+		assertEquals(16, res.getIssues().size());
 	}
 
 	@Test
@@ -163,9 +165,102 @@ class ChVacdValidatorTest extends TestHelper {
 
 		assertEquals(0, res.getFatals().size());
 		assertEquals(0, res.getErrors().size());
-		assertEquals(0, res.getWarnings().size());
-		assertEquals(1, res.getInformations().size());
+		assertEquals(1, res.getWarnings().size());
+		assertEquals(0, res.getInformations().size());
 		assertEquals(1, res.getIssues().size());
 	}
+	
+	@Test
+	void validateBundleFromFile() throws IOException {
+		ChVacdImmunizationAdministrationDocument document = loadBundleFromFile("/fhir/ch-vacd-bunlde-mw_1.json");
+		assertNotNull(document);
+		
+		ValidationResult res = validator.validateDocumentBundle(document,
+				"http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-immunization-administration");
+		assertNotNull(res);
+		log.info("Validation result: {}", res);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Fatals:").append("\n");
+		res.getFatals().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nErrors:").append("\n");
+		res.getErrors().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nWarnings:").append("\n");
+		res.getWarnings().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nInformations:").append("\n");
+		res.getInformations().forEach(i -> sb.append( i).append("\n"));
+		
+		
+		log.info("\n{}", sb.toString());
+	}
+	
+	@Test
+	void validateBundleFromFile2() throws IOException {
+		ChVacdImmunizationAdministrationDocument document = loadBundleFromFile("/fhir/chvacd-immunizationadministration-beispielhugo.json");
+		assertNotNull(document);
+		
+		ValidationResult res = validator.validateDocumentBundle(document,
+				"http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-immunization-administration");
+		assertNotNull(res);
+		log.info("Validation result: {}", res);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Fatals:").append("\n");
+		res.getFatals().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nErrors:").append("\n");
+		res.getErrors().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nWarnings:").append("\n");
+		res.getWarnings().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nInformations:").append("\n");
+		res.getInformations().forEach(i -> sb.append( i).append("\n"));
+		
+		
+		log.info("\n{}", sb.toString());
+	}
+	
+	@Test
+	void validateBundleFromFile3() throws IOException {
+		ChVacdImmunizationAdministrationDocument document = loadBundleFromFile("/fhir/VaccinationRecord-Beispiel-Hugo.json");
+		assertNotNull(document);
+		
+		ValidationResult res = validator.validateDocumentBundle(document,
+				"http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-vaccination-record");
+		assertNotNull(res);
+		log.info("Validation result: {}", res);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Fatals:").append("\n");
+		res.getFatals().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nErrors:").append("\n");
+		res.getErrors().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nWarnings:").append("\n");
+		res.getWarnings().forEach(i -> sb.append( i).append("\n"));
+		
+		sb.append("\nInformations:").append("\n");
+		res.getInformations().forEach(i -> sb.append( i).append("\n"));
+		
+		
+		log.info("\n{}", sb.toString());
+	}
+
+	public ChVacdImmunizationAdministrationDocument loadBundleFromFile(String string) {
+		FhirContext ctx = FhirContext.forR4();
+
+		ChVacdImmunizationAdministrationDocument resource = ctx.newJsonParser().parseResource(ChVacdImmunizationAdministrationDocument.class,
+				this.getClass().getResourceAsStream(string));
+		return resource;
+	}
+	
 
 }
