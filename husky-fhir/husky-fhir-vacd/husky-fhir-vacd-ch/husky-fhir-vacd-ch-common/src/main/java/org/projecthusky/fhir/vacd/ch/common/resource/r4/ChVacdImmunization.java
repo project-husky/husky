@@ -12,6 +12,7 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
@@ -19,6 +20,7 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Immunization;
 import org.hl7.fhir.r4.model.PositiveIntType;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreImmunization;
 import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
