@@ -10,12 +10,17 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.Immunization;
+import org.hl7.fhir.r4.model.PositiveIntType;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreImmunization;
 import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
@@ -114,6 +119,8 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	}
 
 	public ChVacdImmunization setMedication(ChVacdMedicationForImmunization medication) {
+		// this.medication = new Reference("urn:uuid:" +
+		// medication.getIdElement().getIdPart());
 		this.medication = new Reference(medication);
 		return this;
 	}
@@ -155,6 +162,25 @@ public class ChVacdImmunization extends ChCoreImmunization {
 			als.medication = medication == null ? null : medication.copy();
 			als.verificationStatus = verificationStatus == null ? null : verificationStatus.copy();
 		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return super.isEmpty() && //
+				ca.uhn.fhir.util.ElementUtil.isEmpty(relatesTo, medication, conflict,
+						verificationStatus);
+	}
+
+	public void setOccurrence(Date date) {
+		super.setOccurrence(new DateTimeType(new Date()));
+	}
+
+	public void setDoseNumber(int value) {
+		this.getProtocolAppliedFirstRep().setDoseNumber(new PositiveIntType(value));
+	}
+
+	public void setSeriesDoses(int value) {
+		this.getProtocolAppliedFirstRep().setSeriesDoses(new PositiveIntType(value));
 	}
 
 }

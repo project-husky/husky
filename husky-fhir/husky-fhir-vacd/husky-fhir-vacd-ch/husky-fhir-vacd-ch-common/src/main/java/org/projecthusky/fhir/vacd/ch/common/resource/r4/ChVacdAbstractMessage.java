@@ -11,7 +11,6 @@
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.hl7.fhir.r4.model.Identifier;
@@ -19,10 +18,9 @@ import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.resource.r4.AbstractDocument;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatient;
-import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 
 /**
- * 
+ * 	
  */
 public abstract class ChVacdAbstractMessage extends AbstractDocument {
 

@@ -13,7 +13,6 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 import java.util.List;
 import java.util.UUID;
 
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Reference;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
@@ -35,12 +34,8 @@ public class ChVacdRecommendationResponseMessage extends ChVacdAbstractMessage {
 		} else {
 			ChVacdRecommendationResponseMessageHeader messageHeader = new ChVacdRecommendationResponseMessageHeader();
 			messageHeader.setId(UUID.randomUUID().toString());
-			messageHeader.setEvent(new Coding().setSystem(
-					"http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-clinical-decision-support-event-cs")
-					.setCode("immunrecoresponse")
-					.setDisplay("Immunization Recommendation Response"));
 
-			this.getEntry().add(new BundleEntryComponent().setResource(messageHeader)
+			this.getEntry().add(0, new BundleEntryComponent().setResource(messageHeader)
 					.setFullUrl("urn:uuid:" + messageHeader.getId()));
 			return messageHeader;
 		}
@@ -91,6 +86,13 @@ public class ChVacdRecommendationResponseMessage extends ChVacdAbstractMessage {
 	 */
 	public List<ChVacdImmunizationRecommendation> resolveImmunizationRecommendations() {
 		return this.getEntryResourceByResourceType(ChVacdImmunizationRecommendation.class);
+	}
+	
+	@Override
+	public ChVacdRecommendationResponseMessage copy() {
+		final var copy = new ChVacdRecommendationResponseMessage();
+		this.copyValues(copy);
+		return copy;
 	}
 
 }

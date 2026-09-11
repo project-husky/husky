@@ -10,14 +10,15 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
+import java.io.Serial;
+import java.util.Objects;
+
 import org.hl7.fhir.r4.model.Composition;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-
-import java.io.Serial;
-import java.util.Objects;
 
 /**
  * The HAPI custom structure for CH-Core Document.
@@ -34,11 +35,12 @@ public class ChCoreDocument extends AbstractDocument {
 		super();
 	}
 
-
 	/**
 	 * Creates a composition resource and adds it to the document.
+	 * 
 	 * @return The composition resource.
-	 * @throws InvalidContentException if the document contains a composition already.
+	 * @throws InvalidContentException
+	 *             if the document contains a composition already.
 	 */
 	public ChCoreComposition addComposition() throws InvalidContentException {
 		final var composition = new ChCoreComposition();
@@ -47,14 +49,20 @@ public class ChCoreDocument extends AbstractDocument {
 
 	/**
 	 * Adds a composition to the document.
-	 * @param composition The composition to be added to the document.
+	 * 
+	 * @param composition
+	 *            The composition to be added to the document.
 	 * @return The composition.
-	 * @throws InvalidContentException if the document already contains a composition.
+	 * @throws InvalidContentException
+	 *             if the document already contains a composition.
 	 */
-	public ChCoreComposition addComposition(final ChCoreComposition composition) throws InvalidContentException {
+	public ChCoreComposition addComposition(final ChCoreComposition composition)
+			throws InvalidContentException {
 		if (this.getEntryComponentByResourceType(Composition.class) != null)
 			throw new InvalidContentException("The document already contains a composition.");
-		this.getEntry().add(new BundleEntryComponent().setResource(composition));
+		IdUtil.checkId(composition);
+		this.getEntry().add(new BundleEntryComponent().setResource(composition)
+				.setFullUrl(composition.getId()));
 		return composition;
 	}
 
@@ -76,6 +84,14 @@ public class ChCoreDocument extends AbstractDocument {
 	}
 
 	public BundleEntryComponent addPatient(final ChCorePatient patient) {
-		return this.addEntry().setResource(Objects.requireNonNull(patient, "patient resource must not be null"));
+		return this.addEntry()
+				.setResource(Objects.requireNonNull(patient, "patient resource must not be null"));
+	}
+
+	@Override
+	public ChCoreDocument copy() {
+		final var copy = new ChCoreDocument();
+		this.copyValues(copy);
+		return copy;
 	}
 }

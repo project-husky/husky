@@ -37,4 +37,11 @@ public class ChVacdAllergyIntolerance extends ChCoreAllergyIntolerance {
 						.setCode("confirmed").setDisplay("Confirmed")));
 		setClinicalStatus(new CodeableConcept().addCoding(new Coding("http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", "active", "Active")));
 	}
+	
+	@Override
+	public ChVacdAllergyIntolerance copy() {
+		final var copy = new ChVacdAllergyIntolerance();
+		this.copyValues(copy);
+		return copy;
+	}
 }

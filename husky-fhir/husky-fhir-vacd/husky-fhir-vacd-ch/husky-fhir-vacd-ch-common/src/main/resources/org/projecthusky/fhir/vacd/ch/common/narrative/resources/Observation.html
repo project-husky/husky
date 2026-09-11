@@ -1,0 +1,51 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="narrative.css" />
+</head>
+<body>
+	<!--*/-->
+
+
+	<div>
+		<table class="hapiPropertyTable">
+			<tbody>
+				<tr th:if="${not resource.identifier.empty}">
+					<td>Identifier</td>
+					<td th:narrative="${resource.identifier[0]}">intentifier1</td>
+				</tr>
+				<tr th:if="${not resource.category.empty}">
+					<td>Status</td>
+					<td th:narrative="${resource.category}">category</td>
+				</tr>
+				<tr th:if="${not resource.code.empty}">
+					<td>Code</td>
+					<td th:narrative="${resource.code}">code</td>
+				</tr>
+				
+				<tr th:if="${not resource.IssuedElement.empty}">
+					<td>Effective Date</td>
+					<td
+						th:text="${#dates.format(resource.IssuedElement.value,'dd.MM.yyyy')}">effectiveDate</td>
+				</tr>
+			
+
+
+				<tr th:if="${not #lists.isEmpty(resource.performer)}">
+					<td>Performer</td>
+					<td th:narrative="${resource.performer[0].resource}">performer</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+
+	<!--/*-->
+</body>
+</html>
+<!--*/-->

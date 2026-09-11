@@ -1,5 +1,7 @@
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
+import org.hl7.fhir.r4.model.Coding;
+
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 @ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-recommendation-request-messageheader")
@@ -9,8 +11,17 @@ public class ChVacdRecommendationRequestMessageHeader extends ChVacdAbstractMess
 
 	public ChVacdRecommendationRequestMessageHeader() {
 		super();
-		this.setId("urn:uuid:" + this.getId());
-		
+		setEvent(new Coding().setSystem(
+				"http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-clinical-decision-support-event-cs")
+				.setCode("immunrecorequest").setDisplay("Immunization Recommendation Request"));
+
+	}
+	
+	@Override
+	public ChVacdRecommendationRequestMessageHeader copy() {
+		final var copy = new ChVacdRecommendationRequestMessageHeader();
+		this.copyValues(copy);
+		return copy;
 	}
 
 }

@@ -12,6 +12,7 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.UUID;
 
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreMedication;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
@@ -27,7 +28,12 @@ public class ChVacdMedicationForImmunization extends ChCoreMedication {
 	private static final long serialVersionUID = 2842379714024094306L;
 
 	public ChVacdMedicationForImmunization() {
-		addIdentifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+	}
+
+	@Override
+	public ChVacdMedicationForImmunization copy() {
+		final var copy = new ChVacdMedicationForImmunization();
+		this.copyValues(copy);
+		return copy;
 	}
 }

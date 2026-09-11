@@ -1,0 +1,68 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="narrative.css" />
+</head>
+<body>
+	<!--*/-->
+
+
+	<div>
+		<table class="hapiPropertyTable">
+			<tbody>
+
+				<tr th:if="${not resource.identifier.empty}">
+					<td>Identifier</td>
+					<td th:narrative="${resource.identifier[0]}">intentifier1</td>
+				</tr>
+				<tr th:if="${resource.date}">
+					<td>Vaccination Date</td>
+					<td th:text="${#dates.format(resource.date,'dd MMMM yyyy')}">date</td>
+				</tr>
+
+				<tr th:if="${not resource.patient}">
+					<td>Patient</td>
+					<td th:narrative="${resource.patient.resource}">Patient</td>
+				</tr>
+				
+				<th:block th:if="${not #lists.isEmpty(resource.recommendation)}" >
+				<tr th:each="recomm : ${resource.recommendation}">
+					<table>
+						
+						<tr th:if="${not recomm.targetDisease.empty}">
+							<td>Target Disease</td>
+							<td><span th:narrative="${recomm.targetDisease}">disease</span></td>
+						</tr>
+						<th:block th:if="${not #lists.isEmpty(recomm.vaccineCode)}" >
+						<tr th:each="vc : ${recomm.vaccineCode}">
+							<td>Vaccine Code</td>
+							<td><span th:narrative="${vc}">vc</span></td>
+						</tr>
+						</th:block>
+						<th:block th:if="${not #lists.isEmpty(recomm.forecastReason)}" >
+						<tr th:each="vr : ${recomm.forecastReason}">
+							<td>Forecast Reason</td>
+							<td><span th:narrative="${vr}">forecastreason</span></td>
+						</tr>
+						</th:block>
+						
+						<tr th:if="${not recomm.forecastStatus.empty}">
+							<td>Forecast Status</td>
+							<td><span th:narrative="${recomm.forecastStatus}">forecastStatus</span></td>
+						</tr>
+
+					</table>
+				</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+
+	<!--/*-->
+</body>
+</html>
+<!--*/-->

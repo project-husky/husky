@@ -17,6 +17,7 @@ import javax.annotation.concurrent.ThreadSafe;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.Patient;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganization;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatient;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitioner;
@@ -84,7 +85,7 @@ public class ChVacdParser {
 			postHapiParsing(document);
 			return document;
 		}
-		throw new InvalidVacdContentException("The given resource isn't a CH-EMED Document");
+		throw new InvalidVacdContentException("The given resource isn't a CH-VACD Document");
 	}
 	
 //	public <T extends ChVacdAbstractDocument> T parse(final InputStream resource, final ChVacdDocumentType type) {
@@ -93,7 +94,18 @@ public class ChVacdParser {
 //	}
 	
 	private void postHapiParsing(ChVacdAbstractDocument document) {
-		
+//		document.getEntry().forEach(entry -> {
+//			if (entry.getResource() instanceof ChVacdImmunizationAdministrationComposition comp) {
+//				if(comp.getSubject().getResource()==null) {
+//					document.getEntry().stream().filter(e -> e.getResource() instanceof Patient).findFirst().ifPresent(patientEntry -> {
+//						comp.getSubject().setResource(patientEntry.getResource());
+//					});
+//				}
+//			} else if (entry.getResource() instanceof ChVacdVaccinationRecordComposition comp) {
+//				
+//			}
+//			
+//		});
 	}
 
 	/**

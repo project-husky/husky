@@ -25,4 +25,11 @@ public class ChCoreCompositionEpr extends ChCoreComposition {
 		super();
 		setLanguage("de-CH");
 	}
+
+	@Override
+	public ChCoreCompositionEpr copy() {
+		final var copy = new ChCoreCompositionEpr();
+		this.copyValues(copy);
+		return copy;
+	}
 }

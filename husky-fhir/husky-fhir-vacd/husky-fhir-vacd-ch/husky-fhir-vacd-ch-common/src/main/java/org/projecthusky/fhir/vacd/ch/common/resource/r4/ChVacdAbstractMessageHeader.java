@@ -9,7 +9,7 @@ public class ChVacdAbstractMessageHeader extends MessageHeader {
 
 	protected ChVacdAbstractMessageHeader() {
 		super();
-		this.setId("urn:uuid:" + this.getId());
+//		this.setId("urn:uuid:" + this.getId());
 		if (!this.getReason().hasCoding("http://snomed.info/sct", "830152006")) {
 			this.getReason()
 					.addCoding(new Coding("http://snomed.info/sct", "830152006", "Recommend vaccination"));
