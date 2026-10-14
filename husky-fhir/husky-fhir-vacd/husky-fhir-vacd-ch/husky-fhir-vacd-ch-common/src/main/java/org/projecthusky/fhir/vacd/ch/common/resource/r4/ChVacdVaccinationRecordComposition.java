@@ -45,4 +45,11 @@ public class ChVacdVaccinationRecordComposition extends ChVacdAbstractCompositio
 				.setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "17621005",
 						"Normal (qualifier value)")));
 	}
+	
+	@Override
+	public ChVacdVaccinationRecordComposition copy() {
+		final var copy = new ChVacdVaccinationRecordComposition();
+		this.copyValues(copy);
+		return copy;
+	}
 }

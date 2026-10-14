@@ -6,8 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.projecthusky.fhir.vacd.ch.common.TestHelper;
 
-class ChVacdRecommendationRequestMessageTest {
+class ChVacdRecommendationRequestMessageTest extends TestHelper {
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -22,6 +23,8 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		prettyPrint(ref);
 	}
 
 	@Test
@@ -33,6 +36,12 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		assertTrue(ref.getEntryFirstRep() != null && //
+				ref.getEntryFirstRep()
+						.getResource() instanceof ChVacdRecommendationRequestMessageHeader);
+
+		prettyPrint(ref);
 	}
 
 	@Test
@@ -44,6 +53,12 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		assertTrue(ref.getEntryFirstRep() != null && //
+				ref.getEntryFirstRep()
+						.getResource() instanceof ChVacdRecommendationRequestMessageHeader);
+
+		prettyPrint(ref);
 	}
 
 	@Test
@@ -55,6 +70,12 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		assertTrue(ref.getEntryFirstRep() != null && //
+				ref.getEntryFirstRep()
+						.getResource() instanceof ChVacdRecommendationRequestMessageHeader);
+
+		prettyPrint(ref);
 	}
 
 	@Test
@@ -66,6 +87,12 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		assertTrue(ref.getEntryFirstRep() != null && //
+				ref.getEntryFirstRep()
+						.getResource() instanceof ChVacdRecommendationRequestMessageHeader);
+
+		prettyPrint(ref);
 	}
 
 	@Test
@@ -77,6 +104,8 @@ class ChVacdRecommendationRequestMessageTest {
 		assertNotNull(list);
 		assertEquals(1, list.size());
 		assertEquals(entry, list.get(0));
+
+		prettyPrint(ref);
 	}
 
 }

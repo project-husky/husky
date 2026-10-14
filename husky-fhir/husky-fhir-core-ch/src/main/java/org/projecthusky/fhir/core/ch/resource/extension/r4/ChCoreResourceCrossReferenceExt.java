@@ -27,6 +27,8 @@ import ca.uhn.fhir.model.api.annotation.Child;
 @Block
 public class ChCoreResourceCrossReferenceExt extends BackboneElement {
 
+	private static final long serialVersionUID = -5149365167231149861L;
+
 	@Child(name = "entry", min = 1, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "entry", definedLocally = false)
 	protected Reference entry;

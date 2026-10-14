@@ -10,12 +10,9 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.UUID;
-
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
@@ -54,19 +51,26 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 		if (entry != null) {
 			return entry;
 		} else {
-			ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
-			composition.setId(UUID.randomUUID().toString());
-			
-			composition.addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
-					"urn:che:epr:ch-vacd:immunization-administration:2022", "CH VACD Immunization Administration")));
-
-			this.getEntry().add(new BundleEntryComponent().setResource(composition)
-					.setFullUrl("urn:uuid:" + composition.getId()));
-			return composition;
+			return addComposition();
 		}
 		// throw new InvalidContentException(
 		// "The ChVacdImmunizationAdministrationComposition is missing in the
 		// document Bundle");
 	}
 
+	@Override
+	public ChVacdImmunizationAdministrationComposition addComposition()
+			throws InvalidContentException {
+		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
+		composition.setId(IdUtil.generateUrnUuid());
+		super.addComposition(composition);
+		return composition;
+	}
+
+	@Override
+	public ChVacdImmunizationAdministrationDocument copy() {
+		final var copy = new ChVacdImmunizationAdministrationDocument();
+		this.copyValues(copy);
+		return copy;
+	}
 }

@@ -10,8 +10,6 @@
  */
 package org.projecthusky.fhir.core.ch.datatype.r4;
 
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ContactPoint;
 
 import ca.uhn.fhir.model.api.annotation.DatatypeDef;

@@ -14,14 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.vacd.ch.common.enums.ChVacdDocumentType;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdAbstractDocument;
+import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunizationAdministrationComposition;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdImmunizationAdministrationDocument;
 import org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdVaccinationRecordDocument;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
 
@@ -30,18 +34,21 @@ import ca.uhn.fhir.context.FhirContext;
  */
 class ChVacdParserTest {
 
+	private Logger logger = LoggerFactory.getLogger(ChVacdParserTest.class);
+
 	private ChVacdParser parser;
 	private String adminJson;
 	private String adminXml;
 	private String recordJson;
 	private String recordXml;
 
+
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		parser = new ChVacdParser(FhirContext.forR4Cached());
+		parser = new ChVacdParser(FhirContext.forR4());
 		{
 			InputStream is = this.getClass()
 					.getResourceAsStream("/fhir/Bundle-1-1-ImmunizationAdministration.json");
@@ -80,6 +87,31 @@ class ChVacdParserTest {
 				ChVacdDocumentType.ADMIN);
 		assertNotNull(ref);
 		assertTrue(ref instanceof ChVacdImmunizationAdministrationDocument);
+
+	}
+
+	@Test
+	void testParseImmunAdminJson1() throws IOException {
+		InputStream is = this.getClass()
+				.getResourceAsStream("/fhir/chvacd-immunizationadministration-beispielhugo.json");
+		String json = new String(is.readAllBytes());
+		is.close();
+
+		logger.info("JSON: {}", json);
+
+		ChVacdImmunizationAdministrationDocument ref = parser.parse(json, ChVacdDocumentType.ADMIN);
+		logger.info("Parsed: {}", FhirContext.forR4().newJsonParser().setPrettyPrint(true)
+				.encodeResourceToString(ref));
+
+		assertNotNull(ref);
+		assertNotNull(ref.getEntryFirstRep().getResource());
+		assertTrue(ref.getEntryFirstRep()
+				.getResource() instanceof ChVacdImmunizationAdministrationComposition);
+
+		ChVacdImmunizationAdministrationComposition comp = (ChVacdImmunizationAdministrationComposition) ref
+				.getEntryFirstRep().getResource();
+		assertNotNull(comp.getSubject());
+		assertNotNull(comp.getSubject().getResource());
 
 	}
 

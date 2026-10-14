@@ -86,4 +86,12 @@ public class ValidationResult {
         this.issues.addAll(issues);
         return this;
     }
+
+	@Override
+	public String toString() {
+		return "ValidationResult [issues=" + issues + "]";
+	}
+    
+    
+    
 }

@@ -29,9 +29,11 @@ import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidResourceException;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreDocumentEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganizationEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatient;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePractitionerRoleEpr;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 
 /**
  * The HAPI custom structure for CH-VACD ImmunizationAdministrationDocument.
@@ -48,8 +50,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 
 		this.getEntry().clear();
 		this.setId(UUID.randomUUID().toString());
-		this.setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + this.getId()));
+		this.setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986").setValue("urn:uuid:"+this.getIdElement().getIdPart()));
 		this.setTimestamp(new Date());
 		this.setType(BundleType.DOCUMENT);
 	}
@@ -64,6 +65,25 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	@ExpectsValidResource
 	public abstract ChVacdAbstractComposition resolveComposition();
 
+	@ExpectsValidResource
+	public Patient resolvePatient() {
+		if (this.resolveComposition().hasSubject()) {
+			var subjectRef = this.resolveComposition().getSubject();
+			if (subjectRef.getResource() instanceof ChCorePatientEpr) {
+				return (ChCorePatientEpr) subjectRef.getResource();
+			} else if (subjectRef.getResource() instanceof ChCorePatient) {
+				return (ChCorePatient) subjectRef.getResource();
+			} else if (subjectRef.getResource() instanceof Patient) {
+				return (Patient) subjectRef.getResource();
+			} else {
+				throw new InvalidContentException(
+						"The subject of the composition is not a Patient or ChCorePatientEpr");
+			}
+		} else {
+			throw new InvalidContentException("The composition does not have a subject");
+		}
+	}
+
 	/**
 	 * Adds an immunization to the document.
 	 * 
@@ -71,30 +91,15 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the immunization to add.
 	 */
 	public void addImmunization(ChVacdImmunization immunization) {
-		if (!this.resolveComposition().hasSubject()) {
+		if (this.resolveComposition().hasSubject()) {
 			immunization.setPatient(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(immunization);
 
-		if (immunization.getId() == null) {
-			immunization.setId(UUID.randomUUID().toString());
-		}
-
-		if (immunization.getId().startsWith("urn:uuid:")) {
-			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
-					.setFullUrl(immunization.getId()));
-			this.resolveComposition().resolveAdministrationSection()
-					.addEntry(new Reference(immunization.getId()));
-		} else {
-			this.getEntry().add(new BundleEntryComponent().setResource(immunization)
-					.setFullUrl("urn:uuid:" + immunization.getId()));
-			this.resolveComposition().resolveAdministrationSection()
-					.addEntry(new Reference("urn:uuid:" + immunization.getId()));
-		}
-		// this.getEntry().add(new
-		// BundleEntryComponent().setResource(immunization)
-		// .setFullUrl("urn:uuid:" + immunization.getId()));
-		// this.resolveComposition().resolveAdministrationSection()
-		// .addEntry(new Reference("urn:uuid:" + immunization.getId()));
+		this.getEntry().add(new BundleEntryComponent().setResource(immunization)
+				.setFullUrl(immunization.getIdElement().getIdPart()));
+		this.resolveComposition().resolveAdministrationSection()
+				.addEntry(new Reference(immunization));
 	}
 
 	/**
@@ -104,7 +109,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdImmunization addImmunization() {
 		ChVacdImmunization immunization = new ChVacdImmunization();
-		immunization.setId(UUID.randomUUID().toString());
+		immunization.setId(IdUtil.generateUrnUuid());
 		addImmunization(immunization);
 		return immunization;
 	}
@@ -128,11 +133,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (this.resolveComposition().hasSubject()) {
 			basicImmunization.setSubject(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(basicImmunization);
 
 		this.getEntry().add(new BundleEntryComponent().setResource(basicImmunization)
-				.setFullUrl("urn:uuid:" + basicImmunization.getId()));
-		this.resolveComposition().resolveAdministrationSection()
-				.addEntry(new Reference("urn:uuid:" + basicImmunization.getId()));
+				.setFullUrl(basicImmunization.getIdElement().getIdPart()));
+		this.resolveComposition().resolveAdministrationSection().addEntry(
+				new Reference(basicImmunization));
 	}
 
 	/**
@@ -142,7 +148,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdBasicImmunization addBasicImmunization() {
 		ChVacdBasicImmunization basicImmunization = new ChVacdBasicImmunization();
-		basicImmunization.setId(UUID.randomUUID().toString());
+		basicImmunization.setId(IdUtil.generateUrnUuid());
 		addBasicImmunization(basicImmunization);
 		return basicImmunization;
 	}
@@ -163,7 +169,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdMedicalProblem addMedicalProblem() {
 		ChVacdMedicalProblem medicalProblem = new ChVacdMedicalProblem();
-		medicalProblem.setId(UUID.randomUUID().toString());
+		medicalProblem.setId(IdUtil.generateUrnUuid());
 		addMedicalProblem(medicalProblem);
 		return medicalProblem;
 	}
@@ -178,11 +184,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (this.resolveComposition().hasSubject()) {
 			medicalProblem.setSubject(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(medicalProblem);
 
 		this.getEntry().add(new BundleEntryComponent().setResource(medicalProblem)
-				.setFullUrl("urn:uuid:" + medicalProblem.getId()));
+				.setFullUrl(medicalProblem.getIdElement().getIdPart()));
 		this.resolveComposition().resolveMedicalProblemSection()
-				.addEntry(new Reference("urn:uuid:" + medicalProblem.getId()));
+				.addEntry(new Reference(medicalProblem));
 	}
 
 	/**
@@ -201,7 +208,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdLaboratoryAndSerology addLaboratoryAndSerology() {
 		ChVacdLaboratoryAndSerology labandser = new ChVacdLaboratoryAndSerology();
-		labandser.setId(UUID.randomUUID().toString());
+		labandser.setId(IdUtil.generateUrnUuid());
 		addLaboratoryAndSerology(labandser);
 		return labandser;
 	}
@@ -216,11 +223,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (this.resolveComposition().hasSubject()) {
 			labandser.setSubject(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(labandser);
 
 		this.getEntry().add(new BundleEntryComponent().setResource(labandser)
-				.setFullUrl("urn:uuid:" + labandser.getId()));
+				.setFullUrl(labandser.getIdElement().getIdPart()));
 		this.resolveComposition().resolveLaboratorySerologySection()
-				.addEntry(new Reference("urn:uuid:" + labandser.getId()));
+				.addEntry(new Reference(labandser));
 	}
 
 	/**
@@ -239,7 +247,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdAllergyIntolerance addAllergyIntolerance() {
 		ChVacdAllergyIntolerance allInt = new ChVacdAllergyIntolerance();
-		allInt.setId(UUID.randomUUID().toString());
+		allInt.setId(IdUtil.generateUrnUuid());
 		addAllergyIntolerance(allInt);
 		return allInt;
 	}
@@ -251,11 +259,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (this.resolveComposition().hasSubject()) {
 			allInt.setPatient(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(allInt);
 
 		this.getEntry().add(new BundleEntryComponent().setResource(allInt)
-				.setFullUrl("urn:uuid:" + allInt.getId()));
+				.setFullUrl(allInt.getIdElement().getIdPart()));
 		this.resolveComposition().resolveAllergyIntolerancesSection()
-				.addEntry(new Reference("urn:uuid:" + allInt.getId()));
+				.addEntry(new Reference(allInt));
 
 	}
 
@@ -275,7 +284,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdPastIllness addPastIllness() {
 		ChVacdPastIllness pastill = new ChVacdPastIllness();
-		pastill.setId(UUID.randomUUID().toString());
+		pastill.setId(IdUtil.generateUrnUuid());
 		addPastIllness(pastill);
 		return pastill;
 
@@ -291,11 +300,12 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (this.resolveComposition().hasSubject()) {
 			pastill.setSubject(this.resolveComposition().getSubject());
 		}
+		IdUtil.checkId(pastill);
 
 		this.getEntry().add(new BundleEntryComponent().setResource(pastill)
-				.setFullUrl("urn:uuid:" + pastill.getId()));
+				.setFullUrl(pastill.getIdElement().getIdPart()));
 		this.resolveComposition().resolvePastIllnessSection()
-				.addEntry(new Reference("urn:uuid:" + pastill.getId()));
+				.addEntry(new Reference(pastill));
 
 	}
 
@@ -310,17 +320,77 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 *            the patient to set.
 	 */
 	public void setPatient(Patient subject) {
-		if (subject.getId() == null) {
-			subject.setId(UUID.randomUUID().toString());
-		}
-		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
+		IdUtil.checkId(subject);
+		this.resolveComposition().setSubject(new Reference(subject.getIdElement().getIdPart()));
 		this.getEntry().add(new BundleEntryComponent().setResource(subject)
-				.setFullUrl("urn:uuid:" + subject.getId()));
+				.setFullUrl(subject.getIdElement().getIdPart()));
 		// this.resolveComposition().setSubject(new Reference("urn:uuid:" +
 		// subject.getId()));
 	}
 
+	public PractitionerRole addPractitionerRole() {
+		ChCorePractitionerRoleEpr practitionerRole = new ChCorePractitionerRoleEpr();
+		practitionerRole.setId(IdUtil.generateUrnUuid());
+		practitionerRole.setPractitioner(new Reference(addPractitioner()));
+		practitionerRole.setOrganization(new Reference(addOrganization()));
+		addPractitionerRole(practitionerRole);
+		return practitionerRole;
+	}
+
+	public void addPractitionerRole(PractitionerRole practitionerRole) {
+		this.resolveComposition();
+		if (!this.hasEntryByResourceTypeAndId(practitionerRole)) {
+			if (practitionerRole.getOrganization() == null
+					|| practitionerRole.getPractitioner() == null) {
+				throw new InvalidResourceException(
+						"The author must have an organization and a practitioner");
+			}
+			IdUtil.checkId(practitionerRole);
+
+			var org = (Organization) practitionerRole.getOrganization().getResource();
+			addOrganization(org);
+			var pract = (Practitioner) practitionerRole.getPractitioner().getResource();
+			addPractitioner(pract);
+
+			this.getEntry().add(new BundleEntryComponent().setResource(practitionerRole)
+					.setFullUrl(practitionerRole.getIdElement().getIdPart()));
+		}
+	}
+
+	public ChCoreOrganizationEpr addOrganization() {
+		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
+		organization.setId(IdUtil.generateUrnUuid());
+		addOrganization(organization);
+		return organization;
+	}
+
+	public void addOrganization(Organization organization) {
+		this.resolveComposition();
+		if (organization != null && !this.hasEntryByResourceTypeAndId(organization)) {
+			IdUtil.checkId(organization);
+			this.addEntry(new BundleEntryComponent().setResource(organization)
+					.setFullUrl(organization.getIdElement().getIdPart()));
+		}
+	}
+
+	public ChCorePractitionerEpr addPractitioner() {
+		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
+		practitioner.setId(IdUtil.generateUrnUuid());
+		addPractitioner(practitioner);
+		return practitioner;
+	}
+
+	public void addPractitioner(Practitioner practitioner) {
+		this.resolveComposition();
+		if (practitioner != null && !this.hasEntryByResourceTypeAndId(practitioner)) {
+			IdUtil.checkId(practitioner);
+			this.addEntry(new BundleEntryComponent().setResource(practitioner)
+					.setFullUrl(practitioner.getIdElement().getIdPart()));
+		}
+	}
+
 	public void addAuthor(DomainResource author, Date timeOfDataInput) {
+		this.resolveComposition();
 		// Device
 		// RelatedPerson
 		// CH Core Patient EPR
@@ -335,45 +405,57 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 				author instanceof ChCoreOrganizationEpr //
 		) {
 			if (author.getId() == null) {
-				author.setId(UUID.randomUUID().toString());
+				author.setId(IdUtil.generateUrnUuid());
 			}
-			var ref = new Reference("urn:uuid:" + author.getId());
+			// var ref = new Reference("urn:uuid:" + author.getId());
+			var ref = new Reference(author);
 			ref.addExtension()
 					.setUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time")
 					.setValue(new DateTimeType(timeOfDataInput));
-			this.resolveComposition().addAuthor(ref);
+
 			if (!this.hasEntryByResourceTypeAndId(author)) {
 
-				this.addEntry(new BundleEntryComponent().setResource(author)
-						.setFullUrl("urn:uuid:" + author.getId()));
 				if (author instanceof PractitionerRole) {
-					var practRole = ((PractitionerRole) author);
-					if (practRole.getOrganization() == null
-							|| practRole.getPractitioner() == null) {
-						throw new InvalidResourceException(
-								"The author must have an organization and a practitioner");
-					}
-					var org = (Organization) practRole.getOrganization().getResource();
-					if (!this.hasEntryByResourceTypeAndId(org)) {
-						this.addEntry(new BundleEntryComponent().setResource(org)
-								.setFullUrl("urn:uuid:" + (org.getId() != null ? org.getId()
-										: UUID.randomUUID().toString())));
-					}
-					var pract = (Practitioner) practRole.getPractitioner().getResource();
-					if (!this.hasEntryByResourceTypeAndId(pract)) {
-						this.addEntry(new BundleEntryComponent().setResource(pract)
-								.setFullUrl("urn:uuid:" + (pract.getId() != null ? pract.getId()
-										: UUID.randomUUID().toString())));
-					}
+					addPractitionerRole((PractitionerRole) author);
+				} else {
+					this.addEntry(new BundleEntryComponent().setResource(author)
+							.setFullUrl(author.getIdElement().getIdPart()));
 				}
 
 			}
+			this.resolveComposition().addAuthor(ref);
+			
 
 		} else {
 			throw new InvalidResourceException(
 					"The author must be of type RelatedPerson, Device, ChCorePatientEpr, ChCorePractitionerEpr, ChCorePractitionerRoleEpr or ChCoreOrganizationEpr");
 		}
 
+	}
+
+	/**
+	 * Method to create and add MedicationForImmunization
+	 * 
+	 * @return the created and added MedicationForImmunization resource
+	 */
+	public ChVacdMedicationForImmunization addMedication() {
+		ChVacdMedicationForImmunization medication = new ChVacdMedicationForImmunization();
+		medication.setId(IdUtil.generateUrnUuid());
+		addMedication(medication);
+		return medication;
+	}
+
+	/**
+	 * Method to add MedicationForImmunization
+	 * 
+	 * @param medication
+	 *            the MedicationForImmunization resource to be added
+	 */
+	public void addMedication(ChVacdMedicationForImmunization medication) {
+		this.resolveComposition();
+		IdUtil.checkId(medication);
+		this.getEntry().add(new BundleEntryComponent().setResource(medication)
+				.setFullUrl(medication.getIdElement().getIdPart()));
 	}
 
 }

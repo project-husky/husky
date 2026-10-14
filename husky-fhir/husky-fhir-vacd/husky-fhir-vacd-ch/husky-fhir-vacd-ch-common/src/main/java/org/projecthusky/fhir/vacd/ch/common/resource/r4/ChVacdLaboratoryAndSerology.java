@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
@@ -54,8 +55,7 @@ public class ChVacdLaboratoryAndSerology extends Observation {
 	protected Coding verificationStatus;
 
 	public ChVacdLaboratoryAndSerology() {
-		addIdentifier().setSystem("urn:ietf:rfc:3986").setValue("urn:uuid:" + UUID.randomUUID().toString());
-//		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
+		// setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
 	}
 
 	public boolean hasRecorder() {

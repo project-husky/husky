@@ -1,0 +1,868 @@
+{
+  "resourceType": "Bundle",
+  "id": "424cde0b-1b5e-4f32-995b-5463a0024e10",
+  "meta": {
+    "profile": [
+      "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-vaccination-record"
+    ]
+  },
+  "language": "en-US",
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:424cde0b-1b5e-4f32-995b-5463a0024e10"
+  },
+  "type": "document",
+  "timestamp": "2026-09-08T09:33:33.628+00:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:b8c2d1b9-c5b0-4846-a6b2-13f287dfb681",
+      "resource": {
+        "resourceType": "Composition",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-composition-vaccination-record"
+          ]
+        },
+        "language": "de-CH",
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table class=\"hapiPropertyTable\"><tbody><tr><td>Title</td><td>Vaccination Record</td></tr><tr><td>Category</td><td>CH VACD Vaccination Record(urn:oid:2.16.756.5.30.1.127.3.10.10|urn:che:epr:ch-vacd:vaccination-record:2022)</td></tr><tr><td>Identifier</td><td>urn:uuid:091d84d6-c493-40b2-bb7b-dd7932c120ff</td></tr><tr><td>Status</td><td>FINAL</td></tr><tr><td>List Immunization Administration</td><td><span/><span/><span/><span/><span/><span/><br/></td></tr></tbody></table></div>"
+        },
+        "identifier": {
+          "system": "urn:ietf:rfc:3986",
+          "value": "urn:uuid:091d84d6-c493-40b2-bb7b-dd7932c120ff"
+        },
+        "status": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "41000179103"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "urn:oid:2.16.756.5.30.1.127.3.10.10",
+                "code": "urn:che:epr:ch-vacd:vaccination-record:2022",
+                "display": "CH VACD Vaccination Record"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "date": "2026-09-08T09:33:33+00:00",
+        "author": [
+          {
+            "extension": [
+              {
+                "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time",
+                "valueDateTime": "2026-09-08T09:33:33+00:00"
+              }
+            ],
+            "reference": "urn:uuid:27d5fe59-dc84-45b7-a123-2fa480ca9243"
+          }
+        ],
+        "title": "Vaccination Record",
+        "confidentiality": "N",
+        "_confidentiality": {
+          "extension": [
+            {
+              "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "17621005",
+                    "display": "Normal (qualifier value)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "section": [
+          {
+            "title": "List Immunization Administration",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "11369-6"
+                }
+              ]
+            },
+            "entry": [
+              {
+                "reference": "urn:uuid:5e193c13-022e-4fc5-a926-c66a0cde85a6"
+              },
+              {
+                "reference": "urn:uuid:5e193c13-022e-4fc5-a926-c66a0cde85a6"
+              },
+              {
+                "reference": "urn:uuid:e8738e63-328c-4a11-9563-df3a4fd80d86"
+              },
+              {
+                "reference": "urn:uuid:e8738e63-328c-4a11-9563-df3a4fd80d86"
+              },
+              {
+                "reference": "urn:uuid:1b3d3d53-1b9c-41d9-8888-188e2f5d5d3a"
+              },
+              {
+                "reference": "urn:uuid:1b3d3d53-1b9c-41d9-8888-188e2f5d5d3a"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:27d5fe59-dc84-45b7-a123-2fa480ca9243",
+      "resource": {
+        "resourceType": "Device",
+        "status": "active",
+        "manufacturer": "Workgroup Vaccination Showcase",
+        "deviceName": [
+          {
+            "name": "Immunization Registry System",
+            "type": "model-name"
+          }
+        ],
+        "type": {
+          "text": "Immunization Registry System"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5",
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">Hugo <b>BEISPIEL </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39</td></tr><tr><td>Address</td><td><span>Hugo 1 </span><span>8009 </span><span>Hugenswil </span></td></tr><tr><td>Date of birth</td><td><span>31 December 1999</span></td></tr></tbody></table></div>"
+        },
+        "identifier": [
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "family": "Beispiel",
+            "given": [
+              "Hugo"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email"
+          },
+          {
+            "system": "phone"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1999-12-31",
+        "address": [
+          {
+            "line": [
+              "Hugo 1"
+            ],
+            "city": "Hugenswil",
+            "postalCode": "8009"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:870707d4-34b0-4dbb-ade1-f6700aac2d0a",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:5130253e-f9de-4c72-b2cd-b15d6afc669f"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:fc19802f-38bf-46d1-9c6e-5fad3a0052dc"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "681",
+              "display": "Boostrix Polio"
+            }
+          ],
+          "text": "Boostrix Polio"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2009-04-22T00:00:00+00:00",
+        "lotNumber": "8462834",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "398102009",
+                    "display": "Acute poliomyelitis (disorder)"
+                  }
+                ],
+                "text": "Acute poliomyelitis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "76902006",
+                    "display": "Tetanus (disorder)"
+                  }
+                ],
+                "text": "Tetanus (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "27836007",
+                    "display": "Pertussis (disorder)"
+                  }
+                ],
+                "text": "Pertussis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "397430003",
+                    "display": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+                  }
+                ],
+                "text": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole-epr",
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><td>Practitioner</td><td>Heinz <b>KNOCHENSCHLOSSER </b></td></tr><tr><td>Organization</td><td>Praxis Knochenschlosser</td></tr></table></div>"
+        },
+        "practitioner": {
+          "reference": "urn:uuid:75ba4030-4ac5-4b40-bafe-e76a56886fce"
+        },
+        "organization": {
+          "reference": "urn:uuid:6e1b1550-c8fa-47b9-89e5-097356e86986"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5e193c13-022e-4fc5-a926-c66a0cde85a6",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:5130253e-f9de-4c72-b2cd-b15d6afc669f"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:fc19802f-38bf-46d1-9c6e-5fad3a0052dc"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "681",
+              "display": "Boostrix Polio"
+            }
+          ],
+          "text": "Boostrix Polio"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2009-04-22T00:00:00+00:00",
+        "lotNumber": "8462834",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "398102009",
+                    "display": "Acute poliomyelitis (disorder)"
+                  }
+                ],
+                "text": "Acute poliomyelitis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "76902006",
+                    "display": "Tetanus (disorder)"
+                  }
+                ],
+                "text": "Tetanus (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "27836007",
+                    "display": "Pertussis (disorder)"
+                  }
+                ],
+                "text": "Pertussis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "397430003",
+                    "display": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+                  }
+                ],
+                "text": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:33b42921-272c-41cc-a087-23631d920902",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:cbeb53d2-fec5-4686-b9bb-82e88d9bc3b4"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:aee1a453-812f-4ca1-95fe-b89498fcd221"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "681",
+              "display": "Boostrix Polio"
+            }
+          ],
+          "text": "Boostrix Polio"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2009-11-22T00:00:00+00:00",
+        "lotNumber": "dasdarq34234",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "398102009",
+                    "display": "Acute poliomyelitis (disorder)"
+                  }
+                ],
+                "text": "Acute poliomyelitis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "76902006",
+                    "display": "Tetanus (disorder)"
+                  }
+                ],
+                "text": "Tetanus (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "27836007",
+                    "display": "Pertussis (disorder)"
+                  }
+                ],
+                "text": "Pertussis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "397430003",
+                    "display": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+                  }
+                ],
+                "text": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole-epr",
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><td>Practitioner</td><td>Heinz <b>KNOCHENSCHLOSSER </b></td></tr><tr><td>Organization</td><td>Praxis Knochenschlosser</td></tr></table></div>"
+        },
+        "practitioner": {
+          "reference": "urn:uuid:75ba4030-4ac5-4b40-bafe-e76a56886fce"
+        },
+        "organization": {
+          "reference": "urn:uuid:6e1b1550-c8fa-47b9-89e5-097356e86986"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e8738e63-328c-4a11-9563-df3a4fd80d86",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:cbeb53d2-fec5-4686-b9bb-82e88d9bc3b4"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:aee1a453-812f-4ca1-95fe-b89498fcd221"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "681",
+              "display": "Boostrix Polio"
+            }
+          ],
+          "text": "Boostrix Polio"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2009-11-22T00:00:00+00:00",
+        "lotNumber": "dasdarq34234",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0faa55b6-0cc2-44ea-a74e-cc8b2b4ae341"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "398102009",
+                    "display": "Acute poliomyelitis (disorder)"
+                  }
+                ],
+                "text": "Acute poliomyelitis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "76902006",
+                    "display": "Tetanus (disorder)"
+                  }
+                ],
+                "text": "Tetanus (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "27836007",
+                    "display": "Pertussis (disorder)"
+                  }
+                ],
+                "text": "Pertussis (disorder)"
+              },
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "397430003",
+                    "display": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+                  }
+                ],
+                "text": "Diphtheria caused by Corynebacterium diphtheriae (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a7ae1c47-4f85-45cd-b820-a10d1a0461de",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:73ceab5a-401a-42d3-8747-eb0f18875bbe"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:517851e7-502f-4ce8-a223-5ce22a6969e4"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "683",
+              "display": "FSME-Immun 0.25 ml Junior"
+            }
+          ],
+          "text": "FSME-Immun 0.25 ml Junior"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2012-02-22T00:00:00+00:00",
+        "lotNumber": "Hasdjaj",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0bfbcff4-0596-4f35-8123-5859108e2b8d"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "712986001",
+                    "display": "Central European encephalitis (disorder)"
+                  }
+                ],
+                "text": "Central European encephalitis (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0bfbcff4-0596-4f35-8123-5859108e2b8d",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole-epr",
+            "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table><tr><td>Practitioner</td><td>Heidi <b>MACHGESUND </b></td></tr><tr><td>Organization</td><td>Praxis Machgesund</td></tr></table></div>"
+        },
+        "practitioner": {
+          "reference": "urn:uuid:e828e437-b321-44e7-a7f9-083ca6037a4d"
+        },
+        "organization": {
+          "reference": "urn:uuid:20917077-343b-488f-80d3-e070c2453041"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1b3d3d53-1b9c-41d9-8888-188e2f5d5d3a",
+      "resource": {
+        "resourceType": "Immunization",
+        "meta": {
+          "profile": [
+            "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-immunization-medication-reference",
+            "valueReference": {
+              "reference": "urn:uuid:73ceab5a-401a-42d3-8747-eb0f18875bbe"
+            }
+          },
+          {
+            "url": "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "59156000",
+                  "display": "Confirmed"
+                }
+              ],
+              "text": "Confirmed"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:ietf:rfc:3986",
+            "value": "urn:uuid:517851e7-502f-4ce8-a223-5ce22a6969e4"
+          },
+          {
+            "system": "urn:che:epr:ch-vacd:ehr-id",
+            "value": "urn:uuid:9a708238-a033-47c4-adde-6deeeb9acc39"
+          }
+        ],
+        "status": "completed",
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://fhir.ch/ig/ch-vacd/CodeSystem/ch-vacd-swissmedic-cs",
+              "code": "683",
+              "display": "FSME-Immun 0.25 ml Junior"
+            }
+          ],
+          "text": "FSME-Immun 0.25 ml Junior"
+        },
+        "patient": {
+          "reference": "urn:uuid:a27144dd-8f8e-4a6e-8f11-948018c1bfe5"
+        },
+        "occurrenceDateTime": "2012-02-22T00:00:00+00:00",
+        "lotNumber": "Hasdjaj",
+        "performer": [
+          {
+            "actor": {
+              "reference": "urn:uuid:0bfbcff4-0596-4f35-8123-5859108e2b8d"
+            }
+          }
+        ],
+        "protocolApplied": [
+          {
+            "targetDisease": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "712986001",
+                    "display": "Central European encephalitis (disorder)"
+                  }
+                ],
+                "text": "Central European encephalitis (disorder)"
+              }
+            ],
+            "doseNumberPositiveInt": 1
+          }
+        ]
+      }
+    }
+  ]
+}
