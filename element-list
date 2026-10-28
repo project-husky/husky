@@ -158,10 +158,16 @@ org.projecthusky.fhir.structures.utils
 org.projecthusky.fhir.vacd.ch.common
 org.projecthusky.fhir.vacd.ch.common.enums
 org.projecthusky.fhir.vacd.ch.common.exceptions
+org.projecthusky.fhir.vacd.ch.common.narrative
 org.projecthusky.fhir.vacd.ch.common.resource.extension.r4
 org.projecthusky.fhir.vacd.ch.common.resource.r4
 org.projecthusky.fhir.vacd.ch.common.service
 org.projecthusky.fhir.vacd.ch.common.utils
+org.projecthusky.fhir.vacd.ch.common.validation
+org.projecthusky.fhir.validation
+org.projecthusky.fhir.validation.impl
+org.projecthusky.fhir.validation.logging
+org.projecthusky.fhir.validation.model
 org.projecthusky.validation.service
 org.projecthusky.validation.service.pdf
 org.projecthusky.validation.service.schema
