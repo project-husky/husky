@@ -1,0 +1,517 @@
+{
+  "resourceType": "Bundle",
+  "id": "b640eaa0-035e-4cde-93f2-064fdf87d423",
+  "meta": {
+    "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-document", "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-immunization-administration", "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-document-epr" ]
+  },
+  "identifier": {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:uuid:b640eaa0-035e-4cde-93f2-064fdf87d423"
+  },
+  "type": "document",
+  "timestamp": "2019-08-17T12:15:00+01:00",
+  "entry": [ {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Composition/3374",
+    "resource": {
+      "resourceType": "Composition",
+      "id": "3374",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-composition", "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-composition-epr", "http://fhir.ch/ig/ch-ips/StructureDefinition/ch-ips-composition", "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-composition-immunization-administration" ]
+      },
+      "language": "de-AT",
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Composition 3374</b></p><ul><li><b>Title</b>: Ambulanzbrief</li><li><b>Type</b>: Patient summary Document</li><li><b>Date</b>: 2019-08-17T12:15:00+01:00</li><li><b>Subject</b>: Patient/3254</li><li><b>Sections</b>: 36</li></ul></div>"
+      },
+      "identifier": {
+        "system": "urn:ietf:rfc:3986",
+        "value": "urn:uuid:b640eaa0-035e-4cde-93f2-064fdf87d423"
+      },
+      "status": "final",
+      "type": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "41000179103",
+          "display": "Immunization record"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "urn:oid:2.16.756.5.30.1.127.3.10.10",
+          "code": "urn:che:epr:ch-vacd:immunization-administration:2022",
+          "display": "CH VACD Immunization Administration"
+        } ]
+      } ],
+      "subject": {
+        "reference": "Patient/1dc2f524-763e-4d79-b569-ba3505ba2f5e"
+      },
+      "date": "2019-08-17T12:15:00+01:00",
+      "author": [ {
+        "reference": "Practitioner/3252"
+      }, {
+        "reference": "Organization/3253"
+      } ],
+      "title": "Ambulanzbrief",
+      "confidentiality": "N",
+      "_confidentiality": {
+        "extension": [ {
+          "url": "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "http://snomed.info/sct",
+              "code": "17621005",
+              "display": "Normal"
+            } ]
+          }
+        } ]
+      },
+      "custodian": {
+        "reference": "Organization/3253"
+      },
+      "section": [ {
+        "title": "Allergien und Intoleranzen",
+        "code": {
+          "coding": [ {
+            "system": "http://loinc.org",
+            "code": "48765-2",
+            "display": "Allergies and adverse reactions Document"
+          } ],
+          "text": "Allergies and adverse reactions Document"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Allergien und Intoleranzen</div>"
+        },
+        "entry": [ {
+          "reference": "AllergyIntolerance/3258"
+        } ]
+      }, {
+        "title": "Frühere Erkrankungen und Maßnahmen",
+        "code": {
+          "coding": [ {
+            "system": "http://loinc.org",
+            "code": "11348-0",
+            "display": "HISTORY OF PAST ILLNESS"
+          } ],
+          "text": "HISTORY OF PAST ILLNESS"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Frühere Erkrankungen und Maßnahmen</div>"
+        },
+        "entry": [ {
+          "reference": "Condition/3259"
+        } ]
+      }, {
+        "title": "Impfungen",
+        "code": {
+          "coding": [ {
+            "system": "http://loinc.org",
+            "code": "11369-6",
+            "display": "HISTORY OF IMMUNIZATIONS"
+          } ],
+          "text": "HISTORY OF IMMUNIZATIONS"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Impfungen</div>"
+        },
+        "entry": [ {
+          "reference": "Immunization/3265"
+        } ]
+      } ]
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Patient/1dc2f524-763e-4d79-b569-ba3505ba2f5e",
+    "resource": {
+      "resourceType": "Patient",
+      "id": "1dc2f524-763e-4d79-b569-ba3505ba2f5e",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Patient 3254</b></p><p>Dipl.Ing. Hofrat Herbert Hannes Mustermann VorDerHeirat BSc MBA male, DoB: 1961-12-24</p><p>Contact Detail Musterstraße 13a 7000 Eisenstadt AUT</p></div>"
+      },
+      "extension": [ {
+        "url": "http://hl7.org/fhir/StructureDefinition/patient-birthPlace",
+        "valueAddress": {
+          "text": "Graz"
+        }
+      }, {
+        "url": "http://hl7.org/fhir/StructureDefinition/patient-religion",
+        "valueCodeableConcept": {
+          "coding": [ {
+            "system": "urn:oid:2.16.840.1.113883.2.16.1.4.1",
+            "code": "101",
+            "display": "Römisch-Katholisch"
+          } ],
+          "text": "Römisch-Katholisch"
+        }
+      } ],
+      "identifier": [ {
+        "type": {
+          "coding": [ {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "MR",
+            "display": "Medical record number"
+          } ],
+          "text": "Local patient identifier"
+        },
+        "system": "urn:oid:1.2.40.0.34.99.4613.3.2",
+        "value": "121212"
+      }, {
+        "type": {
+          "coding": [ {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "MR",
+            "display": "Medical record number"
+          } ],
+          "text": "Local patient identifier"
+        },
+        "system": "urn:oid:1.2.40.0.10.1.4.3.1",
+        "value": "1111241261"
+      }, {
+        "system": "urn:che:epr:ch-vacd:ehr-id",
+        "value": "1dc2f524-763e-4d79-b569-ba3505ba2f5e"
+      } ],
+      "name": [ {
+        "text": "Dipl.Ing. Hofrat Herbert Hannes Mustermann VorDerHeirat BSc MBA",
+        "family": "Mustermann",
+        "given": [ "Herbert", "Hannes" ],
+        "prefix": [ "Dipl.Ing.", "Hofrat" ],
+        "suffix": [ "BSc", "MBA" ]
+      }, {
+        "use": "old",
+        "text": "Dipl.Ing. Hofrat Herbert Hannes Mustermann VorDerHeirat BSc MBA",
+        "family": "VorDerHeirat",
+        "given": [ "Herbert", "Hannes" ],
+        "prefix": [ "Dipl.Ing.", "Hofrat" ],
+        "suffix": [ "BSc", "MBA" ]
+      } ],
+      "telecom": [ {
+        "system": "phone",
+        "value": "+43.2682.40400",
+        "use": "home"
+      }, {
+        "system": "phone",
+        "value": "+43.664.1234567",
+        "use": "mobile"
+      }, {
+        "system": "email",
+        "value": "herberthannes.mustermann@provider.at"
+      } ],
+      "gender": "male",
+      "birthDate": "1961-12-24",
+      "address": [ {
+        "use": "home",
+        "line": [ "Musterstraße 13a" ],
+        "city": "Eisenstadt",
+        "state": "Burgenland",
+        "postalCode": "7000",
+        "country": "AUT"
+      } ],
+      "maritalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+          "code": "M",
+          "display": "Married"
+        } ],
+        "text": "Married"
+      },
+      "contact": [ {
+        "relationship": [ {
+          "coding": [ {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+            "code": "GUARD",
+            "display": "guardian"
+          } ],
+          "text": "guardian"
+        } ],
+        "name": {
+          "family": "Sorgenvoll",
+          "given": [ "Susi" ]
+        },
+        "address": {
+          "line": [ "Musterstraße 1234" ],
+          "city": "Graz",
+          "state": "Steiermark",
+          "postalCode": "8011",
+          "country": "AUT"
+        }
+      }, {
+        "relationship": [ {
+          "coding": [ {
+            "system": "http://fhir.ch/ig/ch-core/CodeSystem/ech-11",
+            "code": "contactData",
+            "display": "contact data"
+          } ]
+        } ],
+        "name": {
+          "text": "Dr. Walter Hausarzt",
+          "family": "Hausarzt",
+          "given": [ "Walter" ],
+          "prefix": [ "Dr." ]
+        }
+      }, {
+        "relationship": [ {
+          "coding": [ {
+            "system": "http://fhir.ch/ig/ch-core/CodeSystem/ech-11",
+            "code": "contactData",
+            "display": "contact data"
+          }, {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+            "code": "DAU",
+            "display": "natural daughter"
+          } ],
+          "text": "natural daughter"
+        } ],
+        "name": {
+          "text": "Julia Tochter",
+          "family": "Tochter",
+          "given": [ "Julia" ]
+        },
+        "address": {
+          "city": "Wien",
+          "postalCode": "1220",
+          "country": "AUT"
+        }
+      }, {
+        "relationship": [ {
+          "coding": [ {
+            "system": "http://fhir.ch/ig/ch-core/CodeSystem/ech-11",
+            "code": "contactData",
+            "display": "contact data"
+          }, {
+            "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+            "code": "MTH",
+            "display": "Mother"
+          } ],
+          "text": "Mother"
+        } ],
+        "name": {
+          "text": "Hertha Mutter",
+          "family": "Mutter",
+          "given": [ "Hertha" ]
+        },
+        "address": {
+          "city": "Wien",
+          "postalCode": "1220",
+          "country": "AUT"
+        }
+      }, {
+        "relationship": [ {
+          "coding": [ {
+            "system": "http://fhir.ch/ig/ch-core/CodeSystem/ech-11",
+            "code": "contactData",
+            "display": "contact data"
+          } ]
+        } ]
+      } ],
+      "communication": [ {
+        "language": {
+          "coding": [ {
+            "system": "urn:ietf:bcp:47",
+            "code": "de"
+          } ],
+          "text": "de"
+        },
+        "preferred": true
+      } ]
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Practitioner/3252",
+    "resource": {
+      "resourceType": "Practitioner",
+      "id": "3252",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitioner" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Practitioner 3252</b></p><ul><li><b>Display</b>: [{'family': 'Stern', 'given': ['Isabella']}]</li></ul></div>"
+      },
+      "identifier": [ {
+        "system": "urn:oid:1.2.40.0.34.99.4613.3.3",
+        "value": "2323"
+      } ],
+      "name": [ {
+        "family": "Stern",
+        "given": [ "Isabella" ]
+      } ],
+      "telecom": [ {
+        "system": "phone",
+        "value": "+43.6138.3453446.1111"
+      } ]
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Organization/3253",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "3253",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-organization" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Organization 3253</b></p><ul><li><b>Display</b>: Amadeus Spital</li></ul></div>"
+      },
+      "identifier": [ {
+        "system": "urn:oid:1.2.40.0.34.99.4613",
+        "value": "1.2.40.0.34.99.4613"
+      } ],
+      "name": "Amadeus Spital",
+      "telecom": [ {
+        "system": "phone",
+        "value": "+43.6138.3453446.0"
+      } ],
+      "address": [ {
+        "line": [ "Mozartgasse 1-7" ],
+        "city": "St.Wolfgang",
+        "postalCode": "5350",
+        "country": "AUT"
+      } ]
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/PractitionerRole/22b9add7-bf7e-4134-8189-3caf6dcae73f",
+    "resource": {
+      "resourceType": "PractitionerRole",
+      "id": "22b9add7-bf7e-4134-8189-3caf6dcae73f",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-practitionerrole" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: PractitionerRole 22b9add7-bf7e-4134-8189-3caf6dcae73f</b></p><p>PractitionerRole</p></div>"
+      },
+      "identifier": [ {
+        "system": "https://woess.ch/fhir/NamingSystem/practitionerrole",
+        "value": "3252-3253"
+      } ],
+      "active": true,
+      "practitioner": {
+        "reference": "Practitioner/3252"
+      },
+      "organization": {
+        "reference": "Organization/3253"
+      }
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/AllergyIntolerance/3258",
+    "resource": {
+      "resourceType": "AllergyIntolerance",
+      "id": "3258",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-allergyintolerance" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: AllergyIntolerance 3258</b></p><ul><li><b>Allergy</b>: Metamizol</li><li><b>Clinical status</b>: active</li><li><b>Patient</b>: Patient/3254</li></ul></div>"
+      },
+      "identifier": [ {
+        "system": "https://woess.ch/fhir/NamingSystem/cda-import-allergy",
+        "value": "83339b77b432ff80f33c59f9d89db56889f3ec00f18efcc7426069d12cfa67e9"
+      } ],
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+          "code": "confirmed"
+        } ]
+      },
+      "criticality": "high",
+      "code": {
+        "text": "Metamizol"
+      },
+      "patient": {
+        "reference": "Patient/1dc2f524-763e-4d79-b569-ba3505ba2f5e"
+      },
+      "recordedDate": "2019-11-22",
+      "reaction": [ {
+        "manifestation": [ {
+          "coding": [ {
+            "system": "http://snomed.info/sct",
+            "code": "267036007",
+            "display": "Reaktion: Larynxödem"
+          } ],
+          "text": "Reaktion: Larynxödem"
+        } ],
+        "onset": "2011-11-01"
+      } ]
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Condition/3259",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "3259",
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Condition 3259</b></p><ul><li><b>Condition</b>: Trichterbrust</li><li><b>Clinical status</b>: active</li><li><b>Verification</b>: confirmed</li><li><b>Subject</b>: Patient/3254</li></ul></div>"
+      },
+      "identifier": [ {
+        "system": "https://woess.ch/fhir/NamingSystem/cda-import-condition",
+        "value": "03d1e3c0fd6433fb41f8060eed0c972e6939ac7e89b759456769454856a8d520"
+      } ],
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "Q67.6",
+          "display": "Trichterbrust"
+        } ],
+        "text": "Trichterbrust"
+      },
+      "subject": {
+        "reference": "Patient/1dc2f524-763e-4d79-b569-ba3505ba2f5e"
+      },
+      "onsetDateTime": "2000-06-06"
+    }
+  }, {
+    "fullUrl": "https://vaccination-demo.raly.ch/api/fhir/Immunization/3265",
+    "resource": {
+      "resourceType": "Immunization",
+      "id": "3265",
+      "meta": {
+        "profile": [ "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-immunization", "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Immunization 3265</b></p><ul><li><b>Vaccine</b>: ENCEPUR FSPR 0,25ML KIND</li><li><b>Status</b>: completed</li><li><b>Date</b>: 2016-06-17</li><li><b>Patient</b>: Patient/3254</li></ul></div>"
+      },
+      "identifier": [ {
+        "system": "urn:oid:1.2.40.0.34.99.4613.3.5",
+        "value": "1"
+      } ],
+      "status": "completed",
+      "vaccineCode": {
+        "coding": [ {
+          "system": "urn:oid:1.2.40.0.34.4.16.1",
+          "code": "2427872",
+          "display": "ENCEPUR FSPR 0,25ML KIND"
+        } ],
+        "text": "ENCEPUR FSPR 0,25ML KIND"
+      },
+      "patient": {
+        "reference": "Patient/1dc2f524-763e-4d79-b569-ba3505ba2f5e"
+      },
+      "occurrenceDateTime": "2016-06-17",
+      "lotNumber": "6232165-5687"
+    }
+  } ]
+}

@@ -22,7 +22,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16A
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AMeasurementType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AMeasurementUnit;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.time.Instant;
 import java.time.LocalDate;

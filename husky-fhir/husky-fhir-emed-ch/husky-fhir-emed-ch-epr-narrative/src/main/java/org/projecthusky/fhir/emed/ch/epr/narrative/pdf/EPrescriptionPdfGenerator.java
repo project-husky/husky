@@ -10,7 +10,7 @@ import org.projecthusky.fhir.emed.ch.epr.narrative.html.NarrativeFormat;
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.SoftwareProviderMetadataProvider;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EPrescriptionConverter;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;

@@ -1,0 +1,48 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="narrative.css"/>
+	</head>
+	<body>
+<!--*/-->
+
+<div>
+	<table class="hapiPropertyTable">
+		<tbody>
+			<tr th:if="${not resource.title.empty}">
+				<td>Title</td>
+				<td th:text="${resource.title}">title</td>
+			</tr>
+			<tr th:if="${not resource.category.empty and not resource.category[0].coding.empty}">
+					<td>Category</td>
+					<td th:text="${resource.category[0].coding[0].display + '('+ resource.category[0].coding[0].system +'|'+ resource.category[0].coding[0].code +')'}">intentifier1</td>
+				</tr>
+			<tr th:if="${not resource.identifier.empty}">
+					<td>Identifier</td>
+					<td th:narrative="${resource.identifier}">intentifier1</td>
+				</tr>
+			<tr th:if="${not resource.statusElement.empty}">
+				<td>Status</td>
+				<td th:text="${resource.status}">status</td>
+			</tr>
+			
+			
+			<tr th:if="${not resource.section.empty}" th:each="section : ${resource.section}">
+				<td th:text="${section.title}">Section</td>
+				<td>
+					<span th:if="${not section.entry.empty}" th:each="entry: ${section.entry}" th:text="${entry.reference}">Section Text</span><br />
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+</div>
+
+<!--/*-->
+	</body>
+</html>
+<!--*/-->

@@ -9,7 +9,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.PosologyType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.TimeUnit;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.timed.TimedDosage;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Describes the application of a medication at constant intervals.

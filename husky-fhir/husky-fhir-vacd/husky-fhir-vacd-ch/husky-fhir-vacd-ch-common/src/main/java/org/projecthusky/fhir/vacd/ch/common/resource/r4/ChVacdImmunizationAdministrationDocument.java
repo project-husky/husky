@@ -10,9 +10,9 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.UUID;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.util.IdUtil;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
@@ -51,16 +51,26 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 		if (entry != null) {
 			return entry;
 		} else {
-			ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
-			composition.setId(UUID.randomUUID().toString());
-
-			this.getEntry().add(new BundleEntryComponent().setResource(composition)
-					.setFullUrl("urn:uuid:" + composition.getId()));
-			return composition;
+			return addComposition();
 		}
 		// throw new InvalidContentException(
 		// "The ChVacdImmunizationAdministrationComposition is missing in the
 		// document Bundle");
 	}
 
+	@Override
+	public ChVacdImmunizationAdministrationComposition addComposition()
+			throws InvalidContentException {
+		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
+		composition.setId(IdUtil.generateUrnUuid());
+		super.addComposition(composition);
+		return composition;
+	}
+
+	@Override
+	public ChVacdImmunizationAdministrationDocument copy() {
+		final var copy = new ChVacdImmunizationAdministrationDocument();
+		this.copyValues(copy);
+		return copy;
+	}
 }

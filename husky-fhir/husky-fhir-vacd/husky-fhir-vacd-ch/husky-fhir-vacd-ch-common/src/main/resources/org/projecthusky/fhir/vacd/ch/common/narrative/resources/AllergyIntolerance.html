@@ -1,0 +1,52 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="narrative.css"/>
+	</head>
+	<body>
+<!--*/-->
+
+
+<div>
+	<table class="hapiPropertyTable">
+		<tbody>
+			<tr th:if="${not resource.identifier.empty}">
+				<td>Identifier</td>
+				<td th:narrative="${resource.identifier[0]}">intentifier1</td>
+			</tr>
+			<tr th:if="${not resource.clinicalStatus.empty}">
+				<td>Status</td>
+				<td th:narrative="${resource.clinicalStatus}">status</td>
+			</tr>
+			<tr th:if="${not resource.code.empty}">
+				<td>Code</td>
+				<td th:narrative="${resource.code}">VaccineCode</td>
+			</tr>
+			<tr th:if="${not resource.recorder}">
+				<td>Recorder</td>
+				<td th:narrative="${resource.recorder.resource}">recorder</td>
+			</tr>
+			<tr th:if="${not resource.asserter}">
+				<td>Asserter</td>
+				<td th:narrative="${resource.asserter.resource}">asserter</td>
+			</tr>
+			<tr th:if="${not resource.recordedDateElement.empty}">
+				<td>Recorded Date</td>
+				<td th:text="${#dates.format(resource.recordedDateElement.value,'dd.MM.yyyy')}">recordedDate</td>
+			</tr>
+			<tr th:if="${not resource.onsetDateTimeType.empty}">
+				<td>Identification Date</td>
+				<td th:text="${#dates.format(resource.onsetDateTimeType.value,'HH:mm  dd.MM.yyyy')}">onsetDate</td>
+			</tr>
+		</tbody>	
+	</table>
+</div>
+
+<!--/*-->
+	</body>
+</html>
+<!--*/-->

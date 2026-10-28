@@ -23,6 +23,8 @@ import ca.uhn.fhir.model.api.annotation.Child;
  */
 @Block
 public class ChCoreCitizenshipExt extends BackboneElement {
+	private static final long serialVersionUID = 8314394277181699845L;
+
 	/**
 	 * Extension for a placeOfBirth.
 	 */

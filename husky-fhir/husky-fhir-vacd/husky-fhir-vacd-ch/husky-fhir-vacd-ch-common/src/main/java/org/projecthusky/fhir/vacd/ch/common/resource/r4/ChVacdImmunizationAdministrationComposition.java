@@ -37,7 +37,8 @@ public class ChVacdImmunizationAdministrationComposition extends ChVacdAbstractC
 		setType(new CodeableConcept(new Coding("http://snomed.info/sct", "41000179103", "")));
 		getCategory().clear();
 		addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
-				"urn:che:epr:ch-vacd:immunization-administration:2022", "CH VACD Immunization Administration")));
+				"urn:che:epr:ch-vacd:immunization-administration:2022",
+				"CH VACD Immunization Administration")));
 		setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString()));
 		setConfidentiality(DocumentConfidentiality.N);
@@ -45,5 +46,12 @@ public class ChVacdImmunizationAdministrationComposition extends ChVacdAbstractC
 				"http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode")
 				.setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "17621005",
 						"Normal (qualifier value)")));
+	}
+
+	@Override
+	public ChVacdImmunizationAdministrationComposition copy() {
+		final var copy = new ChVacdImmunizationAdministrationComposition();
+		this.copyValues(copy);
+		return copy;
 	}
 }

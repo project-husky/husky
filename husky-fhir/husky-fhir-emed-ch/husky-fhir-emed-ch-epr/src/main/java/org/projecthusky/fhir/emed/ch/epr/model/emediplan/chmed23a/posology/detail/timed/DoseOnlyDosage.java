@@ -8,7 +8,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.TimedDosageType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.dose.EMediplanDose;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Specifies a dosage without specifying a precise moment for the intake.

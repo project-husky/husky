@@ -34,5 +34,12 @@ public class ChCoreComposition extends Composition {
 								&& code.getCode().equals(coding.getCode()))))
 				.findFirst();
 	}
+	
+	@Override
+	public ChCoreComposition copy() {
+		final var copy = new ChCoreComposition();
+		this.copyValues(copy);
+		return copy;
+	}
 
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.DoseType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * This corresponds to the DosageObject definition in ChMed23A.

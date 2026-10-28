@@ -11,7 +11,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.time.Instant;
 import java.time.LocalDate;

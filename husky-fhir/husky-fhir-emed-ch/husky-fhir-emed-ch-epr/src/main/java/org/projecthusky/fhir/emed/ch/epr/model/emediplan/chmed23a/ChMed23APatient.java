@@ -15,7 +15,7 @@ import org.hl7.fhir.r4.model.Observation;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanPatient;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.ChMed23AGender;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

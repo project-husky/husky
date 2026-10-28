@@ -14,7 +14,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanHealthcareProCarrier;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.io.IOException;
 import java.util.Base64;

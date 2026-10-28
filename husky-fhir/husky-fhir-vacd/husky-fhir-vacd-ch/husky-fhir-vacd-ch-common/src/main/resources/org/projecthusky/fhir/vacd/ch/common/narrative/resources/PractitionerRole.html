@@ -1,0 +1,50 @@
+<!--/* 
+This top section is not exported as a part of the Narrative,
+it is only present so that this template can be viewed in 
+a browser. 
+-->
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="narrative.css"/>
+	</head>
+	<body>
+<!--*/-->
+
+<div>
+	<table>
+		<tr >
+			<td>Practitioner</td>
+			<td>
+				<div th:if="${resource.practitioner.resource and not resource.practitioner.resource.name.empty}">
+					<span th:narrative="${resource.practitioner.resource.name[0]}"></span>	
+				</div>
+				<div th:if="${resource.practitioner.resource and resource.practitioner.resource.name.empty}">
+					<span th:text="${resource.practitioner.resource.id}"></span>	
+				</div>
+				<div th:if="${resource.practitioner.reference}">
+					<span th:text="${resource.practitioner.reference}"></span>
+				</div> 
+			</td>
+		</tr>
+		
+		<tr>
+			<td>Organization</td>
+			<td>
+				<div th:if="${resource.organization.resource and resource.organization.resource.name}">
+					<span th:text="${resource.organization.resource.name}"></span>	
+				</div>
+				<div th:if="${resource.organization.resource and not resource.organization.resource.name}">
+					<span th:text="${resource.organization.resource.id}"></span>	
+				</div>
+				<div th:if="${resource.organization.reference}">
+					<span th:text="${resource.organization.reference}"></span>	
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!--/*-->
+	</body>
+</html>
+<!--*/-->

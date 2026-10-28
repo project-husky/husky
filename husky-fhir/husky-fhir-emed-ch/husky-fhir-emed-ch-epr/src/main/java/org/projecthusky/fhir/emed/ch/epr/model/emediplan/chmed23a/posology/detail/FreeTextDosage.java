@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.PosologyType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Describes an unstructured dosage consisting of free text.

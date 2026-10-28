@@ -3,7 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 import java.util.List;
 import java.util.Objects;

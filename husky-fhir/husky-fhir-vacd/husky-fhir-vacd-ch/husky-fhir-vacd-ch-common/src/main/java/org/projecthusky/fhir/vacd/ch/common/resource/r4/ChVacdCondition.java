@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreCondition;
 import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
@@ -43,8 +44,6 @@ public class ChVacdCondition extends ChCoreCondition {
 	protected ChVacdMergingConflictExt conflict;
 
 	public ChVacdCondition() {
-		addIdentifier().setSystem("urn:ietf:rfc:3986")
-				.setValue("urn:uuid:" + UUID.randomUUID().toString());
 		setVerificationStatus(new org.hl7.fhir.r4.model.CodeableConcept()
 				.addCoding(new org.hl7.fhir.r4.model.Coding()
 						.setSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status")

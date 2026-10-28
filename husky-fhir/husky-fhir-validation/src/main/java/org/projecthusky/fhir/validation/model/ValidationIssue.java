@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.epr.validator;
+package org.projecthusky.fhir.validation.model;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;

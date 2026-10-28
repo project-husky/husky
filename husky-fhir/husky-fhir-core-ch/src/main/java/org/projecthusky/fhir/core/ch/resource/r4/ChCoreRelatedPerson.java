@@ -15,7 +15,8 @@ import java.util.List;
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-relatedperson")
 public class ChCoreRelatedPerson extends RelatedPerson implements ChCoreContactPointCarrier {
-    /**
+    private static final long serialVersionUID = 812699619638550305L;
+	/**
      * Extension for a citizenship.
      */
     @Nullable

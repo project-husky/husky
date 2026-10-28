@@ -48,7 +48,7 @@ public class CdaDocumentMarshaller {
         final var marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-		marshaller.setProperty("com.sun.xml.bind.xmlHeaders",
+		marshaller.setProperty("org.glassfish.jaxb.xmlHeaders",
 				String.format("<?xml-stylesheet type='text/xsl' href='%s' ?>", stylesheet));
 
 		final var writer = new StringWriter();

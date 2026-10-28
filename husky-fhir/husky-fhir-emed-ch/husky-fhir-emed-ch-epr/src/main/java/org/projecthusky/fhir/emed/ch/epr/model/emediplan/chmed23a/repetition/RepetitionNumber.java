@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.RepetitionType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

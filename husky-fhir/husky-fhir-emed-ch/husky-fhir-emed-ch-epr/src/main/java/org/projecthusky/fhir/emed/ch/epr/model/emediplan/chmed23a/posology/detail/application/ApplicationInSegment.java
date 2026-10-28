@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.DaySegment;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.posology.detail.dose.EMediplanDose;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Specifies a day segment (morning, noon, evening or night) when a medication must be applied.

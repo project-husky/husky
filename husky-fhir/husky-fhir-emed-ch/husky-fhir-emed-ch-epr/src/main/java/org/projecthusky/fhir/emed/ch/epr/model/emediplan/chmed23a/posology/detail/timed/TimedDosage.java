@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed23a.enums.TimedDosageType;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Specifies the moment and amount of a medication application. All TimedDosage objects must specify an amount to be

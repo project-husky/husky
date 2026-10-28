@@ -3,7 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 /**
  * Interface for an object that carries information about healthcare professionals in the context of an eMediplan

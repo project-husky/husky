@@ -17,7 +17,7 @@ import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.ChMed16ACon
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.ChMed23AConverter;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EMediplanConverter;
 import org.projecthusky.fhir.emed.ch.epr.service.converter.emediplan.EPrescriptionConverter;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationIssue;
+import org.projecthusky.fhir.validation.model.ValidationIssue;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;

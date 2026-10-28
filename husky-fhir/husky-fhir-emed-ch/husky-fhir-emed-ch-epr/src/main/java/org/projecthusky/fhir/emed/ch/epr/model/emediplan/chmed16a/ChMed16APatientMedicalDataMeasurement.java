@@ -9,7 +9,7 @@ import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AMeasurementType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a.enums.ChMed16AMeasurementUnit;
-import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
+import org.projecthusky.fhir.validation.model.ValidationResult;
 
 @NoArgsConstructor
 @AllArgsConstructor
