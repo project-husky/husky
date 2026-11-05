@@ -66,6 +66,7 @@
 		<module>husky-communication</module>
 		<module>husky-validation</module>
 		<module>husky-fhir-structures</module>
+		<module>husky-fhir-communication</module>
 		<module>husky-common</module>
 		<module>husky-cda</module>
 	</modules>
