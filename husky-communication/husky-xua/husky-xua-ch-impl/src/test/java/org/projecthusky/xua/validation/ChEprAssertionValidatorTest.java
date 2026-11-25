@@ -106,11 +106,11 @@ class ChEprAssertionValidatorTest {
                 new CollectionCredentialResolver(List.of(credential)),
                 new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
         );
-        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), trustEngine);
+        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), trustEngine, true);
         UNVALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), new ExplicitKeySignatureTrustEngine(
                 new CollectionCredentialResolver(),
-                new NoopKeyInfoCredentialResolver()
-        ));
+                new NoopKeyInfoCredentialResolver()),
+                false);
         VALIDATION_PARAMS.put(CLOCK_SKEW, Duration.ofSeconds(30));
     }
 
