@@ -25,10 +25,12 @@ import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.NameIDType;
 import org.opensaml.saml.saml2.core.Subject;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
+import org.opensaml.saml.security.impl.SAMLSignatureProfileValidator;
 import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
 import org.opensaml.storage.impl.StorageServiceReplayCache;
 import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
+import org.opensaml.xmlsec.signature.support.SignaturePrevalidator;
 import org.opensaml.xmlsec.signature.support.SignatureTrustEngine;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
 import org.projecthusky.common.utils.OptionalUtils;
@@ -49,8 +51,7 @@ import javax.xml.namespace.QName;
 import java.time.Duration;
 import java.util.*;
 
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.*;
 import static org.projecthusky.common.ch.ChEpr.EPR_SPID_URN;
 import static org.projecthusky.xua.ChEprXuaSpecifications.*;
 import static org.projecthusky.xua.communication.xua.XUserAssertionConstants.*;
@@ -115,7 +116,8 @@ public class ChEprAssertionValidator {
 	 *             {@link OneTimeUseConditionValidator} fails to initialize.
 	 */
 	public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires,
-			@Nullable final SignatureTrustEngine signatureTrustEngine)
+			@Nullable final SignatureTrustEngine signatureTrustEngine,
+			final boolean prevalidateSignature)
 			throws ComponentInitializationException {
 		final var conditionValidators = new ArrayList<ConditionValidator>();
 		conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
@@ -137,17 +139,16 @@ public class ChEprAssertionValidator {
 			log.warn("Using ChEprAssertionValidator without signature validator!");
 		}
 
+		final SignaturePrevalidator signaturePrevalidator;
+		if (prevalidateSignature) signaturePrevalidator = new NoopSAMLSignatureProfileValidator();
+		else signaturePrevalidator = new SAMLSignatureProfileValidator();
+
 		this.validator = new SAML20AssertionValidator(conditionValidators,
-				List.of(new ChEprSubjectConfirmationBearerValidator()),
-				List.of(new ChEprAttributeStatementValidator()), null, signatureTrustEngine, null // No
-																									// signature
-																									// pre-validation
-																									// needed,
-																									// CH-EPR
-																									// does
-																									// not
-																									// add
-																									// requirements
+													  List.of(new ChEprSubjectConfirmationBearerValidator()),
+													  List.of(new ChEprAttributeStatementValidator()),
+													  null,
+													  signatureTrustEngine,
+													  signaturePrevalidator
 		);
 	}
 
